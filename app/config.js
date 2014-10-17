@@ -1,4 +1,4 @@
-angular.module('orkaApp', ['anol.map', 'anol.scaleline'])
+angular.module('orkaApp', ['anol.map', 'anol.scaleline', 'anol.mouseposition'])
 
 .config(function (LayersServiceProvider, ViewServiceProvider, ControlsServiceProvider) {
     ViewServiceProvider.setView(new ol.View({
