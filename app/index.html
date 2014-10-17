@@ -25,7 +25,7 @@
     <![endif]-->
   </head>
 
-  <body ng-app='orkaApp'>
+  <body ng-app='orkaApp'  ng-controller="MapController">
     <!-- top navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -52,12 +52,11 @@
       <div class="row">
 
         <!-- sitebar -->
-        <div class="col-sm-3 col-md-2 sidebar">
-
-        </div>
-
         <!-- map -->
-        <div anol-map class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2"></div>
+        <div anol-map="map" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+          <div anol-scaleline anol-scaleline-map="map" anol-scaleline-external="true"></div>
+          <div anol-mouse-position anol-mouse-position-map="map"></div>
+        </div>
       </div>
     </div>
 
@@ -65,7 +64,12 @@
     <script type="text/javascript" src="anol/libs/angular/angular.js"></script>
     <script type="text/javascript" src="anol/libs/ol3/ol3.min.js"></script>
 
+    <script type="text/javascript" src="anol/modules/map/map-module.js"></script>
     <script type="text/javascript" src="anol/modules/map/map-directive.js"></script>
+    <script type="text/javascript" src="anol/modules/map/map-controller.js"></script>
+    <script type="text/javascript" src="anol/modules/map/layers-service.js"></script>
+    <script type="text/javascript" src="anol/modules/map/controls-service.js"></script>
+    <script type="text/javascript" src="anol/modules/map/view-service.js"></script>
 
     <script type="text/javascript" src="config.js"></script>
   </body>

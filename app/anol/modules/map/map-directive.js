@@ -1,43 +1,20 @@
-angular.module('anol.map', [])
+angular.module('anol.map')
 
-.provider('anolLayersService', function() {
-    var _layers = [];
-
-    this.setLayers = function(layers) {
-        _layers = layers;
-    };
-
-    // and this is the service part
-    var Layers = function(layers) {
-        this.layers = layers || [];
-    };
-    Layers.prototype.addLayer = function(layer) {
-        this.layers.push(layer);
-    };
-    Layers.prototype.addLayers = function(layers) {
-        this.layers = this.layers.concat(layers);
-    };
-
-    this.$get = [function() {
-        return new Layers(_layers);
-    }];
-})
-
-.directive('anolMap', ['anolLayersService', function(anolLayersService) {
+.directive('anolMap', ['ViewService', 'LayersService', 'ControlsService', function(ViewService, LayersService, ControlsService) {
     return {
+        scope: {
+            map: '=anolMap'
+        },
         link: function (scope, element, attrs) {
             element
                 .attr('id', 'anol-map')
                 .attr('class', 'anol-map');
-            scope.map = new ol.Map({
-                layers: anolLayersService.layers,
-                controls: ol.control.defaults({}),
-                target: 'anol-map',
-                view: new ol.View({
-                    center: [0, 0],
-                    zoom: 2
-                })
+
+            scope.map.setView(ViewService.view);
+            angular.forEach(LayersService.layers, function(layer) {
+                scope.map.addLayer(layer);
             });
+            scope.map.setTarget('anol-map');
         }
     };
 }]);
