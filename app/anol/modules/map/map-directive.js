@@ -1,20 +1,25 @@
 angular.module('anol.map')
 
-.directive('anolMap', ['ViewService', 'LayersService', 'ControlsService', function(ViewService, LayersService, ControlsService) {
+.directive('anolMap', ['DefaultMapName', 'MapsService', function(DefaultMapName, MapsService) {
     return {
         scope: {
-            map: '=anolMap'
+            mapName: '@?anolMapName'
         },
         link: function (scope, element, attrs) {
             element
-                .attr('id', 'anol-map')
-                .attr('class', 'anol-map');
+                .attr('id', scope.mapName)
+                .attr('class', scope.mapName);
 
-            scope.map.setView(ViewService.view);
-            angular.forEach(LayersService.layers, function(layer) {
-                scope.map.addLayer(layer);
-            });
-            scope.map.setTarget('anol-map');
+            scope.map.setTarget(scope.mapName);
+        },
+        controller: function($scope, $element, $attrs) {
+            $scope.mapName = $scope.mapName || DefaultMapName;
+
+            $scope.map = MapsService.getMap($scope.mapName);
+
+            this.getMap = function() {
+                return $scope.map;
+            };
         }
     };
 }]);

@@ -1,25 +1,27 @@
 angular.module('anol.scaleline', [])
 
-.directive('anolScaleline', [function() {
+.directive('anolScaleline', ['MapsService', function(MapsService) {
     return {
         restrict: 'A',
+        require: '?^anolMap',
         scope: {
-            map: '=anolScalelineMap',
-            extern: '@anolScalelineExternal'
+            mapName: '@?anolMapName'
         },
-        link: function(scope, element, attrs) {
-            // TODO use only one new ol.control.ScaleLine and
-            // asign target later if needed
-            var control;
-            if(scope.extern) {
-                control = new ol.control.ScaleLine({
+        link: function(scope, element, attrs, AnolMapController) {
+            var controlOptions = {};
+
+            if(angular.isUndefined(AnolMapController)) {
+                scope.map = MapsService.getMap(scope.mapName);
+                controlOptions = {
                     target: element[0]
-                });
+                };
             } else {
-                control = new ol.control.ScaleLine();
+                scope.map = AnolMapController.getMap(scope.mapName);
             }
 
-            scope.map.addControl(control);
+            scope.map.addControl(
+                new ol.control.ScaleLine(controlOptions)
+            );
         }
     };
 }]);
