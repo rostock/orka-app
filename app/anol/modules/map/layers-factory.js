@@ -27,7 +27,8 @@ angular.module('anol.map')
 
         var sourceOptions = {
             tileUrlFunction: tileURL
-        }
+        };
+
         if(tileGrid) {
             sourceOptions.tileGrid = tileGrid;
         }
