@@ -4,9 +4,7 @@ angular.module('anol.mouseposition', [])
     return {
         restrict: 'A',
         require: '?^anolMap',
-        scope: {
-            mapName: '@?anolMapName'
-        },
+        scope: {},
         link: function(scope, element, attrs, AnolMapController) {
             // TODO use only one new ol.control.ScaleLine and
             // asign target later if needed

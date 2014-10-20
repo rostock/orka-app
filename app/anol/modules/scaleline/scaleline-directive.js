@@ -4,9 +4,7 @@ angular.module('anol.scaleline', [])
     return {
         restrict: 'A',
         require: '?^anolMap',
-        scope: {
-            mapName: '@?anolMapName'
-        },
+        scope: {},
         link: function(scope, element, attrs, AnolMapController) {
             scope.map = MapService.getMap();
 

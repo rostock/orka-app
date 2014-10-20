@@ -2,13 +2,11 @@ angular.module('anol.map')
 
 .directive('anolMap', ['DefaultMapName', 'MapService', function(DefaultMapName, MapService) {
     return {
-        scope: {
-            mapName: '@?anolMapName'
-        },
+        scope: {},
         link: function (scope, element, attrs) {
             element
                 .attr('id', scope.mapName)
-                .attr('class', scope.mapName);
+                .addClass(scope.mapName);
 
             scope.map.setTarget(scope.mapName);
         },
