@@ -1,6 +1,6 @@
 angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition'])
 
-.config(function (LayersServiceProvider, MapsServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
+.config(function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
     var projection = new ol.proj.Projection({
         code: 'EPSG:25388',
         units: 'm'
@@ -30,7 +30,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         0.1763888889
     ];
 
-    MapsServiceProvider.addView(new ol.View({
+    MapServiceProvider.addView(new ol.View({
         projection: projection,
         center: [313282, 6003693],
         resolutions: resolutions,

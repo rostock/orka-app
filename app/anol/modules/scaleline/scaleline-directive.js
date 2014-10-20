@@ -1,6 +1,6 @@
 angular.module('anol.scaleline', [])
 
-.directive('anolScaleline', ['MapsService', function(MapsService) {
+.directive('anolScaleline', ['MapService', function(MapService) {
     return {
         restrict: 'A',
         require: '?^anolMap',
@@ -8,15 +8,14 @@ angular.module('anol.scaleline', [])
             mapName: '@?anolMapName'
         },
         link: function(scope, element, attrs, AnolMapController) {
+            scope.map = MapService.getMap();
+
             var controlOptions = {};
 
             if(angular.isUndefined(AnolMapController)) {
-                scope.map = MapsService.getMap(scope.mapName);
                 controlOptions = {
                     target: element[0]
                 };
-            } else {
-                scope.map = AnolMapController.getMap(scope.mapName);
             }
 
             scope.map.addControl(

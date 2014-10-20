@@ -1,42 +1,20 @@
 angular.module('anol.map')
 
-.config(function(DefaultMapName, ControlsServiceProvider) {
-    ControlsServiceProvider.setDefaultMapName(DefaultMapName);
-})
-
 .provider('ControlsService', [function() {
-    var _defaultMapName;
-    var _controls = {};
+    var _controls = [];
 
-    this.setDefaultMapName = function(name) {
-        _defaultMapName = name;
-    };
-
-    this.setControls = function(controls, name) {
-        name = name || _defaultMapName;
-
-        _controls[name] = controls;
+    this.setControls = function(controls) {
+        _controls = controls;
     };
 
     // and this is the service part
     var Controls = function(controls) {
         this.controls = controls;
     };
-    Controls.prototype.addControl = function(control, name) {
-        name = name || _defaultMapName;
-
-        if(angular.isUndefined(this.controls[name])) {
-            this.controls[name] = ol.control.defaults();
-        }
-
+    Controls.prototype.addControl = function(control) {
         this.controls.push(control);
     };
-    Controls.prototype.addControls = function(controls, name) {
-        name = name || _defaultMapName;
-
-        if(angular.isUndefined(this.controls[name])) {
-            this.controls[name] = ol.controls.defaults();
-        }
+    Controls.prototype.addControls = function(controls) {
         this.controls = this.controls.concat(controls);
     };
 

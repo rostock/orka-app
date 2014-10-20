@@ -1,6 +1,6 @@
 angular.module('anol.map')
 
-.directive('anolMap', ['DefaultMapName', 'MapsService', function(DefaultMapName, MapsService) {
+.directive('anolMap', ['DefaultMapName', 'MapService', function(DefaultMapName, MapService) {
     return {
         scope: {
             mapName: '@?anolMapName'
@@ -13,9 +13,9 @@ angular.module('anol.map')
             scope.map.setTarget(scope.mapName);
         },
         controller: function($scope, $element, $attrs) {
-            $scope.mapName = $scope.mapName || DefaultMapName;
+            $scope.mapName = DefaultMapName;
 
-            $scope.map = MapsService.getMap($scope.mapName);
+            $scope.map = MapService.getMap();
 
             this.getMap = function() {
                 return $scope.map;
