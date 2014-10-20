@@ -1,6 +1,7 @@
 angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition'])
 
-.config(function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
+.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider',
+    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
     var projection = new ol.proj.Projection({
         code: 'EPSG:25388',
         units: 'm'
@@ -55,4 +56,4 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
             new ol.control.ZoomSlider()
         ])
     );
-});
+}]);
