@@ -6,7 +6,7 @@ angular.module('anol.map')
         link: function (scope, element, attrs) {
             element
                 .attr('id', scope.mapName)
-                .attr('class', scope.mapName);
+                .addClass(scope.mapName);
 
             scope.map.setTarget(scope.mapName);
         },
