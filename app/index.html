@@ -39,7 +39,6 @@
           <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div class="navbar-collapse collapse">
-          <div anol-scaleline class="navbar-text" style="position: relative; padding-bottom: 20px;"></div>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
@@ -53,9 +52,13 @@
       <div class="row">
 
         <!-- sitebar -->
+        <div class="col-sm-3 col-md-2">
+          <div anol-layerswitcher></div>
+        </div>
         <!-- map -->
-        <div anol-map class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+        <div anol-map class="col-sm-9 col-md-10">
           <div anol-mouse-position></div>
+          <div anol-scaleline></div>
         </div>
       </div>
     </div>
@@ -79,6 +82,7 @@
     <!-- anol-elements -->
     <script type="text/javascript" src="anol/modules/scaleline/scaleline-directive.js"></script>
     <script type="text/javascript" src="anol/modules/mouseposition/mouseposition-directive.js"></script>
+    <script type="text/javascript" src="anol/modules/layerswitcher/layerswitcher-directive.js"></script>
 
     <!-- app -->
     <script type="text/javascript" src="config.js"></script>

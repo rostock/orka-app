@@ -1,4 +1,4 @@
-angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition'])
+angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher'])
 
 .config(function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
     var projection = new ol.proj.Projection({
@@ -45,9 +45,13 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         layer: 'stadtplan_EPSG25833',
         projection: projection
     });
+    tms.set('name', 'BasisLayer');
+
+    var osm = new ol.layer.Tile({source: new ol.source.OSM()});
+    osm.set('name', 'OSM Layer');
 
     LayersServiceProvider.setLayers([
-        tms
+        tms, osm
     ]);
 
     ControlsServiceProvider.setControls(
