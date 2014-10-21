@@ -1,0 +1,8 @@
+<div ng-repeat="topic in topics">
+    <input type="checkbox" ng-model="topic.active" ng-change="update()"/>
+    {{ topic.title }}
+    <div ng-repeat="group in topic.groups" style="margin-left: 10px;">
+        <input type="checkbox" ng-model="group.active" ng-change="update()"/>
+        {{ group.title }}
+    </div>
+</div>

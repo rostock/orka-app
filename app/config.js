@@ -1,7 +1,7 @@
-angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher'])
+angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree'])
 
-.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider',
-    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
+.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider',
+    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider) {
     var projection = new ol.proj.Projection({
         code: 'EPSG:25833',
         units: 'm'
@@ -55,15 +55,16 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
     var poi = LayersFactoryProvider.newDynamicGeoJSON({
         url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
         projection: projection,
-        additionalParameters: function() {
-            return 'poi_types=restaurant';
-        }
+        additionalParameters: LayertreeServiceProvider.getAdditionalParametersCallback()
     });
     poi.set('name', 'POI Layer');
 
+    LayertreeServiceProvider.setTreeLayer(poi);
+    LayertreeServiceProvider.setTopicsUrl('http://localhost:8888/proxy/http://www.orka-mv.de/js/poi_legend_data.json');
+
     LayersServiceProvider.setLayers([
         tms,
-        osm,
+        //osm,
         poi
     ]);
 
