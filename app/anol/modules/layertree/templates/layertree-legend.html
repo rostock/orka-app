@@ -1,0 +1,8 @@
+<div ng-repeat="poi in selectedPois">
+    <img ng-src="{{ iconBaseUrl + typeMap[poi].icon }}" />
+    {{ typeMap[poi].title }}
+</div>
+<div ng-repeat="track in selectedTracks">
+    <img ng-src="{{ iconBaseUrl + typeMap[track].icon }}" />
+    {{ typeMap[track].title }}
+</div>

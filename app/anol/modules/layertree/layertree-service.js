@@ -20,10 +20,10 @@ angular.module('anol.layertree')
     };
 
     this.setIconBaseUrl = function(url) {
-        _iconBaseUrl = url;
+        _iconBaseUrl = url || '';
     };
 
-    // the dynamicGeoJSON layer needs a function at create time to add
+    // the dynamicGeoJSON layer needs a function at config time to add
     // aditional parameters to it's request
     this.getAdditionalPoiParametersCallback = function() {
         return function() {
@@ -32,17 +32,20 @@ angular.module('anol.layertree')
         };
     };
 
-    var LayerTree = function($q, poiLayer, trackLayer, poiUrl, tracksUrl) {
+    var LayerTree = function($rootScope, $q, poiLayer, trackLayer, poiUrl, tracksUrl) {
         var self = this;
+        this.$rootScope = $rootScope;
         this.$q = $q;
         this.poiLayer = poiLayer;
         this.trackLayer = trackLayer;
-        this.icons = {};
+        this.typeMap = {};
+        this.selectedPoiTypes = {};
+        this.selectedTrackTypes = [];
 
         this.poiLayer.setStyle(function(feature, resolution) {
             return [new ol.style.Style({
                 image: new ol.style.Icon({
-                    src: _iconBaseUrl + self.icons[feature.get('type')]
+                    src: self.typeMap[feature.get('type')].icon
                 })
             })];
         });
@@ -51,7 +54,9 @@ angular.module('anol.layertree')
         this.tracksLoaded = this._loadTracks(tracksUrl);
     };
     LayerTree.prototype.updateSelectedPoiTypes = function(selectedTypes) {
-        _selectedPoiTypes = selectedTypes;
+        // keep internal and external types in sync cause we need it both as service value
+        // and as internal otherwise getAdditionalPoiParametersCallback won't work
+        this.selectedPoiTypes = _selectedPoiTypes = selectedTypes;
         // TODO find a better solution to make a new request after selectedTypes has change
         // using clear result in removing all points and redraw them. So the vector data
         // are flickering
@@ -62,10 +67,12 @@ angular.module('anol.layertree')
         // _selectedTrackTypes = selectedTypes;
         var source = this.trackLayer.getSource();
         var params = source.getParams();
+        this.selectedTrackTypes = selectedTypes;
         params.track_types = selectedTypes.join(',');
         this.trackLayer.setVisible(selectedTypes.length > 0);
         source.updateParams(params);
     };
+    // TODO use recursion
     LayerTree.prototype._prepareTopics = function(topics) {
         var self = this;
         angular.forEach(topics, function(topic) {
@@ -73,10 +80,16 @@ angular.module('anol.layertree')
             if(topic.groups !== undefined) {
                 angular.forEach(topic.groups, function(group) {
                     group.active = false;
-                    self.icons[group.type] = group.icon;
+                    self.typeMap[group.type] = {
+                        'icon': _iconBaseUrl + group.icon,
+                        'title': group.title
+                    };
                 });
             } else {
-                self.icons[topic.type] = topic.icon;
+                self.typeMap[topic.type] = {
+                    'icon': _iconBaseUrl + topic.icon,
+                    'title': topic.title
+                };
             }
         });
         return topics;
@@ -107,7 +120,7 @@ angular.module('anol.layertree')
         return deferred.promise;
     };
 
-    this.$get = ['$q', function($q) {
-        return new LayerTree($q, _poiLayer, _trackLayer, _poisUrl, _tracksUrl);
+    this.$get = ['$rootScope', '$q', function($rootScope, $q) {
+        return new LayerTree($rootScope, $q, _poiLayer, _trackLayer, _poisUrl, _tracksUrl);
     }];
-}])
+}]);
