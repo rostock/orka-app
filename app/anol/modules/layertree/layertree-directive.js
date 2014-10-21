@@ -1,7 +1,7 @@
 angular.module('anol.layertree', [])
 
 .provider('LayertreeService', [function() {
-    var _treeLayer, _topicsUrl;
+    var _treeLayer, _topicsUrl, _iconBaseUrl;
 
     var _selectedTypes = [];
 
@@ -11,6 +11,10 @@ angular.module('anol.layertree', [])
 
     this.setTopicsUrl = function(url) {
         _topicsUrl = url;
+    };
+
+    this.setIconBaseUrl = function(url) {
+        _iconBaseUrl = url;
     };
 
     // the dynamicGeoJSON layer needs a function at create time to add
@@ -23,8 +27,18 @@ angular.module('anol.layertree', [])
     };
 
     var LayerTree = function($q, treeLayer, topicsUrl) {
+        var self = this;
         this.$q = $q;
         this.treeLayer = treeLayer;
+        this.icons = {};
+
+        this.treeLayer.setStyle(function(feature, resolution) {
+            return [new ol.style.Style({
+                image: new ol.style.Icon({
+                    src: _iconBaseUrl + self.icons[feature.get('type')]
+                })
+            })];
+        });
 
         this.topicsLoaded = this._loadTopics(topicsUrl);
     };
@@ -36,6 +50,7 @@ angular.module('anol.layertree', [])
         this.treeLayer.getSource().clear();
     };
     LayerTree.prototype._loadTopics = function(url) {
+        var self = this;
         var deferred = this.$q.defer();
         $.ajax({
             url: url,
@@ -43,7 +58,18 @@ angular.module('anol.layertree', [])
         }).done(function(response) {
             deferred.resolve(response.topics);
         });
-        return deferred.promise;
+        return deferred.promise.then(function(topics) {
+            self._collectIcons(topics);
+            return topics;
+        });
+    };
+    LayerTree.prototype._collectIcons = function(topics) {
+        var self = this;
+        angular.forEach(topics, function(topic) {
+            angular.forEach(topic.groups, function(group) {
+                self.icons[group.type] = group.icon;
+            });
+        });
     };
 
     this.$get = ['$q', function($q) {
