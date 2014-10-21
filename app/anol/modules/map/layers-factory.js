@@ -44,6 +44,44 @@ angular.module('anol.map')
         });
     };
 
+    this.newDynamicGeoJSON = function(options) {
+        var source;
+        var sourceOptions = {
+            format: new ol.format.GeoJSON(),
+            strategy: ol.loadingstrategy.bbox
+        };
+        if(options.projection !== undefined) {
+            sourceOptions.projection = options.projection;
+        }
+
+        var loader = function(extent, resolution, projection) {
+            var params = [
+                'srs=' + projection.getCode(),
+                'bbox=' + extent.join(',')
+            ];
+            if(angular.isFunction(options.additionalParameters)) {
+                params.push(options.additionalParameters());
+            }
+
+            var url = options.url + params.join('&');
+            $.ajax({
+                url: url,
+                dataType: 'json'
+            })
+            .done(function(response) {
+                source.addFeatures(source.readFeatures(response));
+            });
+        };
+
+        sourceOptions.loader = loader;
+
+        source = new ol.source.ServerVector(sourceOptions);
+
+        return new ol.layer.Vector({
+            source: source
+        });
+    };
+
     this.$get = [function() {
         return self;
     }];
