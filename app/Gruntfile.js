@@ -72,7 +72,7 @@ module.exports = function(grunt) {
         }
     },
     jsdoc: {
-      src: ['anol/**/*.js'],
+      src: ['anol/modules/**/*.js'],
       options: {
         destination: 'doc'
       }
