@@ -5,6 +5,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         code: 'EPSG:25833',
         units: 'm'
     });
+    ol.proj.addProjection(projection);
 
     var extent = [200000, 5880000, 480000, 6075000];
     var resolutions = [
