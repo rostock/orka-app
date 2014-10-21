@@ -60,6 +60,11 @@ module.exports = function(grunt) {
         src: ['anol/**/*.tpl.html'],
         dest: 'build/templates.js'
       },
+    jsdoc: {
+      src: ['anol/**/*.js'],
+      options: {
+        destination: 'doc'
+      }
     }
   });
 
@@ -73,6 +78,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', ['html2js', 'concat', 'connect:server', 'watch']);
   grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
+  grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'jsdoc']);
   grunt.registerTask('default', ['jshint', 'concat']);
 
 };
