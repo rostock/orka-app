@@ -51,8 +51,19 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
     var osm = new ol.layer.Tile({source: new ol.source.OSM()});
     osm.set('name', 'OSM Layer');
 
+    var poi = LayersFactoryProvider.newDynamicGeoJSON({
+        url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
+        projection: projection,
+        additionalParameters: function() {
+            return 'poi_types=restaurant';
+        }
+    });
+    poi.set('name', 'POI Layer');
+
     LayersServiceProvider.setLayers([
-        tms, osm
+        tms,
+        osm,
+        poi
     ]);
 
     ControlsServiceProvider.setControls(
