@@ -49,9 +49,6 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
     });
     tms.set('name', 'BasisLayer');
 
-    var osm = new ol.layer.Tile({source: new ol.source.OSM()});
-    osm.set('name', 'OSM Layer');
-
     var poi = LayersFactoryProvider.newDynamicGeoJSON({
         url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
         projection: projection,
@@ -65,7 +62,6 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
 
     LayersServiceProvider.setLayers([
         tms,
-        //osm,
         poi
     ]);
 
