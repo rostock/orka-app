@@ -1,8 +1,16 @@
-<div ng-repeat="topic in topics">
-    <input type="checkbox" ng-model="topic.active" ng-change="toggleTopic(topic)"/>
-    {{ topic.title }}
-    <div ng-repeat="group in topic.groups" style="margin-left: 10px;">
-        <input type="checkbox" ng-model="group.active" ng-change="update()"/>
+<div ng-repeat="poi in pois">
+    <input type="checkbox" ng-model="poi.active" ng-change="togglePoiTopic(poi)"/>
+    {{ poi.title }}
+    <div ng-repeat="group in poi.groups" style="margin-left: 10px;">
+        <input type="checkbox" ng-model="group.active" ng-change="updatePois(pois)"/>
+        {{ group.title }}
+    </div>
+</div>
+<div ng-repeat="track in tracks">
+    <input type="checkbox" ng-model="track.active" ng-change="toggleTrackTopic(track)"/>
+    {{ track.title }}
+    <div ng-repeat="group in track.groups" style="margin-left: 10px;">
+        <input type="checkbox" ng-model="group.active" ng-change="updateTracks(tracks)"/>
         {{ group.title }}
     </div>
 </div>

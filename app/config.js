@@ -2,6 +2,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
 
 .config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider',
     function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider) {
+    /* extend projection to allow ol3 transforming coordinates from 25833 to 4326 or/and 3857 */
     var projection = new ol.proj.Projection({
         code: 'EPSG:25833',
         units: 'm'
@@ -49,20 +50,36 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
     });
     tms.set('name', 'BasisLayer');
 
-    var poi = LayersFactoryProvider.newDynamicGeoJSON({
+    var pois = LayersFactoryProvider.newDynamicGeoJSON({
         url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
         projection: projection,
-        additionalParameters: LayertreeServiceProvider.getAdditionalParametersCallback()
+        additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback()
     });
-    poi.set('name', 'POI Layer');
+    pois.set('name', 'POI Layer');
 
-    LayertreeServiceProvider.setTreeLayer(poi);
-    LayertreeServiceProvider.setTopicsUrl('http://localhost:8888/proxy/http://www.orka-mv.de/js/poi_legend_data.json');
+    var tracks = new ol.layer.Image({
+        extent: extent,
+        source: new ol.source.ImageWMS({
+            url: 'http://www.orka-mv.de/citymap/tracks',
+            params: {
+                'LAYERS': 'tracks',
+                'TRANSPARENT': true,
+                'SRS': projection.getCode()
+            }
+        })
+    });
+    tracks.set('name', 'Track Layer');
+
+    LayertreeServiceProvider.setPoiLayer(pois);
+    LayertreeServiceProvider.setTrackLayer(tracks);
+    LayertreeServiceProvider.setPoisUrl('http://localhost:8888/proxy/http://www.orka-mv.de/js/poi_legend_data.json');
+    LayertreeServiceProvider.setTracksUrl('http://localhost:8888/proxy/http://www.orka-mv.de/js/track_legend_data.json');
     LayertreeServiceProvider.setIconBaseUrl('http://www.orka-mv.de/static/icons/');
 
     LayersServiceProvider.setLayers([
         tms,
-        poi
+        tracks,
+        pois
     ]);
 
     ControlsServiceProvider.setControls(

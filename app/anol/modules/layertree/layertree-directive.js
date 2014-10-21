@@ -1,16 +1,22 @@
 angular.module('anol.layertree', [])
 
 .provider('LayertreeService', [function() {
-    var _treeLayer, _topicsUrl, _iconBaseUrl;
+    var _poiLayer, _poisUrl, _iconBaseUrl, _tracksUrl, _trackLayer;
+    var _selectedPoiTypes = [];
 
-    var _selectedTypes = [];
-
-    this.setTreeLayer = function(treeLayer) {
-        _treeLayer = treeLayer;
+    this.setPoiLayer = function(poiLayer) {
+        _poiLayer = poiLayer;
     };
 
-    this.setTopicsUrl = function(url) {
-        _topicsUrl = url;
+    this.setTrackLayer = function(trackLayer) {
+        _trackLayer = trackLayer;
+    };
+
+    this.setPoisUrl = function(url) {
+        _poisUrl = url;
+    };
+    this.setTracksUrl = function(url) {
+        _tracksUrl = url;
     };
 
     this.setIconBaseUrl = function(url) {
@@ -19,20 +25,21 @@ angular.module('anol.layertree', [])
 
     // the dynamicGeoJSON layer needs a function at create time to add
     // aditional parameters to it's request
-    this.getAdditionalParametersCallback = function() {
+    this.getAdditionalPoiParametersCallback = function() {
         return function() {
-            var param = 'poi_types=' + _selectedTypes.join(',');
+            var param = 'poi_types=' + _selectedPoiTypes.join(',');
             return param;
         };
     };
 
-    var LayerTree = function($q, treeLayer, topicsUrl) {
+    var LayerTree = function($q, poiLayer, trackLayer, poiUrl, tracksUrl) {
         var self = this;
         this.$q = $q;
-        this.treeLayer = treeLayer;
+        this.poiLayer = poiLayer;
+        this.trackLayer = trackLayer;
         this.icons = {};
 
-        this.treeLayer.setStyle(function(feature, resolution) {
+        this.poiLayer.setStyle(function(feature, resolution) {
             return [new ol.style.Style({
                 image: new ol.style.Icon({
                     src: _iconBaseUrl + self.icons[feature.get('type')]
@@ -40,37 +47,66 @@ angular.module('anol.layertree', [])
             })];
         });
 
-        this.topicsLoaded = this._loadTopics(topicsUrl);
+        this.poisLoaded = this._loadPois(poiUrl);
+        this.tracksLoaded = this._loadTracks(tracksUrl);
     };
-    LayerTree.prototype.updateSelectedTypes = function(selectedTypes) {
-        _selectedTypes = selectedTypes;
+    LayerTree.prototype.updateSelectedPoiTypes = function(selectedTypes) {
+        _selectedPoiTypes = selectedTypes;
         // TODO find a better solution to make a new request after selectedTypes has change
         // using clear result in removing all points and redraw them. So the vector data
         // are flickering
-        this.treeLayer.getSource().clear();
+        this.poiLayer.getSource().clear();
     };
-    LayerTree.prototype._loadTopics = function(url) {
+    LayerTree.prototype.updateSelectedTrackTypes = function(selectedTypes) {
+        // _selectedTrackTypes = selectedTypes;
+        var source = this.trackLayer.getSource();
+        var params = source.getParams();
+        params.track_types = selectedTypes.join(',');
+        source.updateParams(params);
+    };
+    LayerTree.prototype._prepareTopics = function(topics) {
+        var self = this;
+        angular.forEach(topics, function(topic) {
+            topic.active = false;
+            if(topic.groups !== undefined) {
+                angular.forEach(topic.groups, function(group) {
+                    group.active = false;
+                    self.icons[group.type] = group.icon;
+                });
+            } else {
+                self.icons[topic.type] = topic.icon;
+            }
+        });
+        return topics;
+    };
+    LayerTree.prototype._loadPois = function(url) {
         var self = this;
         var deferred = this.$q.defer();
         $.ajax({
             url: url,
             dataType: 'json'
         }).done(function(response) {
-            var topics = response.topics;
-            angular.forEach(topics, function(topic) {
-                topic.active = false;
-                angular.forEach(topic.groups, function(group) {
-                    group.active = false;
-                    self.icons[group.type] = group.icon;
-                });
-            });
+            var topics = self._prepareTopics(response.topics);
+            deferred.resolve(topics);
+        });
+        return deferred.promise;
+    };
+
+    LayerTree.prototype._loadTracks = function(url) {
+        var self = this;
+        var deferred = this.$q.defer();
+        $.ajax({
+            url: url,
+            dataType: 'json'
+        }).done(function(response) {
+            var topics = self._prepareTopics(response.topics);
             deferred.resolve(topics);
         });
         return deferred.promise;
     };
 
     this.$get = ['$q', function($q) {
-        return new LayerTree($q, _treeLayer, _topicsUrl);
+        return new LayerTree($q, _poiLayer, _trackLayer, _poisUrl, _tracksUrl);
     }];
 }])
 
@@ -82,30 +118,55 @@ angular.module('anol.layertree', [])
         templateUrl: 'anol/modules/layertree/templates/layertree.html',
         scope: {},
         link: function(scope, element, attrs) {
-            LayertreeService.topicsLoaded.then(function(topics) {
-                scope.topics = topics;
+            LayertreeService.poisLoaded.then(function(pois) {
+                scope.pois = pois;
+            });
+            LayertreeService.tracksLoaded.then(function(tracks) {
+                scope.tracks = tracks;
             });
 
-            scope.update = function() {
+            scope.collectSelectedTypes = function(topics) {
                 var selectedTypes = [];
-                angular.forEach(scope.topics, function(topic) {
-                    var activeGroups = 0;
-                    angular.forEach(topic.groups, function(group) {
-                        if(group.active === true) {
-                            selectedTypes.push(group.type);
-                            activeGroups++;
-                        }
-                    });
-                    topic.active = activeGroups == topic.groups.length;
+                angular.forEach(topics, function(topic) {
+                    if(topic.groups !== undefined) {
+                        var activeGroups = 0;
+                        angular.forEach(topic.groups, function(group) {
+                            if(group.active === true) {
+                                selectedTypes.push(group.type);
+                                activeGroups++;
+                            }
+                        });
+                        topic.active = activeGroups == topic.groups.length;
+                    } else if(topic.active === true) {
+                        selectedTypes.push(topic.type);
+                    }
                 });
-                LayertreeService.updateSelectedTypes(selectedTypes);
+                return selectedTypes;
             };
-
             scope.toggleTopic = function(topic) {
                 angular.forEach(topic.groups, function(group) {
                     group.active = topic.active;
                 });
-                scope.update();
+            };
+
+            scope.updatePois = function(pois) {
+                var selectedTypes = scope.collectSelectedTypes(pois);
+                LayertreeService.updateSelectedPoiTypes(selectedTypes);
+            };
+
+            scope.togglePoiTopic = function(topic) {
+                scope.toggleTopic(topic);
+                scope.updatePois(scope.pois);
+            };
+
+            scope.updateTracks = function(tracks) {
+                var selectedTypes = scope.collectSelectedTypes(tracks);
+                LayertreeService.updateSelectedTrackTypes(selectedTypes);
+            };
+
+            scope.toggleTrackTopic = function(topic) {
+                scope.toggleTopic(topic);
+                scope.updateTracks(scope.tracks);
             };
         }
     };
