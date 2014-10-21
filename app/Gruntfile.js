@@ -29,7 +29,12 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['anol/libs/**/*.js', 'anol/modules/**/*.js'],
+        src: [
+          'anol/libs/**/*.js',
+          'anol/modules/**/*.js',
+          '!anol/**/angular-mocks.js',
+          '!anol/test/**/*.*'
+        ],
         dest: 'build/<%= pkg.name %>.js'
       }
     },
@@ -60,6 +65,12 @@ module.exports = function(grunt) {
         src: ['anol/**/*.tpl.html'],
         dest: 'build/templates.js'
       },
+    },
+    karma: {
+        unit: {
+          configFile: 'anol/karma.conf.js',
+        }
+    },
     jsdoc: {
       src: ['anol/**/*.js'],
       options: {
@@ -76,10 +87,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-common-html2js');
 
-  grunt.registerTask('dev', ['html2js', 'concat', 'connect:server', 'watch']);
-  grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-jsdoc');
+
+  grunt.registerTask('dev', ['html2js', 'concat', 'connect:server', 'watch:scripts']);
   grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'jsdoc']);
   grunt.registerTask('default', ['jshint', 'concat']);
+  grunt.registerTask('test', ['karma:unit']);
 
 };
