@@ -56,20 +56,17 @@ angular.module('anol.layertree', [])
             url: url,
             dataType: 'json'
         }).done(function(response) {
-            deferred.resolve(response.topics);
-        });
-        return deferred.promise.then(function(topics) {
-            self._collectIcons(topics);
-            return topics;
-        });
-    };
-    LayerTree.prototype._collectIcons = function(topics) {
-        var self = this;
-        angular.forEach(topics, function(topic) {
-            angular.forEach(topic.groups, function(group) {
-                self.icons[group.type] = group.icon;
+            var topics = response.topics;
+            angular.forEach(topics, function(topic) {
+                topic.active = false;
+                angular.forEach(topic.groups, function(group) {
+                    group.active = false;
+                    self.icons[group.type] = group.icon;
+                });
             });
+            deferred.resolve(topics);
         });
+        return deferred.promise;
     };
 
     this.$get = ['$q', function($q) {
@@ -92,13 +89,23 @@ angular.module('anol.layertree', [])
             scope.update = function() {
                 var selectedTypes = [];
                 angular.forEach(scope.topics, function(topic) {
+                    var activeGroups = 0;
                     angular.forEach(topic.groups, function(group) {
                         if(group.active === true) {
                             selectedTypes.push(group.type);
+                            activeGroups++;
                         }
                     });
+                    topic.active = activeGroups == topic.groups.length;
                 });
                 LayertreeService.updateSelectedTypes(selectedTypes);
+            };
+
+            scope.toggleTopic = function(topic) {
+                angular.forEach(topic.groups, function(group) {
+                    group.active = topic.active;
+                });
+                scope.update();
             };
         }
     };
