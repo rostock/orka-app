@@ -56,12 +56,14 @@ angular.module('anol.layertree')
         // using clear result in removing all points and redraw them. So the vector data
         // are flickering
         this.poiLayer.getSource().clear();
+        this.poiLayer.setVisible(_selectedPoiTypes.length > 0);
     };
     LayerTree.prototype.updateSelectedTrackTypes = function(selectedTypes) {
         // _selectedTrackTypes = selectedTypes;
         var source = this.trackLayer.getSource();
         var params = source.getParams();
         params.track_types = selectedTypes.join(',');
+        this.trackLayer.setVisible(selectedTypes.length > 0);
         source.updateParams(params);
     };
     LayerTree.prototype._prepareTopics = function(topics) {

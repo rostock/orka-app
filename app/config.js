@@ -56,6 +56,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback()
     });
     pois.set('name', 'POI Layer');
+    pois.setVisible(false);
 
     var tracks = new ol.layer.Image({
         extent: extent,
@@ -69,6 +70,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         })
     });
     tracks.set('name', 'Track Layer');
+    tracks.setVisible(false);
 
     LayertreeServiceProvider.setPoiLayer(pois);
     LayertreeServiceProvider.setTrackLayer(tracks);
