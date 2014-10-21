@@ -2,7 +2,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
 
 .config(function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider) {
     var projection = new ol.proj.Projection({
-        code: 'EPSG:25388',
+        code: 'EPSG:25833',
         units: 'm'
     });
 
