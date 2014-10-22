@@ -1,4 +1,4 @@
-angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree'])
+angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink'])
 
 .config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider',
     function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider) {
@@ -49,6 +49,18 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         projection: projection
     });
     tms.set('title', 'BasisLayer');
+    tms.set('shortcut', 'B');
+
+    var tmsGray = LayersFactoryProvider.newTMS({
+        resolutions: resolutions,
+        format: 'png',
+        extent: extent,
+        baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
+        layer: 'stadtplan_greyscale_EPSG25833',
+        projection: projection
+    });
+    tmsGray.set('title', 'Grauer Layer');
+    tmsGray.set('shortcut', 'G');
 
     var pois = LayersFactoryProvider.newDynamicGeoJSON({
         url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
@@ -80,6 +92,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
 
     LayersServiceProvider.setLayers([
         tms,
+        tmsGray,
         tracks,
         pois
     ]);
@@ -89,4 +102,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
             new ol.control.ZoomSlider()
         ])
     );
-}]);
+}])
+
+// need to start PermalinkService
+.run(['PermalinkService', function(PermalinkService) {}]);
