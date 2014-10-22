@@ -48,14 +48,14 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         layer: 'stadtplan_EPSG25833',
         projection: projection
     });
-    tms.set('name', 'BasisLayer');
+    tms.set('title', 'BasisLayer');
 
     var pois = LayersFactoryProvider.newDynamicGeoJSON({
         url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
         projection: projection,
         additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback()
     });
-    pois.set('name', 'POI Layer');
+    pois.set('title', 'POI Layer');
     pois.setVisible(false);
 
     var tracks = new ol.layer.Image({
@@ -69,7 +69,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
             }
         })
     });
-    tracks.set('name', 'Track Layer');
+    tracks.set('title', 'Track Layer');
     tracks.setVisible(false);
 
     LayertreeServiceProvider.setPoiLayer(pois);
