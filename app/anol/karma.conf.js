@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     files: [
       // 'libs/jquery/jquery.js',
-      'libs/angular/angular.js',
+      'libs/angular/angular-debug.js',
       'libs/angular/angular-mocks.js',
       'libs/ol3/ol3.min.js',
       'test/spec/**/*.js',
