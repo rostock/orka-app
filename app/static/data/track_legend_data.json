@@ -1,0 +1,56 @@
+{
+  "topics": [
+    {
+      "groups": [
+        {
+            "title": "Radfernwege",
+            "type": "radfernwege",
+            "icon": "routen/radfernwege.png"
+        },
+        {
+            "title": "Radrundwege",
+            "type": "radrundwege",
+            "icon": "routen/radrundwege.png"
+        },
+        {
+            "title": "Radtouren",
+            "type": "radtouren",
+            "icon": "routen/radtouren.png"
+        }
+      ], 
+      "name": "fahrrad_fahren", 
+      "title": "Fahrrad fahren"
+    },
+    {
+        "title": "Reiten",
+        "type": "pferd",
+        "icon": "routen/pferd.png"
+    },
+    {
+      "groups": [
+        {
+            "title": "Fernwanderwege",
+            "type": "fernwanderwege",
+            "icon": "routen/fernwanderwege.png"
+        },
+        {
+            "title": "Rundwanderwege",
+            "type": "rundwanderwege",
+            "icon": "routen/rundwanderwege.png"
+        },
+        {
+            "title": "Wandertouren",
+            "type": "wandertouren",
+            "icon": "routen/wandertouren.png"
+        }
+      ], 
+      "name": "wandern", 
+      "title": "Wandern"
+    },
+    {
+        "title": "Wassersport",
+        "type": "wasser",
+        "icon": "routen/wasser.png"
+    }
+  ]
+}

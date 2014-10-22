@@ -1,0 +1,212 @@
+{
+  "topics": [
+    {
+      "groups": [
+        {
+          "icon": "aktiv_sein/angelstelle.png", 
+          "title": "Angelstellen", 
+          "type": "angelstelle"
+        }, 
+        {
+          "icon": "aktiv_sein/bootsverleih_kanuverleih.png", 
+          "title": "Boots- &amp; Kanuverleihe", 
+          "type": "bootsverleih_kanuverleih"
+        }, 
+        {
+          "icon": "aktiv_sein/fahrrad-service.png", 
+          "title": "Fahrrad-Service", 
+          "type": "fahrrad-service"
+        }, 
+        {
+          "icon": "aktiv_sein/fahrradverleih.png", 
+          "title": "Fahrradverleihe", 
+          "type": "fahrradverleih"
+        }, 
+        {
+          "icon": "aktiv_sein/pferdehof_pferdeverleih.png", 
+          "title": "Pferdeh\u00f6fe &amp; -verleihe", 
+          "type": "pferdehof_pferdeverleih"
+        }, 
+        {
+          "icon": "aktiv_sein/spielplatz.png", 
+          "title": "Spielpl\u00e4tze", 
+          "type": "spielplatz"
+        }, 
+        {
+          "icon": "aktiv_sein/sportanlage.png", 
+          "title": "Sportanlagen", 
+          "type": "sportanlage"
+        }
+      ], 
+      "name": "aktiv_sein", 
+      "title": "Aktiv sein"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "baden/freibad.png", 
+          "title": "Freib\u00e4der", 
+          "type": "freibad"
+        }, 
+        {
+          "icon": "baden/hallenbad.png", 
+          "title": "Hallenb\u00e4der", 
+          "type": "hallenbad"
+        }, 
+        {
+          "icon": "baden/naturbadestelle.png", 
+          "title": "Naturbadestellen", 
+          "type": "naturbadestelle"
+        }
+      ], 
+      "name": "baden", 
+      "title": "Baden"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "essen_trinken/bar_nachtclub.png", 
+          "title": "Bars &amp; Nachtclubs", 
+          "type": "bar_nachtclub"
+        }, 
+        {
+          "icon": "essen_trinken/cafe.png", 
+          "title": "Caf\u00e9s", 
+          "type": "cafe"
+        }, 
+        {
+          "icon": "essen_trinken/restaurant.png", 
+          "title": "Restaurants", 
+          "type": "restaurant"
+        }, 
+        {
+          "icon": "essen_trinken/schnellimbiss.png", 
+          "title": "Schnellimbisse", 
+          "type": "schnellimbiss"
+        }
+      ], 
+      "name": "essen_trinken", 
+      "title": "Essen &amp; Trinken"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "informieren/info-zentrum.png", 
+          "title": "Informationszentren", 
+          "type": "info-zentrum"
+        }, 
+        {
+          "icon": "informieren/tourist-info.png", 
+          "title": "Touristeninformationen", 
+          "type": "tourist-info"
+        }
+      ], 
+      "name": "informieren", 
+      "title": "Informieren"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "kultur_erleben/kino.png", 
+          "title": "Kinos", 
+          "type": "kino"
+        }, 
+        {
+          "icon": "kultur_erleben/kirche_kloster.png", 
+          "title": "Kirchen &amp; Kl\u00f6ster", 
+          "type": "kirche_kloster"
+        }, 
+        {
+          "icon": "kultur_erleben/monument_baudenkmal.png", 
+          "title": "Monumente &amp; Baudenkmale", 
+          "type": "monument_baudenkmal"
+        }, 
+        {
+          "icon": "kultur_erleben/museum_ausstellung.png", 
+          "title": "Museen &amp; Ausstellungen", 
+          "type": "museum_ausstellung"
+        }, 
+        {
+          "icon": "kultur_erleben/schloss_gutshaus.png", 
+          "title": "Schl\u00f6sser &amp; Gutsh\u00e4user", 
+          "type": "schloss_gutshaus"
+        }, 
+        {
+          "icon": "kultur_erleben/theater.png", 
+          "title": "Theater", 
+          "type": "theater"
+        }
+      ], 
+      "name": "kultur_erleben", 
+      "title": "Kultur erleben"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "natur_erleben/naturdenkmal_bodendenkmal.png", 
+          "title": "Natur- &amp; Bodendenkmale", 
+          "type": "naturdenkmal_bodendenkmal"
+        }, 
+        {
+          "icon": "natur_erleben/park_garten.png", 
+          "title": "Parke &amp; G\u00e4rten", 
+          "type": "park_garten"
+        }, 
+        {
+          "icon": "natur_erleben/tierpark_gehege.png", 
+          "title": "Tierparke &amp; -gehege", 
+          "type": "tierpark_gehege"
+        }
+      ], 
+      "name": "natur_erleben", 
+      "title": "Natur erleben"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "rasten/raststelle-zu-lande.png", 
+          "title": "Rastellen zu Lande", 
+          "type": "raststelle-zu-lande"
+        }, 
+        {
+          "icon": "rasten/raststelle-zu-wasser.png", 
+          "title": "Rastellen zu Wasser", 
+          "type": "raststelle-zu-wasser"
+        }
+      ], 
+      "name": "rasten", 
+      "title": "Rasten"
+    }, 
+    {
+      "groups": [
+        {
+          "icon": "uebernachten/camping.png", 
+          "title": "Camping", 
+          "type": "camping"
+        }, 
+        {
+          "icon": "uebernachten/caravaning.png", 
+          "title": "Caravaning", 
+          "type": "caravaning"
+        }, 
+        {
+          "icon": "uebernachten/herberge.png", 
+          "title": "Herbergen", 
+          "type": "herberge"
+        }, 
+        {
+          "icon": "uebernachten/hotel.png", 
+          "title": "Hotels", 
+          "type": "hotel"
+        }, 
+        {
+          "icon": "uebernachten/pension.png", 
+          "title": "Pensionen", 
+          "type": "pension"
+        }
+      ], 
+      "name": "uebernachten", 
+      "title": "\u00dcbernachten"
+    }
+  ]
+}

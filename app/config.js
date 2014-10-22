@@ -74,8 +74,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
 
     LayertreeServiceProvider.setPoiLayer(pois);
     LayertreeServiceProvider.setTrackLayer(tracks);
-    LayertreeServiceProvider.setPoisUrl('http://localhost:8888/proxy/http://www.orka-mv.de/js/poi_legend_data.json');
-    LayertreeServiceProvider.setTracksUrl('http://localhost:8888/proxy/http://www.orka-mv.de/js/track_legend_data.json');
+    LayertreeServiceProvider.setPoisUrl('/static/data/poi_legend_data.json');
+    LayertreeServiceProvider.setTracksUrl('/static/data/track_legend_data.json');
     LayertreeServiceProvider.setIconBaseUrl('http://www.orka-mv.de/static/icons/');
 
     LayersServiceProvider.setLayers([
