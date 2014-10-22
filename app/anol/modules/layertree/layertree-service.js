@@ -32,10 +32,11 @@ angular.module('anol.layertree')
         };
     };
 
-    var LayerTree = function($rootScope, $q, poiLayer, trackLayer, poiUrl, tracksUrl) {
+    var LayerTree = function($rootScope, $q, poiLayer, trackLayer, poiUrl, tracksUrl, iconBaseUrl) {
         var self = this;
         this.$rootScope = $rootScope;
         this.$q = $q;
+        this.iconBaseUrl = iconBaseUrl;
         this.poiLayer = poiLayer;
         this.trackLayer = trackLayer;
         this.typeMap = {};
@@ -64,7 +65,6 @@ angular.module('anol.layertree')
         this.poiLayer.setVisible(_selectedPoiTypes.length > 0);
     };
     LayerTree.prototype.updateSelectedTrackTypes = function(selectedTypes) {
-        // _selectedTrackTypes = selectedTypes;
         var source = this.trackLayer.getSource();
         var params = source.getParams();
         this.selectedTrackTypes = selectedTypes;
@@ -72,7 +72,6 @@ angular.module('anol.layertree')
         this.trackLayer.setVisible(selectedTypes.length > 0);
         source.updateParams(params);
     };
-    // TODO use recursion
     LayerTree.prototype._prepareTopics = function(topics) {
         var self = this;
         angular.forEach(topics, function(topic) {
@@ -81,13 +80,13 @@ angular.module('anol.layertree')
                 angular.forEach(topic.groups, function(group) {
                     group.active = false;
                     self.typeMap[group.type] = {
-                        'icon': _iconBaseUrl + group.icon,
+                        'icon': self.iconBaseUrl + group.icon,
                         'title': group.title
                     };
                 });
             } else {
                 self.typeMap[topic.type] = {
-                    'icon': _iconBaseUrl + topic.icon,
+                    'icon': self.iconBaseUrl + topic.icon,
                     'title': topic.title
                 };
             }
@@ -121,6 +120,6 @@ angular.module('anol.layertree')
     };
 
     this.$get = ['$rootScope', '$q', function($rootScope, $q) {
-        return new LayerTree($rootScope, $q, _poiLayer, _trackLayer, _poisUrl, _tracksUrl);
+        return new LayerTree($rootScope, $q, _poiLayer, _trackLayer, _poisUrl, _tracksUrl, _iconBaseUrl);
     }];
 }]);
