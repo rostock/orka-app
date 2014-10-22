@@ -11,14 +11,16 @@ angular.module('anol.map')
     var Layers = function(layers) {
         this.layers = [];
         this.visibleLayerShortcuts = [];
+        this.shortcutMapping = {};
         this.addLayers(layers);
     };
     Layers.prototype.prepareLayers = function(layers, listener) {
         var self = this;
         angular.forEach(layers, function(layer) {
-            if(layer.getVisible()) {
-                var shortcut = layer.get('shortcut');
-                if(shortcut !== undefined) {
+            var shortcut = layer.get('shortcut');
+            if(shortcut !== undefined) {
+                self.shortcutMapping[shortcut] = layer;
+                if(layer.getVisible()) {
                     self.visibleLayerShortcuts.push(shortcut);
                 }
             }
@@ -52,6 +54,23 @@ angular.module('anol.map')
             self.visibleChangedHandler(evt);
         });
         this.layers = this.layers.concat(layers);
+    };
+    Layers.prototype.setVisibleByShortcuts = function(visibleShortcuts) {
+        var self = this;
+        visibleShortcuts = visibleShortcuts.split('');
+        angular.forEach(visibleShortcuts, function(shortcut) {
+            if(self.shortcutMapping[shortcut] !== undefined) {
+                self.shortcutMapping[shortcut].setVisible(true);
+            }
+        });
+        var nonVisibleShortcuts = $.grep(self.visibleLayerShortcuts, function(el) {
+            return $.inArray( el, visibleShortcuts ) == -1;
+        });
+        angular.forEach(nonVisibleShortcuts, function(shortcut) {
+            if(self.shortcutMapping[shortcut] !== undefined) {
+                self.shortcutMapping[shortcut].setVisible(false);
+            }
+        });
     };
 
     this.$get = [function() {
