@@ -3,13 +3,14 @@ angular.module('anol.permalink', [])
 .provider('PermalinkService', [function() {
     var _urlCrs;
     var extractMapParams = function(path) {
-        var permalinkRegEx = /.*map=(\d+)\/(\d+\.?\d+?)\/(\d+\.?\d+?)\/?([A-Z]+)?$/g;
+        var permalinkRegEx = /.*map=(\d+)\/(\d+\.?\d+?)\/(\d+\.?\d+?)\/(EPSG:\d+)\/?([A-Z]+)?$/g;
         var mapParams = permalinkRegEx.exec(path);
-        if(mapParams !== null && mapParams.length == 5) {
+        if(mapParams !== null && mapParams.length == 6) {
             return {
                 'zoom': parseInt(mapParams[1]),
                 'center': [parseFloat(mapParams[2]), parseFloat(mapParams[3])],
-                'shortcuts': mapParams[4]
+                'crs': mapParams[4],
+                'shortcuts': mapParams[5]
             };
         }
         return false;
@@ -47,8 +48,8 @@ angular.module('anol.permalink', [])
 
         var mapParams = extractMapParams(self.$location.path());
         if(mapParams !== false) {
-
-            self.view.setCenter(mapParams.center);
+            var center = ol.proj.transform(mapParams.center, mapParams.crs, self.view.getProjection());
+            self.view.setCenter(center);
             self.view.setZoom(mapParams.zoom);
             if(mapParams.shortcuts !== undefined) {
                 self.LayersService.setVisibleByShortcuts(mapParams.shortcuts);
@@ -57,7 +58,6 @@ angular.module('anol.permalink', [])
     };
     Permalink.prototype.moveendHandler = function(evt) {
         var self = this;
-        // projection string from provider config
         var center = ol.proj.transform(self.view.getCenter(), self.view.getProjection(), self.urlCrs);
         self.lon = center[0];
         self.lat = center[1];
@@ -72,7 +72,7 @@ angular.module('anol.permalink', [])
         if(self.zoom === undefined || self.lon === undefined || self.lat === undefined) {
             return;
         }
-        var urlAddon = 'map=' + [self.zoom, self.lon, self.lat, self.layersShortcuts].join('/');
+        var urlAddon = 'map=' + [self.zoom, self.lon, self.lat, self.urlCrs, self.layersShortcuts].join('/');
         self.$location.path(urlAddon);
         self.permalink = self.$location.absUrl();
     };
