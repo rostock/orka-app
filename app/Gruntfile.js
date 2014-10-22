@@ -61,7 +61,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['anol/modules/**/*.js'],
-        tasks: ['concat'],
+        tasks: ['clean', 'concat:dev'],
         options: {
           spawn: false,
         },
