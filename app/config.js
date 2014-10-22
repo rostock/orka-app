@@ -1,7 +1,7 @@
 angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink'])
 
-.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider',
-    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider) {
+.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider', 'PermalinkServiceProvider',
+    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider, PermalinkServiceProvider) {
     /* extend projection to allow ol3 transforming coordinates from 25833 to 4326 or/and 3857 */
     var projection = new ol.proj.Projection({
         code: 'EPSG:25833',
@@ -32,6 +32,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         0.3527777778,
         0.1763888889
     ];
+
+    PermalinkServiceProvider.setUrlCrs(projection.getCode());
 
     MapServiceProvider.addView(new ol.View({
         projection: projection,

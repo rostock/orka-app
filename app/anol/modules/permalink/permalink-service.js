@@ -1,73 +1,83 @@
 angular.module('anol.permalink', [])
 
-.factory('PermalinkService', ['$rootScope', '$location', 'MapService', 'LayersService', function($rootScope, $location, MapService, LayersService) {
-    var layersShortcuts;
-    var lon;
-    var lat;
-    var zoom;
-    var self = this;
-    var map = MapService.getMap();
-
-    var generatePermalink = function(evt) {
-        if(zoom === undefined || lon === undefined || lat === undefined) {
-            return;
-        }
-        var urlAddon = 'map=' + [zoom, lon, lat, layersShortcuts].join('/');
-        $location.path(urlAddon);
-        self.permalink = $location.absUrl();
-    };
-
-    var moveendHandler = function(evt) {
-        var view = map.getView();
-
-
-        var projection = view.getProjection();
-        // projection string from provider config
-        var center = ol.proj.transform(view.getCenter(), projection, 'EPSG:25833');
-        lon = center[0];
-        lat = center[1];
-
-        zoom = view.getZoom();
-        $rootScope.$apply(function() {
-            generatePermalink();
-        });
-    };
-
+.provider('PermalinkService', [function() {
+    var _urlCrs;
     var extractMapParams = function(path) {
         var permalinkRegEx = /.*map=(\d+)\/(\d+\.?\d+?)\/(\d+\.?\d+?)\/?([A-Z]+)?$/g;
         var mapParams = permalinkRegEx.exec(path);
         if(mapParams !== null && mapParams.length == 5) {
             return {
-                'zoom': mapParams[1],
-                'center': [mapParams[2], mapParams[3]],
+                'zoom': parseInt(mapParams[1]),
+                'center': [parseFloat(mapParams[2]), parseFloat(mapParams[3])],
                 'shortcuts': mapParams[4]
             };
         }
         return false;
     };
 
-    map.on('moveend', moveendHandler);
+    this.setUrlCrs = function(crs) {
+        _urlCrs = crs;
+    };
 
-    $rootScope.$watchCollection(
-        function() {
-            return LayersService.visibleLayerShortcuts;
-        }, function(newVal, oldVal) {
-            if(newVal !== undefined) {
-                layersShortcuts = newVal.join('');
-                generatePermalink();
+    var Permalink = function($rootScope, $location, MapService, LayersService, urlCrs) {
+        var self = this;
+        self.urlCrs = urlCrs;
+        self.$rootScope = $rootScope;
+        self.$location = $location;
+        self.LayersService = LayersService;
+        self.zoom = undefined;
+        self.lon = undefined;
+        self.lat = undefined;
+        self.layersShortcuts = undefined;
+        self.map = MapService.getMap();
+        self.view = self.map.getView();
+
+        self.map.on('moveend', self.moveendHandler, self);
+
+        self.$rootScope.$watchCollection(
+            function() {
+                return self.LayersService.visibleLayerShortcuts;
+            }, function(newVal, oldVal) {
+                if(newVal !== undefined) {
+                    self.layersShortcuts = newVal.join('');
+                    self.generatePermalink();
+                }
+            }
+        );
+
+        var mapParams = extractMapParams(self.$location.path());
+        if(mapParams !== false) {
+
+            self.view.setCenter(mapParams.center);
+            self.view.setZoom(mapParams.zoom);
+            if(mapParams.shortcuts !== undefined) {
+                self.LayersService.setVisibleByShortcuts(mapParams.shortcuts);
             }
         }
-    );
+    };
+    Permalink.prototype.moveendHandler = function(evt) {
+        var self = this;
+        // projection string from provider config
+        var center = ol.proj.transform(self.view.getCenter(), self.view.getProjection(), self.urlCrs);
+        self.lon = center[0];
+        self.lat = center[1];
 
-    var mapParams = extractMapParams($location.path());
-    if(mapParams !== false) {
-        var view = map.getView();
-        view.setCenter(mapParams.center);
-        view.setZoom(mapParams.zoom);
-        if(mapParams.shortcuts !== undefined) {
-            LayersService.setVisibleByShortcuts(mapParams.shortcuts);
+        self.zoom = self.view.getZoom();
+        self.$rootScope.$apply(function() {
+            self.generatePermalink();
+        });
+    };
+    Permalink.prototype.generatePermalink = function(evt) {
+        var self = this;
+        if(self.zoom === undefined || self.lon === undefined || self.lat === undefined) {
+            return;
         }
-    }
+        var urlAddon = 'map=' + [self.zoom, self.lon, self.lat, self.layersShortcuts].join('/');
+        self.$location.path(urlAddon);
+        self.permalink = self.$location.absUrl();
+    };
 
-    return self;
+    this.$get = ['$rootScope', '$location', 'MapService', 'LayersService', function($rootScope, $location, MapService, LayersService) {
+        return new Permalink($rootScope, $location, MapService, LayersService, _urlCrs);
+    }];
 }]);
