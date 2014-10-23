@@ -21,6 +21,9 @@ angular.module('anol.map')
         if(options.visible !== undefined) {
             layer.setVisible(options.visible);
         }
+        if(options.extent !== undefined) {
+            layer.setExtent(options.extent);
+        }
         return layer;
     };
 
@@ -97,6 +100,15 @@ angular.module('anol.map')
             source: source
         });
 
+        return applyLayerProperties(layer, options);
+    };
+
+    this.newSingleTileWMS = function(options) {
+        var sourceOptions = createBasicSourceOptions(options);
+        sourceOptions.url = options.url;
+        sourceOptions.params = options.params;
+
+        var layer = new ol.layer.Image({source: new ol.source.ImageWMS(sourceOptions)});
         return applyLayerProperties(layer, options);
     };
 

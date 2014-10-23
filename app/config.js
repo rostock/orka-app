@@ -72,16 +72,14 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         visible: false
     });
 
-    var tracks = new ol.layer.Image({
+    var tracks = LayersFactoryProvider.newSingleTileWMS({
         extent: extent,
-        source: new ol.source.ImageWMS({
-            url: 'http://www.orka-mv.de/citymap/tracks',
-            params: {
-                'LAYERS': 'tracks',
-                'TRANSPARENT': true,
-                'SRS': projection.getCode()
-            }
-        }),
+        url: 'http://www.orka-mv.de/citymap/tracks',
+        params: {
+            'LAYERS': 'tracks',
+            'TRANSPARENT': true,
+            'SRS': projection.getCode()
+        },
         title: 'Track Layer',
         visible: false
     });
