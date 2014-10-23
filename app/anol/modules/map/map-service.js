@@ -18,22 +18,19 @@ angular.module('anol.map')
         _view = view;
     };
 
-    var MapService = function(layersService, controlsService) {
-        this.LayersService = layersService;
-        this.ControlsService = controlsService;
-        this.map = undefined;
-    };
-    MapService.prototype.getMap = function() {
-        if(angular.isUndefined(this.map)) {
-            this.map = buildMapConfig(
-                this.LayersService.layers,
-                this.ControlsService.controls
-            );
-        }
-        return this.map;
-    };
-
     this.$get = ['LayersService', 'ControlsService', function(LayersService, ControlsService) {
-        return new MapService(LayersService, ControlsService);
+        var MapService = function() {
+            this.map = undefined;
+        };
+        MapService.prototype.getMap = function() {
+            if(angular.isUndefined(this.map)) {
+                this.map = buildMapConfig(
+                    LayersService.layers,
+                    ControlsService.controls
+                );
+            }
+            return this.map;
+        };
+        return new MapService();
     }];
 }]);
