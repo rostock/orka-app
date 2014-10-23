@@ -1,7 +1,7 @@
-angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink'])
+angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink', 'anol.print'])
 
-.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider', 'PermalinkServiceProvider',
-    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider, PermalinkServiceProvider) {
+.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider', 'PermalinkServiceProvider', 'PrintServiceProvider',
+    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider, PermalinkServiceProvider, PrintServiceProvider) {
     /* extend projection to allow ol3 transforming coordinates from 25833 to 4326 or/and 3857 */
     var projection = new ol.proj.Projection({
         code: 'EPSG:25833',
@@ -102,6 +102,30 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
             new ol.control.ZoomSlider()
         ])
     );
+
+    PrintServiceProvider.setPageSizes([
+        {
+            'label': 'DIN A4 Hoch',
+            'icon': 'glyphicon-resize-horizontal',
+            'value': [210, 297]
+        },
+        {
+            'label': 'DIN A4 Quer',
+            'icon': 'glyphicon-resize-vertical',
+            'value': [297, 210]
+        }
+    ]);
+    PrintServiceProvider.setOutputFormats([
+        {
+            'label': 'PDF',
+            'value': 'pdf'
+        },
+        {
+            'label': 'PNG',
+            'value': 'png'
+        }
+    ]);
+    PrintServiceProvider.setDefaultScale(250000);
 }])
 
 // need to start PermalinkService, can be removed if app using PermalinkDirective (when exist)

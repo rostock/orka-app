@@ -1,0 +1,29 @@
+<select ng-model="outputFormat" ng-options="format as format.label for format in outputFormats">
+</select><br>
+<div class="btn-group">
+    <button type="button" class="btn btn-default"
+            ng-repeat="pageSize in pageSizes"
+            ng-class="{'active': $parent.isPageSize(pageSize.value)}"
+            ng-click="$parent.setPageSize(pageSize.value)">
+        {{ pageSize.label }}
+        <span ng-if="pageSize.icon" class="glyphicon" ng-class="pageSize.icon"></span>
+    </button>
+</div>
+<!-- TODO add validators for input fields -->
+<label>
+    <input type="number" ng-model="pageSize[0]" ng-change="updatePrintLayer()">Breite
+</label>
+<label>
+    <input type="number" ng-model="pageSize[1]" ng-change="updatePrintLayer()">Höhe
+</label>
+<label>
+    <input type="number" ng-model="scale" ng-change="updatePrintLayer()">Maßstab
+</label>
+<label>
+    <input type="checkbox" ng-model="streetIndex">Straßenverzeichnis
+</label>
+<label>
+    <input type="checkbox" ng-model="licenceAgreed">Nutzungsbedingungen zustimmen
+</label>
+<button class="btn btn-default" ng-click="startPrint()" ng-disabled="!licenceAgreed">Ausgabe erstellen</button>
+<button class="btn btn-default" ng-click="resetPrintArea()">Ausgabebereich zentrieren</button>

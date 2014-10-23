@@ -57,6 +57,7 @@ angular.module('anol.permalink', [])
         Permalink.prototype.moveendHandler = function(evt) {
             var self = this;
             var center = ol.proj.transform(self.view.getCenter(), self.view.getProjection(), self.urlCrs);
+            // TODO round lon, lat to 5 digits
             self.lon = center[0];
             self.lat = center[1];
 
