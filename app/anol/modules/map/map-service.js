@@ -3,9 +3,10 @@ angular.module('anol.map')
 .provider('MapService', [function() {
     var _view;
 
-    var buildMapConfig = function(layers, controls) {
+    var buildMapConfig = function(layers, controls, interactions) {
         var map = new ol.Map(angular.extend({}, {
             controls: controls,
+            interactions: interactions,
             layers: layers
         }));
         map.setView(_view);
@@ -16,7 +17,7 @@ angular.module('anol.map')
         _view = view;
     };
 
-    this.$get = ['LayersService', 'ControlsService', function(LayersService, ControlsService) {
+    this.$get = ['LayersService', 'ControlsService', 'InteractionsService', function(LayersService, ControlsService, InteractionsService) {
         var MapService = function() {
             this.map = undefined;
         };
@@ -24,10 +25,12 @@ angular.module('anol.map')
             if(angular.isUndefined(this.map)) {
                 this.map = buildMapConfig(
                     LayersService.layers,
-                    ControlsService.controls
+                    ControlsService.controls,
+                    InteractionsService.interactions
                 );
                 LayersService.registerMap(this.map);
                 ControlsService.registerMap(this.map);
+                InteractionsService.registerMap(this.map);
             }
             return this.map;
         };
