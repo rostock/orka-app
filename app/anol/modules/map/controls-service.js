@@ -1,7 +1,7 @@
 angular.module('anol.map')
 
 .provider('ControlsService', [function() {
-    var _controls = [];
+    var _controls;
 
     this.setControls = function(controls) {
         _controls = controls;
@@ -10,7 +10,7 @@ angular.module('anol.map')
     this.$get = [function() {
         // and this is the service part
         var Controls = function(controls) {
-            this.controls = controls;
+            this.controls = controls || ol.control.defaults();
             this.map = undefined;
         };
         Controls.prototype.registerMap = function(map) {
