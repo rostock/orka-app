@@ -48,10 +48,10 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         extent: extent,
         baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
         layer: 'stadtplan_EPSG25833',
-        projection: projection
+        projection: projection,
+        title: 'BasisLayer',
+        shortcut: 'B'
     });
-    tms.set('title', 'BasisLayer');
-    tms.set('shortcut', 'B');
 
     var tmsGray = LayersFactoryProvider.newTMS({
         resolutions: resolutions,
@@ -59,18 +59,18 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         extent: extent,
         baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
         layer: 'stadtplan_greyscale_EPSG25833',
-        projection: projection
+        projection: projection,
+        title: 'Grauer Layer',
+        shortcut: 'G'
     });
-    tmsGray.set('title', 'Grauer Layer');
-    tmsGray.set('shortcut', 'G');
 
     var pois = LayersFactoryProvider.newDynamicGeoJSON({
         url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
         projection: projection,
-        additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback()
+        additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
+        title: 'POI Layer',
+        visible: false
     });
-    pois.set('title', 'POI Layer');
-    pois.setVisible(false);
 
     var tracks = new ol.layer.Image({
         extent: extent,
@@ -81,10 +81,10 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
                 'TRANSPARENT': true,
                 'SRS': projection.getCode()
             }
-        })
+        }),
+        title: 'Track Layer',
+        visible: false
     });
-    tracks.set('title', 'Track Layer');
-    tracks.setVisible(false);
 
     LayertreeServiceProvider.setPoiLayer(pois);
     LayertreeServiceProvider.setTrackLayer(tracks);
@@ -106,5 +106,5 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
     );
 }])
 
-// need to start PermalinkService
+// need to start PermalinkService, can be removed if app using PermalinkDirective (when exist)
 .run(['PermalinkService', function(PermalinkService) {}]);

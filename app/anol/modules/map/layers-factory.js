@@ -1,6 +1,28 @@
 angular.module('anol.map')
+// TODO think about a better solution to provide layer objects
 .provider('LayersFactory', [function() {
     var self = this;
+
+    var createBasicSourceOptions = function(options) {
+        var sourceOptions = {};
+        if(options.projection !== undefined) {
+            sourceOptions.projection = options.projection;
+        }
+        return sourceOptions;
+    };
+
+    var applyLayerProperties = function(layer, options) {
+        if(options.title !== undefined) {
+            layer.set('title', options.title);
+        }
+        if(options.shortcut !== undefined) {
+            layer.set('shortcut', options.shortcut);
+        }
+        if(options.visible !== undefined) {
+            layer.setVisible(options.visible);
+        }
+        return layer;
+    };
 
     this.newTMS = function(options) {
         var tileGrid = false;
@@ -24,35 +46,26 @@ angular.module('anol.map')
                 resolutions: options.resolutions
             });
         }
-
-        var sourceOptions = {
-            tileUrlFunction: tileURL
-        };
+        var sourceOptions = createBasicSourceOptions(options);
+        sourceOptions.tileUrlFunction = tileURL;
 
         if(tileGrid) {
             sourceOptions.tileGrid = tileGrid;
         }
-        if(options.projection !== undefined) {
-            sourceOptions.projection = options.projection;
-        }
+
         if(options.atrtibution !== undefined) {
             sourceOptions.attributions = options.attributions;
         }
 
-        return new ol.layer.Tile({
+        var layer = new ol.layer.Tile({
             source: new ol.source.TileImage(sourceOptions)
         });
+
+        return applyLayerProperties(layer, options);
     };
 
     this.newDynamicGeoJSON = function(options) {
         var source;
-        var sourceOptions = {
-            format: new ol.format.GeoJSON(),
-            strategy: ol.loadingstrategy.bbox
-        };
-        if(options.projection !== undefined) {
-            sourceOptions.projection = options.projection;
-        }
 
         var loader = function(extent, resolution, projection) {
             var params = [
@@ -73,13 +86,18 @@ angular.module('anol.map')
             });
         };
 
+        var sourceOptions = createBasicSourceOptions(options);
+        sourceOptions.format = new ol.format.GeoJSON();
+        sourceOptions.strategy = ol.loadingstrategy.bbox;
         sourceOptions.loader = loader;
 
         source = new ol.source.ServerVector(sourceOptions);
 
-        return new ol.layer.Vector({
+        var layer = new ol.layer.Vector({
             source: source
         });
+
+        return applyLayerProperties(layer, options);
     };
 
     this.$get = [function() {
