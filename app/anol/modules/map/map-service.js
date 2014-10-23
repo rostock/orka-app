@@ -28,6 +28,7 @@ angular.module('anol.map')
                     LayersService.layers,
                     ControlsService.controls
                 );
+                LayersService.registerMap(this.map);
             }
             return this.map;
         };

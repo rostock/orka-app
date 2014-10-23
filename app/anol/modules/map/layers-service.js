@@ -10,10 +10,14 @@ angular.module('anol.map')
     this.$get = [function() {
         // and this is the service part
         var Layers = function(layers) {
+            this.map = undefined;
             this.layers = [];
             this.visibleLayerShortcuts = [];
             this.shortcutMapping = {};
             this.addLayers(layers);
+        };
+        Layers.prototype.registerMap = function(map) {
+            this.map = map;
         };
         Layers.prototype.prepareLayers = function(layers, listener) {
             var self = this;
@@ -26,6 +30,14 @@ angular.module('anol.map')
                     }
                 }
                 layer.on('change:visible', listener);
+                // while map is undefined, don't add layers to it
+                // when map is created, all this.layers are added to map
+                // after that, this.map is registered
+                // so, wehen map is defined, added layers are not in map
+                // and must be added
+                if(self.map !== undefined) {
+                    self.map.addLayer(layer);
+                }
             });
         };
         Layers.prototype.visibleChangedHandler = function(evt) {
@@ -47,6 +59,7 @@ angular.module('anol.map')
             this.prepareLayers([layer], function(evt) {
                 self.visibleChangedHandler(evt);
             });
+
             this.layers.push(layer);
         };
         Layers.prototype.addLayers = function(layers) {
@@ -54,6 +67,7 @@ angular.module('anol.map')
             this.prepareLayers(layers, function(evt) {
                 self.visibleChangedHandler(evt);
             });
+
             this.layers = this.layers.concat(layers);
         };
         Layers.prototype.setVisibleByShortcuts = function(visibleShortcuts) {
