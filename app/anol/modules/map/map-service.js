@@ -5,12 +5,10 @@ angular.module('anol.map')
 
     var buildMapConfig = function(layers, controls) {
         var map = new ol.Map(angular.extend({}, {
-            'controls': controls
+            controls: controls,
+            layers: layers
         }));
         map.setView(_view);
-        angular.forEach(layers, function(layer) {
-            map.addLayer(layer);
-        });
         return map;
     };
 
