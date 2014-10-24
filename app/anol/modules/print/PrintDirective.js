@@ -102,6 +102,7 @@ angular.module('anol.print', [])
             modifyFeatures.push(dragFeatures.righttop);
 
             dragFeatures.center = new ol.Feature(new ol.geom.Point(center));
+            dragFeatures.center.on('change', this.dragFeatureCenterChangeHandler, this);
             modifyFeatures.push(dragFeatures.center);
 
             printSource.addFeatures(modifyFeatures.getArray());
@@ -143,7 +144,7 @@ angular.module('anol.print', [])
             updateFeature(dragFeatures.righttop, currentFeature, [right, top], this.dragFeatureDiagonalChangeHandler);
             updateFeature(dragFeatures.lefttop, currentFeature, [left, top], this.dragFeatureDiagonalChangeHandler);
 
-            updateFeature(dragFeatures.center, currentFeature, center, this.dragFeatureNormalChangeHandler);
+            updateFeature(dragFeatures.center, currentFeature, center, this.dragFeatureCenterChangeHandler);
         };
 
         Print.prototype.dragFeatureNormalChangeHandler = function(evt) {
@@ -155,10 +156,14 @@ angular.module('anol.print', [])
 
         Print.prototype.dragFeatureDiagonalChangeHandler = function(evt) {
             var currentFeature = evt.target;
-
             this.updatePrintAreaDiagonal(currentFeature);
             this.updateDragFeatures(currentFeature);
             this.updatePrintSize();
+        };
+        Print.prototype.dragFeatureCenterChangeHandler = function(evt) {
+            var currentFeature = evt.target;
+            this.updatePrintAreaCenter(currentFeature);
+            this.updateDragFeatures(currentFeature);
         };
         Print.prototype.updatePrintAreaDiagonal = function(currentFeature) {
             var lefttop, righttop, leftbottom, rightbottom;
@@ -178,6 +183,14 @@ angular.module('anol.print', [])
             var top = dragFeatures.top.getGeometry().getCoordinates()[1];
             var bottom = dragFeatures.bottom.getGeometry().getCoordinates()[1];
 
+            this.updatePrintArea(left, top, right, bottom);
+        };
+        Print.prototype.updatePrintAreaCenter = function(currentFeature) {
+            var center = currentFeature.getGeometry().getCoordinates();
+            var top = center[1] + (this.mapHeight / 2);
+            var bottom = center[1] - (this.mapHeight / 2);
+            var left = center[0] - (this.mapWidth / 2);
+            var right = center[0] + (this.mapWidth / 2);
             this.updatePrintArea(left, top, right, bottom);
         };
         Print.prototype.updatePrintArea = function(left, top, right, bottom) {
