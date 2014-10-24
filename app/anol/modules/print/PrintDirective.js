@@ -198,9 +198,11 @@ angular.module('anol.print', [])
         Print.prototype.updatePrintSize = function() {
             var self = this;
             $rootScope.$apply(function() {
+                self.mapWidth = dragFeatures.right.getGeometry().getCoordinates()[0] - dragFeatures.left.getGeometry().getCoordinates()[0];
+                self.mapHeight = dragFeatures.top.getGeometry().getCoordinates()[1] - dragFeatures.bottom.getGeometry().getCoordinates()[1];
                 self.currentPageSize = [
-                    (dragFeatures.right.getGeometry().getCoordinates()[0] - dragFeatures.left.getGeometry().getCoordinates()[0]) * 1000 / self.currentScale,
-                    (dragFeatures.top.getGeometry().getCoordinates()[1] - dragFeatures.bottom.getGeometry().getCoordinates()[1]) * 1000 / self.currentScale
+                    self.mapWidth * 1000 / self.currentScale,
+                    self.mapHeight * 1000 / self.currentScale
                 ];
             });
         };
