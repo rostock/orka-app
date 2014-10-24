@@ -61,6 +61,7 @@ angular.module('anol.print', [])
             var right = center[0] + (this.mapWidth / 2);
 
             printSource.clear();
+            printArea = undefined;
             this.updatePrintArea(left, top, right, bottom);
             this.createDragFeatures(left, top, right, bottom, center);
         };
