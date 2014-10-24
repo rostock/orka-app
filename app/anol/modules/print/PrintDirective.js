@@ -29,7 +29,7 @@ angular.module('anol.print', [])
             righttop: undefined,
             center: undefined
         };
-
+        var modifyFeatures = new ol.Collection();
         // create print layer
         // TODO create FeatureLayer or something like that to layers factory
         var printSource = new ol.source.Vector();
@@ -47,128 +47,175 @@ angular.module('anol.print', [])
             this.currentPageSize = undefined;
             this.currentScale = undefined;
         };
-        Print.prototype.createPrintArea = function(pageSize, scale) {
+        Print.prototype.createPrintArea = function(pageSize, scale, center) {
             this.currentPageSize = pageSize;
             this.currentScale = scale;
             this.mapWidth = this.currentPageSize[0] / 1000 * this.currentScale;
             this.mapHeight = this.currentPageSize[1] / 1000 * this.currentScale;
 
             var view = MapService.getMap().getView();
-
-            dragFeatures.center = new ol.Feature(new ol.geom.Point(view.getCenter()));
-
-            this.createDragFeatures();
-            this.updatePrintArea(pageSize, scale);
-
-            var featureList = [dragFeatures.left,
-                dragFeatures.lefttop,
-                dragFeatures.top,
-                dragFeatures.righttop,
-                dragFeatures.right,
-                dragFeatures.rightbottom,
-                dragFeatures.bottom,
-                dragFeatures.leftbottom,
-                dragFeatures.center
-            ];
-            printSource.addFeatures(featureList);
-
-            if(modify !== undefined) {
-                InteractionsService.removeInteraction(modify);
-            }
-            modify = new ol.interaction.Modify({features: new ol.Collection(featureList)});
-
-            InteractionsService.addInteraction(modify);
-        };
-        Print.prototype.createDragFeatures = function() {
-            var center = dragFeatures.center.getGeometry().getCoordinates();
+            center = center || view.getCenter();
             var top = center[1] + (this.mapHeight / 2);
             var bottom = center[1] - (this.mapHeight / 2);
             var left = center[0] - (this.mapWidth / 2);
             var right = center[0] + (this.mapWidth / 2);
 
-            dragFeatures.left = new ol.Feature(new ol.geom.Point([left, center[1]]));
-            dragFeatures.left.on('change', this.updateLeft, this);
-            dragFeatures.leftbottom = new ol.Feature(new ol.geom.Point([left, bottom]));
-            dragFeatures.leftbottom.on('change', this.updateLeftbottom, this);
-            dragFeatures.lefttop = new ol.Feature(new ol.geom.Point([left, top]));
-            dragFeatures.lefttop.on('change', this.updateLefttop, this);
-
-
-            dragFeatures.top = new ol.Feature(new ol.geom.Point([center[0], top]));
-            dragFeatures.righttop = new ol.Feature(new ol.geom.Point([right, top]));
-            dragFeatures.right = new ol.Feature(new ol.geom.Point([right, center[1]]));
-            dragFeatures.rightbottom = new ol.Feature(new ol.geom.Point([right, bottom]));
-            dragFeatures.bottom = new ol.Feature(new ol.geom.Point([center[0], bottom]));
-
-        };
-
-        Print.prototype.updateLeft = function(evt) {
-            var leftCoords = evt.target.getGeometry().getCoordinates();
-
-            var lefttop = dragFeatures.lefttop;
-            var leftbottom = dragFeatures.leftbottom;
-
-            lefttop.un('change', this.updateLefttop, this);
-            leftbottom.un('change', this.updateLeftbottom, this);
-
-            lefttop.getGeometry().setCoordinates([leftCoords[0], lefttop.getGeometry().getCoordinates()[1]]);
-            leftbottom.getGeometry().setCoordinates([leftCoords[0], leftbottom.getGeometry().getCoordinates()[1]]);
-
-            lefttop.on('change', this.updateLefttop, this);
-            leftbottom.on('change', this.updateLeftbottom, this);
-
-            this.updatePrintArea();
-            this.updatePrintSize();
-
-        };
-        Print.prototype.updateLefttop = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('lefttop changed to', coords);
-        };
-        Print.prototype.updateTop = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('top changed to', coords);
-        };
-        Print.prototype.updateRighttop = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('righttop changed to', coords);
-        };
-        Print.prototype.updateRight = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('right changed to', coords);
-        };
-        Print.prototype.updateRightbottom = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('rightbottom changed to', coords);
-        };
-        Print.prototype.updateBottom = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('bottom changed to', coords);
-        };
-        Print.prototype.updateLeftbottom = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('leftbottm changed to', coords);
-        };
-        Print.prototype.updateCenter = function(evt) {
-            var coords = evt.target.getGeometry().getCoordinates();
-            console.log('center changed to', coords);
-        };
-        Print.prototype.updatePrintArea = function(pageSize, scale) {
             var coords = [[
-                dragFeatures.lefttop.getGeometry().getCoordinates(),
-                dragFeatures.righttop.getGeometry().getCoordinates(),
-                dragFeatures.rightbottom.getGeometry().getCoordinates(),
-                dragFeatures.leftbottom.getGeometry().getCoordinates(),
-                dragFeatures.lefttop.getGeometry().getCoordinates()
+                [left, top],
+                [right, top],
+                [right, bottom],
+                [left, bottom],
+                [left, top]
             ]];
 
-            if(this.printArea !== undefined) {
-                printSource.removeFeature(this.printArea);
+            // start move in function
+            if(printArea !== undefined) {
+                printSource.removeFeature(printArea);
             }
+            printArea = new ol.Feature(new ol.geom.Polygon(coords));
+            printSource.clear();
+            printSource.addFeatures([printArea]);
+            // end move in function
+            this.createDragFeatures();
+        };
+        Print.prototype.createDragFeatures = function() {
+            // start move in function or use 63-69
+            var edgePoints = printArea.getGeometry().getCoordinates()[0];
+            var left = edgePoints[0][0];
+            var right = edgePoints[1][0];
+            var top = edgePoints[0][1];
+            var bottom = edgePoints[2][1];
+            var center = printArea.getGeometry().getInteriorPoint().getCoordinates();
+            // end move in function
 
-            this.printArea = new ol.Feature(new ol.geom.Polygon(coords));
+            modifyFeatures.clear();
 
-            printSource.addFeatures([this.printArea]);
+            // TOTO refactore
+            dragFeatures.left = new ol.Feature(new ol.geom.Point([left, center[1]]));
+            dragFeatures.left.on('change', this.dragFeatureNormalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.left);
+
+            dragFeatures.right = new ol.Feature(new ol.geom.Point([right, center[1]]));
+            dragFeatures.right.on('change', this.dragFeatureNormalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.right);
+
+            dragFeatures.top = new ol.Feature(new ol.geom.Point([center[0], top]));
+            dragFeatures.top.on('change', this.dragFeatureNormalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.top);
+
+            dragFeatures.bottom = new ol.Feature(new ol.geom.Point([center[0], bottom]));
+            dragFeatures.bottom.on('change', this.dragFeatureNormalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.bottom);
+
+            dragFeatures.leftbottom = new ol.Feature(new ol.geom.Point([left, bottom]));
+            dragFeatures.leftbottom.on('change', this.dragFeatureDiagonalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.leftbottom);
+
+            dragFeatures.lefttop = new ol.Feature(new ol.geom.Point([left, top]));
+            dragFeatures.lefttop.on('change', this.dragFeatureDiagonalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.lefttop);
+
+            dragFeatures.rightbottom = new ol.Feature(new ol.geom.Point([right, bottom]));
+            dragFeatures.rightbottom.on('change', this.dragFeatureDiagonalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.rightbottom);
+
+            dragFeatures.righttop = new ol.Feature(new ol.geom.Point([right, top]));
+            dragFeatures.righttop.on('change', this.dragFeatureDiagonalChangeHandler, this);
+            modifyFeatures.push(dragFeatures.righttop);
+
+            dragFeatures.center = new ol.Feature(new ol.geom.Point(center));
+            modifyFeatures.push(dragFeatures.center);
+
+            printSource.addFeatures(modifyFeatures.getArray());
+
+            if(modify !== undefined) {
+                InteractionsService.removeInteraction(modify);
+            }
+            modify = new ol.interaction.Modify({features: modifyFeatures});
+
+            InteractionsService.addInteraction(modify);
+        };
+        Print.prototype.updateDragFeatures = function(currentFeature) {
+            var self = this;
+            var edgePoints = printArea.getGeometry().getCoordinates()[0];
+            var left = edgePoints[0][0];
+            var right = edgePoints[1][0];
+            var top = edgePoints[0][1];
+            var bottom = edgePoints[2][1];
+            var center = printArea.getGeometry().getInteriorPoint().getCoordinates();
+
+            var updateFeature = function(dragFeature, currentFeature, coords, handler) {
+                // TODO remove modify when we can
+                dragFeature.un('change', handler, self);
+                if(dragFeature !== currentFeature) {
+                    modifyFeatures.remove(dragFeature);
+                    dragFeature.getGeometry().setCoordinates(coords);
+                    modifyFeatures.push(dragFeature);
+                }
+                dragFeature.on('change', handler, self);
+            };
+
+            updateFeature(dragFeatures.left, currentFeature, [left, center[1]], this.dragFeatureNormalChangeHandler);
+            updateFeature(dragFeatures.bottom, currentFeature, [center[0], bottom], this.dragFeatureNormalChangeHandler);
+            updateFeature(dragFeatures.right, currentFeature, [right, center[1]], this.dragFeatureNormalChangeHandler);
+            updateFeature(dragFeatures.top, currentFeature, [center[0], top], this.dragFeatureNormalChangeHandler);
+
+            updateFeature(dragFeatures.leftbottom, currentFeature, [left, bottom], this.dragFeatureDiagonalChangeHandler);
+            updateFeature(dragFeatures.rightbottom, currentFeature, [right, bottom], this.dragFeatureDiagonalChangeHandler);
+            updateFeature(dragFeatures.righttop, currentFeature, [right, top], this.dragFeatureDiagonalChangeHandler);
+            updateFeature(dragFeatures.lefttop, currentFeature, [left, top], this.dragFeatureDiagonalChangeHandler);
+
+            updateFeature(dragFeatures.center, currentFeature, center, this.dragFeatureNormalChangeHandler);
+        };
+
+        Print.prototype.dragFeatureNormalChangeHandler = function(evt) {
+            var currentFeature = evt.target;
+            this.updatePrintAreaNormal();
+            this.updateDragFeatures(currentFeature);
+            this.updatePrintSize();
+        };
+
+        Print.prototype.dragFeatureDiagonalChangeHandler = function(evt) {
+            var currentFeature = evt.target;
+
+            this.updatePrintAreaDiagonal(currentFeature);
+            this.updateDragFeatures(currentFeature);
+            this.updatePrintSize();
+        };
+        Print.prototype.updatePrintAreaDiagonal = function(currentFeature) {
+            var lefttop, righttop, leftbottom, rightbottom;
+            if(dragFeatures.lefttop === currentFeature || dragFeatures.rightbottom === currentFeature) {
+                lefttop = dragFeatures.lefttop.getGeometry().getCoordinates();
+                rightbottom = dragFeatures.rightbottom.getGeometry().getCoordinates();
+                this.updatePrintArea(lefttop[0], lefttop[1], rightbottom[0], rightbottom[1]);
+            } else {
+                righttop = dragFeatures.righttop.getGeometry().getCoordinates();
+                leftbottom = dragFeatures.leftbottom.getGeometry().getCoordinates();
+                this.updatePrintArea(leftbottom[0], righttop[1], righttop[0], leftbottom[1]);
+            }
+        };
+        Print.prototype.updatePrintAreaNormal = function() {
+            var left = dragFeatures.left.getGeometry().getCoordinates()[0];
+            var right = dragFeatures.right.getGeometry().getCoordinates()[0];
+            var top = dragFeatures.top.getGeometry().getCoordinates()[1];
+            var bottom = dragFeatures.bottom.getGeometry().getCoordinates()[1];
+
+            this.updatePrintArea(left, top, right, bottom);
+        };
+        Print.prototype.updatePrintArea = function(left, top, right, bottom) {
+            var coords = [[
+                [left, top],
+                [right, top],
+                [right, bottom],
+                [left, bottom],
+                [left, top]
+            ]];
+
+            if(printArea !== undefined) {
+                printSource.removeFeature(printArea);
+            }
+            printArea = new ol.Feature(new ol.geom.Polygon(coords));
+            printSource.addFeatures([printArea]);
         };
         Print.prototype.updatePrintSize = function() {
             var self = this;
@@ -180,10 +227,10 @@ angular.module('anol.print', [])
             });
         };
         Print.prototype.addFeatureFromPageSize = function(pageSize, scale) {
-            if(this.printArea === undefined) {
+            if(printArea === undefined) {
                 this.createPrintArea(pageSize, scale);
             } else {
-                this.updatePrintArea(pageSize, scale);
+                this.createPrintArea(pageSize, scale, printArea.getGeometry().getInteriorPoint().getCoordinates());
             }
         };
         return new Print(_pageSizes, _outputFormats, _defaultScale);
