@@ -60,37 +60,14 @@ angular.module('anol.print', [])
             var left = center[0] - (this.mapWidth / 2);
             var right = center[0] + (this.mapWidth / 2);
 
-            var coords = [[
-                [left, top],
-                [right, top],
-                [right, bottom],
-                [left, bottom],
-                [left, top]
-            ]];
-
-            // start move in function
-            if(printArea !== undefined) {
-                printSource.removeFeature(printArea);
-            }
-            printArea = new ol.Feature(new ol.geom.Polygon(coords));
             printSource.clear();
-            printSource.addFeatures([printArea]);
-            // end move in function
-            this.createDragFeatures();
+            this.updatePrintArea(left, top, right, bottom);
+            this.createDragFeatures(left, top, right, bottom, center);
         };
-        Print.prototype.createDragFeatures = function() {
-            // start move in function or use 63-69
-            var edgePoints = printArea.getGeometry().getCoordinates()[0];
-            var left = edgePoints[0][0];
-            var right = edgePoints[1][0];
-            var top = edgePoints[0][1];
-            var bottom = edgePoints[2][1];
-            var center = printArea.getGeometry().getInteriorPoint().getCoordinates();
-            // end move in function
-
+        Print.prototype.createDragFeatures = function(left, top, right, bottom, center) {
             modifyFeatures.clear();
 
-            // TOTO refactore
+            // TOTO refactor
             dragFeatures.left = new ol.Feature(new ol.geom.Point([left, center[1]]));
             dragFeatures.left.on('change', this.dragFeatureNormalChangeHandler, this);
             modifyFeatures.push(dragFeatures.left);
