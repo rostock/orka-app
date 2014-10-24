@@ -31,6 +31,13 @@ angular.module('anol.map')
             }
             this.interactions = this.interactions.concat(interactions);
         };
+        Interactions.prototype.removeInteraction = function(interaction) {
+            this.map.removeInteraction(interaction);
+            var idx = $.inArray(this.interactions, interaction);
+            if(idx !== -1) {
+                this.interactions.splice(idx, 1);
+            }
+        };
         return new Interactions(_interactions);
     }];
 }]);
