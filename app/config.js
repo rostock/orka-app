@@ -1,4 +1,4 @@
-angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink', 'anol.print'])
+angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink', 'anol.print', 'anol.featurepopup'])
 
 .config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider', 'PermalinkServiceProvider', 'PrintServiceProvider',
     function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider, PermalinkServiceProvider, PrintServiceProvider) {
