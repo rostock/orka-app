@@ -1,3 +1,5 @@
+<!-- TODO separat background from overlay layers -->
+
 <div ng-if="layer.get('displayInLayerswitcher') !== false"
      ng-repeat="layer in layers">
     <span class="glyphicon"
@@ -5,4 +7,5 @@
           ng-click="layer.setVisible(!layer.getVisible())">
     </span>
     {{ layer.get('title') }}
+    <span ng-if="layer.get('isBackground') === true" class="glyphicon glyphicon-paperclip"></span>
 </div>

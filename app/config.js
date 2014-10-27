@@ -50,7 +50,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         layer: 'stadtplan_EPSG25833',
         projection: projection,
         title: 'BasisLayer',
-        shortcut: 'B'
+        shortcut: 'B',
+        isBackground: true
     });
 
     var tmsGray = LayersFactoryProvider.newTMS({
@@ -61,7 +62,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         layer: 'stadtplan_greyscale_EPSG25833',
         projection: projection,
         title: 'Grauer Layer',
-        shortcut: 'G'
+        shortcut: 'G',
+        isBackground: true
     });
 
     var pois = LayersFactoryProvider.newDynamicGeoJSON({

@@ -27,6 +27,9 @@ angular.module('anol.map')
         if(options.displayInLayerswitcher !== undefined) {
             layer.set('displayInLayerswitcher', options.displayInLayerswitcher);
         }
+        if(options.isBackground !== undefined) {
+            layer.set('isBackground', options.isBackground);
+        }
         return layer;
     };
 
@@ -66,6 +69,7 @@ angular.module('anol.map')
         var layer = new ol.layer.Tile({
             source: new ol.source.TileImage(sourceOptions)
         });
+        layer.set('layerName', options.layer);
 
         return applyLayerProperties(layer, options);
     };

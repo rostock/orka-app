@@ -12,6 +12,9 @@ angular.module('anol.map')
         var Layers = function(layers) {
             this.map = undefined;
             this.layers = [];
+            // TODO store the only active background layer in this.backgroundlayer
+            this.backgroundLayers = [];
+            this.overlayLayers = [];
             this.visibleLayerShortcuts = [];
             this.shortcutMapping = {};
             this.addLayers(layers);
@@ -28,6 +31,11 @@ angular.module('anol.map')
                     if(layer.getVisible()) {
                         self.visibleLayerShortcuts.push(shortcut);
                     }
+                }
+                if(layer.get('isBackground')) {
+                    self.backgroundLayers.push(layer);
+                } else {
+                    self.overlayLayers.push(layer);
                 }
                 layer.on('change:visible', listener);
                 // while map is undefined, don't add layers to it
