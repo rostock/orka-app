@@ -14,6 +14,9 @@ angular.module('anol.print', [])
             scope.startPrint = function() {
                 console.warn('Implement me');
             };
+            // if we assign pageSize = value in template angular put only a reverence
+            // into scope.pageSize and typing somethink into width/height input fields
+            // will result in modifying selected availablePageSize value
             scope.setPageSize = function(size) {
                 scope.pageSize = angular.copy(size);
                 scope.updatePrintLayer();
@@ -30,9 +33,6 @@ angular.module('anol.print', [])
             };
         },
         controller: function($scope, $element, $attrs) {
-            // if we assign pageSize = value in template angular put only a reverence
-            // into scope.pageSize and typing somethink into width/height input fields
-            // will result in modifying selected availablePageSize value
 
             $scope.isPageSize = function(size) {
                 return angular.equals(size, $scope.pageSize);
