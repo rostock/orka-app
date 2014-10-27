@@ -95,6 +95,15 @@ angular.module('anol.map')
                 }
             });
         };
+        Layers.prototype.backgroundLayer = function() {
+            var backgroundLayer;
+            angular.forEach(this.backgroundLayers, function(layer) {
+                if(layer.getVisible() === true) {
+                    backgroundLayer = layer;
+                }
+            });
+            return backgroundLayer;
+        };
         return new Layers(_layers);
     }];
 }]);

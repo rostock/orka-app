@@ -13,14 +13,8 @@ angular.module('anol.print', [])
             };
             scope.startPrint = function() {
                 scope.downloadUrl = false;
-                var layerName;
+                var layerName = LayersService.backgroundLayer().get('layerName');
 
-                // TODO replace with LayersService.backgroundLayer if present in LayersService
-                angular.forEach(LayersService.backgroundLayers, function(layer) {
-                    if(layer.getVisible() && layerName === undefined) {
-                        layerName = layer.get('layerName');
-                    }
-                });
                 var downloadPromise = PrintService.createDownload(
                     scope.outputFormat.value,
                     layerName,
