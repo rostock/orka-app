@@ -3,7 +3,7 @@ angular.module('anol.print')
 .provider('PrintService', [function() {
     // Better move directive configuration in directive so
     // direcitve can be replaced by custom one?
-    var _pageSizes, _outputFormats, _defaultScale;
+    var _pageSizes, _outputFormats, _defaultScale, _createDownloadUrl, _checkDownloadUrl, _checkDownloadDelay;
 
     this.setPageSizes = function(pageSizes) {
         _pageSizes = pageSizes;
@@ -14,8 +14,17 @@ angular.module('anol.print')
     this.setDefaultScale = function(scale) {
         _defaultScale = scale;
     };
+    this.setCreateDownloadUrl = function(url) {
+        _createDownloadUrl = url;
+    };
+    this.setCheckDownloadUrl = function(url) {
+        _checkDownloadUrl = url;
+    };
+    this.setCheckDownloadDelay = function(delay) {
+        _checkDownloadDelay = delay;
+    };
 
-    this.$get = ['$rootScope', 'MapService', 'LayersService', 'InteractionsService', function($rootScope, MapService, LayersService, InteractionsService) {
+    this.$get = ['$rootScope', '$q', '$http', '$timeout', 'MapService', 'LayersService', 'InteractionsService', function($rootScope, $q, $http, $timeout, MapService, LayersService, InteractionsService) {
         var _modify;
         var _printArea;
         var _dragFeatures = {
@@ -41,7 +50,10 @@ angular.module('anol.print')
 
         LayersService.addLayer(_printLayer);
 
-        var Print = function(pageSizes, outputFormats, defaultScale) {
+        var Print = function(createDownloadUrl, checkDownloadUrl, checkDownloadDelay, pageSizes, outputFormats, defaultScale) {
+            this.createDownloadUrl = createDownloadUrl;
+            this.checkDownloadUrl = checkDownloadUrl;
+            this.checkDownloadDelay = checkDownloadDelay;
             this.pageSizes = pageSizes;
             this.outputFormats = outputFormats;
             this.defaultScale = defaultScale;
@@ -227,6 +239,57 @@ angular.module('anol.print')
                 this.createPrintArea(pageSize, scale, _printArea.getGeometry().getInteriorPoint().getCoordinates());
             }
         };
-        return new Print(_pageSizes, _outputFormats, _defaultScale);
+        Print.prototype.createDownload = function(format, layer, streetIndex, poiTypes, trackTypes) {
+            var self = this;
+            var bounds = [];
+            bounds = bounds.concat(_dragFeatures.leftbottom.getGeometry().getCoordinates());
+            bounds = bounds.concat(_dragFeatures.righttop.getGeometry().getCoordinates());
+
+            var data = {
+                bbox: bounds.join(','),
+                scale: self.currentScale,
+                format: format,
+                layer: layer,
+                params: {
+                    'street_index': streetIndex,
+                    'poi_types': poiTypes.length === 0 ? false : poiTypes.join(','),
+                    'track_types': trackTypes.length === 0 ? false : trackTypes.join(','),
+                }
+            };
+
+            var deferred = $q.defer();
+
+            // promise with "success" and "error" methods (specific to $http)
+            var createPromise = $http.post(self.createDownloadUrl, data);
+            createPromise.success(function(data, status, headers, config) {
+                var checkPromise = self.checkDownload(data.status_url);
+                checkPromise.then(function(url) {
+                    deferred.resolve(url);
+                });
+            });
+            createPromise.error(function(data, status, headers, config) {
+                deferred.reject(data);
+            });
+            return deferred.promise;
+        };
+        Print.prototype.checkDownload = function(statusUrl) {
+            var self = this;
+            var deferred = $q.defer();
+
+            var wrapper = function() {
+                var checkPromise = $http.get(self.checkDownloadUrl + statusUrl);
+                checkPromise.success(function(data, status, headers, config) {
+
+                    if(data.status !== 'done') {
+                        $timeout(wrapper, self.checkDownloadDelay);
+                    } else {
+                        deferred.resolve(data.url);
+                    }
+                });
+            };
+            wrapper();
+            return deferred.promise;
+        };
+        return new Print(_createDownloadUrl, _checkDownloadUrl, _checkDownloadDelay, _pageSizes, _outputFormats, _defaultScale);
     }];
 }]);

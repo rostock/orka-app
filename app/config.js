@@ -130,6 +130,9 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         }
     ]);
     PrintServiceProvider.setDefaultScale(250000);
+    PrintServiceProvider.setCreateDownloadUrl('/print');
+    PrintServiceProvider.setCheckDownloadUrl('');
+    PrintServiceProvider.setCheckDownloadDelay(2000);
 }])
 
 // need to start PermalinkService, can be removed if app using PermalinkDirective (when exist)
