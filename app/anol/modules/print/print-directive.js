@@ -41,6 +41,8 @@ angular.module('anol.print', [])
             $scope.outputFormats = PrintService.outputFormats;
             $scope.pageSizes = PrintService.pageSizes;
             $scope.scale = angular.copy(PrintService.defaultScale);
+            $scope.streetIndex = false;
+            $scope.licenceAgreed = false;
 
             $scope.outputFormat = $scope.outputFormats[0];
 
