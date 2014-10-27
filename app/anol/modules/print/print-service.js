@@ -37,6 +37,7 @@ angular.module('anol.print')
             source: _printSource
         });
         _printLayer.set('title', 'PrintLayer');
+        _printLayer.set('displayInLayerswitcher', false);
 
         LayersService.addLayer(_printLayer);
 

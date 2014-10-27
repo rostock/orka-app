@@ -69,7 +69,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         projection: projection,
         additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
         title: 'POI Layer',
-        visible: false
+        visible: false,
+        displayInLayerswitcher: false
     });
 
     var tracks = LayersFactoryProvider.newSingleTileWMS({
@@ -81,7 +82,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
             'SRS': projection.getCode()
         },
         title: 'Track Layer',
-        visible: false
+        visible: false,
+        displayInLayerswitcher: false
     });
 
     LayertreeServiceProvider.setPoiLayer(pois);

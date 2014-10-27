@@ -1,4 +1,8 @@
-<div ng-repeat="layer in layers">
-    <span class="glyphicon" ng-class="{'glyphicon-eye-open': layer.getVisible(), 'glyphicon-eye-close': !layer.getVisible()}" ng-click="layer.setVisible(!layer.getVisible())"></span>
+<div ng-if="layer.get('displayInLayerswitcher') !== false"
+     ng-repeat="layer in layers">
+    <span class="glyphicon"
+          ng-class="{'glyphicon-eye-open': layer.getVisible(), 'glyphicon-eye-close': !layer.getVisible()}"
+          ng-click="layer.setVisible(!layer.getVisible())">
+    </span>
     {{ layer.get('title') }}
 </div>

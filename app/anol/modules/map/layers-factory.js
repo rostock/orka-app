@@ -24,6 +24,9 @@ angular.module('anol.map')
         if(options.extent !== undefined) {
             layer.setExtent(options.extent);
         }
+        if(options.displayInLayerswitcher !== undefined) {
+            layer.set('displayInLayerswitcher', options.displayInLayerswitcher);
+        }
         return layer;
     };
 
