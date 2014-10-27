@@ -30,6 +30,9 @@ angular.module('anol.map')
         if(options.isBackground !== undefined) {
             layer.set('isBackground', options.isBackground);
         }
+        if(options.layer !== undefined) {
+            layer.set('layer', options.layer);
+        }
         return layer;
     };
 
@@ -69,7 +72,6 @@ angular.module('anol.map')
         var layer = new ol.layer.Tile({
             source: new ol.source.TileImage(sourceOptions)
         });
-        layer.set('layerName', options.layer);
 
         return applyLayerProperties(layer, options);
     };

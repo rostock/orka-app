@@ -71,6 +71,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
         projection: projection,
         additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
         title: 'POI Layer',
+        layer: 'poi_layer',
         visible: false,
         displayInLayerswitcher: false
     });
@@ -84,6 +85,7 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scaleline', 'anol.mouseposi
             'SRS': projection.getCode()
         },
         title: 'Track Layer',
+        layer: 'track_layer',
         visible: false,
         displayInLayerswitcher: false
     });

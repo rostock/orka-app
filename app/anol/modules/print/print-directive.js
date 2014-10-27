@@ -13,7 +13,7 @@ angular.module('anol.print', [])
             };
             scope.startPrint = function() {
                 scope.downloadUrl = false;
-                var layerName = LayersService.backgroundLayer().get('layerName');
+                var layerName = LayersService.backgroundLayer().get('layer');
 
                 var downloadPromise = PrintService.createDownload(
                     scope.outputFormat.value,
