@@ -39,7 +39,7 @@ angular.module('anol.layertree')
             this.poiLayer = poiLayer;
             this.trackLayer = trackLayer;
             this.typeMap = {};
-            this.selectedPoiTypes = {};
+            this.selectedPoiTypes = [];
             this.selectedTrackTypes = [];
 
             this.poiLayer.setStyle(function(feature, resolution) {
