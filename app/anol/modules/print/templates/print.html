@@ -25,5 +25,5 @@
 <label>
     <input type="checkbox" ng-model="licenceAgreed">Nutzungsbedingungen zustimmen
 </label>
-<button class="btn btn-default" ng-click="startPrint()" ng-disabled="!licenceAgreed">Ausgabe erstellen</button>
+<button class="btn btn-default" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()">Ausgabe erstellen</button>
 <button class="btn btn-default" ng-click="resetPrintArea()">Ausgabebereich zentrieren</button>

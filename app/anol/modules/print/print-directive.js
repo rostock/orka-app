@@ -8,6 +8,7 @@ angular.module('anol.print', [])
         scope: {},
         link: function(scope, element, attrs) {
             scope.isPrintable = function() {
+                // TODO refactor
                 return scope.pageSize !== undefined && scope.pageSize[0] !== undefined && scope.pageSize[1] !== undefined && scope.scale !== undefined;
             };
             scope.startPrint = function() {
