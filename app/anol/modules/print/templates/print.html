@@ -27,3 +27,7 @@
 </label>
 <button class="btn btn-default" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()">Ausgabe erstellen</button>
 <button class="btn btn-default" ng-click="resetPrintArea()">Ausgabebereich zentrieren</button>
+
+<div ng-show="downloadUrl !== false">
+    <a ng-href="{{ downloadUrl }}">Download</a>
+</div>
