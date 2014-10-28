@@ -104,6 +104,16 @@ angular.module('anol.map')
             });
             return backgroundLayer;
         };
+        Layers.prototype.layersByProperty = function(key, value) {
+            var self = this;
+            var layers = [];
+            angular.forEach(self.layers, function(layer) {
+                if(layer.get(key) === value) {
+                    layers.push(layer);
+                }
+            });
+            return layers;
+        };
         return new Layers(_layers);
     }];
 }]);
