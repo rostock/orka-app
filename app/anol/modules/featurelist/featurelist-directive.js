@@ -6,6 +6,7 @@ angular.module('anol.featurelist', [])
         scope: {
             'featureLayer': '@featureLayer'
         },
+        transclude: true,
         templateUrl: 'anol/modules/featurelist/templates/featurelist.html',
         controller: function($scope, $element, $attrs) {
             var calculateExtent = function(map) {
@@ -22,6 +23,19 @@ angular.module('anol.featurelist', [])
                     });
                 }
                 return features;
+            };
+
+            this.scrollTo = function(feature) {
+                var id = 'feature_' + feature.get('num');
+                var featureElement = $element.find('#' + id);
+                var featureListContainer = $element.find('#anol-feature-list-container');
+
+                var currentScrollTop = featureListContainer.scrollTop();
+                var containerTop = featureListContainer.offset().top;
+                var elementTop = featureElement.offset().top;
+                var scrollTo = (elementTop + currentScrollTop) - containerTop;
+
+                featureListContainer.scrollTop(scrollTo);
             };
 
             $scope.map = MapService.getMap();

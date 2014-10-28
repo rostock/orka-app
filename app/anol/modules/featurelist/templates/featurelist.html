@@ -1,8 +1,11 @@
-<div ng-repeat="feature in features">
-    <h5>{{ feature.get('name') }}</h5>
-    <address>
-        {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
-        {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
-    </address>
-    <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
+<ng-transclude></ng-transclude>
+<div style="height: 250px; overflow: auto;" id="anol-feature-list-container">
+    <div ng-repeat="feature in features" id="feature_{{ feature.get('num') }}">
+        <h5>{{ feature.get('name') }}</h5>
+        <address>
+            {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
+            {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
+        </address>
+        <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
+    </div>
 </div>
