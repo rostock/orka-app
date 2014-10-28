@@ -94,6 +94,18 @@ angular.module('anol.map')
                 dataType: 'json'
             })
             .done(function(response) {
+                // TODO find a better solution
+                // remove all features from source.
+                // otherwise features in source might be duplicated
+                // cause source.readFeatures don't look in source for
+                // existing received features.
+                // we can't use source.clear() at this place, cause
+                // source.clear() will trigger to reload features from server
+                // and this leads to an infinite loop
+                var sourceFeatures = source.getFeatures();
+                for(var i = 0; i < sourceFeatures.length; i++) {
+                    source.removeFeature(sourceFeatures[i]);
+                }
                 source.addFeatures(source.readFeatures(response));
             });
         };
