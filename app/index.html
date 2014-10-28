@@ -58,6 +58,7 @@
           <div anol-layertree></div>
           <hr>
           <div anol-layertree-legend></div>
+          <div anol-scale-text></div>
         </div>
         <!-- map -->
         <div anol-map class="col-sm-6 col-md-8">
@@ -65,7 +66,12 @@
           <!-- Readd when custom defined projection 25833 can be transformed to 4326 by ol3 -->
           <!--<div anol-scaleline></div>-->
         </div>
-        <div anol-print class="col-sm-3 col-md-2"></div>
+        <div class="col-sm-3 col-md-2">
+          <div anol-print ></div>
+          <hr>
+          <div anol-feature-list feature-layer='poi_layer'></div>
+        </div>
+
       </div>
     </div>
     <div style="display: none">
