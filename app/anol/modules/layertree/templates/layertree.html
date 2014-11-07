@@ -17,7 +17,7 @@
         <input type="checkbox" ng-model="track.active" ng-change="toggleTrackTopic(track)"/>
         <span class="glyphicon" ng-class="{'glyphicon-expand': !track.showGroup, 'glyphicon-collapse-down': track.showGroup}" ng-click="track.showGroup = !track.showGroup" ng-if="track.groups"></span>
         {{ track.title }}
-        <div ng-class="{'hide': !poi.showGroup}">
+        <div ng-class="{'hide': !track.showGroup}">
             <div ng-repeat="group in track.groups" style="margin-left: 10px;">
                 <input type="checkbox" ng-model="group.active" ng-change="updateTracks(tracks)"/>
                 {{ group.title }}
