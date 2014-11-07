@@ -18,22 +18,26 @@ angular.module('anol.featurelist', [])
                 return feature.get('num');
             };
             var featuresByExtent = function() {
-                var features = [];
+                var featureGroups = {};
                 if(scope.featureLayer.getVisible()) {
                     var _features = scope.featureLayer.getSource().getFeatures();
                     angular.forEach(_features, function(feature) {
                         if(ol.extent.intersects(scope.extent, feature.getGeometry().getExtent())) {
-                            features.push(feature);
+                            var featureType = feature.get('type');
+                            if(featureGroups[featureType] === undefined) {
+                                featureGroups[featureType] = [];
+                            }
+                            featureGroups[featureType].push(feature);
                         }
                     });
                 }
                 // TODO improve sorting
                 // using angular orderBy filter is not very fast.
-                // for 4 features sortFeaturesByNumValue is called 6 times
-                // for 59 features sortFeaturesByNumValue is called 574 times
-                // for 167 features sortFeaturesByNumValue is called 2112 times
-                // for 547 features sortFeaturesByNumValue is called 8840 times
-                return $filter('orderBy')(features, sortFeaturesByNumValue, false);
+                angular.forEach(featureGroups, function(features) {
+                    features = $filter('orderBy')(features, sortFeaturesByNumValue, false);
+                });
+
+                return featureGroups;
             };
 
             scope.toggleMarker = function(feature, show) {
@@ -69,16 +73,21 @@ angular.module('anol.featurelist', [])
             scope.featureLayer.getSource().on('change', function() {
                 var features = featuresByExtent();
                 scope.$applyAsync(function() {
-                    scope.features = features;
+                    scope.featureGroups = features;
                 });
             });
 
             scope.$watch('extent', function(newVal, oldVal) {
-                scope.features = featuresByExtent();
+                scope.featureGroups = featuresByExtent();
             });
         },
         controller: function($scope, $element, $attrs) {
             this.scrollTo = function(feature) {
+                $scope.$apply(function() {
+                    $scope.showGroup = feature.get('type');
+                    $scope.showFeatureContent = feature.get('num');
+                });
+                $scope.toggleMarker();
                 var id = 'feature_' + feature.get('num');
                 var featureElement = $element.find('#' + id);
                 var featureListContainer = $element.find('#anol-feature-list-container');

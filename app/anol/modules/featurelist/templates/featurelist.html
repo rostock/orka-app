@@ -1,13 +1,24 @@
 <ng-transclude></ng-transclude>
-<div style="height: 250px; overflow: auto;" id="anol-feature-list-container">
-    <div ng-repeat="feature in features" id="feature_{{ feature.get('num') }}" ng-click="toggleMarker(feature, $parent.showContent);">
-        <h5 ng-click="$parent.showContent=$parent.showContent === feature.get('num') ? false : feature.get('num');">{{ feature.get('name') }}</h5>
-        <div ng-show="$parent.showContent === feature.get('num')">
-            <address>
-                {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
-                {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
-            </address>
-            <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
+<div style="height: 250px; overflow: auto;"
+     id="anol-feature-list-container">
+    <div ng-repeat="(type, features) in featureGroups">
+        <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
+            {{ type }}
+        </h4>
+        <div id="feature_{{ feature.get('num') }}"
+             ng-show="$parent.showGroup === type"
+             ng-repeat="feature in features"
+             ng-click="toggleMarker(feature, $parent.$parent.showFeatureContent);">
+            <h5 ng-click="$parent.$parent.showFeatureContent = $parent.$parent.showFeatureContent === feature.get('num') ? false : feature.get('num');">
+                {{ feature.get('name') }}
+            </h5>
+            <div ng-show="$parent.$parent.showFeatureContent === feature.get('num')">
+                <address>
+                    {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
+                    {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
+                </address>
+                <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
+            </div>
         </div>
     </div>
 </div>
