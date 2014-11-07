@@ -1,6 +1,6 @@
 angular.module('anol.featurelist', [])
 
-.directive('anolFeatureList', ['MapService', 'LayersService', function(MapService, LayersService) {
+.directive('anolFeatureList', ['MapService', 'LayersService', '$filter', function(MapService, LayersService, $filter) {
     return {
         restrict: 'A',
         scope: {
@@ -14,6 +14,9 @@ angular.module('anol.featurelist', [])
             var calculateExtent = function(map) {
                 return map.getView().calculateExtent(map.getSize());
             };
+            var sortFeaturesByNumValue = function(feature) {
+                return feature.get('num');
+            };
             var featuresByExtent = function() {
                 var features = [];
                 if(scope.featureLayer.getVisible()) {
@@ -24,7 +27,13 @@ angular.module('anol.featurelist', [])
                         }
                     });
                 }
-                return features;
+                // TODO improve sorting
+                // using angular orderBy filter is not very fast.
+                // for 4 features sortFeaturesByNumValue is called 6 times
+                // for 59 features sortFeaturesByNumValue is called 574 times
+                // for 167 features sortFeaturesByNumValue is called 2112 times
+                // for 547 features sortFeaturesByNumValue is called 8840 times
+                return $filter('orderBy')(features, sortFeaturesByNumValue, false);
             };
 
             scope.toggleMarker = function(feature, show) {
@@ -39,7 +48,6 @@ angular.module('anol.featurelist', [])
                 }
                 scope.markerLayer.setVisible(show);
             };
-
 
             scope.map = MapService.getMap();
             scope.extent = calculateExtent(scope.map);

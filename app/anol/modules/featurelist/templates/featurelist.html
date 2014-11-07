@@ -1,8 +1,8 @@
 <ng-transclude></ng-transclude>
 <div style="height: 250px; overflow: auto;" id="anol-feature-list-container">
-    <div ng-repeat="feature in features | orderBy:feature.get('num')" id="feature_{{ feature.get('num') }}" ng-click="toggleMarker(feature, $parent.showContent);">
-        <h5 ng-click="$parent.showContent=$parent.showContent == feature.get('num') ? false : feature.get('num');">{{ feature.get('name') }} ({{ feature.get('num') }})</h5>
-        <div ng-show="$parent.showContent == feature.get('num')">
+    <div ng-repeat="feature in features" id="feature_{{ feature.get('num') }}" ng-click="toggleMarker(feature, $parent.showContent);">
+        <h5 ng-click="$parent.showContent=$parent.showContent === feature.get('num') ? false : feature.get('num');">{{ feature.get('name') }}</h5>
+        <div ng-show="$parent.showContent === feature.get('num')">
             <address>
                 {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
                 {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
