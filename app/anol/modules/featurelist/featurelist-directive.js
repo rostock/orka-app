@@ -4,20 +4,22 @@ angular.module('anol.featurelist', [])
     return {
         restrict: 'A',
         scope: {
-            'featureLayer': '@featureLayer'
+            'featureLayerName': '@featureLayer',
+            'markerLayerName': '@markerLayer',
+            'marker': '@markerPath'
         },
         transclude: true,
         templateUrl: 'anol/modules/featurelist/templates/featurelist.html',
-        controller: function($scope, $element, $attrs) {
+        link: function(scope, element, attr) {
             var calculateExtent = function(map) {
                 return map.getView().calculateExtent(map.getSize());
             };
             var featuresByExtent = function() {
                 var features = [];
-                if($scope.layer.getVisible()) {
-                    var _features = $scope.layer.getSource().getFeatures();
+                if(scope.featureLayer.getVisible()) {
+                    var _features = scope.featureLayer.getSource().getFeatures();
                     angular.forEach(_features, function(feature) {
-                        if(ol.extent.intersects($scope.extent, feature.getGeometry().getExtent())) {
+                        if(ol.extent.intersects(scope.extent, feature.getGeometry().getExtent())) {
                             features.push(feature);
                         }
                     });
@@ -25,6 +27,45 @@ angular.module('anol.featurelist', [])
                 return features;
             };
 
+            scope.showMarker = function(feature) {
+                var geometry = feature.getGeometry().clone();
+                if(scope.markerFeature === undefined) {
+                    scope.markerFeature = new ol.Feature();
+                    scope.markerLayer.getSource().addFeatures([scope.markerFeature]);
+                }
+                scope.markerFeature.setGeometry(geometry);
+            };
+
+
+            scope.map = MapService.getMap();
+            scope.extent = calculateExtent(scope.map);
+
+            scope.featureLayer = LayersService.layersByProperty('layer', scope.featureLayerName)[0];
+            scope.markerLayer = LayersService.layersByProperty('layer', scope.markerLayerName)[0];
+            scope.markerLayer.setStyle(new ol.style.Style({
+                image: new ol.style.Icon({
+                    src: scope.marker
+                })
+            }));
+
+            scope.map.on('moveend', function(evt) {
+                scope.$apply(function() {
+                    scope.extent = calculateExtent(evt.target);
+                });
+            });
+
+            scope.featureLayer.getSource().on('change', function() {
+                var features = featuresByExtent();
+                scope.$applyAsync(function() {
+                    scope.features = features;
+                });
+            });
+
+            scope.$watch('extent', function(newVal, oldVal) {
+                scope.features = featuresByExtent();
+            });
+        },
+        controller: function($scope, $element, $attrs) {
             this.scrollTo = function(feature) {
                 var id = 'feature_' + feature.get('num');
                 var featureElement = $element.find('#' + id);
@@ -37,28 +78,6 @@ angular.module('anol.featurelist', [])
 
                 featureListContainer.scrollTop(scrollTo);
             };
-
-            $scope.map = MapService.getMap();
-            $scope.extent = calculateExtent($scope.map);
-            $scope.currentExtent =
-            $scope.layer = LayersService.layersByProperty('layer', $scope.featureLayer)[0];
-
-            $scope.map.on('moveend', function(evt) {
-                $scope.$apply(function() {
-                    $scope.extent = calculateExtent(evt.target);
-                });
-            });
-
-            $scope.layer.getSource().on('change', function() {
-                var features = featuresByExtent();
-                $scope.$applyAsync(function() {
-                    $scope.features = features;
-                });
-            });
-
-            $scope.$watch('extent', function(newVal, oldVal) {
-                $scope.features = featuresByExtent();
-            });
         }
     };
 }]);

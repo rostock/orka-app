@@ -1,6 +1,6 @@
 <ng-transclude></ng-transclude>
 <div style="height: 250px; overflow: auto;" id="anol-feature-list-container">
-    <div ng-repeat="feature in features" id="feature_{{ feature.get('num') }}">
+    <div ng-repeat="feature in features" id="feature_{{ feature.get('num') }}" ng-click="showMarker(feature)">
         <h5>{{ feature.get('name') }}</h5>
         <address>
             {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>

@@ -90,6 +90,12 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scale', 'anol.mouseposition
         displayInLayerswitcher: false
     });
 
+    var marker = LayersFactoryProvider.newFeatureLayer({
+        title: 'Marker Layer',
+        layer: 'marker_layer',
+        displayInLayerswitcher: false
+    });
+
     LayertreeServiceProvider.setPoiLayer(pois);
     LayertreeServiceProvider.setTrackLayer(tracks);
     LayertreeServiceProvider.setPoisUrl('/static/data/poi_legend_data.json');
@@ -100,7 +106,8 @@ angular.module('orkaApp', ['anol', 'anol.map', 'anol.scale', 'anol.mouseposition
         tms,
         tmsGray,
         tracks,
-        pois
+        pois,
+        marker
     ]);
 
     ControlsServiceProvider.setControls(
