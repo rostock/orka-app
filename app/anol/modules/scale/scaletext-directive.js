@@ -16,15 +16,15 @@ angular.module('anol.scale')
             }
         },
         controller: function($scope, $element, $attrs) {
+            var INCHES_PER_METER = 39.37;
+            // TODO make dpi configurable
+            var DPI = 72;
+
             var calculateScale = function() {
                 // found at https://groups.google.com/d/msg/ol3-dev/RAJa4locqaM/4AzBrkndL9AJ
                 var resolution = $scope.view.getResolution();
                 var mpu = $scope.view.getProjection().getMetersPerUnit();
-                // TODO make dpi configurable
-                var dpi = 72;
-                // TODO find out why 39.37
-                var scale = resolution * mpu * 39.37 * dpi;
-
+                var scale = resolution * mpu * INCHES_PER_METER * DPI;
                 return Math.round(scale);
             };
             $scope.view = MapService.getMap().getView();
