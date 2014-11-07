@@ -1,6 +1,6 @@
-angular.module('anol.scaleline', [])
+angular.module('anol.scale')
 
-.directive('anolScaleline', ['MapService', function(MapService) {
+.directive('anolScaleLine', ['MapService', function(MapService) {
     return {
         restrict: 'A',
         require: '?^anolMap',

@@ -3,3 +3,4 @@ angular.module('anol', [])
 // TODO: We need a structure for modules
 angular.module('anol.map', []);
 angular.module('anol.layertree', []);
+angular.module('anol.scale', []);
