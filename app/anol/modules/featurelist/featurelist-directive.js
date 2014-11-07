@@ -1,6 +1,6 @@
 angular.module('anol.featurelist', [])
 
-.directive('anolFeatureList', ['MapService', 'LayersService', '$filter', function(MapService, LayersService, $filter) {
+.directive('anolFeatureList', ['$filter', 'MapService', 'LayersService', 'LayertreeService', function($filter, MapService, LayersService, LayertreeService) {
     return {
         restrict: 'A',
         scope: {
@@ -99,6 +99,19 @@ angular.module('anol.featurelist', [])
 
                 featureListContainer.scrollTop(scrollTo);
             };
+
+            $scope.typeMap = {};
+
+            LayertreeService.poisLoaded.then(function(topics) {
+                angular.forEach(topics, function(topic) {
+                    $scope.typeMap[topic.name] = topic.title;
+                    if(topic.groups !== undefined) {
+                        angular.forEach(topic.groups, function(group) {
+                            $scope.typeMap[group.type] = group.title;
+                        });
+                    }
+                });
+            });
         }
     };
 }]);

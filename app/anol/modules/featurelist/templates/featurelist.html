@@ -3,7 +3,7 @@
      id="anol-feature-list-container">
     <div ng-repeat="(type, features) in featureGroups">
         <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
-            {{ type }}
+            {{ typeMap[type] }}
         </h4>
         <div id="feature_{{ feature.get('num') }}"
              ng-show="$parent.showGroup === type"
