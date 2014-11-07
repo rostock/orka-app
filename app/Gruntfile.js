@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
 
   // Project configuration.
   grunt.initConfig({
@@ -50,13 +51,55 @@ module.exports = function(grunt) {
         src: [ 'build' ]
       }
     },
+    configureRewriteRules: {
+      options: {
+          rulesProvider: 'connect.rules'
+      }
+    },
     connect: {
       server: {
         options: {
           hostname: '*',
-          port: 7000
+          port: 7000,
+          middleware: function (connect, options) {
+            var middlewares = [];
+
+            // RewriteRules support
+            middlewares.push(rewriteRulesSnippet);
+
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+
+            var directory = options.directory || options.base[options.base.length - 1];
+            options.base.forEach(function (base) {
+              // Serve static files.
+              middlewares.push(connect.static(base));
+            });
+
+            // Make directory browse-able.
+            middlewares.push(connect.directory(directory));
+
+            return middlewares;
+          }
         }
-      }
+      },
+      rules: [{
+        from: '^/(.*)/anol/(.*)$',
+        to: '/anol/$2'
+      }, {
+        from: '^/(.*)/static/(.*)$',
+        to: '/static/$2'
+      }, {
+        from: '^/(.*)/build/(.*)$',
+        to: '/build/$2'
+      }, {
+        from: '^/(.*)/config.js$',
+        to: '/config.js'
+      }, {
+        from: '^(.*)/$',
+        to: '/'
+      }]
     },
     watch: {
       scripts: {
@@ -69,7 +112,7 @@ module.exports = function(grunt) {
     },
     html2js: {
       main: {
-        src: ['anol/**/*.tpl.html'],
+        src: ['anol/**/templates/*.html'],
         dest: 'build/templates.js'
       },
     },
@@ -92,12 +135,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-connect-rewrite');
   grunt.loadNpmTasks('grunt-common-html2js');
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('dev', ['html2js', 'concat:dev', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('dev', ['html2js', 'concat:dev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
   grunt.registerTask('build', ['jshint', 'concat:dist', 'uglify', 'jsdoc']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
