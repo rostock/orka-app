@@ -133,6 +133,14 @@ angular.module('anol.map')
         return applyLayerProperties(layer, options);
     };
 
+    this.newFeatureLayer = function(options) {
+        var sourceOptions = createBasicSourceOptions(options);
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector(sourceOptions)
+        });
+        return applyLayerProperties(layer, options);
+    };
+
     this.$get = [function() {
         return self;
     }];

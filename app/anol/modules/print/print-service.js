@@ -24,7 +24,7 @@ angular.module('anol.print')
         _checkDownloadDelay = delay;
     };
 
-    this.$get = ['$rootScope', '$q', '$http', '$timeout', 'MapService', 'LayersService', 'InteractionsService', function($rootScope, $q, $http, $timeout, MapService, LayersService, InteractionsService) {
+    this.$get = ['$rootScope', '$q', '$http', '$timeout', 'MapService', 'LayersService', 'LayersFactory', 'InteractionsService', function($rootScope, $q, $http, $timeout, MapService, LayersService, LayersFactory, InteractionsService) {
         var _modify;
         var _printArea;
         var _dragFeatures = {
@@ -39,15 +39,12 @@ angular.module('anol.print')
             center: undefined
         };
         var _modifyFeatures = new ol.Collection();
-        // create print layer
-        // TODO create FeatureLayer or something like that to layers factory
-        var _printSource = new ol.source.Vector();
-        var _printLayer = new ol.layer.Vector({
-            source: _printSource
-        });
-        _printLayer.set('title', 'PrintLayer');
-        _printLayer.set('displayInLayerswitcher', false);
 
+        var _printLayer = LayersFactory.newFeatureLayer({
+            'title': 'PrintLayer',
+            'displayInLayerswitcher': false
+        });
+        var _printSource = _printLayer.getSource();
         LayersService.addLayer(_printLayer);
 
         var Print = function(createDownloadUrl, checkDownloadUrl, checkDownloadDelay, pageSizes, outputFormats, defaultScale) {
@@ -239,6 +236,7 @@ angular.module('anol.print')
                 this.createPrintArea(pageSize, scale, _printArea.getGeometry().getInteriorPoint().getCoordinates());
             }
         };
+        // TODO move into orka namespace
         Print.prototype.createDownload = function(format, layer, streetIndex, poiTypes, trackTypes) {
             var self = this;
             var bounds = [];
@@ -272,6 +270,7 @@ angular.module('anol.print')
             });
             return deferred.promise;
         };
+        // TODO move into orka namespace
         Print.prototype.checkDownload = function(statusUrl) {
             var self = this;
             var deferred = $q.defer();
