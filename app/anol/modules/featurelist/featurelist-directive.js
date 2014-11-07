@@ -27,13 +27,17 @@ angular.module('anol.featurelist', [])
                 return features;
             };
 
-            scope.showMarker = function(feature) {
-                var geometry = feature.getGeometry().clone();
-                if(scope.markerFeature === undefined) {
-                    scope.markerFeature = new ol.Feature();
-                    scope.markerLayer.getSource().addFeatures([scope.markerFeature]);
+            scope.toggleMarker = function(feature, show) {
+                show = show === false || show === undefined ? false : true;
+                if(show) {
+                    var geometry = feature.getGeometry().clone();
+                    if(scope.markerFeature === undefined) {
+                        scope.markerFeature = new ol.Feature();
+                        scope.markerLayer.getSource().addFeatures([scope.markerFeature]);
+                    }
+                    scope.markerFeature.setGeometry(geometry);
                 }
-                scope.markerFeature.setGeometry(geometry);
+                scope.markerLayer.setVisible(show);
             };
 
 
