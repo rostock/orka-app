@@ -2,9 +2,9 @@
     <div class="panel-heading">
         <span class="glyphicon glyphicon-remove pull-right"
           ng-click="popupVisible=false"></span>
-        <h3 class="panel-title">{{ feature.get('name') }}</h3>
+        <h3 class="panel-title" ng-click="showContent=!showContent">{{ feature.get('name') }}</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body" ng-show='showContent'>
         <address>
             {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
             {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
