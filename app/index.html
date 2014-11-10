@@ -86,8 +86,41 @@
     <script type="text/javascript" src="/build/anol.js"></script>
     <script type="text/javascript" src="/config.js"></script>
     <script type="text/javascript">
+      /**
+       * to load config by path url is like:
+       * http://localhost:7000/test/#/
+       *
+       * to load config by parameter url is like:
+       * http://localhost:7000/?page=test/#
+       */
+      // TODO replace by jquery plugin or improve
+      var getConfigName = function() {
+        var path = [];
+        $.each(window.location.pathname.split('/'), function(idx, pathComponent) {
+          if(pathComponent !== '') {
+            path.push(pathComponent);
+          }
+        });
+        var byPath = path[path.length -1];
+
+        var search = window.location.search;
+        if(search[0] === '?') {
+          search = search.slice(1, search.length);
+        }
+        if(search[search.length - 1] === '/') {
+          search = search.slice(0, search.length - 1);
+        }
+        var params = {};
+        $.each(search.split('&'), function(idx, param) {
+          var p = param.split('=');
+          params[p[0]] = p[1];
+        });
+        var byParam = params.page;
+
+        return byParam || byPath;
+      };
+
       angular.element(document).ready(function() {
-          var orkaAppConfig = {};
           var deferred = new $.Deferred();
           var loadConfig = function(url) {
               var head = document.getElementsByTagName('head')[0];
@@ -112,8 +145,7 @@
             angular.bootstrap(document, ['orkaApp']);
           });
 
-          // TODO analyse url
-          loadConfig('/static/data/test_config.js');
+          loadConfig('/static/data/' + getConfigName() + '_config.js');
 
       });
     </script>
