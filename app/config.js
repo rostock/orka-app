@@ -86,12 +86,14 @@ angular.module('orkaApp', ['anol', 'anol.config', 'anol.map', 'anol.scale', 'ano
 }])
 
 .config(['ConfigServiceProvider', 'PrintServiceProvider', function(ConfigServiceProvider, PrintServiceProvider) {
-    PrintServiceProvider.setPageSizes(ConfigServiceProvider.config.print.pageSizes);
-    PrintServiceProvider.setOutputFormats(ConfigServiceProvider.config.print.outputFormats);
-    PrintServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
-    PrintServiceProvider.setCreateDownloadUrl(ConfigServiceProvider.config.print.createURL);
-    PrintServiceProvider.setCheckDownloadUrl(ConfigServiceProvider.config.print.checkURL);
-    PrintServiceProvider.setCheckDownloadDelay(ConfigServiceProvider.config.print.checkDelay);
+    if(ConfigServiceProvider.config.print !== undefined) {
+        PrintServiceProvider.setPageSizes(ConfigServiceProvider.config.print.pageSizes);
+        PrintServiceProvider.setOutputFormats(ConfigServiceProvider.config.print.outputFormats);
+        PrintServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
+        PrintServiceProvider.setCreateDownloadUrl(ConfigServiceProvider.config.print.createURL);
+        PrintServiceProvider.setCheckDownloadUrl(ConfigServiceProvider.config.print.checkURL);
+        PrintServiceProvider.setCheckDownloadDelay(ConfigServiceProvider.config.print.checkDelay);
+    }
 }])
 
 // need to start PermalinkService, can be removed if app using PermalinkDirective (when exist)

@@ -1,6 +1,6 @@
 angular.module('anol.print', [])
 
-.directive('anolPrint', ['PrintService', 'LayertreeService', 'LayersService', function(PrintService, LayertreeService, LayersService) {
+.directive('anolPrint', ['ConfigService', 'PrintService', 'LayertreeService', 'LayersService', function(ConfigService, PrintService, LayertreeService, LayersService) {
     return {
         restrict: 'A',
         transclude: true,
@@ -46,6 +46,10 @@ angular.module('anol.print', [])
             };
         },
         controller: function($scope, $element, $attrs) {
+            $scope.show = ConfigService.config.print !== undefined;
+            if(!$scope.show) {
+                return;
+            }
             $scope.isPageSize = function(size) {
                 return angular.equals(size, $scope.pageSize);
             };
