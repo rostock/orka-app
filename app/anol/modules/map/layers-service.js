@@ -4,7 +4,7 @@ angular.module('anol.map')
     var _layers = [];
 
     this.setLayers = function(layers) {
-        _layers = layers;
+        _layers = _layers.concat(layers);
     };
 
     this.$get = [function() {

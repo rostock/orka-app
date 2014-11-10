@@ -1,147 +1,97 @@
-angular.module('orkaApp', ['anol', 'anol.map', 'anol.scale', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink', 'anol.print', 'anol.featurepopup', 'anol.featurelist'])
+angular.module('orkaApp', ['anol', 'anol.config', 'anol.map', 'anol.scale', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink', 'anol.print', 'anol.featurepopup', 'anol.featurelist'])
 
-.config(['LayersServiceProvider','MapServiceProvider', 'ControlsServiceProvider', 'LayersFactoryProvider', 'LayertreeServiceProvider', 'PermalinkServiceProvider', 'PrintServiceProvider',
-    function (LayersServiceProvider, MapServiceProvider, ControlsServiceProvider, LayersFactoryProvider, LayertreeServiceProvider, PermalinkServiceProvider, PrintServiceProvider) {
-    /* extend projection to allow ol3 transforming coordinates from 25833 to 4326 or/and 3857 */
-    var projection = new ol.proj.Projection({
-        code: 'EPSG:25833',
-        units: 'm'
-    });
-    ol.proj.addProjection(projection);
+.config(['ConfigServiceProvider', function(ConfigServiceProvider) {
+    ConfigServiceProvider.setConfig(orkaAppConfig);
+}])
 
-    var extent = [200000, 5880000, 480000, 6075000];
-    var resolutions = [
-        529.166666667,
-        352.777777778,
-        264.583333333,
-        176.388888889,
-        88.1944444444,
-        52.9166666667,
-        35.2777777778,
-        28.2222222222,
-        22.9305555556,
-        17.6388888889,
-        12.3472222222,
-        8.8194444444,
-        7.0555555556,
-        5.2916666667,
-        3.5277777778,
-        2.6458333333,
-        1.7638888889,
-        0.8819444444,
-        0.3527777778,
-        0.1763888889
-    ];
-
-    PermalinkServiceProvider.setUrlCrs(projection.getCode());
-
+.config(['ConfigServiceProvider', 'MapServiceProvider', function(ConfigServiceProvider, MapServiceProvider) {
     MapServiceProvider.addView(new ol.View({
-        projection: projection,
-        center: [313282, 6003693],
-        resolutions: resolutions,
-        zoom: 9
+        projection: ConfigServiceProvider.config.map.projection,
+        center: ConfigServiceProvider.config.map.center,
+        resolutions: ConfigServiceProvider.config.map.resolutions,
+        zoom: ConfigServiceProvider.config.map.zoom
     }));
+}])
 
-    var tms = LayersFactoryProvider.newTMS({
-        resolutions: resolutions,
-        format: 'png',
-        extent: extent,
-        baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
-        layer: 'stadtplan_EPSG25833',
-        projection: projection,
-        title: 'BasisLayer',
-        shortcut: 'B',
-        isBackground: true
-    });
-
-    var tmsGray = LayersFactoryProvider.newTMS({
-        resolutions: resolutions,
-        format: 'png',
-        extent: extent,
-        baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
-        layer: 'stadtplan_greyscale_EPSG25833',
-        projection: projection,
-        title: 'Grauer Layer',
-        shortcut: 'G',
-        isBackground: true
-    });
-
-    var pois = LayersFactoryProvider.newDynamicGeoJSON({
-        url: 'http://localhost:8888/proxy/http://www.orka-mv.de/citymap/poi.geojson?',
-        projection: projection,
-        additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
-        title: 'POI Layer',
-        layer: 'poi_layer',
-        visible: false,
-        displayInLayerswitcher: false
-    });
-
-    var tracks = LayersFactoryProvider.newSingleTileWMS({
-        extent: extent,
-        url: 'http://www.orka-mv.de/citymap/tracks',
-        params: {
-            'LAYERS': 'tracks',
-            'TRANSPARENT': true,
-            'SRS': projection.getCode()
-        },
-        title: 'Track Layer',
-        layer: 'track_layer',
-        visible: false,
-        displayInLayerswitcher: false
-    });
-
-    var marker = LayersFactoryProvider.newFeatureLayer({
-        title: 'Marker Layer',
-        layer: 'marker_layer',
-        displayInLayerswitcher: false
-    });
-
-    LayertreeServiceProvider.setPoiLayer(pois);
-    LayertreeServiceProvider.setTrackLayer(tracks);
-    LayertreeServiceProvider.setPoisUrl('/static/data/poi_legend_data.json');
-    LayertreeServiceProvider.setTracksUrl('/static/data/track_legend_data.json');
-    LayertreeServiceProvider.setIconBaseUrl('http://www.orka-mv.de/static/icons/');
-
-    LayersServiceProvider.setLayers([
-        tms,
-        tmsGray,
-        tracks,
-        pois,
-        marker
-    ]);
-
+.config(['ControlsServiceProvider', function(ControlsServiceProvider) {
     ControlsServiceProvider.setControls(
         ol.control.defaults().extend([
             new ol.control.ZoomSlider()
         ])
     );
+}])
 
-    PrintServiceProvider.setPageSizes([
-        {
-            'label': 'DIN A4 Hoch',
-            'icon': 'glyphicon-resize-horizontal',
-            'value': [210, 297]
-        },
-        {
-            'label': 'DIN A4 Quer',
-            'icon': 'glyphicon-resize-vertical',
-            'value': [297, 210]
+.config(['ConfigServiceProvider', 'PermalinkServiceProvider', function(ConfigServiceProvider, PermalinkServiceProvider) {
+    PermalinkServiceProvider.setUrlCrs(ConfigServiceProvider.config.map.projection.getCode());
+}])
+
+.config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider) {
+    var layers = [];
+    angular.forEach(ConfigServiceProvider.config.backgroundLayer, function(backgroundLayer) {
+        layers.push(LayersFactoryProvider.newTMS({
+            projection: ConfigServiceProvider.config.map.projection,
+            resolutions: ConfigServiceProvider.config.map.resolutions,
+            extent: ConfigServiceProvider.config.map.extent,
+            format: backgroundLayer.format,
+            baseURL: backgroundLayer.baseURL,
+            layer: backgroundLayer.layer,
+            title: backgroundLayer.title,
+            shortcut: backgroundLayer.shortcut,
+            isBackground: true
+        }));
+    });
+    LayersServiceProvider.setLayers(layers);
+}])
+
+.config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', 'LayertreeServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider, LayertreeServiceProvider) {
+    var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
+        projection: ConfigServiceProvider.config.map.projection,
+        url: ConfigServiceProvider.config.mapThemes.poiLayerURL,
+        title: 'POI Layer',
+        layer: 'poi_layer',
+        visible: false,
+        displayInLayerswitcher: false,
+        additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
+    });
+    var trackLayer = LayersFactoryProvider.newSingleTileWMS({
+        extent: ConfigServiceProvider.config.map.extent,
+        url: ConfigServiceProvider.config.mapThemes.trackLayerURL,
+        title: 'Track Layer',
+        layer: 'track_layer',
+        visible: false,
+        displayInLayerswitcher: false,
+        params: {
+            'LAYERS': ConfigServiceProvider.config.mapThemes.trackLayerName,
+            'TRANSPARENT': true,
+            'SRS': ConfigServiceProvider.config.map.projection.getCode()
         }
+    });
+    var markerLayer = LayersFactoryProvider.newFeatureLayer({
+        title: 'Marker Layer',
+        layer: 'marker_layer',
+        displayInLayerswitcher: false
+    });
+
+    LayertreeServiceProvider.setPoiLayer(poiLayer);
+    LayertreeServiceProvider.setTrackLayer(trackLayer);
+    LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.mapThemes.poiLegendURL);
+    LayertreeServiceProvider.setTrackLegendUrl(ConfigServiceProvider.config.mapThemes.trackLegendURL);
+    LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.mapThemes.poiIconBaseURL);
+
+    LayersServiceProvider.setLayers([
+        poiLayer,
+        trackLayer,
+        markerLayer
     ]);
-    PrintServiceProvider.setOutputFormats([
-        {
-            'label': 'PDF',
-            'value': 'pdf'
-        },
-        {
-            'label': 'PNG',
-            'value': 'png'
-        }
-    ]);
-    PrintServiceProvider.setDefaultScale(250000);
-    PrintServiceProvider.setCreateDownloadUrl('/print');
-    PrintServiceProvider.setCheckDownloadUrl('');
-    PrintServiceProvider.setCheckDownloadDelay(2000);
+}])
+
+.config(['ConfigServiceProvider', 'PrintServiceProvider', function(ConfigServiceProvider, PrintServiceProvider) {
+    PrintServiceProvider.setPageSizes(ConfigServiceProvider.config.print.pageSizes);
+    PrintServiceProvider.setOutputFormats(ConfigServiceProvider.config.print.outputFormats);
+    PrintServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
+    PrintServiceProvider.setCreateDownloadUrl(ConfigServiceProvider.config.print.createURL);
+    PrintServiceProvider.setCheckDownloadUrl(ConfigServiceProvider.config.print.checkURL);
+    PrintServiceProvider.setCheckDownloadDelay(ConfigServiceProvider.config.print.checkDelay);
 }])
 
 // need to start PermalinkService, can be removed if app using PermalinkDirective (when exist)

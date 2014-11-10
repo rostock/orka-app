@@ -1,7 +1,7 @@
 angular.module('anol.layertree')
 
 .provider('LayertreeService', [function() {
-    var _poiLayer, _poisUrl, _iconBaseUrl, _tracksUrl, _trackLayer;
+    var _poiLayer, _poiLegendUrl, _iconBaseUrl, _trackLegendUrl, _trackLayer;
     var _selectedPoiTypes = [];
 
     this.setPoiLayer = function(poiLayer) {
@@ -12,11 +12,11 @@ angular.module('anol.layertree')
         _trackLayer = trackLayer;
     };
 
-    this.setPoisUrl = function(url) {
-        _poisUrl = url;
+    this.setPoiLegendUrl = function(url) {
+        _poiLegendUrl = url;
     };
-    this.setTracksUrl = function(url) {
-        _tracksUrl = url;
+    this.setTrackLegendUrl = function(url) {
+        _trackLegendUrl = url;
     };
 
     this.setIconBaseUrl = function(url) {
@@ -33,7 +33,7 @@ angular.module('anol.layertree')
     };
 
     this.$get = ['$q', function($q) {
-        var LayerTree = function(poiLayer, trackLayer, poiUrl, tracksUrl, iconBaseUrl) {
+        var LayerTree = function(poiLayer, trackLayer, poiLegendUrl, trackLegendUrl, iconBaseUrl) {
             var self = this;
             this.iconBaseUrl = iconBaseUrl;
             this.poiLayer = poiLayer;
@@ -50,8 +50,8 @@ angular.module('anol.layertree')
                 })];
             });
 
-            this.poisLoaded = this._loadPois(poiUrl);
-            this.tracksLoaded = this._loadTracks(tracksUrl);
+            this.poisLoaded = this._loadPois(poiLegendUrl);
+            this.tracksLoaded = this._loadTracks(trackLegendUrl);
         };
         LayerTree.prototype.updateSelectedPoiTypes = function(selectedTypes) {
             // keep internal and external types in sync cause we need it both as service value
@@ -117,6 +117,6 @@ angular.module('anol.layertree')
             });
             return deferred.promise;
         };
-        return new LayerTree(_poiLayer, _trackLayer, _poisUrl, _tracksUrl, _iconBaseUrl);
+        return new LayerTree(_poiLayer, _trackLayer, _poiLegendUrl, _trackLegendUrl, _iconBaseUrl);
     }];
 }]);

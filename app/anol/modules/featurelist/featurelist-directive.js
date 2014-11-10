@@ -1,12 +1,11 @@
 angular.module('anol.featurelist', [])
 
-.directive('anolFeatureList', ['$filter', 'MapService', 'LayersService', 'LayertreeService', function($filter, MapService, LayersService, LayertreeService) {
+.directive('anolFeatureList', ['$filter', 'ConfigService', 'MapService', 'LayersService', 'LayertreeService', function($filter, ConfigService, MapService, LayersService, LayertreeService) {
     return {
         restrict: 'A',
         scope: {
             'featureLayerName': '@featureLayer',
-            'markerLayerName': '@markerLayer',
-            'marker': '@markerPath'
+            'markerLayerName': '@markerLayer'
         },
         transclude: true,
         templateUrl: 'anol/modules/featurelist/templates/featurelist.html',
@@ -99,6 +98,7 @@ angular.module('anol.featurelist', [])
 
                 featureListContainer.scrollTop(scrollTo);
             };
+            $scope.marker = ConfigService.config.mapThemes.poiMarkerIcon;
 
             $scope.typeMap = {};
 
