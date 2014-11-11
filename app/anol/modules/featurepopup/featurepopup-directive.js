@@ -1,14 +1,14 @@
-angular.module('orka.featurepopup', [])
+angular.module('anol.featurepopup', [])
 
-.directive('orkaFeaturePopup', ['MapService', function(MapService) {
+.directive('anolFeaturePopup', ['MapService', function(MapService) {
     return {
         restrict: 'A',
         scope: {
             'featureLayer': '@featureLayer'
         },
-        require: '?^orkaFeatureList',
+        require: '?^anolFeatureList',
         replace: true,
-        templateUrl: 'orka/modules/featurepopup/templates/popup.html',
+        templateUrl: 'anol/modules/featurepopup/templates/popup.html',
         link: function(scope, element, attrs, OrkaFeatureListController) {
             scope.handleClick = function(evt) {
                 var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
