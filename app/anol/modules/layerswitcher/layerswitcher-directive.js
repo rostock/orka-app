@@ -15,11 +15,11 @@ angular.module('anol.layerswitcher', [])
         controller: function($scope, $element, $attrs) {
             $scope.backgroundLayers = LayersService.backgroundLayers;
             angular.forEach($scope.backgroundLayers, function(layer) {
-                if(layer.getVisible() === true) {
-                    if($scope.backgroundLayer !== undefined) {
-                        $scope.backgroundLayer.setVisible(false);
-                    }
+                if(layer.getVisible() === true && $scope.backgroundLayer === undefined) {
                     $scope.backgroundLayer = layer;
+                    $scope.backgroundLayer.setVisible(false);
+                } else {
+                    layer.setVisible(false);
                 }
             });
             $scope.overlayLayers = LayersService.overlayLayers;
