@@ -1,4 +1,4 @@
-angular.module('anol.config', [])
+angular.module('orka.config', [])
 
 .provider('ConfigService', [function() {
     var deferred = new $.Deferred();

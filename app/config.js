@@ -1,6 +1,6 @@
 angular.module('orkaApp', [
-    'anol', 'anol.config', 'anol.map', 'anol.scale', 'anol.mouseposition', 'anol.layerswitcher', 'anol.permalink', 'anol.print', 
-    'orka.print', 'orka.featurepopup', 'orka.featurelist', 'orka.layertree'
+    'anol', 'anol.map', 'anol.scale', 'anol.mouseposition', 'anol.layerswitcher', 'anol.permalink', 'anol.print',
+    'orka.config', 'orka.print', 'orka.featurepopup', 'orka.featurelist', 'orka.layertree'
 ])
 
 .config(['ConfigServiceProvider', function(ConfigServiceProvider) {
