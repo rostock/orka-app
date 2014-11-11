@@ -1,5 +1,6 @@
-angular.module('anol.layertree')
+angular.module('orka.layertree')
 
+// TODO rename
 .provider('LayertreeService', [function() {
     var _poiLayer, _poiLegendUrl, _iconBaseUrl, _trackLegendUrl, _trackLayer;
     var _selectedPoiTypes = [];

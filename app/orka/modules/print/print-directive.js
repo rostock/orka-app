@@ -1,10 +1,10 @@
-angular.module('anol.print', [])
+angular.module('orka.print', [])
 
-.directive('anolPrint', ['ConfigService', 'PrintService', 'LayertreeService', 'LayersService', function(ConfigService, PrintService, LayertreeService, LayersService) {
+.directive('orkaPrint', ['ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', function(ConfigService, PrintPageService, LayertreeService, LayersService, PrintService) {
     return {
         restrict: 'A',
         transclude: true,
-        templateUrl: 'anol/modules/print/templates/print.html',
+        templateUrl: 'orka/modules/print/templates/print.html',
         scope: {},
         link: function(scope, element, attrs) {
             scope.isPrintable = function() {
@@ -16,6 +16,7 @@ angular.module('anol.print', [])
                 var layerName = LayersService.backgroundLayer().get('layer');
 
                 var downloadPromise = PrintService.createDownload(
+                    PrintPageService.getBounds(),
                     scope.outputFormat.value,
                     layerName,
                     scope.streetIndex,
@@ -32,16 +33,17 @@ angular.module('anol.print', [])
             // will result in modifying selected availablePageSize value
             scope.setPageSize = function(size) {
                 scope.pageSize = angular.copy(size);
-                scope.updatePrintLayer();
+                scope.updatePrintPage();
             };
-            scope.updatePrintLayer = function() {
+            scope.updatePrintPage = function() {
+                console.log(scope)
                 if(scope.isPrintable()) {
-                    PrintService.addFeatureFromPageSize(scope.pageSize, scope.scale);
+                    PrintPageService.addFeatureFromPageSize(scope.pageSize, scope.scale);
                 }
             };
-            scope.resetPrintArea = function() {
+            scope.resetPrintPage = function() {
                 if(scope.isPrintable()) {
-                    PrintService.createPrintArea(scope.pageSize, scope.scale);
+                    PrintPageService.createPrintArea(scope.pageSize, scope.scale);
                 }
             };
         },
@@ -54,9 +56,9 @@ angular.module('anol.print', [])
                 return angular.equals(size, $scope.pageSize);
             };
 
-            $scope.outputFormats = PrintService.outputFormats;
-            $scope.pageSizes = PrintService.pageSizes;
-            $scope.scale = angular.copy(PrintService.defaultScale);
+            $scope.outputFormats = PrintPageService.outputFormats;
+            $scope.pageSizes = PrintPageService.pageSizes;
+            $scope.scale = angular.copy(PrintPageService.defaultScale);
             $scope.streetIndex = false;
             $scope.licenceAgreed = false;
             $scope.downloadUrl = false;
@@ -65,7 +67,7 @@ angular.module('anol.print', [])
 
             $scope.$watch(
                 function() {
-                    return PrintService.currentPageSize;
+                    return PrintPageService.currentPageSize;
                 },
                 function(newVal, oldVal) {
                     $scope.pageSize = newVal;

@@ -1,4 +1,7 @@
-angular.module('orkaApp', ['anol', 'anol.config', 'anol.map', 'anol.scale', 'anol.mouseposition', 'anol.layerswitcher', 'anol.layertree', 'anol.permalink', 'anol.print', 'anol.featurepopup', 'anol.featurelist'])
+angular.module('orkaApp', [
+    'anol', 'anol.config', 'anol.map', 'anol.scale', 'anol.mouseposition', 'anol.layerswitcher', 'anol.permalink', 'anol.print', 
+    'orka.print', 'orka.featurepopup', 'orka.featurelist', 'orka.layertree'
+])
 
 .config(['ConfigServiceProvider', function(ConfigServiceProvider) {
     ConfigServiceProvider.setConfig(orkaAppConfig);
@@ -85,11 +88,11 @@ angular.module('orkaApp', ['anol', 'anol.config', 'anol.map', 'anol.scale', 'ano
     ]);
 }])
 
-.config(['ConfigServiceProvider', 'PrintServiceProvider', function(ConfigServiceProvider, PrintServiceProvider) {
+.config(['ConfigServiceProvider', 'PrintPageServiceProvider', 'PrintServiceProvider', function(ConfigServiceProvider, PrintPageServiceProvider, PrintServiceProvider) {
     if(ConfigServiceProvider.config.print !== undefined) {
-        PrintServiceProvider.setPageSizes(ConfigServiceProvider.config.print.pageSizes);
-        PrintServiceProvider.setOutputFormats(ConfigServiceProvider.config.print.outputFormats);
-        PrintServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
+        PrintPageServiceProvider.setPageSizes(ConfigServiceProvider.config.print.pageSizes);
+        PrintPageServiceProvider.setOutputFormats(ConfigServiceProvider.config.print.outputFormats);
+        PrintPageServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
         PrintServiceProvider.setCreateDownloadUrl(ConfigServiceProvider.config.print.createURL);
         PrintServiceProvider.setCheckDownloadUrl(ConfigServiceProvider.config.print.checkURL);
         PrintServiceProvider.setCheckDownloadDelay(ConfigServiceProvider.config.print.checkDelay);

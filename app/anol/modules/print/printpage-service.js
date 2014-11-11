@@ -1,9 +1,9 @@
-angular.module('anol.print')
+angular.module('anol.print', [])
 
-.provider('PrintService', [function() {
+.provider('PrintPageService', [function() {
     // Better move directive configuration in directive so
     // direcitve can be replaced by custom one?
-    var _pageSizes, _outputFormats, _defaultScale, _createDownloadUrl, _checkDownloadUrl, _checkDownloadDelay;
+    var _pageSizes, _outputFormats, _defaultScale;
 
     this.setPageSizes = function(pageSizes) {
         _pageSizes = pageSizes;
@@ -14,17 +14,8 @@ angular.module('anol.print')
     this.setDefaultScale = function(scale) {
         _defaultScale = scale;
     };
-    this.setCreateDownloadUrl = function(url) {
-        _createDownloadUrl = url;
-    };
-    this.setCheckDownloadUrl = function(url) {
-        _checkDownloadUrl = url;
-    };
-    this.setCheckDownloadDelay = function(delay) {
-        _checkDownloadDelay = delay;
-    };
 
-    this.$get = ['$rootScope', '$q', '$http', '$timeout', 'MapService', 'LayersService', 'LayersFactory', 'InteractionsService', function($rootScope, $q, $http, $timeout, MapService, LayersService, LayersFactory, InteractionsService) {
+    this.$get = ['$rootScope', 'MapService', 'LayersService', 'LayersFactory', 'InteractionsService', function($rootScope, MapService, LayersService, LayersFactory, InteractionsService) {
         var _modify;
         var _printArea;
         var _dragFeatures = {
@@ -47,17 +38,14 @@ angular.module('anol.print')
         var _printSource = _printLayer.getSource();
         LayersService.addLayer(_printLayer);
 
-        var Print = function(createDownloadUrl, checkDownloadUrl, checkDownloadDelay, pageSizes, outputFormats, defaultScale) {
-            this.createDownloadUrl = createDownloadUrl;
-            this.checkDownloadUrl = checkDownloadUrl;
-            this.checkDownloadDelay = checkDownloadDelay;
+        var PrintPage = function(pageSizes, outputFormats, defaultScale) {
             this.pageSizes = pageSizes;
             this.outputFormats = outputFormats;
             this.defaultScale = defaultScale;
             this.currentPageSize = undefined;
             this.currentScale = undefined;
         };
-        Print.prototype.createPrintArea = function(pageSize, scale, center) {
+        PrintPage.prototype.createPrintArea = function(pageSize, scale, center) {
             this.currentPageSize = pageSize;
             this.currentScale = scale;
             this.mapWidth = this.currentPageSize[0] / 1000 * this.currentScale;
@@ -75,7 +63,7 @@ angular.module('anol.print')
             this.updatePrintArea(left, top, right, bottom);
             this.createDragFeatures(left, top, right, bottom, center);
         };
-        Print.prototype.createDragFeatures = function(left, top, right, bottom, center) {
+        PrintPage.prototype.createDragFeatures = function(left, top, right, bottom, center) {
             _modifyFeatures.clear();
 
             // TOTO refactor
@@ -124,7 +112,7 @@ angular.module('anol.print')
 
             InteractionsService.addInteraction(_modify);
         };
-        Print.prototype.updateDragFeatures = function(currentFeature) {
+        PrintPage.prototype.updateDragFeatures = function(currentFeature) {
             var self = this;
             var edgePoints = _printArea.getGeometry().getCoordinates()[0];
             var left = edgePoints[0][0];
@@ -157,25 +145,25 @@ angular.module('anol.print')
             updateFeature(_dragFeatures.center, currentFeature, center, this.dragFeatureCenterChangeHandler);
         };
 
-        Print.prototype.dragFeatureNormalChangeHandler = function(evt) {
+        PrintPage.prototype.dragFeatureNormalChangeHandler = function(evt) {
             var currentFeature = evt.target;
             this.updatePrintAreaNormal();
             this.updateDragFeatures(currentFeature);
             this.updatePrintSize();
         };
 
-        Print.prototype.dragFeatureDiagonalChangeHandler = function(evt) {
+        PrintPage.prototype.dragFeatureDiagonalChangeHandler = function(evt) {
             var currentFeature = evt.target;
             this.updatePrintAreaDiagonal(currentFeature);
             this.updateDragFeatures(currentFeature);
             this.updatePrintSize();
         };
-        Print.prototype.dragFeatureCenterChangeHandler = function(evt) {
+        PrintPage.prototype.dragFeatureCenterChangeHandler = function(evt) {
             var currentFeature = evt.target;
             this.updatePrintAreaCenter(currentFeature);
             this.updateDragFeatures(currentFeature);
         };
-        Print.prototype.updatePrintAreaDiagonal = function(currentFeature) {
+        PrintPage.prototype.updatePrintAreaDiagonal = function(currentFeature) {
             var lefttop, righttop, leftbottom, rightbottom;
             if(_dragFeatures.lefttop === currentFeature || _dragFeatures.rightbottom === currentFeature) {
                 lefttop = _dragFeatures.lefttop.getGeometry().getCoordinates();
@@ -187,7 +175,7 @@ angular.module('anol.print')
                 this.updatePrintArea(leftbottom[0], righttop[1], righttop[0], leftbottom[1]);
             }
         };
-        Print.prototype.updatePrintAreaNormal = function() {
+        PrintPage.prototype.updatePrintAreaNormal = function() {
             var left = _dragFeatures.left.getGeometry().getCoordinates()[0];
             var right = _dragFeatures.right.getGeometry().getCoordinates()[0];
             var top = _dragFeatures.top.getGeometry().getCoordinates()[1];
@@ -195,7 +183,7 @@ angular.module('anol.print')
 
             this.updatePrintArea(left, top, right, bottom);
         };
-        Print.prototype.updatePrintAreaCenter = function(currentFeature) {
+        PrintPage.prototype.updatePrintAreaCenter = function(currentFeature) {
             var center = currentFeature.getGeometry().getCoordinates();
             var top = center[1] + (this.mapHeight / 2);
             var bottom = center[1] - (this.mapHeight / 2);
@@ -203,7 +191,7 @@ angular.module('anol.print')
             var right = center[0] + (this.mapWidth / 2);
             this.updatePrintArea(left, top, right, bottom);
         };
-        Print.prototype.updatePrintArea = function(left, top, right, bottom) {
+        PrintPage.prototype.updatePrintArea = function(left, top, right, bottom) {
             var coords = [[
                 [left, top],
                 [right, top],
@@ -218,7 +206,7 @@ angular.module('anol.print')
             _printArea = new ol.Feature(new ol.geom.Polygon(coords));
             _printSource.addFeatures([_printArea]);
         };
-        Print.prototype.updatePrintSize = function() {
+        PrintPage.prototype.updatePrintSize = function() {
             var self = this;
             $rootScope.$apply(function() {
                 self.mapWidth = _dragFeatures.right.getGeometry().getCoordinates()[0] - _dragFeatures.left.getGeometry().getCoordinates()[0];
@@ -229,66 +217,20 @@ angular.module('anol.print')
                 ];
             });
         };
-        Print.prototype.addFeatureFromPageSize = function(pageSize, scale) {
+        PrintPage.prototype.addFeatureFromPageSize = function(pageSize, scale) {
             if(_printArea === undefined) {
                 this.createPrintArea(pageSize, scale);
             } else {
                 this.createPrintArea(pageSize, scale, _printArea.getGeometry().getInteriorPoint().getCoordinates());
             }
         };
-        // TODO move into orka namespace
-        Print.prototype.createDownload = function(format, layer, streetIndex, poiTypes, trackTypes) {
-            var self = this;
+        PrintPage.prototype.getBounds = function() {
             var bounds = [];
             bounds = bounds.concat(_dragFeatures.leftbottom.getGeometry().getCoordinates());
             bounds = bounds.concat(_dragFeatures.righttop.getGeometry().getCoordinates());
-
-            var data = {
-                bbox: bounds.join(','),
-                scale: self.currentScale,
-                format: format,
-                layer: layer,
-                params: {
-                    'street_index': streetIndex,
-                    'poi_types': poiTypes.length === 0 ? false : poiTypes.join(','),
-                    'track_types': trackTypes.length === 0 ? false : trackTypes.join(','),
-                }
-            };
-
-            var deferred = $q.defer();
-
-            // promise with "success" and "error" methods (specific to $http)
-            var createPromise = $http.post(self.createDownloadUrl, data);
-            createPromise.success(function(data, status, headers, config) {
-                var checkPromise = self.checkDownload(data.status_url);
-                checkPromise.then(function(url) {
-                    deferred.resolve(url);
-                });
-            });
-            createPromise.error(function(data, status, headers, config) {
-                deferred.reject(data);
-            });
-            return deferred.promise;
+            return bounds;
         };
-        // TODO move into orka namespace
-        Print.prototype.checkDownload = function(statusUrl) {
-            var self = this;
-            var deferred = $q.defer();
-
-            var wrapper = function() {
-                var checkPromise = $http.get(self.checkDownloadUrl + statusUrl);
-                checkPromise.success(function(data, status, headers, config) {
-
-                    if(data.status !== 'done') {
-                        $timeout(wrapper, self.checkDownloadDelay);
-                    } else {
-                        deferred.resolve(data.url);
-                    }
-                });
-            };
-            wrapper();
-            return deferred.promise;
-        };
-        return new Print(_createDownloadUrl, _checkDownloadUrl, _checkDownloadDelay, _pageSizes, _outputFormats, _defaultScale);
+        
+        return new PrintPage(_pageSizes, _outputFormats, _defaultScale);
     }];
 }]);

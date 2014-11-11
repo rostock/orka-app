@@ -1,6 +1,6 @@
-angular.module('anol.featurelist', [])
+angular.module('orka.featurelist', [])
 
-.directive('anolFeatureList', ['$filter', 'ConfigService', 'MapService', 'LayersService', 'LayertreeService', function($filter, ConfigService, MapService, LayersService, LayertreeService) {
+.directive('orkaFeatureList', ['$filter', 'ConfigService', 'MapService', 'LayersService', 'LayertreeService', function($filter, ConfigService, MapService, LayersService, LayertreeService) {
     return {
         restrict: 'A',
         scope: {
@@ -8,7 +8,7 @@ angular.module('anol.featurelist', [])
             'markerLayerName': '@markerLayer'
         },
         transclude: true,
-        templateUrl: 'anol/modules/featurelist/templates/featurelist.html',
+        templateUrl: 'orka/modules/featurelist/templates/featurelist.html',
         link: function(scope, element, attr) {
             var calculateExtent = function(map) {
                 return map.getView().calculateExtent(map.getSize());
@@ -89,7 +89,7 @@ angular.module('anol.featurelist', [])
                 $scope.toggleMarker();
                 var id = 'feature_' + feature.get('num');
                 var featureElement = $element.find('#' + id);
-                var featureListContainer = $element.find('#anol-feature-list-container');
+                var featureListContainer = $element.find('#orka-feature-list-container');
 
                 var currentScrollTop = featureListContainer.scrollTop();
                 var containerTop = featureListContainer.offset().top;

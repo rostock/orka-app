@@ -1,11 +1,11 @@
-angular.module('anol.layertree')
+angular.module('orka.layertree', [])
 
-.directive('anolLayertree', ['LayertreeService', function(LayertreeService) {
+.directive('orkaLayertree', ['LayertreeService', function(LayertreeService) {
     // used to render the tree and interact with the service above
     return {
         restrict: 'A',
         transclude: true,
-        templateUrl: 'anol/modules/layertree/templates/layertree.html',
+        templateUrl: 'orka/modules/layertree/templates/layertree.html',
         scope: {},
         link: function(scope, element, attrs) {
             LayertreeService.poisLoaded.then(function(pois) {

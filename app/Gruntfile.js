@@ -10,13 +10,14 @@ module.exports = function(grunt) {
         // When using AngularJS you have to disable the mangle option.
         mangle: false
       },
+      // TODO add orka
       build: {
         src: 'build/<%= pkg.name %>.js',
         dest: 'build/<%= pkg.name %>.min.js'
       }
     },
     jshint: {
-      files: [ 'Gruntfile.js', 'anol/modules/**/*.js' ],
+      files: [ 'Gruntfile.js', 'anol/modules/**/*.js', 'orka/modules/**/*.js' ],
       options: {
         globals: {
           jQuery: true,
@@ -29,13 +30,13 @@ module.exports = function(grunt) {
       options: {
         separator: ';'
       },
-      dev: {
+      anolDev: {
         src: [
           'anol/modules/**/*.js',
         ],
         dest: 'build/<%= pkg.name %>.js'
       },
-      dist: {
+      anolDist: {
         src: [
           'anol/libs/**/*.js',
           'anol/modules/**/*.js',
@@ -44,6 +45,22 @@ module.exports = function(grunt) {
           '!anol/**/*-debug.js'
         ],
         dest: 'build/<%= pkg.name %>.js'
+      },
+      orkaDev: {
+        src: [
+          'orka/modules/**/*.js',
+        ],
+        dest: 'build/orka.js'
+      },
+      orkaDist: {
+        src: [
+          'orka/libs/**/*.js',
+          'orka/modules/**/*.js',
+          '!orka/**/angular-mocks.js',
+          '!orka/test/**/*.*',
+          '!orka/**/*-debug.js'
+        ],
+        dest: 'build/orka.js'
       }
     },
     clean: {
@@ -88,6 +105,9 @@ module.exports = function(grunt) {
         from: '^/(.*)/anol/(.*)$',
         to: '/anol/$2'
       }, {
+        from: '^/(.*)/orka/(.*)$',
+        to: '/orka/$2'
+      }, {
         from: '^/(.*)/static/(.*)$',
         to: '/static/$2'
       }, {
@@ -103,8 +123,8 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['anol/modules/**/*.js'],
-        tasks: ['clean', 'concat:dev'],
+        files: ['anol/modules/**/*.js', 'orka/modules/**/*.js'],
+        tasks: ['clean', 'concat:anolDev', 'concat:orkaDev'],
         options: {
           spawn: false,
         },
@@ -112,7 +132,7 @@ module.exports = function(grunt) {
     },
     html2js: {
       main: {
-        src: ['anol/**/templates/*.html'],
+        src: ['anol/**/templates/*.html', 'orka/**/templates/*.html'],
         dest: 'build/templates.js'
       },
     },
@@ -141,8 +161,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-jsdoc');
 
-  grunt.registerTask('dev', ['html2js', 'concat:dev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['jshint', 'concat:dist', 'uglify', 'jsdoc']);
+  grunt.registerTask('dev', ['html2js', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('build', ['jshint', 'concat:anolDist', 'concat:orkaDist', 'uglify', 'jsdoc']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
 

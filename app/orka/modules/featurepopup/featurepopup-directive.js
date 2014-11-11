@@ -1,15 +1,15 @@
-angular.module('anol.featurepopup', [])
+angular.module('orka.featurepopup', [])
 
-.directive('anolFeaturePopup', ['MapService', function(MapService) {
+.directive('orkaFeaturePopup', ['MapService', function(MapService) {
     return {
         restrict: 'A',
         scope: {
             'featureLayer': '@featureLayer'
         },
-        require: '?^anolFeatureList',
+        require: '?^orkaFeatureList',
         replace: true,
-        templateUrl: 'anol/modules/featurepopup/templates/popup.html',
-        link: function(scope, element, attrs, AnolFeatureListController) {
+        templateUrl: 'orka/modules/featurepopup/templates/popup.html',
+        link: function(scope, element, attrs, OrkaFeatureListController) {
             scope.handleClick = function(evt) {
                 var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
                     if(layer.get('layer') === scope.featureLayer) {
@@ -22,8 +22,8 @@ angular.module('anol.featurepopup', [])
                         scope.feature = feature;
                         scope.popupVisible = true;
                     });
-                    if(angular.isDefined(AnolFeatureListController)) {
-                        AnolFeatureListController.scrollTo(feature);
+                    if(angular.isDefined(OrkaFeatureListController)) {
+                        OrkaFeatureListController.scrollTo(feature);
                     }
                 }
             };

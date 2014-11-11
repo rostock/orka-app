@@ -12,22 +12,22 @@
     </div>
     <!-- TODO add validators for input fields -->
     <label>
-        <input type="number" ng-model="pageSize[0]" ng-change="updatePrintLayer()">Breite
+        <input type="number" ng-model="pageSize[0]" ng-change="updatePrintPage()">Breite
     </label>
     <label>
-        <input type="number" ng-model="pageSize[1]" ng-change="updatePrintLayer()">Höhe
+        <input type="number" ng-model="pageSize[1]" ng-change="updatePrintPage()">Höhe
     </label>
     <label>
-        <input type="number" ng-model="scale" ng-change="updatePrintLayer()">Maßstab
+        <input type="number" ng-model="$parent.scale" ng-change="updatePrintPage()">Maßstab
     </label>
     <label>
-        <input type="checkbox" ng-model="streetIndex">Straßenverzeichnis
+        <input type="checkbox" ng-model="$parent.streetIndex">Straßenverzeichnis
     </label>
     <label>
-        <input type="checkbox" ng-model="licenceAgreed">Nutzungsbedingungen zustimmen
+        <input type="checkbox" ng-model="$parent.licenceAgreed">Nutzungsbedingungen zustimmen
     </label>
     <button class="btn btn-default" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()">Ausgabe erstellen</button>
-    <button class="btn btn-default" ng-click="resetPrintArea()">Ausgabebereich zentrieren</button>
+    <button class="btn btn-default" ng-click="resetPrintPage()">Ausgabebereich zentrieren</button>
 
     <div ng-show="downloadUrl !== false">
         <a ng-href="{{ downloadUrl }}">Download</a>

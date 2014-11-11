@@ -1,10 +1,10 @@
-angular.module('anol.layertree')
+angular.module('orka.layertree')
 
-.directive('anolLayertreeLegend', ['LayertreeService', function(LayertreeService) {
+.directive('orkaLayertreeLegend', ['LayertreeService', function(LayertreeService) {
     return {
         restrict: 'A',
         transclude: true,
-        templateUrl: 'anol/modules/layertree/templates/layertree-legend.html',
+        templateUrl: 'orka/modules/layertree/templates/layertree-legend.html',
         scope: {},
         link: function(scope, element, attrs) {
             scope.selectedPois = LayertreeService.selectedPoiTypes;
