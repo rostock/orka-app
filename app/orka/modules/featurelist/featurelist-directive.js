@@ -98,7 +98,7 @@ angular.module('orka.featurelist', [])
 
                 featureListContainer.scrollTop(scrollTo);
             };
-            $scope.marker = ConfigService.config.mapThemes.poiMarkerIcon;
+            $scope.marker = ConfigService.config.poi.markerIcon;
 
             $scope.typeMap = {};
 

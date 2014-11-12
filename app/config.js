@@ -49,7 +49,7 @@ angular.module('orkaApp', [
 .config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', 'LayertreeServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider, LayertreeServiceProvider) {
     var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
         projection: ConfigServiceProvider.config.map.projection,
-        url: ConfigServiceProvider.config.mapThemes.poiLayerURL,
+        url: ConfigServiceProvider.config.poi.layerURL,
         title: 'POI Layer',
         layer: 'poi_layer',
         visible: false,
@@ -58,13 +58,13 @@ angular.module('orkaApp', [
     });
     var trackLayer = LayersFactoryProvider.newSingleTileWMS({
         extent: ConfigServiceProvider.config.map.extent,
-        url: ConfigServiceProvider.config.mapThemes.trackLayerURL,
+        url: ConfigServiceProvider.config.track.layerURL,
         title: 'Track Layer',
         layer: 'track_layer',
         visible: false,
         displayInLayerswitcher: false,
         params: {
-            'LAYERS': ConfigServiceProvider.config.mapThemes.trackLayerName,
+            'LAYERS': ConfigServiceProvider.config.track.layerName,
             'TRANSPARENT': true,
             'SRS': ConfigServiceProvider.config.map.projection.getCode()
         }
@@ -77,9 +77,9 @@ angular.module('orkaApp', [
 
     LayertreeServiceProvider.setPoiLayer(poiLayer);
     LayertreeServiceProvider.setTrackLayer(trackLayer);
-    LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.mapThemes.poiLegendURL);
-    LayertreeServiceProvider.setTrackLegendUrl(ConfigServiceProvider.config.mapThemes.trackLegendURL);
-    LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.mapThemes.poiIconBaseURL);
+    LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.poi.legendURL);
+    LayertreeServiceProvider.setTrackLegendUrl(ConfigServiceProvider.config.track.legendURL);
+    LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
 
     LayersServiceProvider.setLayers([
         poiLayer,
