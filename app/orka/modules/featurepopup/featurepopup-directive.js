@@ -1,6 +1,6 @@
 angular.module('orka.featurepopup', [])
 // TODO inherit somehow from anol.featurepopup
-.directive('orkaFeaturePopup', ['MapService', function(MapService) {
+.directive('orkaFeaturePopup', ['MapService', 'ConfigService', function(MapService, ConfigService) {
     return {
         restrict: 'A',
         scope: {
@@ -12,7 +12,7 @@ angular.module('orka.featurepopup', [])
         link: function(scope, element, attrs, OrkaFeatureListController) {
             var calculatePopupExtent = function(placementPixel) {
                 // left, bottom, right, top
-                var popupBuffer = [20, 20, 20, 20];
+                var popupBuffer = ConfigService.config.popup.buffer;
                 var popupElement =  angular.element(scope.popup.getElement());
                 var popupOffset = scope.popup.getOffset();
                 var xPx = placementPixel[0] + popupOffset[0];
@@ -119,11 +119,10 @@ angular.module('orka.featurepopup', [])
 
             scope.map.on('click', scope.handleClick, this);
 
-            // TODO make Overlay.positioning and Overlay.offset configurable
             scope.popup = new ol.Overlay({
                 element: element[0],
-                positioning: 'top-left',
-                offset: [10, 0]
+                positioning: ConfigService.config.popup.positioning,
+                offset: ConfigService.config.popup.offset
             });
             scope.map.addOverlay(scope.popup);
         },

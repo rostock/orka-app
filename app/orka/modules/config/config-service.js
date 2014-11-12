@@ -87,11 +87,17 @@ angular.module('orka.config', [])
                 'label': 'PNG',
                 'value': 'png'
             }]
+        },
+        popup: {
+            positioning: 'top-left',
+            offset: [10, 10],
+            buffer: [5, 5, 5, 5]
         }
     };
 
     this.setConfig = function(config) {
         var self = this;
+        self.config.popup = $.extend({}, defaults.popup);
         self.config.map = $.extend({}, defaults.map, config.map);
         self.config.backgroundLayer = [];
         angular.forEach(config.layers, function(layerName) {
