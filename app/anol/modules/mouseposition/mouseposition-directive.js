@@ -6,8 +6,6 @@ angular.module('anol.mouseposition', [])
         require: '?^anolMap',
         scope: {},
         link: function(scope, element, attrs, AnolMapController) {
-            // TODO use only one new ol.control.ScaleLine and
-            // asign target later if needed
             var controlOptions = {};
 
             scope.map = MapService.getMap();

@@ -30,8 +30,6 @@ angular.module('orka.featurelist', [])
                         }
                     });
                 }
-                // TODO improve sorting
-                // using angular orderBy filter is not very fast.
                 angular.forEach(featureGroups, function(features) {
                     features = $filter('orderBy')(features, sortFeaturesByNumValue, false);
                 });

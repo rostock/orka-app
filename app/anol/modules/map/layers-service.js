@@ -12,7 +12,6 @@ angular.module('anol.map')
         var Layers = function(layers) {
             this.map = undefined;
             this.layers = [];
-            // TODO store the only active background layer in this.backgroundlayer
             this.backgroundLayers = [];
             this.overlayLayers = [];
             this.visibleLayerShortcuts = [];

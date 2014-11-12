@@ -20,7 +20,6 @@ angular.module('orka.print')
             this.checkDownloadDelay = checkDownloadDelay;
         };
 
-        // TODO move into orka namespace
         Print.prototype.createDownload = function(bounds, format, layer, streetIndex, poiTypes, trackTypes) {
             var self = this;
 
@@ -51,7 +50,6 @@ angular.module('orka.print')
             });
             return deferred.promise;
         };
-        // TODO move into orka namespace
         Print.prototype.checkDownload = function(statusUrl) {
             var self = this;
             var deferred = $q.defer();
