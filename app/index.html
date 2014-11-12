@@ -61,10 +61,13 @@
           <div anol-scale-text></div>
         </div>
         <!-- map -->
-        <div anol-map class="col-sm-6 col-md-8">
-          <div anol-mouse-position></div>
-          <!-- Readd when custom defined projection 25833 can be transformed to 4326 by ol3 -->
-          <!--<div anol-scale-line></div>-->
+        <div class="col-sm-6 col-md-8">
+          <!-- TODO fix map canvas width & height -->
+          <div anol-map>
+            <div anol-mouse-position></div>
+            <!-- Readd when custom defined projection 25833 can be transformed to 4326 by ol3 -->
+            <!--<div anol-scale-line></div>-->
+          </div>
         </div>
         <div class="col-sm-3 col-md-2">
           <div orka-print ></div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <title>Feature Popup Example</title>
 
     <!-- Core CSS -->
@@ -39,7 +39,7 @@
 
     <script type="text/javascript">
       angular.module('example', ['anol', 'anol.map', 'anol.featurepopup'])
-      .config(['MapServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', 
+      .config(['MapServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider',
         function(MapServiceProvider, LayersFactoryProvider, LayersServiceProvider) {
           MapServiceProvider.addView(new ol.View({
             center: [0, 0],
