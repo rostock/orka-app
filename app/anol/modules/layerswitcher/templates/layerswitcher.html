@@ -1,9 +1,11 @@
-<h4>Background Layers</h4>
-<div ng-if="layer.get('displayInLayerswitcher') !== false"
-     ng-repeat="layer in backgroundLayers">
-     <!-- double $parent cause ng-if and ng-repeat create own closed scopes -->
-    <input type="radio" ng-model="$parent.$parent.backgroundLayer" ng-value="layer">
-    {{ layer.get('title') }}
+<div ng-if="backgroundLayers.length > 1">
+    <h4>Background Layers</h4>
+    <div ng-if="layer.get('displayInLayerswitcher') !== false"
+         ng-repeat="layer in backgroundLayers">
+         <!-- double $parent cause ng-if and ng-repeat create own closed scopes -->
+        <input type="radio" ng-model="$parent.$parent.$parent.backgroundLayer" ng-value="layer">
+        {{ layer.get('title') }}
+    </div>
 </div>
 <h4>Overlay Layers</h4>
 <div ng-if="layer.get('displayInLayerswitcher') !== false"
