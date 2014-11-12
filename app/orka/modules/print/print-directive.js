@@ -8,8 +8,19 @@ angular.module('orka.print', [])
         scope: {},
         link: function(scope, element, attrs) {
             scope.isPrintable = function() {
-                // TODO refactor
-                return scope.pageSize !== undefined && scope.pageSize[0] !== undefined && scope.pageSize[1] !== undefined && scope.scale !== undefined;
+                if(scope.scale === undefined || scope.scale <= 0) {
+                    return false;
+                }
+                if(scope.pageSize === undefined) {
+                    return false;
+                }
+                if(scope.pageSize[0] === undefined || scope.pageSize[0] <= 0) {
+                    return false;
+                }
+                if(scope.pageSize[1] === undefined || scope.pageSize[1] <= 0) {
+                    return false;
+                }
+                return true;
             };
             scope.startPrint = function() {
                 scope.downloadUrl = false;
@@ -36,7 +47,6 @@ angular.module('orka.print', [])
                 scope.updatePrintPage();
             };
             scope.updatePrintPage = function() {
-                console.log(scope)
                 if(scope.isPrintable()) {
                     PrintPageService.addFeatureFromPageSize(scope.pageSize, scope.scale);
                 }
