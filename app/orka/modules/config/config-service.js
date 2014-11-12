@@ -33,8 +33,11 @@ angular.module('orka.config', [])
             ],
             center: [313282, 6003693],
             zoom: 9
-            // TODO attribution
         },
+        attributions: [
+            '<br>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)',
+            '<br>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a>(<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a>'
+        ],
         backgroundLayer: {
             'ORKA_STADTPLAN': {
                 baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
@@ -92,7 +95,9 @@ angular.module('orka.config', [])
         self.config.map = $.extend({}, defaults.map, config.map);
         self.config.backgroundLayer = [];
         angular.forEach(config.layers, function(layerName) {
-            self.config.backgroundLayer.push(defaults.backgroundLayer[layerName]);
+            var layer = defaults.backgroundLayer[layerName];
+            layer.attributions = config.attributions || defaults.attributions;
+            self.config.backgroundLayer.push(layer);
         });
         self.config.poi = $.extend({}, defaults.poi, config.poi);
         self.config.track = $.extend({}, defaults.track, config.track);

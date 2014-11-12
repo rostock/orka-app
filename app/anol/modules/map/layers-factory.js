@@ -8,6 +8,17 @@ angular.module('anol.map')
         if(options.projection !== undefined) {
             sourceOptions.projection = options.projection;
         }
+        if(options.attributions !== undefined) {
+            if(!(options.attributions instanceof Array)) {
+                options.attributions = [options.attributions];
+            }
+            sourceOptions.attributions = [];
+            angular.forEach(options.attributions, function(attributionText) {
+                sourceOptions.attributions.push(new ol.Attribution({
+                    html: attributionText
+                }));
+            });
+        }
         return sourceOptions;
     };
 
@@ -58,6 +69,7 @@ angular.module('anol.map')
                 resolutions: options.resolutions
             });
         }
+
         var sourceOptions = createBasicSourceOptions(options);
         sourceOptions.tileUrlFunction = tileURL;
 
@@ -65,9 +77,6 @@ angular.module('anol.map')
             sourceOptions.tileGrid = tileGrid;
         }
 
-        if(options.atrtibution !== undefined) {
-            sourceOptions.attributions = options.attributions;
-        }
 
         var layer = new ol.layer.Tile({
             source: new ol.source.TileImage(sourceOptions)

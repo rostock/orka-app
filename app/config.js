@@ -40,7 +40,8 @@ angular.module('orkaApp', [
             layer: backgroundLayer.layer,
             title: backgroundLayer.title,
             shortcut: backgroundLayer.shortcut,
-            isBackground: true
+            isBackground: true,
+            attributions: backgroundLayer.attributions
         }));
     });
     LayersServiceProvider.setLayers(layers);
