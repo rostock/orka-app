@@ -2,6 +2,7 @@ angular.module('anol.permalink', [])
 
 .provider('PermalinkService', [function() {
     var _urlCrs;
+    var _precision = 100000;
     var extractMapParams = function(path) {
         var permalinkRegEx = /.*map=(\d+)\/(\d+\.?\d+?)\/(\d+\.?\d+?)\/(EPSG:\d+)\/?([A-Z]+)?$/g;
         var mapParams = permalinkRegEx.exec(path);
@@ -20,10 +21,15 @@ angular.module('anol.permalink', [])
         _urlCrs = crs;
     };
 
+    this.setPrecision = function(precision) {
+        _precision = precision;
+    };
+
     this.$get = ['$rootScope', '$location', 'MapService', 'LayersService', function($rootScope, $location, MapService, LayersService) {
-        var Permalink = function(urlCrs) {
+        var Permalink = function(urlCrs, precision) {
             var self = this;
             self.urlCrs = urlCrs;
+            self.precision = precision;
             self.zoom = undefined;
             self.lon = undefined;
             self.lat = undefined;
@@ -57,9 +63,8 @@ angular.module('anol.permalink', [])
         Permalink.prototype.moveendHandler = function(evt) {
             var self = this;
             var center = ol.proj.transform(self.view.getCenter(), self.view.getProjection(), self.urlCrs);
-            // TODO round lon, lat to 5 digits
-            self.lon = center[0];
-            self.lat = center[1];
+            self.lon = Math.round(center[0] * this.precision) / this.precision;
+            self.lat = Math.round(center[1] * this.precision) / this.precision;
 
             self.zoom = self.view.getZoom();
             $rootScope.$apply(function() {
@@ -75,6 +80,6 @@ angular.module('anol.permalink', [])
             $location.path(urlAddon);
             self.permalink = $location.absUrl();
         };
-        return new Permalink(_urlCrs);
+        return new Permalink(_urlCrs, _precision);
     }];
 }]);
