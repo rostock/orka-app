@@ -22,7 +22,13 @@ angular.module('anol.layerswitcher', [])
                     layer.setVisible(false);
                 }
             });
-            $scope.overlayLayers = LayersService.overlayLayers;
+            var overlayLayers = [];
+            angular.forEach(LayersService.overlayLayers, function(layer) {
+                if(layer.get('displayInLayerswitcher') !== false) {
+                    overlayLayers.push(layer);
+                }
+            });
+            $scope.overlayLayers = overlayLayers;
         }
     };
 }]);
