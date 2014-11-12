@@ -7,7 +7,8 @@ angular.module('anol.map')
         var map = new ol.Map(angular.extend({}, {
             controls: controls,
             interactions: interactions,
-            layers: layers
+            layers: layers,
+            logo: false
         }));
         map.setView(_view);
         return map;
