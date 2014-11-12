@@ -30,7 +30,9 @@ angular.module('orka.config', [])
                 0.8819444444,
                 0.3527777778,
                 0.1763888889
-            ]
+            ],
+            center: [313282, 6003693],
+            zoom: 9
             // TODO attribution
         },
         backgroundLayer: {
