@@ -111,7 +111,7 @@ angular.module('orka.featurelist', [])
 
                 scope.featureLayer.getSource().on('anolSourceUpdated', function() {
                     var features = featuresByExtent();
-                    scope.$applyAsync(function() {
+                    scope.$apply(function() {
                         scope.featureGroups = features;
                         if(scope.showFeatureContent !== false) {
                             $timeout(scope.moveContentOutofOverflow, 0, false);
