@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <span class="glyphicon glyphicon-remove pull-right"
           ng-click="popupVisible=false"></span>
-        <h3 class="panel-title">{{ feature.get('name') }}</h3>
+        <h3 class="panel-title" ng-bind-html="feature.get('name') | html "></h3>
     </div>
     <div class="panel-body">
         <a ng-if="feature.get('website')" ng-href="{{ feature.get('website') || '' }}">Homepage</a>

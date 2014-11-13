@@ -2,23 +2,14 @@
 <div style="height: 250px; overflow: auto;"
      id="orka-feature-list-container">
     <div ng-repeat="(type, features) in featureGroups">
-        <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
-            {{ typeMap[type] }}
-        </h4>
-        <div id="feature_{{ feature.get('num') }}"
+        <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;" ng-bind-html="typeMap[type] | html"></h4>
+        <div id="feature_{{ feature.get('num') }}"  style="border: 1px solid black;"
              ng-show="$parent.showGroup === type"
              ng-repeat="feature in features"
              ng-click="toggleMarker(feature, $parent.$parent.showFeatureContent);">
-            <h5 ng-click="toggleFeatureContent(feature)">
-                {{ feature.get('name') }}
-            </h5>
+            <h5 ng-click="toggleFeatureContent(feature)" ng-bind-html="feature.get('name') | html"></h5>
             <div ng-show="$parent.$parent.showFeatureContent === feature.get('num')">
                 <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
-                <address>
-                    {{ feature.get('street') || '' }} {{ feature.get('housenumber') || '' }}<br>
-                    {{ feature.get('postal') || '' }} {{ feature.get('city') || '' }}
-                </address>
-
                 <!-- show properties defiend in config -->
             </div>
         </div>
