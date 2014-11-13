@@ -1,6 +1,6 @@
 angular.module('orka.featurepopup', ['anol.featurepopup'])
 
-.directive('orkaFeaturePopup', ['$injector', 'MapService', 'ConfigService', function($injector, MapService, ConfigService) {
+.directive('orkaFeaturePopup', ['$injector', 'MapService', 'ConfigService', 'LayertreeService', function($injector, MapService, ConfigService, LayertreeService) {
     var anolFeaturePopupDirective = $injector.get('anolFeaturePopupDirective')[0];
     return {
         restrict: 'A',
@@ -20,6 +20,12 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                     positioning: ConfigService.config.popup.positioning,
                     offset: ConfigService.config.popup.offset
                 };
+
+                scope.typeMap = {};
+
+                LayertreeService.poisLoaded.then(function() {
+                    scope.typeMap = LayertreeService.typeMap;
+                });
 
                 scope.handleClick = function(evt) {
                     var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {

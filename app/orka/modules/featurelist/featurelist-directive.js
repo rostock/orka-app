@@ -17,21 +17,8 @@ angular.module('orka.featurelist', [])
 
                 scope.typeMap = {};
 
-                LayertreeService.poisLoaded.then(function(topics) {
-                    angular.forEach(topics, function(topic) {
-                        scope.typeMap[topic.name] = {
-                            'title': topic.title,
-                            'listTags': topic.listTags
-                        };
-                        if(topic.groups !== undefined) {
-                            angular.forEach(topic.groups, function(group) {
-                                scope.typeMap[group.type] = {
-                                    'title': group.title,
-                                    'listTags': group.listTags || topic.listTags
-                                };
-                            });
-                        }
-                    });
+                LayertreeService.poisLoaded.then(function() {
+                    scope.typeMap = LayertreeService.typeMap;
                 });
 
                 scope.toggleMarker = function(feature) {
