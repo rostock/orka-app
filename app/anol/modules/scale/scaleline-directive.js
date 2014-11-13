@@ -5,20 +5,21 @@ angular.module('anol.scale')
         restrict: 'A',
         require: '?^anolMap',
         scope: {},
-        link: function(scope, element, attrs, AnolMapController) {
-            scope.map = MapService.getMap();
+        link: {
+            pre: function(scope, element, attrs, AnolMapController) {
+                scope.map = MapService.getMap();
 
-            var controlOptions = {};
+                var controlOptions = {};
+                if(angular.isUndefined(AnolMapController)) {
+                    controlOptions = {
+                        target: element[0]
+                    };
+                }
 
-            if(angular.isUndefined(AnolMapController)) {
-                controlOptions = {
-                    target: element[0]
-                };
+                scope.map.addControl(
+                    new ol.control.ScaleLine(controlOptions)
+                );
             }
-
-            scope.map.addControl(
-                new ol.control.ScaleLine(controlOptions)
-            );
         }
     };
 }]);

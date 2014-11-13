@@ -6,83 +6,87 @@ angular.module('orka.print', [])
         transclude: true,
         templateUrl: 'orka/modules/print/templates/print.html',
         scope: {},
-        link: function(scope, element, attrs) {
-            scope.isPrintable = function() {
-                if(scope.scale === undefined || scope.scale <= 0) {
-                    return false;
-                }
-                if(scope.pageSize === undefined) {
-                    return false;
-                }
-                if(scope.pageSize[0] === undefined || scope.pageSize[0] <= 0) {
-                    return false;
-                }
-                if(scope.pageSize[1] === undefined || scope.pageSize[1] <= 0) {
-                    return false;
-                }
-                return true;
-            };
-            scope.startPrint = function() {
-                scope.downloadUrl = false;
-                var layerName = LayersService.backgroundLayer().get('layer');
+        link: {
+            pre: function(scope, element, attrs) {
+                // TODO find a better solution to prevent directive to be executed
+                // when ConfigService.config.print is undefined
+                scope.show = ConfigService.config.print !== undefined;
 
-                var downloadPromise = PrintService.createDownload(
-                    PrintPageService.getBounds(),
-                    scope.outputFormat.value,
-                    layerName,
-                    scope.streetIndex,
-                    LayertreeService.selectedPoiTypes,
-                    LayertreeService.selectedTrackTypes
+                if(scope.show) {
+                    scope.outputFormats = PrintPageService.outputFormats;
+                    scope.pageSizes = PrintPageService.pageSizes;
+                    scope.scale = angular.copy(PrintPageService.defaultScale);
+                    scope.streetIndex = false;
+                    scope.licenceAgreed = false;
+                    scope.downloadUrl = false;
+
+                    scope.outputFormat = scope.outputFormats[0];
+                }
+
+
+                scope.isPageSize = function(size) {
+                    return angular.equals(size, scope.pageSize);
+                };
+                scope.isPrintable = function() {
+                    if(scope.scale === undefined || scope.scale <= 0) {
+                        return false;
+                    }
+                    if(scope.pageSize === undefined) {
+                        return false;
+                    }
+                    if(scope.pageSize[0] === undefined || scope.pageSize[0] <= 0) {
+                        return false;
+                    }
+                    if(scope.pageSize[1] === undefined || scope.pageSize[1] <= 0) {
+                        return false;
+                    }
+                    return true;
+                };
+                scope.startPrint = function() {
+                    scope.downloadUrl = false;
+                    var layerName = LayersService.backgroundLayer().get('layer');
+
+                    var downloadPromise = PrintService.createDownload(
+                        PrintPageService.getBounds(),
+                        scope.outputFormat.value,
+                        layerName,
+                        scope.streetIndex,
+                        LayertreeService.selectedPoiTypes,
+                        LayertreeService.selectedTrackTypes
+                    );
+
+                    downloadPromise.then(function(url) {
+                        scope.downloadUrl = url;
+                    });
+                };
+                // if we assign pageSize = value in template angular put only a reverence
+                // into scope.pageSize and typing somethink into width/height input fields
+                // will result in modifying selected availablePageSize value
+                scope.setPageSize = function(size) {
+                    scope.pageSize = angular.copy(size);
+                    scope.updatePrintPage();
+                };
+                scope.updatePrintPage = function() {
+                    if(scope.isPrintable()) {
+                        PrintPageService.addFeatureFromPageSize(scope.pageSize, scope.scale);
+                    }
+                };
+                scope.resetPrintPage = function() {
+                    if(scope.isPrintable()) {
+                        PrintPageService.createPrintArea(scope.pageSize, scope.scale);
+                    }
+                };
+            },
+            post: function(scope, element, attrs) {
+                scope.$watch(
+                    function() {
+                        return PrintPageService.currentPageSize;
+                    },
+                    function(newVal, oldVal) {
+                        scope.pageSize = newVal;
+                    }
                 );
-
-                downloadPromise.then(function(url) {
-                    scope.downloadUrl = url;
-                });
-            };
-            // if we assign pageSize = value in template angular put only a reverence
-            // into scope.pageSize and typing somethink into width/height input fields
-            // will result in modifying selected availablePageSize value
-            scope.setPageSize = function(size) {
-                scope.pageSize = angular.copy(size);
-                scope.updatePrintPage();
-            };
-            scope.updatePrintPage = function() {
-                if(scope.isPrintable()) {
-                    PrintPageService.addFeatureFromPageSize(scope.pageSize, scope.scale);
-                }
-            };
-            scope.resetPrintPage = function() {
-                if(scope.isPrintable()) {
-                    PrintPageService.createPrintArea(scope.pageSize, scope.scale);
-                }
-            };
-        },
-        controller: function($scope, $element, $attrs) {
-            $scope.show = ConfigService.config.print !== undefined;
-            if(!$scope.show) {
-                return;
             }
-            $scope.isPageSize = function(size) {
-                return angular.equals(size, $scope.pageSize);
-            };
-
-            $scope.outputFormats = PrintPageService.outputFormats;
-            $scope.pageSizes = PrintPageService.pageSizes;
-            $scope.scale = angular.copy(PrintPageService.defaultScale);
-            $scope.streetIndex = false;
-            $scope.licenceAgreed = false;
-            $scope.downloadUrl = false;
-
-            $scope.outputFormat = $scope.outputFormats[0];
-
-            $scope.$watch(
-                function() {
-                    return PrintPageService.currentPageSize;
-                },
-                function(newVal, oldVal) {
-                    $scope.pageSize = newVal;
-                }
-            );
         }
     };
 }]);

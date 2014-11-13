@@ -1,40 +1,35 @@
 angular.module('anol.scale')
 
-.directive('anolScaleText', ['MapService', function(MapService) {
+.constant('INCHES_PER_METER', 39.37)
+.constant('DPI', 72)
+
+.directive('anolScaleText', ['MapService', 'INCHES_PER_METER', 'DPI', function(MapService, INCHES_PER_METER, DPI) {
     return {
         restrict: 'A',
         require: '?^anolMap',
         template: '<div>1 : {{ scale }}</div>',
         scope: {},
-        link: function(scope, element, attrs, AnolMapController) {
-            var controlOptions = {};
-
-            if(angular.isUndefined(AnolMapController)) {
-                controlOptions = {
-                    target: element[0]
+        link: {
+            pre: function(scope, element, attrs) {
+                scope.view = MapService.getMap().getView();
+                scope.calculateScale = function() {
+                    // found at https://groups.google.com/d/msg/ol3-dev/RAJa4locqaM/4AzBrkndL9AJ
+                    var resolution = scope.view.getResolution();
+                    var mpu = scope.view.getProjection().getMetersPerUnit();
+                    var scale = resolution * mpu * INCHES_PER_METER * DPI;
+                    return Math.round(scale);
                 };
-            }
-        },
-        controller: function($scope, $element, $attrs) {
-            var INCHES_PER_METER = 39.37;
-            // TODO make dpi configurable
-            var DPI = 72;
 
-            var calculateScale = function() {
-                // found at https://groups.google.com/d/msg/ol3-dev/RAJa4locqaM/4AzBrkndL9AJ
-                var resolution = $scope.view.getResolution();
-                var mpu = $scope.view.getProjection().getMetersPerUnit();
-                var scale = resolution * mpu * INCHES_PER_METER * DPI;
-                return Math.round(scale);
-            };
-            $scope.view = MapService.getMap().getView();
-            $scope.view.on('change:resolution', function() {
-                $scope.$apply(function() {
-                    $scope.scale = calculateScale();
+                scope.scale = scope.calculateScale();
+            },
+            post: function(scope, element, attrs) {
+                scope.view.on('change:resolution', function() {
+                    scope.$apply(function() {
+                        scope.scale = scope.calculateScale();
+                    });
                 });
-            });
 
-            $scope.scale = calculateScale();
+            }
         }
     };
 }]);

@@ -6,31 +6,34 @@ angular.module('orka.layertree')
         transclude: true,
         templateUrl: 'orka/modules/layertree/templates/layertree-legend.html',
         scope: {},
-        link: function(scope, element, attrs) {
-            scope.selectedPois = LayertreeService.selectedPoiTypes;
-            scope.selectedTracks = LayertreeService.selectedTrackTypes;
-            scope.typeMap = LayertreeService.typeMap;
+        link: {
+            pre: function(scope, element, attrs) {
+                scope.selectedPois = LayertreeService.selectedPoiTypes;
+                scope.selectedTracks = LayertreeService.selectedTrackTypes;
+                scope.typeMap = LayertreeService.typeMap;
+            },
+            post: function(scope, element, attrs) {
+                scope.$watch(function() {
+                        return LayertreeService.selectedPoiTypes;
+                    }, function(newVal, oldVal) {
+                        scope.selectedPois = newVal;
+                    }
+                );
 
-            scope.$watch(function() {
-                    return LayertreeService.selectedPoiTypes;
-                }, function(newVal, oldVal) {
-                    scope.selectedPois = newVal;
-                }
-            );
+                scope.$watch(function() {
+                        return LayertreeService.selectedTrackTypes;
+                    }, function(newVal, oldVal) {
+                        scope.selectedTracks = newVal;
+                    }
+                );
 
-            scope.$watch(function() {
-                    return LayertreeService.selectedTrackTypes;
-                }, function(newVal, oldVal) {
-                    scope.selectedTracks = newVal;
-                }
-            );
-
-            scope.$watch(function() {
-                    return LayertreeService.typeMap;
-                }, function(newVal, oldVal) {
-                    scope.typeMap = newVal;
-                }
-            );
+                scope.$watch(function() {
+                        return LayertreeService.typeMap;
+                    }, function(newVal, oldVal) {
+                        scope.typeMap = newVal;
+                    }
+                );
+            }
         }
     };
 }]);

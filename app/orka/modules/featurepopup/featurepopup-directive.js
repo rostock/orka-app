@@ -10,35 +10,39 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
         require: '?^orkaFeatureList',
         replace: true,
         templateUrl: 'orka/modules/featurepopup/templates/popup.html',
-        link: function(scope, element, attrs, OrkaFeatureListController) {
-            scope.handleClick = function(evt) {
-                var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-                    if(layer.get('layer') === scope.featureLayer) {
-                        return feature;
-                    }
-                });
-                if(feature) {
-                    scope.popup.setPosition(evt.coordinate);
+        link: {
+            pre: function(scope, element, attrs, OrkaFeatureListController) {
+                scope.map = MapService.getMap();
+                scope.feature = undefined;
+                scope.popupVisible = false;
+                scope.overlayOptions = {
+                    element: element[0],
+                    positioning: ConfigService.config.popup.positioning,
+                    offset: ConfigService.config.popup.offset
+                };
 
-                    scope.$apply(function() {
-                        scope.feature = feature;
-                        scope.popupVisible = true;
+                scope.handleClick = function(evt) {
+                    var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                        if(layer.get('layer') === scope.featureLayer) {
+                            return feature;
+                        }
                     });
-                    var popupExtent = scope.calculatePopupExtent(evt.pixel);
-                    scope.moveMap(popupExtent);
-                    if(angular.isDefined(OrkaFeatureListController)) {
-                        OrkaFeatureListController.scrollTo(feature);
-                    }
-                }
-            };
-            scope.map.on('click', scope.handleClick, this);
+                    if(feature) {
+                        scope.popup.setPosition(evt.coordinate);
 
-            scope.popup = new ol.Overlay({
-                element: element[0],
-                positioning: ConfigService.config.popup.positioning,
-                offset: ConfigService.config.popup.offset
-            });
-            scope.map.addOverlay(scope.popup);
+                        scope.$apply(function() {
+                            scope.feature = feature;
+                            scope.popupVisible = true;
+                        });
+                        var popupExtent = scope.calculatePopupExtent(evt.pixel);
+                        scope.moveMap(popupExtent);
+                        if(angular.isDefined(OrkaFeatureListController)) {
+                            OrkaFeatureListController.scrollTo(feature);
+                        }
+                    }
+                };
+            },
+            post: anolFeaturePopupDirective.link.post
         },
         controller: anolFeaturePopupDirective.controller
     };

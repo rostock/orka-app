@@ -8,33 +8,39 @@ angular.module('anol.featurepopup', [])
         },
         replace: true,
         templateUrl: 'anol/modules/featurepopup/templates/popup.html',
-        link: function(scope, element, attrs) {
-            
+        link: {
+            pre: function(scope, element, attrs) {
+                scope.map = MapService.getMap();
+                scope.feature = undefined;
+                scope.popupVisible = false;
+                scope.overlayOptions = {
+                    element: element[0]
+                };
 
-            scope.handleClick = function(evt) {
-                var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-                    if(layer.get('layer') === scope.featureLayer) {
-                        return feature;
-                    }
-                });
-                if(feature) {
-                    scope.popup.setPosition(evt.coordinate);
-                    scope.$apply(function() {
-                        scope.feature = feature;
-                        scope.popupVisible = true;
+                scope.handleClick = function(evt) {
+                    var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                        if(layer.get('layer') === scope.featureLayer) {
+                            return feature;
+                        }
                     });
+                    if(feature) {
+                        scope.popup.setPosition(evt.coordinate);
+                        scope.$apply(function() {
+                            scope.feature = feature;
+                            scope.popupVisible = true;
+                        });
 
-                    var popupExtent = $scope.calculatePopupExtent(evt.pixel);
-                    $scope.moveMap(popupExtent);
-                }
-            };
+                        var popupExtent = scope.calculatePopupExtent(evt.pixel);
+                        scope.moveMap(popupExtent);
+                    }
+                };
+            },
+            post: function(scope, element, attrs) {
+                scope.map.on('click', scope.handleClick, this);
 
-            scope.map.on('click', scope.handleClick, this);
-
-            scope.popup = new ol.Overlay({
-                element: element[0]
-            });
-            scope.map.addOverlay(scope.popup);
+                scope.popup = new ol.Overlay(scope.overlayOptions);
+                scope.map.addOverlay(scope.popup);
+            }
         },
         controller: function($scope, $element, $attrs) {
             $scope.calculatePopupExtent = function(placementPixel) {
@@ -122,9 +128,6 @@ angular.module('anol.featurepopup', [])
                     ]);
                 }
             };
-            $scope.map = MapService.getMap();
-            $scope.feature = undefined;
-            $scope.popupVisible = false;
         }
     };
 }]);
