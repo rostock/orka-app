@@ -9,18 +9,46 @@ angular.module('anol.featurepopup', [])
         replace: true,
         templateUrl: 'anol/modules/featurepopup/templates/popup.html',
         link: function(scope, element, attrs) {
-            var calculatePopupExtent = function(placementPixel) {
+            
+
+            scope.handleClick = function(evt) {
+                var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                    if(layer.get('layer') === scope.featureLayer) {
+                        return feature;
+                    }
+                });
+                if(feature) {
+                    scope.popup.setPosition(evt.coordinate);
+                    scope.$apply(function() {
+                        scope.feature = feature;
+                        scope.popupVisible = true;
+                    });
+
+                    var popupExtent = $scope.calculatePopupExtent(evt.pixel);
+                    $scope.moveMap(popupExtent);
+                }
+            };
+
+            scope.map.on('click', scope.handleClick, this);
+
+            scope.popup = new ol.Overlay({
+                element: element[0]
+            });
+            scope.map.addOverlay(scope.popup);
+        },
+        controller: function($scope, $element, $attrs) {
+            $scope.calculatePopupExtent = function(placementPixel) {
                 // left, bottom, right, top
                 var popupBuffer = [5, 5, 5, 5];
-                var popupElement =  angular.element(scope.popup.getElement());
-                var popupOffset = scope.popup.getOffset();
+                var popupElement =  angular.element($scope.popup.getElement());
+                var popupOffset = $scope.popup.getOffset();
                 var xPx = placementPixel[0] + popupOffset[0];
                 var yPx = placementPixel[1] + popupOffset[1];
 
                 var width = popupElement.width();
                 var height = popupElement.height();
 
-                var position = scope.popup.getPositioning().split('-');
+                var position = $scope.popup.getPositioning().split('-');
 
                 var leftPx, rightPx;
                 // x-axis
@@ -61,17 +89,17 @@ angular.module('anol.featurepopup', [])
                 topPx = topPx - popupBuffer[3];
 
                 var extent = [];
-                var lb = scope.map.getCoordinateFromPixel([leftPx, bottomPx]);
-                var rt = scope.map.getCoordinateFromPixel([rightPx ,topPx]);
+                var lb = $scope.map.getCoordinateFromPixel([leftPx, bottomPx]);
+                var rt = $scope.map.getCoordinateFromPixel([rightPx ,topPx]);
                 extent = extent.concat(lb);
                 extent = extent.concat(rt);
 
                 return extent;
             };
 
-            var moveMap = function(popupExtent) {
-                var view = scope.map.getView();
-                var mapExtent = view.calculateExtent(scope.map.getSize());
+            $scope.moveMap = function(popupExtent) {
+                var view = $scope.map.getView();
+                var mapExtent = view.calculateExtent($scope.map.getSize());
                 var dx = 0;
                 var dy = 0;
                 if(popupExtent[0] < mapExtent[0]) {
@@ -94,33 +122,6 @@ angular.module('anol.featurepopup', [])
                     ]);
                 }
             };
-
-            scope.handleClick = function(evt) {
-                var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-                    if(layer.get('layer') === scope.featureLayer) {
-                        return feature;
-                    }
-                });
-                if(feature) {
-                    scope.popup.setPosition(evt.coordinate);
-                    scope.$apply(function() {
-                        scope.feature = feature;
-                        scope.popupVisible = true;
-                    });
-
-                    var popupExtent = calculatePopupExtent(evt.pixel);
-                    moveMap(popupExtent);
-                }
-            };
-
-            scope.map.on('click', scope.handleClick, this);
-
-            scope.popup = new ol.Overlay({
-                element: element[0]
-            });
-            scope.map.addOverlay(scope.popup);
-        },
-        controller: function($scope, $element, $attrs) {
             $scope.map = MapService.getMap();
             $scope.feature = undefined;
             $scope.popupVisible = false;
