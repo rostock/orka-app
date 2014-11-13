@@ -59,7 +59,7 @@ angular.module('orka.featurelist', [])
                 };
 
                 scope.toggleFeatureContent = function(feature) {
-                    scope.showFeatureContent = scope.showFeatureContent === feature.get('num') ? false : feature.get('num');
+                    scope.showFeatureContent = scope.showFeatureContent === feature.get('osm_id') ? false : feature.get('osm_id');
                     scope.toggleMarker(feature);
                     // timeout function is runing right after scope digest completet.
                     // before digest is not complete, browser has not updated html.
@@ -72,7 +72,7 @@ angular.module('orka.featurelist', [])
                     return map.getView().calculateExtent(map.getSize());
                 };
                 var sortFeaturesByNumValue = function(feature) {
-                    return feature.get('num');
+                    return feature.get('osm_id');
                 };
                 var featuresByExtent = function() {
                     var featureGroups = {};
@@ -119,10 +119,10 @@ angular.module('orka.featurelist', [])
             this.scrollTo = function(feature) {
                 $scope.$apply(function() {
                     $scope.showGroup = feature.get('type');
-                    $scope.showFeatureContent = feature.get('num');
+                    $scope.showFeatureContent = feature.get('osm_id');
                 });
                 $scope.toggleMarker();
-                var id = 'feature_' + feature.get('num');
+                var id = 'feature_' + feature.get('osm_id');
                 var featureElement = $element.find('#' + id);
                 var featureListContainer = $element.find('#orka-feature-list-container');
 
