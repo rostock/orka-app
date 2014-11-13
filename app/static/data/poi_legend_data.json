@@ -3,210 +3,218 @@
     {
       "groups": [
         {
-          "icon": "aktiv_sein/angelstelle.png", 
-          "title": "Angelstellen", 
+          "icon": "aktiv_sein/angelstelle.png",
+          "title": "Angelstellen",
           "type": "angelstelle"
-        }, 
+        },
         {
-          "icon": "aktiv_sein/bootsverleih_kanuverleih.png", 
-          "title": "Boots- &amp; Kanuverleihe", 
+          "icon": "aktiv_sein/bootsverleih_kanuverleih.png",
+          "title": "Boots- & Kanuverleihe",
           "type": "bootsverleih_kanuverleih"
-        }, 
+        },
         {
-          "icon": "aktiv_sein/fahrrad-service.png", 
-          "title": "Fahrrad-Service", 
+          "icon": "aktiv_sein/fahrrad-service.png",
+          "title": "Fahrrad-Service",
           "type": "fahrrad-service"
-        }, 
+        },
         {
-          "icon": "aktiv_sein/fahrradverleih.png", 
-          "title": "Fahrradverleihe", 
+          "icon": "aktiv_sein/fahrradverleih.png",
+          "title": "Fahrradverleihe",
           "type": "fahrradverleih"
-        }, 
+        },
         {
-          "icon": "aktiv_sein/pferdehof_pferdeverleih.png", 
-          "title": "Pferdeh\u00f6fe &amp; -verleihe", 
+          "icon": "aktiv_sein/pferdehof_pferdeverleih.png",
+          "title": "Pferdeh\u00f6fe & -verleihe",
           "type": "pferdehof_pferdeverleih"
-        }, 
+        },
         {
-          "icon": "aktiv_sein/spielplatz.png", 
-          "title": "Spielpl\u00e4tze", 
+          "icon": "aktiv_sein/spielplatz.png",
+          "title": "Spielpl\u00e4tze",
           "type": "spielplatz"
-        }, 
+        },
         {
-          "icon": "aktiv_sein/sportanlage.png", 
-          "title": "Sportanlagen", 
+          "icon": "aktiv_sein/sportanlage.png",
+          "title": "Sportanlagen",
           "type": "sportanlage"
         }
-      ], 
-      "name": "aktiv_sein", 
-      "title": "Aktiv sein"
-    }, 
+      ],
+      "name": "aktiv_sein",
+      "title": "Aktiv sein",
+      "listTags": ["fee", "opening_hours", "brand"]
+    },
     {
       "groups": [
         {
-          "icon": "baden/freibad.png", 
-          "title": "Freib\u00e4der", 
+          "icon": "baden/freibad.png",
+          "title": "Freib\u00e4der",
           "type": "freibad"
-        }, 
+        },
         {
-          "icon": "baden/hallenbad.png", 
-          "title": "Hallenb\u00e4der", 
+          "icon": "baden/hallenbad.png",
+          "title": "Hallenb\u00e4der",
           "type": "hallenbad"
-        }, 
+        },
         {
-          "icon": "baden/naturbadestelle.png", 
-          "title": "Naturbadestellen", 
+          "icon": "baden/naturbadestelle.png",
+          "title": "Naturbadestellen",
           "type": "naturbadestelle"
         }
-      ], 
-      "name": "baden", 
-      "title": "Baden"
-    }, 
+      ],
+      "name": "baden",
+      "title": "Baden",
+      "listTags": ["fee", "opening_hours"]
+    },
     {
       "groups": [
         {
-          "icon": "essen_trinken/bar_nachtclub.png", 
-          "title": "Bars &amp; Nachtclubs", 
+          "icon": "essen_trinken/bar_nachtclub.png",
+          "title": "Bars & Nachtclubs",
           "type": "bar_nachtclub"
-        }, 
+        },
         {
-          "icon": "essen_trinken/cafe.png", 
-          "title": "Caf\u00e9s", 
+          "icon": "essen_trinken/cafe.png",
+          "title": "Caf\u00e9s",
           "type": "cafe"
-        }, 
+        },
         {
-          "icon": "essen_trinken/restaurant.png", 
-          "title": "Restaurants", 
+          "icon": "essen_trinken/restaurant.png",
+          "title": "Restaurants",
           "type": "restaurant"
-        }, 
+        },
         {
-          "icon": "essen_trinken/schnellimbiss.png", 
-          "title": "Schnellimbisse", 
+          "icon": "essen_trinken/schnellimbiss.png",
+          "title": "Schnellimbisse",
           "type": "schnellimbiss"
         }
-      ], 
-      "name": "essen_trinken", 
-      "title": "Essen &amp; Trinken"
-    }, 
+      ],
+      "name": "essen_trinken",
+      "title": "Essen & Trinken",
+      "listTags": ["cuisine", "opening_hours", "operator", "brand"]
+    },
     {
       "groups": [
         {
-          "icon": "informieren/info-zentrum.png", 
-          "title": "Informationszentren", 
+          "icon": "informieren/info-zentrum.png",
+          "title": "Informationszentren",
           "type": "info-zentrum"
-        }, 
+        },
         {
-          "icon": "informieren/tourist-info.png", 
-          "title": "Touristeninformationen", 
+          "icon": "informieren/tourist-info.png",
+          "title": "Touristeninformationen",
           "type": "tourist-info"
         }
-      ], 
-      "name": "informieren", 
-      "title": "Informieren"
-    }, 
+      ],
+      "name": "informieren",
+      "title": "Informieren",
+      "listTags": ["opening_hours", "operator"]
+    },
     {
       "groups": [
         {
-          "icon": "kultur_erleben/kino.png", 
-          "title": "Kinos", 
+          "icon": "kultur_erleben/kino.png",
+          "title": "Kinos",
           "type": "kino"
-        }, 
+        },
         {
-          "icon": "kultur_erleben/kirche_kloster.png", 
-          "title": "Kirchen &amp; Kl\u00f6ster", 
+          "icon": "kultur_erleben/kirche_kloster.png",
+          "title": "Kirchen & Kl\u00f6ster",
           "type": "kirche_kloster"
-        }, 
+        },
         {
-          "icon": "kultur_erleben/monument_baudenkmal.png", 
-          "title": "Monumente &amp; Baudenkmale", 
+          "icon": "kultur_erleben/monument_baudenkmal.png",
+          "title": "Monumente & Baudenkmale",
           "type": "monument_baudenkmal"
-        }, 
+        },
         {
-          "icon": "kultur_erleben/museum_ausstellung.png", 
-          "title": "Museen &amp; Ausstellungen", 
+          "icon": "kultur_erleben/museum_ausstellung.png",
+          "title": "Museen & Ausstellungen",
           "type": "museum_ausstellung"
-        }, 
+        },
         {
-          "icon": "kultur_erleben/schloss_gutshaus.png", 
-          "title": "Schl\u00f6sser &amp; Gutsh\u00e4user", 
+          "icon": "kultur_erleben/schloss_gutshaus.png",
+          "title": "Schl\u00f6sser & Gutsh\u00e4user",
           "type": "schloss_gutshaus"
-        }, 
+        },
         {
-          "icon": "kultur_erleben/theater.png", 
-          "title": "Theater", 
+          "icon": "kultur_erleben/theater.png",
+          "title": "Theater",
           "type": "theater"
         }
-      ], 
-      "name": "kultur_erleben", 
-      "title": "Kultur erleben"
-    }, 
+      ],
+      "name": "kultur_erleben",
+      "title": "Kultur erleben",
+      "listTags": ["opening_hours", "religion", "operator", "fee", "cuisine"]
+    },
     {
       "groups": [
         {
-          "icon": "natur_erleben/naturdenkmal_bodendenkmal.png", 
-          "title": "Natur- &amp; Bodendenkmale", 
+          "icon": "natur_erleben/naturdenkmal_bodendenkmal.png",
+          "title": "Natur- & Bodendenkmale",
           "type": "naturdenkmal_bodendenkmal"
-        }, 
+        },
         {
-          "icon": "natur_erleben/park_garten.png", 
-          "title": "Parke &amp; G\u00e4rten", 
+          "icon": "natur_erleben/park_garten.png",
+          "title": "Parke & G\u00e4rten",
           "type": "park_garten"
-        }, 
+        },
         {
-          "icon": "natur_erleben/tierpark_gehege.png", 
-          "title": "Tierparke &amp; -gehege", 
+          "icon": "natur_erleben/tierpark_gehege.png",
+          "title": "Tierparke & -gehege",
           "type": "tierpark_gehege"
         }
-      ], 
-      "name": "natur_erleben", 
-      "title": "Natur erleben"
-    }, 
+      ],
+      "name": "natur_erleben",
+      "title": "Natur erleben",
+      "listTags": ["opening_hours", "operator", "religion", "fee"]
+    },
     {
       "groups": [
         {
-          "icon": "rasten/raststelle-zu-lande.png", 
-          "title": "Rastellen zu Lande", 
+          "icon": "rasten/raststelle-zu-lande.png",
+          "title": "Rastellen zu Lande",
           "type": "raststelle-zu-lande"
-        }, 
+        },
         {
-          "icon": "rasten/raststelle-zu-wasser.png", 
-          "title": "Rastellen zu Wasser", 
+          "icon": "rasten/raststelle-zu-wasser.png",
+          "title": "Rastellen zu Wasser",
           "type": "raststelle-zu-wasser"
         }
-      ], 
-      "name": "rasten", 
-      "title": "Rasten"
-    }, 
+      ],
+      "name": "rasten",
+      "title": "Rasten",
+      "listTags": ["opening_hours", "operator", "fee"]
+    },
     {
       "groups": [
         {
-          "icon": "uebernachten/camping.png", 
-          "title": "Camping", 
+          "icon": "uebernachten/camping.png",
+          "title": "Camping",
           "type": "camping"
-        }, 
+        },
         {
-          "icon": "uebernachten/caravaning.png", 
-          "title": "Caravaning", 
+          "icon": "uebernachten/caravaning.png",
+          "title": "Caravaning",
           "type": "caravaning"
-        }, 
+        },
         {
-          "icon": "uebernachten/herberge.png", 
-          "title": "Herbergen", 
+          "icon": "uebernachten/herberge.png",
+          "title": "Herbergen",
           "type": "herberge"
-        }, 
+        },
         {
-          "icon": "uebernachten/hotel.png", 
-          "title": "Hotels", 
+          "icon": "uebernachten/hotel.png",
+          "title": "Hotels",
           "type": "hotel"
-        }, 
+        },
         {
-          "icon": "uebernachten/pension.png", 
-          "title": "Pensionen", 
+          "icon": "uebernachten/pension.png",
+          "title": "Pensionen",
           "type": "pension"
         }
-      ], 
-      "name": "uebernachten", 
-      "title": "\u00dcbernachten"
+      ],
+      "name": "uebernachten",
+      "title": "\u00dcbernachten",
+      "listTags": ["opening_hours", "operator", "fee", "brand"]
     }
   ]
 }

@@ -19,10 +19,16 @@ angular.module('orka.featurelist', [])
 
                 LayertreeService.poisLoaded.then(function(topics) {
                     angular.forEach(topics, function(topic) {
-                        scope.typeMap[topic.name] = topic.title;
+                        scope.typeMap[topic.name] = {
+                            'title': topic.title,
+                            'listTags': topic.listTags
+                        };
                         if(topic.groups !== undefined) {
                             angular.forEach(topic.groups, function(group) {
-                                scope.typeMap[group.type] = group.title;
+                                scope.typeMap[group.type] = {
+                                    'title': group.title,
+                                    'listTags': group.listTags || topic.listTags
+                                };
                             });
                         }
                     });
@@ -65,6 +71,10 @@ angular.module('orka.featurelist', [])
                     // before digest is not complete, browser has not updated html.
                     // so element is hidden although scope.showFeatureContent is true
                     $timeout(scope.moveContentOutofOverflow, 0, false);
+                };
+
+                scope.hasAddress = function(feature) {
+                    return feature.get('addr:street') !== undefined && feature.get('addr:city') !== undefined;
                 };
             },
             post: function(scope, element, attr) {
