@@ -1,6 +1,6 @@
 angular.module('orka.featurelist', [])
 
-.directive('orkaFeatureList', ['$filter', '$timeout', 'ConfigService', 'MapService', 'LayersService', 'LayertreeService', function($filter, $timeout, ConfigService, MapService, LayersService, LayertreeService) {
+.directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', function($filter, $timeout, MapService, LayersService, LayertreeService) {
     return {
         restrict: 'A',
         scope: {
@@ -81,11 +81,6 @@ angular.module('orka.featurelist', [])
 
             scope.featureLayer = LayersService.layersByProperty('layer', scope.featureLayerName)[0];
             scope.markerLayer = LayersService.layersByProperty('layer', scope.markerLayerName)[0];
-            scope.markerLayer.setStyle(new ol.style.Style({
-                image: new ol.style.Icon({
-                    src: scope.marker
-                })
-            }));
 
             scope.map.on('moveend', function(evt) {
                 scope.$apply(function() {
@@ -122,8 +117,6 @@ angular.module('orka.featurelist', [])
 
                 featureListContainer.scrollTop(scrollTo);
             };
-            $scope.marker = ConfigService.config.poi.markerIcon;
-
             $scope.typeMap = {};
 
             LayertreeService.poisLoaded.then(function(topics) {

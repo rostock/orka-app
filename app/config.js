@@ -73,7 +73,12 @@ angular.module('orkaApp', [
     var markerLayer = LayersFactoryProvider.newFeatureLayer({
         title: 'Marker Layer',
         layer: 'marker_layer',
-        displayInLayerswitcher: false
+        displayInLayerswitcher: false,
+        style: new ol.style.Style({
+            image: new ol.style.Icon({
+                src: ConfigServiceProvider.config.poi.markerIcon
+            })
+        })
     });
 
     LayertreeServiceProvider.setPoiLayer(poiLayer);

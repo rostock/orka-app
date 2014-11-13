@@ -44,6 +44,9 @@ angular.module('anol.map')
         if(options.layer !== undefined) {
             layer.set('layer', options.layer);
         }
+        if(options.style !== undefined) {
+            layer.setStyle(options.style);
+        }
         return layer;
     };
 
@@ -76,7 +79,6 @@ angular.module('anol.map')
         if(tileGrid) {
             sourceOptions.tileGrid = tileGrid;
         }
-
 
         var layer = new ol.layer.Tile({
             source: new ol.source.TileImage(sourceOptions)
