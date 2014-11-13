@@ -40,7 +40,8 @@
       ],
       "name": "aktiv_sein",
       "title": "Aktiv sein",
-      "listTags": ["fee", "opening_hours", "brand"]
+      "listTags": ["fee", "opening_hours", "brand"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -62,7 +63,8 @@
       ],
       "name": "baden",
       "title": "Baden",
-      "listTags": ["fee", "opening_hours"]
+      "listTags": ["fee", "opening_hours"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -89,7 +91,8 @@
       ],
       "name": "essen_trinken",
       "title": "Essen & Trinken",
-      "listTags": ["cuisine", "opening_hours", "operator", "brand"]
+      "listTags": ["cuisine", "opening_hours", "operator", "brand"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -106,7 +109,8 @@
       ],
       "name": "informieren",
       "title": "Informieren",
-      "listTags": ["opening_hours", "operator"]
+      "listTags": ["opening_hours", "operator"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -143,7 +147,8 @@
       ],
       "name": "kultur_erleben",
       "title": "Kultur erleben",
-      "listTags": ["opening_hours", "religion", "operator", "fee", "cuisine"]
+      "listTags": ["opening_hours", "religion", "operator", "fee", "cuisine"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -165,7 +170,8 @@
       ],
       "name": "natur_erleben",
       "title": "Natur erleben",
-      "listTags": ["opening_hours", "operator", "religion", "fee"]
+      "listTags": ["opening_hours", "operator", "religion", "fee"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -182,7 +188,8 @@
       ],
       "name": "rasten",
       "title": "Rasten",
-      "listTags": ["opening_hours", "operator", "fee"]
+      "listTags": ["opening_hours", "operator", "fee"],
+      "popupTags": ["religion", "operator"]
     },
     {
       "groups": [
@@ -214,7 +221,8 @@
       ],
       "name": "uebernachten",
       "title": "\u00dcbernachten",
-      "listTags": ["opening_hours", "operator", "fee", "brand"]
+      "listTags": ["opening_hours", "operator", "fee", "brand"],
+      "popupTags": ["religion", "operator"]
     }
   ]
 }
