@@ -118,6 +118,10 @@ angular.module('anol.map')
                     source.removeFeature(sourceFeatures[i]);
                 }
                 source.addFeatures(source.readFeatures(response));
+                // we have to dispatch own event couse change-event triggered
+                // for each feature remove and for feature added
+                // remove when ol3 provide something like source.update
+                source.dispatchEvent('anolSourceUpdated');
             });
         };
 
