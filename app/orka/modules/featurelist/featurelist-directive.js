@@ -1,6 +1,6 @@
 angular.module('orka.featurelist', [])
 
-.directive('orkaFeatureList', ['$filter', 'ConfigService', 'MapService', 'LayersService', 'LayertreeService', function($filter, ConfigService, MapService, LayersService, LayertreeService) {
+.directive('orkaFeatureList', ['$filter', '$timeout', 'ConfigService', 'MapService', 'LayersService', 'LayertreeService', function($filter, $timeout, ConfigService, MapService, LayersService, LayertreeService) {
     return {
         restrict: 'A',
         scope: {
@@ -48,6 +48,32 @@ angular.module('orka.featurelist', [])
                     scope.markerFeature.setGeometry(geometry);
                 }
                 scope.markerLayer.setVisible(show);
+            };
+
+            scope.moveContentOutofOverflow = function() {
+                if(scope.showFeatureContent !== false) {
+                    var id = 'feature_' + scope.showFeatureContent;
+                    var featureElement = element.find('#' + id);
+                    var featureListContainer = element.find('#orka-feature-list-container');
+
+                    var elementBottom = featureElement.offset().top + featureElement.height();
+                    var containerBottom = featureListContainer.offset().top + featureListContainer.height();
+
+                    var delta = elementBottom - containerBottom;
+                    if(delta > 0) {
+                        var currentScrollTop = featureListContainer.scrollTop();
+                        var scrollTo = currentScrollTop + delta;
+                        featureListContainer.scrollTop(scrollTo);
+                    }
+                }
+            };
+
+            scope.toggleFeatureContent = function(feature) {
+                scope.showFeatureContent = scope.showFeatureContent === feature.get('num') ? false : feature.get('num');
+                // timeout function is runing right after scope digest completet.
+                // before digest is not complete, browser has not updated html.
+                // so element is hidden although scope.showFeatureContent is true
+                $timeout(scope.moveContentOutofOverflow, 0, false);
             };
 
             scope.map = MapService.getMap();

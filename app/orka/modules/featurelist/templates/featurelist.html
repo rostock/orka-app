@@ -9,7 +9,7 @@
              ng-show="$parent.showGroup === type"
              ng-repeat="feature in features"
              ng-click="toggleMarker(feature, $parent.$parent.showFeatureContent);">
-            <h5 ng-click="$parent.$parent.showFeatureContent = $parent.$parent.showFeatureContent === feature.get('num') ? false : feature.get('num');">
+            <h5 ng-click="toggleFeatureContent(feature)">
                 {{ feature.get('name') }}
             </h5>
             <div ng-show="$parent.$parent.showFeatureContent === feature.get('num')">
