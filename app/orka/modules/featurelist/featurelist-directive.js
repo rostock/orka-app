@@ -28,9 +28,8 @@ angular.module('orka.featurelist', [])
                     });
                 });
 
-                scope.toggleMarker = function(feature, show) {
-                    show = show === false || show === undefined ? false : true;
-                    if(show) {
+                scope.toggleMarker = function(feature) {
+                    if(scope.showFeatureContent) {
                         var geometry = feature.getGeometry().clone();
                         if(scope.markerFeature === undefined) {
                             scope.markerFeature = new ol.Feature();
@@ -38,7 +37,7 @@ angular.module('orka.featurelist', [])
                         }
                         scope.markerFeature.setGeometry(geometry);
                     }
-                    scope.markerLayer.setVisible(show);
+                    scope.markerLayer.setVisible(scope.showFeatureContent);
                 };
 
                 scope.moveContentOutofOverflow = function() {
@@ -61,6 +60,7 @@ angular.module('orka.featurelist', [])
 
                 scope.toggleFeatureContent = function(feature) {
                     scope.showFeatureContent = scope.showFeatureContent === feature.get('num') ? false : feature.get('num');
+                    scope.toggleMarker(feature);
                     // timeout function is runing right after scope digest completet.
                     // before digest is not complete, browser has not updated html.
                     // so element is hidden although scope.showFeatureContent is true

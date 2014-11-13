@@ -5,8 +5,7 @@
         <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;" ng-bind-html="typeMap[type] | html"></h4>
         <div id="feature_{{ feature.get('num') }}"  style="border: 1px solid black;"
              ng-show="$parent.showGroup === type"
-             ng-repeat="feature in features"
-             ng-click="toggleMarker(feature, $parent.$parent.showFeatureContent);">
+             ng-repeat="feature in features">
             <h5 ng-click="toggleFeatureContent(feature)" ng-bind-html="feature.get('name') | html"></h5>
             <div ng-show="$parent.$parent.showFeatureContent === feature.get('num')">
                 <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
