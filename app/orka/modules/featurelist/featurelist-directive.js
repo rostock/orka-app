@@ -106,6 +106,12 @@ angular.module('orka.featurelist', [])
                     });
                 });
 
+                scope.map.on('click', function(evt) {
+                    scope.$apply(function() {
+                        scope.markerLayer.setVisible(false);
+                    });
+                });
+
                 scope.featureLayer.getSource().on('anolSourceUpdated', function() {
                     var features = featuresByExtent();
                     scope.$apply(function() {
@@ -129,7 +135,6 @@ angular.module('orka.featurelist', [])
                     $scope.showGroup = feature.get('type');
                     $scope.showFeatureContent = feature.get('osm_id');
                 });
-                $scope.toggleMarker();
                 var id = 'feature_' + feature.get('osm_id');
                 var featureElement = $element.find('#' + id);
                 var featureListContainer = $element.find('#orka-feature-list-container');
