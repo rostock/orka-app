@@ -23,9 +23,9 @@
   <body ng-controller="appCtrl">
     <div class="navbar navbar-default header" >
       <a class="navbar-brand" href="#">Header Demo Anwendung</a>
-      <div ng-click=toggleSidebar()>Toggle Sidebar</div>
+      <div ng-click="fullscreen=!fullscreen">Toggle Sidebar</div>
     </div>
-    
+
     <div class="nav-collapse sidebar">
       <div class="sidebar-menu">
 
@@ -61,8 +61,8 @@
         </div>
       </div>
     </div>
-    
-    <div class="main-content" ng-class="{ 'fullscreen': fullscreen, }">
+
+    <div class="main-content" ng-class="{ 'fullscreen': fullscreen }">
       <div class="map-wrapper" anol-map>
         <div anol-mouse-position></div>
         <div anol-scale-text></div>
@@ -80,11 +80,13 @@
     <script type="text/javascript" src="/config.js"></script>
     <script type="text/javascript">
       // TODO move to config js
-      angular.module('orkaApp').controller('appCtrl', function ($scope) {
-        $scope.toggleSidebar = function(){
-          // todo hide sidebar and reszize map
-        };
-      });
+      angular.module('orkaApp').controller('appCtrl', ['$scope', '$timeout', 'MapService', function ($scope, $timeout, MapService) {
+        $scope.$watch('fullscreen', function() {
+          $timeout(function() {
+            MapService.getMap().updateSize();
+          }, 0, false);
+        });
+      }]);
 
       angular.module('orkaApp').controller('SitebarCtrl', function ($scope) {
         $scope.oneAtATime = true;
