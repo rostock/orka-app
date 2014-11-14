@@ -79,7 +79,7 @@
     <script type="text/javascript" src="/build/orka.js"></script>
     <script type="text/javascript" src="/config.js"></script>
     <script type="text/javascript">
-      // TODO move to config js
+      // TODO move to controller js
       angular.module('orkaApp').controller('appCtrl', ['$scope', '$timeout', 'MapService', function ($scope, $timeout, MapService) {
         $scope.$watch('fullscreen', function() {
           $timeout(function() {
@@ -159,6 +159,7 @@
             angular.bootstrap(document, ['orkaApp']);
           });
 
+          // TODO load app without config or use default one?
           loadConfig('/static/data/' + getConfigName() + '_config.js');
 
       });
