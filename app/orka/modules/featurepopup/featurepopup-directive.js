@@ -28,6 +28,7 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                 });
 
                 scope.handleClick = function(evt) {
+                    var visible = false;
                     var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
                         if(layer.get('layer') === scope.featureLayer) {
                             return feature;
@@ -35,17 +36,18 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                     });
                     if(feature) {
                         scope.popup.setPosition(evt.coordinate);
+                        visible = true;
 
-                        scope.$apply(function() {
-                            scope.feature = feature;
-                            scope.popupVisible = true;
-                        });
                         var popupExtent = scope.calculatePopupExtent(evt.pixel);
                         scope.moveMap(popupExtent);
                         if(angular.isDefined(OrkaFeatureListController)) {
                             OrkaFeatureListController.scrollTo(feature);
                         }
                     }
+                    scope.$apply(function() {
+                        scope.feature = feature;
+                        scope.popupVisible = visible;
+                    });
                 };
             },
             post: anolFeaturePopupDirective.link.post

@@ -143,6 +143,7 @@ angular.module('orka.featurelist', [])
             }
         },
         controller: function($scope, $element, $attrs) {
+            // TODO review when layout finished
             this.scrollTo = function(feature) {
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);

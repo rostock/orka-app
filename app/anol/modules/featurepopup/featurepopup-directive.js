@@ -18,6 +18,7 @@ angular.module('anol.featurepopup', [])
                 };
 
                 scope.handleClick = function(evt) {
+                    var visible = false;
                     var feature = scope.map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
                         if(layer.get('layer') === scope.featureLayer) {
                             return feature;
@@ -25,14 +26,16 @@ angular.module('anol.featurepopup', [])
                     });
                     if(feature) {
                         scope.popup.setPosition(evt.coordinate);
-                        scope.$apply(function() {
-                            scope.feature = feature;
-                            scope.popupVisible = true;
-                        });
+                        visible = true;
 
                         var popupExtent = scope.calculatePopupExtent(evt.pixel);
                         scope.moveMap(popupExtent);
                     }
+
+                    scope.$apply(function() {
+                        scope.feature = feature;
+                        scope.popupVisible = visible;
+                    });
                 };
             },
             post: function(scope, element, attrs) {
