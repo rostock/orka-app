@@ -4,13 +4,14 @@ angular.module('anol.scale')
 .constant('DPI', 72)
 
 .directive('anolScaleText', ['MapService', 'INCHES_PER_METER', 'DPI', function(MapService, INCHES_PER_METER, DPI) {
+
     return {
         restrict: 'A',
         require: '?^anolMap',
-        template: '<div>1 : {{ scale }}</div>',
+        template: '<div style="position: absolute; bottom: 8px; left: 8px;">1 : {{ scale }}</div>',
         scope: {},
         link: {
-            pre: function(scope, element, attrs) {
+            pre: function(scope, element, attrs, AnolMapController) {
                 scope.view = MapService.getMap().getView();
                 scope.calculateScale = function() {
                     // found at https://groups.google.com/d/msg/ol3-dev/RAJa4locqaM/4AzBrkndL9AJ
@@ -19,6 +20,14 @@ angular.module('anol.scale')
                     var scale = resolution * mpu * INCHES_PER_METER * DPI;
                     return Math.round(scale);
                 };
+                if(angular.isDefined(AnolMapController)) {
+                    element.addClass('ol-unselectable');
+                    MapService.getMap().addControl(
+                        new ol.control.Control({
+                            element: element.first().context
+                        })
+                    );
+                }
 
                 scope.scale = scope.calculateScale();
             },

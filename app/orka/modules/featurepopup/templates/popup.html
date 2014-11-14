@@ -5,6 +5,11 @@
         <h3 class="panel-title" ng-bind-html="feature.get('name') | html "></h3>
     </div>
     <div class="panel-body">
-        <a ng-if="feature.get('website')" ng-href="{{ feature.get('website') || '' }}">Homepage</a>
+        <a ng-if="feature.get('website')" ng-href="{{ feature.get('website') }}">Homepage</a>
+        <div ng-repeat="tag in typeMap[feature.get('type')].popupTags">
+            <div ng-if="feature.get(tag)">
+                {{ tag }}: {{ feature.get(tag) }}
+            </div>
+        </div>
     </div>
 </div>

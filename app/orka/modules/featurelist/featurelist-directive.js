@@ -17,15 +17,8 @@ angular.module('orka.featurelist', [])
 
                 scope.typeMap = {};
 
-                LayertreeService.poisLoaded.then(function(topics) {
-                    angular.forEach(topics, function(topic) {
-                        scope.typeMap[topic.name] = topic.title;
-                        if(topic.groups !== undefined) {
-                            angular.forEach(topic.groups, function(group) {
-                                scope.typeMap[group.type] = group.title;
-                            });
-                        }
-                    });
+                LayertreeService.poisLoaded.then(function() {
+                    scope.typeMap = LayertreeService.typeMap;
                 });
 
                 scope.toggleMarker = function(feature) {
@@ -65,6 +58,10 @@ angular.module('orka.featurelist', [])
                     // before digest is not complete, browser has not updated html.
                     // so element is hidden although scope.showFeatureContent is true
                     $timeout(scope.moveContentOutofOverflow, 0, false);
+                };
+
+                scope.hasAddress = function(feature) {
+                    return feature.get('addr:street') !== undefined && feature.get('addr:city') !== undefined;
                 };
             },
             post: function(scope, element, attr) {
@@ -109,6 +106,12 @@ angular.module('orka.featurelist', [])
                     });
                 });
 
+                scope.map.on('click', function(evt) {
+                    scope.$apply(function() {
+                        scope.markerLayer.setVisible(false);
+                    });
+                });
+
                 scope.featureLayer.getSource().on('anolSourceUpdated', function() {
                     var features = featuresByExtent();
                     scope.$apply(function() {
@@ -132,7 +135,6 @@ angular.module('orka.featurelist', [])
                     $scope.showGroup = feature.get('type');
                     $scope.showFeatureContent = feature.get('osm_id');
                 });
-                $scope.toggleMarker();
                 var id = 'feature_' + feature.get('osm_id');
                 var featureElement = $element.find('#' + id);
                 var featureListContainer = $element.find('#orka-feature-list-container');

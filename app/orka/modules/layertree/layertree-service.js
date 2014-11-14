@@ -81,7 +81,9 @@ angular.module('orka.layertree')
                         group.active = false;
                         self.typeMap[group.type] = {
                             'icon': self.iconBaseUrl + group.icon,
-                            'title': group.title
+                            'title': group.title,
+                            'listTags': group.listTags || topic.listTags,
+                            'popupTags': group.popupTags || topic.popupTags
                         };
                     });
                 } else {

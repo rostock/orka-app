@@ -1,14 +1,27 @@
 <ng-transclude></ng-transclude>
 <div id="orka-feature-list-container">
     <div ng-repeat="(type, features) in featureGroups">
-        <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;" ng-bind-html="typeMap[type] | html"></h4>
+        <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
+            {{ typeMap[type].title }}
+        </h4>
         <div id="feature_{{ feature.get('osm_id') }}"
              ng-show="$parent.showGroup === type"
              ng-repeat="feature in features">
-            <h5 ng-click="toggleFeatureContent(feature)" ng-bind-html="feature.get('name') | html"></h5>
+            <h5 ng-click="toggleFeatureContent(feature)">
+                {{ feature.get('name') }}
+            </h5>
             <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')">
-                <a ng-href="{{ feature.get('website') || '' }}">Homepage</a>
-                <!-- show properties defiend in config -->
+                <a ng-href="feature.get('website')"
+                   ng-if="feature.get('website')">Homepage</a>
+                <address ng-if="hasAddress(feature)">
+                    {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }}<br>
+                    {{ feature.get('addr:zipcode') }} {{ feature.get('addr:city') }}
+                </address>
+                <div ng-repeat="tag in typeMap[type].listTags">
+                    <div ng-if="feature.get(tag)">
+                        {{ tag }}: {{ feature.get(tag) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
