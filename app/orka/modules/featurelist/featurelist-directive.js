@@ -21,13 +21,36 @@ angular.module('orka.featurelist', [])
                     scope.typeMap = LayertreeService.typeMap;
                 });
 
+                // TODO simplify
                 scope.toggleMarker = function(feature) {
-                    if(feature !== undefined && feature.get('highlightMarker') !== true) {
-                        feature.set('highlightMarker', true);
-                    } else if(scope.markerFeature !== undefined) {
-                        scope.markerFeature.set('highlightMarker', false);
+                    if(scope.markerFeature !== undefined) {
+                        var markerVisible = ol.extent.containsCoordinate(scope.extent, scope.markerFeature.getGeometry().getCoordinates());
+                        if(!markerVisible) {
+                            scope.markerFeature.set('highlightMarker', false);
+                            return;
+                        } else if(feature === undefined) {
+                            scope.markerFeature.set('highlightMarker', true);
+                            return;
+                        }
+                        if(feature === undefined) {
+                            scope.markerFeature.set('highlightMarker', false);
+                            scope.markerFeature = feature;
+                            return;
+                        }
+                        if(feature !== scope.markerFeature) {
+                            scope.markerFeature.set('highlightMarker', false);
+                            scope.markerFeature = feature;
+                            scope.markerFeature.set('highlightMarker', true);
+                            return;
+                        } else {
+                            scope.markerFeature.set('highlightMarker', false);
+                            scope.markerFeature = undefined;
+                            return;
+                        }
+                    } else if(feature !== undefined) {
+                        scope.markerFeature = feature;
+                        scope.markerFeature.set('highlightMarker', true);
                     }
-                    scope.markerFeature = feature;
                 };
 
                 scope.moveContentOutofOverflow = function() {
@@ -76,8 +99,8 @@ angular.module('orka.featurelist', [])
                         angular.forEach(_features, function(feature) {
                             if(ol.extent.intersects(scope.extent, feature.getGeometry().getExtent())) {
                                 var featureType = feature.get('type');
-                                if(scope.showFeatureContent === feature.get('osm_id')) {
-                                    feature.set('highlightMarker', true);
+                                if(scope.markerFeature !== undefined && scope.markerFeature.get('osm_id') === feature.get('osm_id')) {
+                                    scope.markerFeature = feature;
                                 }
                                 if(featureGroups[featureType] === undefined) {
                                     featureGroups[featureType] = [];
@@ -94,15 +117,9 @@ angular.module('orka.featurelist', [])
                 };
 
                 scope.map.on('moveend', function(evt) {
+                    var extent = calculateExtent(evt.target);
                     scope.$apply(function() {
-                        scope.extent = calculateExtent(evt.target);
-                    });
-                });
-
-                scope.map.on('click', function(evt) {
-                    scope.$apply(function() {
-                        scope.showFeatureContent = false;
-                        scope.toggleMarker();
+                        scope.extent = extent;
                     });
                 });
 
@@ -114,10 +131,12 @@ angular.module('orka.featurelist', [])
                             $timeout(scope.moveContentOutofOverflow, 0, false);
                         }
                     });
+                    scope.toggleMarker();
                 });
 
                 scope.$watch('extent', function(newVal, oldVal) {
                     scope.featureGroups = featuresByExtent();
+                    scope.toggleMarker();
                 });
 
                 scope.extent = calculateExtent(scope.map);
@@ -125,6 +144,11 @@ angular.module('orka.featurelist', [])
         },
         controller: function($scope, $element, $attrs) {
             this.scrollTo = function(feature) {
+                if($scope.markerFeature !== undefined) {
+                    $scope.markerFeature.set('highlightMarker', false);
+                    $scope.markerFeature = undefined;
+                }
+                $scope.toggleMarker();
                 $scope.$apply(function() {
                     $scope.showGroup = feature.get('type');
                     $scope.showFeatureContent = feature.get('osm_id');
