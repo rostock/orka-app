@@ -1,6 +1,6 @@
 angular.module('orka.featurelist', [])
 
-.directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', function($filter, $timeout, MapService, LayersService, LayertreeService) {
+.directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', 'ConfigService', function($filter, $timeout, MapService, LayersService, LayertreeService, ConfigService) {
     return {
         restrict: 'A',
         scope: {
@@ -22,31 +22,29 @@ angular.module('orka.featurelist', [])
                 });
 
                 scope.toggleMarker = function(feature) {
-                    if(scope.showFeatureContent !== false && feature !== undefined) {
-                        var geometry = feature.getGeometry().clone();
-                        if(scope.markerFeature === undefined) {
-                            scope.markerFeature = new ol.Feature();
-                            scope.markerLayer.getSource().addFeatures([scope.markerFeature]);
-                        }
-                        scope.markerFeature.setGeometry(geometry);
+                    if(feature !== undefined && feature.get('highlightMarker') !== true) {
+                        feature.set('highlightMarker', true);
+                    } else if(scope.markerFeature !== undefined) {
+                        scope.markerFeature.set('highlightMarker', false);
                     }
-                    scope.markerLayer.setVisible(scope.showFeatureContent !== false);
+                    scope.markerFeature = feature;
                 };
 
                 scope.moveContentOutofOverflow = function() {
-                    if(scope.showFeatureContent !== false) {
+                    if(scope.showFeatureContent !== false && scope.showFeatureContent !== undefined) {
                         var id = 'feature_' + scope.showFeatureContent;
                         var featureElement = element.find('#' + id);
-                        var featureListContainer = element.find('#orka-feature-list-container');
+                        if(featureElement.length > 0) {
+                            var featureListContainer = element.find('#orka-feature-list-container');
+                            var elementBottom = featureElement.offset().top + featureElement.height();
+                            var containerBottom = featureListContainer.offset().top + featureListContainer.height();
 
-                        var elementBottom = featureElement.offset().top + featureElement.height();
-                        var containerBottom = featureListContainer.offset().top + featureListContainer.height();
-
-                        var delta = elementBottom - containerBottom;
-                        if(delta > 0) {
-                            var currentScrollTop = featureListContainer.scrollTop();
-                            var scrollTo = currentScrollTop + delta;
-                            featureListContainer.scrollTop(scrollTo);
+                            var delta = elementBottom - containerBottom;
+                            if(delta > 0) {
+                                var currentScrollTop = featureListContainer.scrollTop();
+                                var scrollTo = currentScrollTop + delta;
+                                featureListContainer.scrollTop(scrollTo);
+                            }
                         }
                     }
                 };
@@ -73,14 +71,13 @@ angular.module('orka.featurelist', [])
                 };
                 var featuresByExtent = function() {
                     var featureGroups = {};
-                    var selectedFeatureRemoved = scope.showFeatureContent !== false;
                     if(scope.featureLayer.getVisible()) {
                         var _features = scope.featureLayer.getSource().getFeatures();
                         angular.forEach(_features, function(feature) {
                             if(ol.extent.intersects(scope.extent, feature.getGeometry().getExtent())) {
                                 var featureType = feature.get('type');
-                                if(selectedFeatureRemoved === true) {
-                                    selectedFeatureRemoved = scope.showFeatureContent === feature.get('osm_id') ? false : true;
+                                if(scope.showFeatureContent === feature.get('osm_id')) {
+                                    feature.set('highlightMarker', true);
                                 }
                                 if(featureGroups[featureType] === undefined) {
                                     featureGroups[featureType] = [];
@@ -92,10 +89,6 @@ angular.module('orka.featurelist', [])
                     angular.forEach(featureGroups, function(features) {
                         features = $filter('orderBy')(features, sortFeaturesByNumValue, false);
                     });
-                    if(selectedFeatureRemoved) {
-                        scope.showFeatureContent = false;
-                        scope.toggleMarker();
-                    }
 
                     return featureGroups;
                 };
@@ -108,7 +101,8 @@ angular.module('orka.featurelist', [])
 
                 scope.map.on('click', function(evt) {
                     scope.$apply(function() {
-                        scope.markerLayer.setVisible(false);
+                        scope.showFeatureContent = false;
+                        scope.toggleMarker();
                     });
                 });
 

@@ -70,16 +70,6 @@ angular.module('orkaApp', [
             'SRS': ConfigServiceProvider.config.map.projection.getCode()
         }
     });
-    var markerLayer = LayersFactoryProvider.newFeatureLayer({
-        title: 'Marker Layer',
-        layer: 'marker_layer',
-        displayInLayerswitcher: false,
-        style: new ol.style.Style({
-            image: new ol.style.Icon({
-                src: ConfigServiceProvider.config.poi.markerIcon
-            })
-        })
-    });
 
     LayertreeServiceProvider.setPoiLayer(poiLayer);
     LayertreeServiceProvider.setTrackLayer(trackLayer);
@@ -89,8 +79,7 @@ angular.module('orkaApp', [
 
     LayersServiceProvider.setLayers([
         poiLayer,
-        trackLayer,
-        markerLayer
+        trackLayer
     ]);
 }])
 

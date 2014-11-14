@@ -57,7 +57,7 @@ angular.module('orka.config', [])
         poi: {
             layerURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:4000/poi.geojson?',
             iconBaseURL: 'http://www.orka-mv.de/static/icons/',
-            markerIcon: '/static/img/marker.svg',
+            markerIcon: '/static/img/highlightMarker.png',
             legendURL: '/static/data/poi_legend_data.json',
         },
         track: {

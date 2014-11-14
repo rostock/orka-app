@@ -33,7 +33,7 @@ angular.module('orka.layertree')
         };
     };
 
-    this.$get = ['$q', function($q) {
+    this.$get = ['$q', 'ConfigService', function($q, ConfigService) {
         var LayerTree = function(poiLayer, trackLayer, poiLegendUrl, trackLegendUrl, iconBaseUrl) {
             var self = this;
             this.iconBaseUrl = iconBaseUrl;
@@ -44,11 +44,21 @@ angular.module('orka.layertree')
             this.selectedTrackTypes = [];
 
             this.poiLayer.setStyle(function(feature, resolution) {
-                return [new ol.style.Style({
+                var styles = [];
+                if(feature.get('highlightMarker') === true) {
+                    styles.push(new ol.style.Style({
+                        image: new ol.style.Icon({
+                            src: ConfigService.config.poi.markerIcon
+                        })
+                    }));
+                }
+                styles.push(new ol.style.Style({
                     image: new ol.style.Icon({
                         src: self.typeMap[feature.get('type')].icon
                     })
-                })];
+                }));
+
+                return styles;
             });
 
             this.poisLoaded = this._loadPois(poiLegendUrl);
