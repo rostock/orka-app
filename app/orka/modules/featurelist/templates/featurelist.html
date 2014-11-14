@@ -1,6 +1,5 @@
 <ng-transclude></ng-transclude>
-<div style="height: 250px; overflow: auto;"
-     id="orka-feature-list-container">
+<div id="orka-feature-list-container">
     <div ng-repeat="(type, features) in featureGroups">
         <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;" ng-bind-html="typeMap[type] | html"></h4>
         <div id="feature_{{ feature.get('osm_id') }}"

@@ -1,4 +1,4 @@
-<div  style="height: 250px; overflow: auto;">
+<div>
     <div ng-repeat="poi in pois">
         <input type="checkbox" ng-model="poi.active" ng-change="togglePoiTopic(poi)"/>
         <span class="glyphicon" ng-class="{'glyphicon-expand': !poi.showGroup, 'glyphicon-collapse-down': poi.showGroup}" ng-click="poi.showGroup = !poi.showGroup" ng-if="poi.groups"></span>
@@ -12,7 +12,7 @@
     </div>
 </div>
 <hr>
-<div style="height: 250px; overflow: auto;">
+<div>
     <div ng-repeat="track in tracks">
         <input type="checkbox" ng-model="track.active" ng-change="toggleTrackTopic(track)"/>
         <span class="glyphicon" ng-class="{'glyphicon-expand': !track.showGroup, 'glyphicon-collapse-down': track.showGroup}" ng-click="track.showGroup = !track.showGroup" ng-if="track.groups"></span>
