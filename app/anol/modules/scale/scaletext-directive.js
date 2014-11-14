@@ -8,7 +8,7 @@ angular.module('anol.scale')
     return {
         restrict: 'A',
         require: '?^anolMap',
-        template: '<div style="position: absolute; bottom: 8px; left: 8px;">1 : {{ scale }}</div>',
+        template: '<div class="anol-map-scale">1 : {{ scale }}</div>',
         scope: {},
         link: {
             pre: function(scope, element, attrs, AnolMapController) {
