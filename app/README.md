@@ -3,6 +3,8 @@ Use Grunt for Development
 =========================
 
 For development and testing we use the JavaScript task runner Grunt. You can install all packages you need with::
+	
+	npm install -g grunt-cli
 
 	npm install
 
