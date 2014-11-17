@@ -51,12 +51,22 @@ angular.module('anol.featurepopup', [])
                 // left, bottom, right, top
                 var popupBuffer = [5, 5, 5, 5];
                 var popupElement =  angular.element($scope.popup.getElement());
+
+                var paddingLeft = popupElement.css('padding-left');
+                paddingLeft = parseInt(paddingLeft.slice(0, paddingLeft.length -2));
+                var paddingRight = popupElement.css('padding-right');
+                paddingRight = parseInt(paddingRight.slice(0, paddingRight.length -2));
+                var paddingTop = popupElement.css('padding-top');
+                paddingTop = parseInt(paddingTop.slice(0, paddingTop.length -2));
+                var paddingBottom = popupElement.css('padding-bottom');
+                paddingBottom = parseInt(paddingBottom.slice(0, paddingBottom.length -2));
+
                 var popupOffset = $scope.popup.getOffset();
                 var xPx = placementPixel[0] + popupOffset[0];
                 var yPx = placementPixel[1] + popupOffset[1];
 
-                var width = popupElement.width();
-                var height = popupElement.height();
+                var width = popupElement.width() + paddingLeft + paddingRight;
+                var height = popupElement.height() + paddingTop + paddingBottom;
 
                 var position = $scope.popup.getPositioning().split('-');
 
