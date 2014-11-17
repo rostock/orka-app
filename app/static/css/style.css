@@ -111,3 +111,19 @@ html, body {
   opacity: 0.75;
   padding: 5px;
 }
+
+.ol-attribution:not(.ol-collapsed) {
+  top: auto;
+  left: auto;
+  bottom: 40px;
+  right: 5px;
+  background-color: #fff;
+  opacity: 0.75;
+  padding: 5px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.ol-attribution ul {
+  max-width: none;
+}
