@@ -17,11 +17,15 @@ angular.module('orkaApp', [
 }])
 
 .config(['ControlsServiceProvider', function(ControlsServiceProvider) {
-    ControlsServiceProvider.setControls(
-        ol.control.defaults().extend([
-            new ol.control.ZoomSlider()
-        ])
-    );
+    ControlsServiceProvider.setControls([
+        new ol.control.Zoom(),
+        new ol.control.Rotate(),
+        new ol.control.Attribution({
+            collapsed: false,
+            collapsible: false
+        }),
+        new ol.control.ZoomSlider()
+    ]);
 }])
 
 .config(['ConfigServiceProvider', 'PermalinkServiceProvider', function(ConfigServiceProvider, PermalinkServiceProvider) {
