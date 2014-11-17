@@ -151,3 +151,23 @@ body {
   left: 5px;
   position: absolute;
 }
+
+/* orka-popup */
+.orka-popup {
+  background-color: #f5f5f5;
+  padding: 8px;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.orka-popup .orka-popup-container .orka-popup-close {
+  color: #b4b4b4;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.orka-popup .orka-popup-container .orka-popup-title {
+  font-weight: bold;
+}

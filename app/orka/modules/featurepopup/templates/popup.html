@@ -1,15 +1,13 @@
-<div ng-show="popupVisible" class="panel panel-default">
-    <div class="panel-heading">
-        <span class="glyphicon glyphicon-remove pull-right"
-          ng-click="popupVisible=false"></span>
-        <h3 class="panel-title" ng-bind-html="feature.get('name') | html "></h3>
-    </div>
-    <div class="panel-body">
-        <a ng-if="feature.get('website')" ng-href="{{ feature.get('website') }}">Homepage</a>
-        <div ng-repeat="tag in typeMap[feature.get('type')].popupTags">
-            <div ng-if="feature.get(tag)">
-                {{ tag }}: {{ feature.get(tag) }}
-            </div>
+<div ng-show="popupVisible" class="orka-popup">
+    <div class="orka-popup-container">
+        <div class="orka-popup-close">
+            <span class="glyphicon glyphicon-remove"
+                  ng-click="popupVisible=false">
+            </span>
+        </div>
+        <div class="orka-popup-title">{{ feature.get('name') }}</div>
+        <div class="orka-popup-content">
+            <a ng-if="feature.get('website')" ng-href="{{ feature.get('website') }}">Homepage</a>
         </div>
     </div>
 </div>
