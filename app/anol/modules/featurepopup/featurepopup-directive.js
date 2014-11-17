@@ -50,23 +50,13 @@ angular.module('anol.featurepopup', [])
             $scope.calculatePopupExtent = function(placementPixel) {
                 // left, bottom, right, top
                 var popupBuffer = [5, 5, 5, 5];
-                var popupElement =  angular.element($scope.popup.getElement());
-
-                var paddingLeft = popupElement.css('padding-left');
-                paddingLeft = parseInt(paddingLeft.slice(0, paddingLeft.length -2));
-                var paddingRight = popupElement.css('padding-right');
-                paddingRight = parseInt(paddingRight.slice(0, paddingRight.length -2));
-                var paddingTop = popupElement.css('padding-top');
-                paddingTop = parseInt(paddingTop.slice(0, paddingTop.length -2));
-                var paddingBottom = popupElement.css('padding-bottom');
-                paddingBottom = parseInt(paddingBottom.slice(0, paddingBottom.length -2));
 
                 var popupOffset = $scope.popup.getOffset();
                 var xPx = placementPixel[0] + popupOffset[0];
                 var yPx = placementPixel[1] + popupOffset[1];
 
-                var width = popupElement.width() + paddingLeft + paddingRight;
-                var height = popupElement.height() + paddingTop + paddingBottom;
+                var width = $scope.popupOuterWidth();
+                var height = $scope.popupOuterHeight();
 
                 var position = $scope.popup.getPositioning().split('-');
 
@@ -141,6 +131,39 @@ angular.module('anol.featurepopup', [])
                         center[1] + dy
                     ]);
                 }
+            };
+
+            $scope.popupOuterHeight = function() {
+                var popupElement =  angular.element($scope.popup.getElement());
+                var paddingTop = popupElement.css('padding-top');
+                var paddingBottom = popupElement.css('padding-bottom');
+
+                paddingTop = parseInt(paddingTop.slice(0, paddingTop.length -2));
+                paddingBottom = parseInt(paddingBottom.slice(0, paddingBottom.length -2));
+
+                return popupElement.height() + paddingTop + paddingBottom;
+            };
+
+            $scope.popupOuterWidth = function() {
+                var popupElement =  angular.element($scope.popup.getElement());
+
+                var paddingLeft = popupElement.css('padding-left');
+                var paddingRight = popupElement.css('padding-right');
+
+                paddingLeft = parseInt(paddingLeft.slice(0, paddingLeft.length -2));
+                paddingRight = parseInt(paddingRight.slice(0, paddingRight.length -2));
+
+                return popupElement.width() + paddingLeft + paddingRight;
+            };
+
+            $scope.popupInnerHeight = function() {
+                var popupElement =  angular.element($scope.popup.getElement());
+                return popupElement.height();
+            };
+
+            $scope.popupInnerWidth = function() {
+                var popupElement =  angular.element($scope.popup.getElement());
+                return popupElement.width();
             };
         }
     };
