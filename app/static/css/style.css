@@ -138,3 +138,16 @@ body {
   font-size: 10px;
   line-height: 15px;
 }
+
+/* anol */
+.anol-map-scale {
+  background-color: #fff;
+  opacity: 0.75;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  bottom: 5px;
+  left: 5px;
+  position: absolute;
+}
