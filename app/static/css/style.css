@@ -3,6 +3,11 @@ html, body {
   height: 100%;
 }
 
+body {
+  font-family: 'PT Sans','Verdana',sans-serif;
+  color: #333333;
+}
+
 .header {
     left: 0;
     position: fixed;
@@ -110,6 +115,7 @@ html, body {
   background-color: #fff;
   opacity: 0.75;
   padding: 5px;
+  font-size: 13px;
 }
 
 .ol-attribution:not(.ol-collapsed) {
@@ -126,4 +132,9 @@ html, body {
 
 .ol-attribution ul {
   max-width: none;
+}
+
+.ol-attribution ul li div {
+  font-size: 10px;
+  line-height: 15px;
 }
