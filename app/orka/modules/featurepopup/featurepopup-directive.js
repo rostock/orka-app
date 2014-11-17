@@ -15,10 +15,13 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                 scope.map = MapService.getMap();
                 scope.feature = undefined;
                 scope.popupVisible = false;
+                var offset = ConfigService.config.popup.offset;
+                var noseWidth = element.find('.orka-popup-nose').width();
+                offset[0] += noseWidth;
                 scope.overlayOptions = {
                     element: element[0],
                     positioning: ConfigService.config.popup.positioning,
-                    offset: ConfigService.config.popup.offset
+                    offset: offset
                 };
 
                 scope.typeMap = {};
@@ -41,7 +44,11 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                         $timeout(function() {
                             var popupExtent = scope.calculatePopupExtent(evt.pixel);
                             scope.moveMap(popupExtent);
-                        }, 0, false)
+                            // TODO add support for other popup-placements than center-left
+                            var noseElement = element.find('.orka-popup-nose');
+                            noseElement.css('top', (scope.popupInnerHeight() / 2) + (noseElement.height() / 2) + 'px');
+
+                        }, 0, false);
                         // TODO readd when styling finished
                         // if(angular.isDefined(OrkaFeatureListController)) {
                         //     OrkaFeatureListController.scrollTo(feature);
