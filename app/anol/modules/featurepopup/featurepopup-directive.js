@@ -1,6 +1,6 @@
 angular.module('anol.featurepopup', [])
 
-.directive('anolFeaturePopup', ['MapService', function(MapService) {
+.directive('anolFeaturePopup', ['$timeout', 'MapService', function($timeout, MapService) {
     return {
         restrict: 'A',
         scope: {
@@ -27,9 +27,10 @@ angular.module('anol.featurepopup', [])
                     if(feature) {
                         scope.popup.setPosition(evt.coordinate);
                         visible = true;
-
-                        var popupExtent = scope.calculatePopupExtent(evt.pixel);
-                        scope.moveMap(popupExtent);
+                        $timeout(function() {
+                            var popupExtent = scope.calculatePopupExtent(evt.pixel);
+                            scope.moveMap(popupExtent);
+                        }, 0, false);
                     }
 
                     scope.$apply(function() {

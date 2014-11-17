@@ -1,6 +1,6 @@
 angular.module('orka.featurepopup', ['anol.featurepopup'])
 
-.directive('orkaFeaturePopup', ['$injector', 'MapService', 'ConfigService', 'LayertreeService', function($injector, MapService, ConfigService, LayertreeService) {
+.directive('orkaFeaturePopup', ['$injector', '$timeout', 'MapService', 'ConfigService', 'LayertreeService', function($injector, $timeout, MapService, ConfigService, LayertreeService) {
     var anolFeaturePopupDirective = $injector.get('anolFeaturePopupDirective')[0];
     return {
         restrict: 'A',
@@ -38,11 +38,14 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                         scope.popup.setPosition(evt.coordinate);
                         visible = true;
 
-                        var popupExtent = scope.calculatePopupExtent(evt.pixel);
-                        scope.moveMap(popupExtent);
-                        if(angular.isDefined(OrkaFeatureListController)) {
-                            OrkaFeatureListController.scrollTo(feature);
-                        }
+                        $timeout(function() {
+                            var popupExtent = scope.calculatePopupExtent(evt.pixel);
+                            scope.moveMap(popupExtent);
+                        }, 0, false)
+                        // TODO readd when styling finished
+                        // if(angular.isDefined(OrkaFeatureListController)) {
+                        //     OrkaFeatureListController.scrollTo(feature);
+                        // }
                     }
                     scope.$apply(function() {
                         scope.feature = feature;
