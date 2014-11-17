@@ -1,7 +1,7 @@
 html, body {
   width: 100%;
   height: 100%;
-} 
+}
 
 .header {
     left: 0;
@@ -51,4 +51,52 @@ html, body {
 
 .bold {
   font-weight: bold;
+}
+
+/* OL3 */
+
+.ol-zoomslider {
+  left: 5px;
+  top: 29px;
+  width: 22px;
+  border-radius: 0;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.ol-zoomslider .ol-zoomslider-thumb {
+  background-color: #000;
+  opacity: 0.75;
+  margin: 0;
+
+}
+
+.ol-zoom,
+.ol-zoom:hover {
+  width: 22px;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  left: 5px;
+  height: 200px;
+
+}
+
+.ol-zoom .ol-zoom-in {
+  background-color: #000;
+  opacity: 0.75;
+  border-radius: 5px 5px 0px 0px;
+  margin: 0;
+  width: 22px;
+  height: 22px;
+}
+
+.ol-zoom .ol-zoom-out {
+  background-color: #000;
+  opacity: 0.75;
+  border-radius: 0px 0px 5px 5px;
+  margin: 0;
+  margin-top: 200px;
+  width: 22px;
+  height: 22px;
 }
