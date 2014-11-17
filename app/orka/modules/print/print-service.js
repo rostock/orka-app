@@ -15,17 +15,19 @@ angular.module('orka.print')
 
     this.$get = ['$q', '$http', '$timeout', function($q, $http, $timeout) {
     	var Print = function(createDownloadUrl, checkDownloadUrl, checkDownloadDelay) {
+            this.status = 'waiting';
+            this.abort = false;
             this.createDownloadUrl = createDownloadUrl;
             this.checkDownloadUrl = checkDownloadUrl;
             this.checkDownloadDelay = checkDownloadDelay;
         };
 
-        Print.prototype.createDownload = function(bounds, format, layer, streetIndex, poiTypes, trackTypes) {
+        Print.prototype.createDownload = function(bounds, format, scale, layer, streetIndex, poiTypes, trackTypes) {
             var self = this;
 
             var data = {
                 bbox: bounds.join(','),
-                scale: self.currentScale,
+                scale: scale,
                 format: format,
                 layer: layer,
                 params: {
@@ -34,7 +36,6 @@ angular.module('orka.print')
                     'track_types': trackTypes.length === 0 ? false : trackTypes.join(','),
                 }
             };
-
             var deferred = $q.defer();
 
             // promise with "success" and "error" methods (specific to $http)
@@ -46,6 +47,7 @@ angular.module('orka.print')
                 });
             });
             createPromise.error(function(data, status, headers, config) {
+                self.status = 'error';
                 deferred.reject(data);
             });
             return deferred.promise;
@@ -57,12 +59,19 @@ angular.module('orka.print')
             var wrapper = function() {
                 var checkPromise = $http.get(self.checkDownloadUrl + statusUrl);
                 checkPromise.success(function(data, status, headers, config) {
-
-                    if(data.status !== 'done') {
-                        $timeout(wrapper, self.checkDownloadDelay);
-                    } else {
+                    self.status = data.status;
+                    if(data.status === 'done') {
                         deferred.resolve(data.url);
+                    } else if(self.abort === true) {
+                        self.abort = false;
+                        deferred.reject('aborted');
+                    } else {
+                        $timeout(wrapper, self.checkDownloadDelay);
                     }
+                });
+                checkPromise.error(function(data, status, headers, config) {
+                    self.status = 'error';
+                    deferred.reject(data);
                 });
             };
             wrapper();

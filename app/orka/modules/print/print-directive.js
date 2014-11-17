@@ -1,6 +1,6 @@
 angular.module('orka.print', [])
 
-.directive('orkaPrint', ['ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', function(ConfigService, PrintPageService, LayertreeService, LayersService, PrintService) {
+.directive('orkaPrint', ['$modal', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', function($modal, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService) {
     return {
         restrict: 'A',
         transclude: true,
@@ -42,6 +42,7 @@ angular.module('orka.print', [])
                     }
                     return true;
                 };
+                // TODO test with running printqueue & gearmand
                 scope.startPrint = function() {
                     scope.downloadUrl = false;
                     var layerName = LayersService.backgroundLayer().get('layer');
@@ -49,6 +50,7 @@ angular.module('orka.print', [])
                     var downloadPromise = PrintService.createDownload(
                         PrintPageService.getBounds(),
                         scope.outputFormat.value,
+                        PrintPageService.currentScale,
                         layerName,
                         scope.streetIndex,
                         LayertreeService.selectedPoiTypes,
@@ -58,6 +60,16 @@ angular.module('orka.print', [])
                     downloadPromise.then(function(url) {
                         scope.downloadUrl = url;
                     });
+                    var modalInstance = $modal.open({
+                        templateUrl: 'orka/modules/print/templates/print-modal.html',
+                        scope: scope,
+                        backdrop: 'static'
+                    });
+
+                    modalInstance.result.then(
+                        function() { /* TODO somethink on success */},
+                        function() { PrintService.abort = true; }
+                    );
                 };
                 // if we assign pageSize = value in template angular put only a reverence
                 // into scope.pageSize and typing somethink into width/height input fields
@@ -86,6 +98,12 @@ angular.module('orka.print', [])
                         scope.pageSize = newVal;
                     }
                 );
+                scope.$watch(
+                    function() {
+                        return PrintService.status;
+                    }, function(newVal, oldVal) {
+                        scope.printStatus = newVal;
+                    });
             }
         }
     };
