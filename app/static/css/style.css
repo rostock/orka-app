@@ -71,7 +71,7 @@ body {
 
 .ol-zoomslider .ol-zoomslider-thumb {
   background-color: #000;
-  opacity: 0.75;
+  opacity: 0.7;
   margin: 0;
 
 }
@@ -89,7 +89,7 @@ body {
 
 .ol-zoom .ol-zoom-in {
   background-color: #000;
-  opacity: 0.75;
+  opacity: 0.7;
   border-radius: 5px 5px 0px 0px;
   margin: 0;
   width: 22px;
@@ -98,7 +98,7 @@ body {
 
 .ol-zoom .ol-zoom-out {
   background-color: #000;
-  opacity: 0.75;
+  opacity: 0.7;
   border-radius: 0px 0px 5px 5px;
   margin: 0;
   margin-top: 200px;
@@ -113,7 +113,7 @@ body {
   right: 5px;
   border-radius: 5px;
   background-color: #fff;
-  opacity: 0.75;
+  opacity: 0.7;
   padding: 5px;
   font-size: 13px;
 }
@@ -124,7 +124,7 @@ body {
   bottom: 40px;
   right: 5px;
   background-color: #fff;
-  opacity: 0.75;
+  opacity: 0.7;
   padding: 5px;
   height: auto;
   border-radius: 5px;
@@ -142,7 +142,7 @@ body {
 /* anol */
 .anol-map-scale {
   background-color: #fff;
-  opacity: 0.75;
+  opacity: 0.7;
   padding: 5px;
   border-radius: 5px;
   font-size: 14px;
