@@ -33,7 +33,8 @@ angular.module('anol.map')
 
                             var marginBottom = element.css('margin-bottom');
                             marginBottom = parseInt(marginBottom.slice(0, marginBottom.length -2));
-                            scope.setContainerHeight(newVal - marginTop - marginBottom);
+                            // TODO find out why mapHeight needs to be 4 px smaller than it could be
+                            scope.setContainerHeight(newVal - marginTop - marginBottom - 4);
                         }
                     });
                 }
