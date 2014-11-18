@@ -8,7 +8,7 @@
     <p ng-show="printStatus === 'done'">Die Ausgabe wurde erfolgreich erstellt. Mit dem Download-Button können Sie die Ausgabe nun lokal auf Ihrem Rechner speichern.</p>
 </div>
 <div class="modal-footer">
-    <button ng-show="printStatus === 'done'" class="btn btn-danger pull-left" ng-click="$dismiss()">Abbrechen</button>
-    <button ng-show="printStatus !== 'done'" class="btn btn-default pull-left" ng-click="$dismiss()">Schließen</button>
+    <button ng-show="printStatus !== 'done'" class="btn btn-danger pull-left" ng-click="$dismiss()">Abbrechen</button>
+    <button ng-show="printStatus === 'done'" class="btn btn-default pull-left" ng-click="$dismiss()">Schließen</button>
     <a class="btn btn-success pull-right" ng-show="printStatus === 'done'" ng-href="downloadUrl">Download</a>
 </div>
