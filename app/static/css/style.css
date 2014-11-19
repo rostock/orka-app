@@ -20,16 +20,9 @@ body {
     border-radius: 0;
 }
 
-
-.sidebar {
-  height: 100%;
-  position: fixed;
-  width: 230px;
-  top: 50px;
-}
-
 .main-content {
-  margin-left: 235px;
+  margin-left: 230px;
+  height: 100%;
 }
 
 .fullscreen {
@@ -43,25 +36,58 @@ body {
   height: 500px;
 }
 
+.bold {
+  font-weight: bold;
+}
 
-.sidebar-toggle-box {
-  float: left;
-  padding-right: 15px;
-  margin-top: 20px;
-  background-color: red;
-  height: 20px;
-  width: 20px;
+/* sidebar */
+.sidebar {
+  height: 100%;
+  position: fixed;
+  width: 0px;
+  top: 50px;
+  z-index: 1000;
+}
+.sidebar.show {
+  height: 100%;
+  position: fixed;
+  width: 230px;
+  top: 50px;
+  z-index: 1000;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar.show .sideways.tabs-right {
+  right: -15px;
+}
+
+.sidebar:not(.show) .sideways.tabs-right {
+  right: 43px;
+}
+
+.sideways > li > a {
+  border-bottom: none;
+}
+
+.nav-tabs > li > a {
+  background-color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.nav-tabs > li > a:hover {
+  opacity: 0.8;
   cursor: pointer;
 }
 
-.bold {
-  font-weight: bold;
+.nav-tabs > li.active > a {
+  opacity: 1;
+  cursor: pointer;
 }
 
 /* OL3 */
 
 .ol-zoomslider {
-  left: 5px;
+  left: 50px;
   top: 29px;
   width: 22px;
   border-radius: 0;
@@ -82,7 +108,7 @@ body {
   background-color: transparent;
   border-radius: 0;
   padding: 0;
-  left: 5px;
+  left: 50px;
   height: 200px;
 
 }

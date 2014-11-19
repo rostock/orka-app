@@ -12,6 +12,7 @@
 
     <link href="/anol/libs/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="/anol/libs/ol3/ol3.css" rel="stylesheet">
+    <link href="/static/css/lib/bootstrap.vertical-tabs.min.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,42 +24,48 @@
   <body ng-controller="appCtrl">
     <div class="navbar navbar-default header" >
       <a class="navbar-brand" href="#">Header Demo Anwendung</a>
-      <div ng-click="fullscreen=!fullscreen">Toggle Sidebar</div>
     </div>
 
-    <div class="nav-collapse sidebar">
-      <div class="sidebar-menu">
-
-        <div ng-controller="SitebarCtrl">
-          <div>
-        </div>
-
-        <accordion close-others="oneAtATime">
-          <accordion-group heading="Layerauswahl" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+    <div class="sidebar" ng-class="{'show': selectedTab !== false}">
+      <div class="col-xs-9">
+        <div class="tab-content">
+          <div class="tab-pane" ng-class="{'active': selectedTab==='layerswitcher'}">
             <div anol-layerswitcher></div>
-          </accordion-group>
-
-          <accordion-group heading="POI">
+          </div>
+          <div class="tab-pane" ng-class="{'active': selectedTab==='layertree'}">
             <div orka-layertree></div>
-          </accordion-group>
-
-          <accordion-group heading="Legende">
+          </div>
+          <div class="tab-pane" ng-class="{'active': selectedTab==='legend'}">
             <div orka-layertree-legend></div>
-          </accordion-group>
-
-          <accordion-group heading="Drucken">
-              <div orka-print ></div>
-          </accordion-group>
-
-          <accordion-group heading="Feautres">
+          </div>
+          <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
+            <div orka-print ></div>
+          </div>
+          <div class="tab-pane" ng-class="{'active': selectedTab==='featurelist'}">
             <div orka-feature-list feature-layer="poi_layer" marker-layer="marker_layer">
               <div orka-feature-popup feature-layer="poi_layer"></div>
             </div>
-          </accordion-group>
-
-        </accordion>
-
+          </div>
         </div>
+      </div>
+      <div class="col-xs-3">
+        <ul class="nav nav-tabs tabs-right sideways">
+          <li ng-class="{'active': selectedTab==='layerswitcher'}">
+            <a ng-click="selectTab('layerswitcher')">Layerswitcher</a>
+          </li>
+          <li ng-class="{'active': selectedTab==='layertree'}">
+            <a ng-click="selectTab('layertree')">Layertree</a>
+          </li>
+          <li ng-class="{'active': selectedTab==='legend'}">
+            <a ng-click="selectTab('legend')">Legend</a>
+          </li>
+          <li ng-class="{'active': selectedTab==='print'}">
+            <a ng-click="selectTab('print')">Print</a>
+          </li>
+          <li ng-class="{'active': selectedTab==='featurelist'}">
+            <a ng-click="selectTab('featurelist')">Feature List</a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -85,21 +92,20 @@
     <script type="text/javascript">
       // TODO move to controller js
       angular.module('orkaApp').controller('appCtrl', ['$scope', '$timeout', 'MapService', function ($scope, $timeout, MapService) {
+        $scope.selectedTab = false;
+        $scope.fullscreen = true;
+
+        $scope.selectTab = function(tab) {
+          $scope.selectedTab = tab === $scope.selectedTab ? false : tab;
+          $scope.fullscreen = $scope.selectedTab === false;
+        };
+
         $scope.$watch('fullscreen', function() {
           $timeout(function() {
             MapService.getMap().updateSize();
           }, 0, false);
         });
       }]);
-
-      angular.module('orkaApp').controller('SitebarCtrl', function ($scope) {
-        $scope.oneAtATime = true;
-
-        $scope.status = {
-          isFirstOpen: true,
-          isFirstDisabled: false
-        };
-      });
     </script>
 
 
