@@ -1,8 +1,18 @@
-<div ng-repeat="poi in selectedPois">
-    <img ng-src="{{ iconBaseUrl + typeMap[poi].icon }}" />
-    <span ng-bind-html="typeMap[poi].title | html"></span>
+<div class="orka-legend-toggle">
+    <span class="glyphicon" ng-class="{'glyphicon-chevron-left': !showLegend, 'glyphicon-chevron-right': showLegend}" ng-click="showLegend=!showLegend"></span>
 </div>
-<div ng-repeat="track in selectedTracks">
-    <img ng-src="{{ iconBaseUrl + typeMap[track].icon }}" />
-    <span ng-bind-html="typeMap[track].title | html"></span>
+<div class="orka-legend" ng-show="showLegend">
+    <span class="bold">Legende</span>
+    <div class="orka-poi-container">
+        <div ng-repeat="poi in selectedPois">
+            <img ng-src="{{ iconBaseUrl + typeMap[poi].icon }}" class="orka-poi-legend-icon"/>
+            <span ng-bind-html="typeMap[poi].title | html"></span>
+        </div>
+    </div>
+    <div class="orka-tracks-container">
+        <div ng-repeat="track in selectedTracks">
+            <img ng-src="{{ iconBaseUrl + typeMap[track].icon }}" class="orka-track-legend-icon" />
+            <span ng-bind-html="typeMap[track].title | html"></span>
+        </div>
+    </div>
 </div>
