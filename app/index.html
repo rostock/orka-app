@@ -75,8 +75,10 @@
         <div ng-if="backgroundLayers.length > 1">
           <span class="bold">Hintergrundkarte</span>
           <div ng-repeat="layer in backgroundLayers">
-            <input type="radio" ng-model="$parent.$parent.backgroundLayer" ng-value="layer">
-            {{ layer.get('title') }}
+            <label class="no-style">
+              <input type="radio" ng-model="$parent.$parent.backgroundLayer" ng-value="layer">
+              {{ layer.get('title') }}
+            </label>
           </div>
         </div>
         <ng-transclude></ng-transclude>

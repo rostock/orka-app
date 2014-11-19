@@ -72,6 +72,17 @@ body {
   font-weight: bold;
 }
 
+label {
+  cursor: pointer;
+}
+
+label.no-style {
+  display: auto;
+  font-weight: normal;
+  margin-bottom: 0px;
+  max-width: none;
+}
+
 /* sidebar */
 .sidebar {
   height: 100%;

@@ -6,8 +6,10 @@
         {{ poi.title }}
         <div ng-class="{'hide': !poi.showGroup}">
             <div ng-repeat="group in poi.groups" style="margin-left: 10px;">
-                <input type="checkbox" ng-model="group.active" ng-change="updatePois(pois)"/>
-                {{ group.title }}
+                <label class="no-style">
+                    <input type="checkbox" ng-model="group.active" ng-change="updatePois(pois)"/>
+                    {{ group.title }}
+                </label>
             </div>
         </div>
     </div>
@@ -20,8 +22,10 @@
         {{ track.title }}
         <div ng-class="{'hide': !track.showGroup}">
             <div ng-repeat="group in track.groups" style="margin-left: 10px;">
-                <input type="checkbox" ng-model="group.active" ng-change="updateTracks(tracks)"/>
-                {{ group.title }}
+                <label class="no-style">
+                    <input type="checkbox" ng-model="group.active" ng-change="updateTracks(tracks)"/>
+                    {{ group.title }}
+                </label>
             </div>
         </div>
     </div>
