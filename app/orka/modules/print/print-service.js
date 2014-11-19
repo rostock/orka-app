@@ -28,7 +28,8 @@ angular.module('orka.print')
 
         Print.prototype.createDownload = function(bounds, format, scale, layer, streetIndex, poiTypes, trackTypes) {
             var self = this;
-
+            self.abort = false;
+            self.status = 'waiting';
             var data = {
                 bbox: bounds.join(','),
                 scale: scale,
