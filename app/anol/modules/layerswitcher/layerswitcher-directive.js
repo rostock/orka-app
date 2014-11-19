@@ -4,6 +4,7 @@ angular.module('anol.layerswitcher', [])
     return {
         restrict: 'A',
         require: '?^anolMap',
+        transclude: true,
         templateUrl: 'anol/modules/layerswitcher/templates/layerswitcher.html',
         scope: {},
         link: {
