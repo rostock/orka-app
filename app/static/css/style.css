@@ -73,6 +73,8 @@ body {
   background-color: #fff;
   opacity: 0.8;
   cursor: pointer;
+  margin-right: 2px;
+  margin-left: 2px;
 }
 .nav-tabs > li > a:hover {
   opacity: 0.8;
