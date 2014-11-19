@@ -166,7 +166,7 @@ body {
 }
 
 /* anol */
-.anol-map-scale {
+.ol-unselectable .anol-map-scale {
   background-color: #fff;
   opacity: 0.7;
   padding: 5px;
