@@ -1,13 +1,13 @@
 <span class="bold">Themen</span>
 <div class="orka-poi-container">
     <div ng-repeat="poi in pois">
-        <input type="checkbox" ng-model="poi.active" ng-change="togglePoiTopic(poi)"/>
-        <span class="glyphicon" ng-class="{'glyphicon-expand': !poi.showGroup, 'glyphicon-collapse-down': poi.showGroup}" ng-click="poi.showGroup = !poi.showGroup" ng-if="poi.groups"></span>
+        <input type="checkbox" ng-model="poi.active" ng-change="togglePoiTopic(poi)" class="pointer" />
+        <span class="pointer glyphicon" ng-class="{'glyphicon-expand': !poi.showGroup, 'glyphicon-collapse-down': poi.showGroup}" ng-click="poi.showGroup = !poi.showGroup" ng-if="poi.groups"></span>
         {{ poi.title }}
         <div ng-class="{'hide': !poi.showGroup}">
             <div ng-repeat="group in poi.groups" style="margin-left: 10px;">
-                <label class="no-style">
-                    <input type="checkbox" ng-model="group.active" ng-change="updatePois(pois)"/>
+                <label class="no-style pointer">
+                    <input type="checkbox" ng-model="group.active" ng-change="updatePois(pois)" class="pointer"/>
                     {{ group.title }}
                 </label>
             </div>
@@ -17,13 +17,13 @@
 <hr>
 <div class="orka-tracks-container">
     <div ng-repeat="track in tracks">
-        <input type="checkbox" ng-model="track.active" ng-change="toggleTrackTopic(track)"/>
-        <span class="glyphicon" ng-class="{'glyphicon-expand': !track.showGroup, 'glyphicon-collapse-down': track.showGroup}" ng-click="track.showGroup = !track.showGroup" ng-if="track.groups"></span>
+        <input type="checkbox" ng-model="track.active" ng-change="toggleTrackTopic(track)" class="pointer"/>
+        <span class="pointer glyphicon" ng-class="{'glyphicon-expand': !track.showGroup, 'glyphicon-collapse-down': track.showGroup}" ng-click="track.showGroup = !track.showGroup" ng-if="track.groups"></span>
         {{ track.title }}
         <div ng-class="{'hide': !track.showGroup}">
             <div ng-repeat="group in track.groups" style="margin-left: 10px;">
-                <label class="no-style">
-                    <input type="checkbox" ng-model="group.active" ng-change="updateTracks(tracks)"/>
+                <label class="no-style pointer">
+                    <input type="checkbox" ng-model="group.active" ng-change="updateTracks(tracks)" class="pointer"/>
                     {{ group.title }}
                 </label>
             </div>
