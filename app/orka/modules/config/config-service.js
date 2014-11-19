@@ -44,14 +44,16 @@ angular.module('orka.config', [])
                 layer: 'stadtplan_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan',
-                shortcut: 'S'
+                shortcut: 'S',
+                printLayer: 'mvp-mapserver-print'
             },
             'ORKA_STADTPLAN_GRAU': {
                 baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/1.0.0/',
                 layer: 'stadtplan_greyscale_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan Grau',
-                shortcut: 'G'
+                shortcut: 'G',
+                printLayer: 'mvp-mapserver-greyscale-print'
             }
         },
         poi: {

@@ -45,7 +45,7 @@ angular.module('orka.print', [])
                 // TODO test with running printqueue & gearmand
                 scope.startPrint = function() {
                     scope.downloadUrl = false;
-                    var layerName = LayersService.backgroundLayer().get('layer');
+                    var layerName = LayersService.backgroundLayer().get('printLayer');
 
                     var downloadPromise = PrintService.createDownload(
                         PrintPageService.getBounds(),

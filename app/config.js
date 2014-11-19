@@ -35,7 +35,7 @@ angular.module('orkaApp', [
 .config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider) {
     var layers = [];
     angular.forEach(ConfigServiceProvider.config.backgroundLayer, function(backgroundLayer) {
-        layers.push(LayersFactoryProvider.newTMS({
+        var layer = LayersFactoryProvider.newTMS({
             projection: ConfigServiceProvider.config.map.projection,
             resolutions: ConfigServiceProvider.config.map.resolutions,
             extent: ConfigServiceProvider.config.map.extent,
@@ -46,7 +46,9 @@ angular.module('orkaApp', [
             shortcut: backgroundLayer.shortcut,
             isBackground: true,
             attributions: backgroundLayer.attributions
-        }));
+        });
+        layer.set('printLayer', backgroundLayer.printLayer);
+        layers.push(layer);
     });
     LayersServiceProvider.setLayers(layers);
 }])
