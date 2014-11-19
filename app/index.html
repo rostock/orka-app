@@ -72,6 +72,22 @@
       <div class="anol-map-scale">Maßstab 1 : {{ scale }}</div>
     </script>
 
+    <script type="text/ng-template" id="anol/modules/layerswitcher/templates/layerswitcher.html">
+      <div class="orka-layerswitcher-toggle" ng-show="showToggle">
+        <span class="glyphicon" ng-class="{'glyphicon-chevron-left': collapsed, 'glyphicon-chevron-right': !collapsed}" ng-click="collapsed=!collapsed"></span>
+      </div>
+      <div class="orka-layerswitcher" ng-show="!collapsed">
+        <div ng-if="backgroundLayers.length > 1">
+          <span class="bold">Hintergrundkarte</span>
+          <div ng-repeat="layer in backgroundLayers">
+            <input type="radio" ng-model="$parent.$parent.backgroundLayer" ng-value="layer">
+            {{ layer.get('title') }}
+          </div>
+        </div>
+        <ng-transclude></ng-transclude>
+      </div>
+    </script>
+
     <!-- Remove libs when build dist -->
     <script type="text/javascript" src="/anol/libs/jquery/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/anol/libs/angular/angular-debug.js"></script>

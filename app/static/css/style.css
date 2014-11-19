@@ -173,7 +173,9 @@ body {
   position: absolute;
 }
 
-.ol-unselectable .anol-layerswitcher {
+/* orka */
+
+.ol-unselectable .orka-layerswitcher {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 0px 25px 5px 5px;
   border-radius: 5px 0px 0px 5px;
@@ -185,7 +187,7 @@ body {
   width: 200px;
 }
 
-.ol-unselectable .anol-layerswitcher-toggle {
+.ol-unselectable .orka-layerswitcher-toggle {
   width: 20px;
   top: 13px;
   right: 0px;
@@ -198,7 +200,7 @@ body {
   cursor: pointer;
 }
 
-.ol-unselectable .anol-layerswitcher hr {
+.ol-unselectable .orka-layerswitcher hr {
   margin-top: 0px;
   margin-bottom: 0px;
   margin-right: -20px;
