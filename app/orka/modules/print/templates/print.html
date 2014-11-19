@@ -1,6 +1,30 @@
-<div ng-if="show">
-    <select ng-model="outputFormat" ng-options="format as format.label for format in outputFormats">
-    </select><br>
+<div ng-if="show" class="orka-print">
+    <div class="print-headline-container print-headline-container-first">
+        <span class="print-headline print-headline-first">
+            <span class="number-in-circle number-in-circle-first">5</span>
+            Schritte zur eigenen Karte:
+        </span>
+    </div>
+    <div class="print-headline-container">
+        <span class="print-headline">
+            <span class="number-in-circle">1</span>
+            Hintergrundkarte und Themen wählen
+        </span>
+    </div>
+    <div class="print-headline-container">
+        <span class="print-headline">
+            <span class="number-in-circle">2</span>
+            Dateiformat wählen
+        </span>
+    </div>
+    <select class="form-control" ng-model="outputFormat" ng-options="format as format.label for format in outputFormats">
+    </select>
+    <div class="print-headline-container">
+        <span class="print-headline">
+            <span class="number-in-circle">3</span>
+            Größe des Ausgabebereichs wählen…
+        </span>
+    </div>
     <div class="btn-group">
         <button type="button" class="btn btn-default"
                 ng-repeat="pageSize in pageSizes"
@@ -10,23 +34,69 @@
             <span ng-if="pageSize.icon" class="glyphicon" ng-class="pageSize.icon"></span>
         </button>
     </div>
+    <div class="print-interheadline-container">
+        <span id="valid-map-size-hint" class="print-headline">…oder frei definieren (maximal 2000 cm²)</span>
+    </div>
     <!-- TODO add validators for input fields -->
-    <label>
-        <input type="number" ng-model="pageSize[0]" ng-change="updatePrintPage()">Breite
-    </label>
-    <label>
-        <input type="number" ng-model="pageSize[1]" ng-change="updatePrintPage()">Höhe
-    </label>
-    <label>
-        <input type="number" ng-model="$parent.scale" ng-change="updatePrintPage()">Maßstab
-    </label>
-    <label>
-        <input type="checkbox" ng-model="$parent.streetIndex">Straßenverzeichnis
-    </label>
-    <label>
-        <input type="checkbox" ng-model="$parent.licenceAgreed">Nutzungsbedingungen zustimmen
-    </label>
-    <button class="btn btn-default" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()">Ausgabe erstellen</button>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="width">Breite</label>
+                <div class="input-group">
+                    <input class="form-control" name="width" type="number" ng-model="pageSize[0]" ng-change="updatePrintPage()">
+                    <span class="input-group-addon">mm</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="height">Höhe</label>
+                <div class="input-group">
+                    <input class="form-control" name="height" type="number" ng-model="pageSize[1]" ng-change="updatePrintPage()">
+                    <span class="input-group-addon">mm</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="print-headline-container">
+        <span id="valid-scale-range-hint" class="print-headline">
+            <span class="number-in-circle">4</span>
+            Ausgabemaßstab definieren
+        </span>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon">1 :</span>
+            <input class="form-control" type="number" ng-model="$parent.scale" ng-change="updatePrintPage()">
+        </div>
+    </div>
+    <div class="print-headline-container">
+        <span class="print-headline">
+            <span class="number-in-circle">5</span>
+            <input type="checkbox" ng-model="$parent.streetIndex">
+            Straßenverzeichnis
+        </span>
+    </div>
+
+    <div class="create_export">
+        <div class="print-headline-container-last">
+            <span class="print-headline print-headline-last">
+                <label title="Sie müssen den Nutzungsbedingungen für die Ausgabe der ORKa.MV zustimmen, bevor Sie die Ausgabe erstellen können!" for="aggree_license" style="display:none"></label>
+                <span class="print-headline">
+                    <input type="checkbox" ng-model="$parent.licenceAgreed">
+                    <a href="http://www.orka-mv.de/ausgabebedingungen.html" target="_blank">Nutzungsbedingungen</a>
+                    zustimmen
+                </span>
+                <span class="print-headline">
+                    <button class="btn btn-success" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()">Ausgabe erstellen</button>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="print-headline-container">
+        <span class="print-headline">Ausgabebereich nicht mehr im Kartenbild?</span>
+    </div>
     <button class="btn btn-default" ng-click="resetPrintPage()">Ausgabebereich zentrieren</button>
 
     <div ng-show="downloadUrl !== false">

@@ -27,7 +27,7 @@
     </div>
 
     <div class="sidebar" ng-class="{'show': selectedTab !== false}">
-      <div class="col-xs-9">
+      <div class="col-xs-11">
         <div class="tab-content">
           <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
             <div orka-print ></div>
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-1">
         <ul class="nav nav-tabs tabs-right sideways">
           <li ng-class="{'active': selectedTab==='print'}">
             <a ng-click="selectTab('print')">Print</a>
