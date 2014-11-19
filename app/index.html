@@ -29,9 +29,6 @@
     <div class="sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="col-xs-9">
         <div class="tab-content">
-          <div class="tab-pane" ng-class="{'active': selectedTab==='layertree'}">
-            <div orka-layertree></div>
-          </div>
           <div class="tab-pane" ng-class="{'active': selectedTab==='legend'}">
             <div orka-layertree-legend></div>
           </div>
@@ -47,9 +44,6 @@
       </div>
       <div class="col-xs-3">
         <ul class="nav nav-tabs tabs-right sideways">
-          <li ng-class="{'active': selectedTab==='layertree'}">
-            <a ng-click="selectTab('layertree')">Layertree</a>
-          </li>
           <li ng-class="{'active': selectedTab==='legend'}">
             <a ng-click="selectTab('legend')">Legend</a>
           </li>
@@ -67,7 +61,10 @@
       <div class="map-wrapper" anol-map auto-resize="height">
         <div orka-mouse-position></div>
         <div anol-scale-text></div>
-        <div anol-layerswitcher></div>
+        <div anol-layerswitcher>
+          <hr>
+          <div orka-layertree></div>
+        </div>
        </div>
     </div>
 
