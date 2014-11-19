@@ -191,6 +191,7 @@ body {
   right: 0px;
   position: absolute;
   z-index: 1000;
+  width: 200px;
 }
 
 .ol-unselectable .anol-layerswitcher-toggle {
@@ -205,6 +206,12 @@ body {
   text-align: center;
   z-index: 1001;
   cursor: pointer;
+}
+
+.ol-unselectable .anol-layerswitcher hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: -20px;
 }
 
 /* orka-popup */
@@ -241,4 +248,18 @@ body {
 
 .orka-popup .orka-popup-container .orka-popup-title {
   font-weight: bold;
+}
+
+.orka-poi-container {
+  max-height: 180px;
+}
+
+.orka-tracks-container {
+  max-height: 90px;
+}
+
+.orka-poi-container,
+.orka-tracks-container {
+  margin-right: -20px;
+  overflow: auto;
 }
