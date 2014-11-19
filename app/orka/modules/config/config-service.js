@@ -69,8 +69,9 @@ angular.module('orka.config', [])
         },
         print: {
             defaultScale: 250000,
-            createURL: '/print',
-            checkURL: '',
+            createURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000/print',
+            checkURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000',
+            downloadURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000',
             checkDelay: 2000,
             pageSizes: [{
                 'label': 'A4',

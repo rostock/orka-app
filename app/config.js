@@ -97,6 +97,7 @@ angular.module('orkaApp', [
         PrintServiceProvider.setCreateDownloadUrl(ConfigServiceProvider.config.print.createURL);
         PrintServiceProvider.setCheckDownloadUrl(ConfigServiceProvider.config.print.checkURL);
         PrintServiceProvider.setCheckDownloadDelay(ConfigServiceProvider.config.print.checkDelay);
+        PrintServiceProvider.setDownloadUrl(ConfigServiceProvider.config.print.downloadURL);
     }
 }])
 
