@@ -73,13 +73,21 @@ angular.module('orka.config', [])
             checkURL: '',
             checkDelay: 2000,
             pageSizes: [{
-                'label': 'DIN A4 Hoch',
+                'label': 'A4',
                 'icon': 'glyphicon-resize-horizontal',
                 'value': [210, 297]
             }, {
-                'label': 'DIN A4 Quer',
+                'label': 'A4',
                 'icon': 'glyphicon-resize-vertical',
                 'value': [297, 210]
+            }, {
+                'label': 'A3',
+                'icon': 'glyphicon-resize-horizontal',
+                'value': [297, 420]
+            }, {
+                'label': 'A3',
+                'icon': 'glyphicon-resize-vertical',
+                'value': [420, 297]
             }],
             outputFormats: [{
                 'label': 'PDF',
