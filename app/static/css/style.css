@@ -70,19 +70,18 @@ body {
 }
 
 .nav-tabs > li > a {
-  background-color: #fff;
-  opacity: 0.8;
+  background-color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   margin-right: 2px;
   margin-left: 2px;
 }
 .nav-tabs > li > a:hover {
-  opacity: 0.8;
+  background-color: rgba(224, 224, 224, 0.8);
   cursor: pointer;
 }
 
 .nav-tabs > li.active > a {
-  opacity: 1;
+  background-color: #fff;
   cursor: pointer;
 }
 
@@ -98,8 +97,7 @@ body {
 }
 
 .ol-zoomslider .ol-zoomslider-thumb {
-  background-color: #000;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.7);
   margin: 0;
 
 }
@@ -116,8 +114,7 @@ body {
 }
 
 .ol-zoom .ol-zoom-in {
-  background-color: #000;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 5px 5px 0px 0px;
   margin: 0;
   width: 22px;
@@ -125,8 +122,7 @@ body {
 }
 
 .ol-zoom .ol-zoom-out {
-  background-color: #000;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 0px 0px 5px 5px;
   margin: 0;
   margin-top: 200px;
@@ -140,8 +136,7 @@ body {
   bottom: 5px;
   right: 5px;
   border-radius: 5px;
-  background-color: #fff;
-  opacity: 0.7;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
   font-size: 13px;
 }
@@ -151,8 +146,7 @@ body {
   left: auto;
   bottom: 40px;
   right: 5px;
-  background-color: #fff;
-  opacity: 0.7;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
   height: auto;
   border-radius: 5px;
@@ -169,8 +163,7 @@ body {
 
 /* anol */
 .ol-unselectable .anol-map-scale {
-  background-color: #fff;
-  opacity: 0.7;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
   border-radius: 5px;
   font-size: 14px;
@@ -181,8 +174,7 @@ body {
 }
 
 .ol-unselectable .anol-layerswitcher {
-  background-color: #fff;
-  opacity: 0.7;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 0px 25px 5px 5px;
   border-radius: 5px 0px 0px 5px;
   font-size: 14px;
@@ -199,8 +191,7 @@ body {
   top: 13px;
   right: 0px;
   border-radius: 5px 0px 0px 5px;
-  background-color: #000;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   position: absolute;
   text-align: center;
