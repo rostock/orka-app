@@ -3,6 +3,7 @@ angular.module('orka.featurelist', [])
 .directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', 'ConfigService', function($filter, $timeout, MapService, LayersService, LayertreeService, ConfigService) {
     return {
         restrict: 'A',
+        replace: true,
         scope: {
             'featureLayerName': '@featureLayer',
             'markerLayerName': '@markerLayer'
