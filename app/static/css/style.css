@@ -176,7 +176,67 @@ label.no-style {
   margin-left: 10px;
 }
 
-/* OL3 */
+/*
+ * Print content
+ */
+span.number-in-circle {
+    background-color: #de0029;
+    border-radius: 25%;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 16px;
+    height: 22px;
+    text-align: center;
+    width: 22px;
+}
+span.number-in-circle-first {
+    background-color: #2b58a3;
+    font-size: 22px;
+    height: 32px;
+    width: 32px;
+}
+span.print-headline {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 22px;
+}
+span.print-headline-first {
+    font-size: 16px;
+    line-height: 30px;
+}
+div.print-headline-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 280px;
+}
+div.print-headline-container-first {
+    background-color: #f5ca8d;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+div.print-interheadline-container {
+    margin-top: 10px;
+    width: 280px;
+}
+select.output-format-select {
+  width: 218px;
+}
+div.print-headline-container-last {
+    background-color: #f5ca8d;
+    border-radius: 6px;
+    margin: 10px 0;
+    padding: 10px;
+    width: 280px;
+}
+.orka-print .form-group {
+  margin-bottom: 0px;
+}
+
+
+/*
+ * Map components
+ */
 
 .ol-zoomslider {
   left: 50px;
@@ -252,7 +312,6 @@ label.no-style {
   line-height: 15px;
 }
 
-/* anol */
 .ol-unselectable .anol-map-scale {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
@@ -263,8 +322,6 @@ label.no-style {
   left: 5px;
   position: absolute;
 }
-
-/* orka */
 
 .ol-unselectable .orka-layerswitcher {
   background-color: rgba(255, 255, 255, 0.7);
@@ -392,58 +449,3 @@ label.no-style {
   max-height: 60px;
 }
 
-/* print area */
-span.number-in-circle {
-    background-color: #de0029;
-    border-radius: 25%;
-    color: #ffffff;
-    display: inline-block;
-    font-size: 16px;
-    height: 22px;
-    text-align: center;
-    width: 22px;
-}
-span.number-in-circle-first {
-    background-color: #2b58a3;
-    font-size: 22px;
-    height: 32px;
-    width: 32px;
-}
-span.print-headline {
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 22px;
-}
-span.print-headline-first {
-    font-size: 16px;
-    line-height: 30px;
-}
-div.print-headline-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 280px;
-}
-div.print-headline-container-first {
-    background-color: #f5ca8d;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-div.print-interheadline-container {
-    margin-top: 10px;
-    width: 280px;
-}
-select.output-format-select {
-  width: 218px;
-}
-div.print-headline-container-last {
-    background-color: #f5ca8d;
-    border-radius: 6px;
-    margin: 10px 0;
-    padding: 10px;
-    width: 280px;
-}
-
-.orka-print .form-group {
-  margin-bottom: 0px;
-}
