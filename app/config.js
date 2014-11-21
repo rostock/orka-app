@@ -84,8 +84,8 @@ angular.module('orkaApp', [
     LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
 
     LayersServiceProvider.setLayers([
-        poiLayer,
-        trackLayer
+        trackLayer,
+        poiLayer
     ]);
 }])
 
