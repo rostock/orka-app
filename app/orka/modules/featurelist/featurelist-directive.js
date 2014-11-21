@@ -129,7 +129,9 @@ angular.module('orka.featurelist', [])
                     scope.toggleMarker();
                 });
 
-                scope.$watch('extent', function(newVal, oldVal) {
+                scope.$watch(function() {
+                    return LayertreeService.selectedPoiTypes;
+                }, function(newVal, oldVal) {
                     scope.featureGroups = featuresByExtent();
                     scope.toggleMarker();
                 });
