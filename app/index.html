@@ -27,28 +27,24 @@
     </div>
 
     <div class="sidebar" ng-class="{'show': selectedTab !== false}">
-      <div class="col-xs-11">
-        <div class="tab-content">
-          <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
-            <div orka-print ></div>
-          </div>
-          <div class="tab-pane" ng-class="{'active': selectedTab==='featurelist'}">
-            <div orka-feature-list feature-layer="poi_layer" marker-layer="marker_layer">
-              <div orka-feature-popup feature-layer="poi_layer"></div>
-            </div>
+      <div class="tab-content">
+        <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
+          <div orka-print ></div>
+        </div>
+        <div class="tab-pane" ng-class="{'active': selectedTab==='featurelist'}">
+          <div orka-feature-list feature-layer="poi_layer" marker-layer="marker_layer" class="orka-feature-list">
+            <div orka-feature-popup feature-layer="poi_layer"></div>
           </div>
         </div>
       </div>
-      <div class="col-xs-1">
-        <ul class="nav nav-tabs tabs-right sideways">
-          <li ng-class="{'active': selectedTab==='print'}">
-            <a ng-click="selectTab('print')">Print</a>
-          </li>
-          <li ng-class="{'active': selectedTab==='featurelist'}">
-            <a ng-click="selectTab('featurelist')">Feature List</a>
-          </li>
-        </ul>
-      </div>
+      <ul class="nav nav-tabs tabs-right sideways">
+        <li ng-class="{'active': selectedTab==='print'}">
+          <a ng-click="selectTab('print')">Print</a>
+        </li>
+        <li ng-class="{'active': selectedTab==='featurelist'}">
+          <a ng-click="selectTab('featurelist')">Feature List</a>
+        </li>
+      </ul>
     </div>
 
     <div class="main-content" ng-class="{ 'fullscreen': fullscreen }">
