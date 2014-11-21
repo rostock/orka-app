@@ -13,6 +13,7 @@ angular.module('orka.featurelist', [])
         link: {
             pre: function(scope, element, attr) {
                 scope.map = MapService.getMap();
+                scope.featureGroups = false;
                 scope.featureLayer = LayersService.layersByProperty('layer', scope.featureLayerName)[0];
                 scope.markerLayer = LayersService.layersByProperty('layer', scope.markerLayerName)[0];
 
@@ -110,7 +111,9 @@ angular.module('orka.featurelist', [])
                     angular.forEach(featureGroups, function(features) {
                         features = $filter('orderBy')(features, sortFeaturesByNumValue, false);
                     });
-
+                    if(Object.keys(featureGroups).length === 0) {
+                        return false;
+                    }
                     return featureGroups;
                 };
 
