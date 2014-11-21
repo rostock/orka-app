@@ -57,22 +57,19 @@ angular.module('orka.featurelist', [])
                 scope.moveContentOutofOverflow = function() {
                     if(scope.showFeatureContent !== false && scope.showFeatureContent !== undefined) {
                         var id = 'feature_' + scope.showFeatureContent;
-                        var featureElement = element.find('#' + id);
-                        if(featureElement.length > 0) {
-                            var featureListContainer = element.find('#orka-feature-list-container');
-                            var elementBottom = featureElement.offset().top + featureElement.height();
-                            var containerBottom = featureListContainer.offset().top + featureListContainer.height();
-
-                            var delta = elementBottom - containerBottom;
-                            if(delta > 0) {
-                                var currentScrollTop = featureListContainer.scrollTop();
-                                var scrollTo = currentScrollTop + delta;
-                                featureListContainer.scrollTop(scrollTo);
-                            }
-                        }
+                        scope.scrollToFeatureById(id);
                     }
                 };
-
+                scope.scrollToFeatureById = function(id) {
+                    var featureElement = element.find('#' + id);
+                    if(featureElement.length > 0) {
+                        var currentScrollTop = element.scrollTop();
+                        var containerTop = element.offset().top;
+                        var elementTop = featureElement.offset().top;
+                        var scrollTo = (elementTop + currentScrollTop) - containerTop;
+                        element.scrollTop(scrollTo);
+                    }
+                };
                 scope.toggleFeatureContent = function(feature) {
                     scope.showFeatureContent = scope.showFeatureContent === feature.get('osm_id') ? false : feature.get('osm_id');
                     scope.toggleMarker(feature);
@@ -128,9 +125,6 @@ angular.module('orka.featurelist', [])
                     var features = featuresByExtent();
                     scope.$apply(function() {
                         scope.featureGroups = features;
-                        if(scope.showFeatureContent !== false) {
-                            $timeout(scope.moveContentOutofOverflow, 0, false);
-                        }
                     });
                     scope.toggleMarker();
                 });
@@ -140,11 +134,16 @@ angular.module('orka.featurelist', [])
                     scope.toggleMarker();
                 });
 
+                scope.$watch('featureGroups', function(newVal, oldVal) {
+                    if(scope.showFeatureContent !== false) {
+                        $timeout(scope.moveContentOutofOverflow, 0, false);
+                    }
+                });
+
                 scope.extent = calculateExtent(scope.map);
             }
         },
         controller: function($scope, $element, $attrs) {
-            // TODO review when layout finished
             this.scrollTo = function(feature) {
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);
@@ -156,15 +155,7 @@ angular.module('orka.featurelist', [])
                     $scope.showFeatureContent = feature.get('osm_id');
                 });
                 var id = 'feature_' + feature.get('osm_id');
-                var featureElement = $element.find('#' + id);
-                var featureListContainer = $element.find('#orka-feature-list-container');
-
-                var currentScrollTop = featureListContainer.scrollTop();
-                var containerTop = featureListContainer.offset().top;
-                var elementTop = featureElement.offset().top;
-                var scrollTo = (elementTop + currentScrollTop) - containerTop;
-
-                featureListContainer.scrollTop(scrollTo);
+                $scope.scrollToFeatureById(id);
             };
         }
     };

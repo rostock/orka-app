@@ -49,10 +49,9 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                             noseElement.css('top', (scope.popupInnerHeight() / 2) + (noseElement.height() / 2) + 'px');
 
                         }, 0, false);
-                        // TODO readd when styling finished
-                        // if(angular.isDefined(OrkaFeatureListController)) {
-                        //     OrkaFeatureListController.scrollTo(feature);
-                        // }
+                        if(angular.isDefined(OrkaFeatureListController)) {
+                            OrkaFeatureListController.scrollTo(feature);
+                        }
                     }
                     scope.$apply(function() {
                         scope.feature = feature;
