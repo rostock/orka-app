@@ -1,25 +1,27 @@
 <ng-transclude></ng-transclude>
-<div id="orka-feature-list-container">
-    <div ng-repeat="(type, features) in featureGroups">
-        <h4 ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
+<div id="orka-feature-list-container" class="list-group">
+    <div ng-repeat="(type, features) in featureGroups" class="feature-group-container list-group-item">
+        <h4 class="pointer" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
             {{ typeMap[type].title }}
         </h4>
-        <div id="feature_{{ feature.get('osm_id') }}"
-             ng-show="$parent.showGroup === type"
-             ng-repeat="feature in features">
-            <h5 ng-click="toggleFeatureContent(feature)">
-                {{ feature.get('name') }}
-            </h5>
-            <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')">
-                <a ng-href="feature.get('website')"
-                   ng-if="feature.get('website')">Homepage</a>
-                <address ng-if="hasAddress(feature)">
-                    {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }}<br>
-                    {{ feature.get('addr:zipcode') }} {{ feature.get('addr:city') }}
-                </address>
-                <div ng-repeat="tag in typeMap[type].listTags">
-                    <div ng-if="feature.get(tag)">
-                        {{ tag }}: {{ feature.get(tag) }}
+        <div class="features-container" ng-show="$parent.showGroup === type">
+            <div id="feature_{{ feature.get('osm_id') }}"
+                 ng-repeat="feature in features"
+                 class="feature">
+                <span class="pointer bold" ng-click="toggleFeatureContent(feature)">
+                    {{ feature.get('name') }}
+                </span>
+                <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')" class="feature-content">
+                    <a ng-href="feature.get('website')"
+                       ng-if="feature.get('website')">Homepage</a>
+                    <address ng-if="hasAddress(feature)">
+                        {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }}<br>
+                        {{ feature.get('addr:zipcode') }} {{ feature.get('addr:city') }}
+                    </address>
+                    <div ng-repeat="tag in typeMap[type].listTags">
+                        <div ng-if="feature.get(tag)">
+                            {{ tag }}: {{ feature.get(tag) }}
+                        </div>
                     </div>
                 </div>
             </div>

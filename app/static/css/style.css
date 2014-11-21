@@ -153,6 +153,29 @@ label.no-style {
   cursor: pointer;
 }
 
+/*
+ * Feature list
+ */
+
+.orka-feature-list {
+  overflow: auto;
+  max-height: 90%;
+}
+
+.feature {
+  margin-left: 10px;
+}
+
+.feature:nth-child(even) {
+  background-color: #eee;
+}
+.feature:nth-child(odd) {
+  background-color: #fff;
+}
+.feature-content {
+  margin-left: 10px;
+}
+
 /* OL3 */
 
 .ol-zoomslider {
