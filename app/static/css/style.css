@@ -148,15 +148,24 @@ label.no-style {
   cursor: pointer;
   margin-right: 2px;
   margin-left: 2px;
+  color: #000;
 }
 .nav-tabs > li > a:hover {
   background-color: rgba(224, 224, 224, 0.8);
   cursor: pointer;
+  color: #000;
 }
 
 .nav-tabs > li.active > a {
   background-color: #fff;
   cursor: pointer;
+  color: #000;
+}
+
+.nav-tabs > li.active > a:hover {
+  background-color: #eee;
+  cursor: pointer;
+  color: #000;
 }
 
 /*
