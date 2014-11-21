@@ -245,7 +245,6 @@ div.print-headline-container-last {
   margin-bottom: 0px;
 }
 
-
 /*
  * Map components
  */
@@ -370,7 +369,8 @@ div.print-headline-container-last {
   background-color: #f5f5f5;
   padding: 8px;
   border-radius: 5px;
-  width: 250px;
+  min-width: 100px;
+  max-width: 200px;
   border: 1px solid #d9d9d9;
 }
 
@@ -389,12 +389,16 @@ div.print-headline-container-last {
   left: -5px;
 }
 
-.orka-popup .orka-popup-container .orka-popup-close {
+.orka-popup .orka-popup-close {
   color: #b4b4b4;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 5px;
+  right: 5px;
   cursor: pointer;
+}
+
+.orka-popup .orka-popup-container {
+  margin-right: 20px;
 }
 
 .orka-popup .orka-popup-container .orka-popup-title {
