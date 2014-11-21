@@ -2,23 +2,24 @@
     <ng-transclude></ng-transclude>
     <ul class="list-group" ng-show="featureGroups !== false">
         <li ng-repeat="(type, features) in featureGroups" class="list-group-item">
-            <h4 class="pointer list-group-item-heading" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
+            <h5 class="pointer list-group-item-heading bold" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
                 {{ typeMap[type].title }}
-            </h4>
+            </h5>
             <ul ng-show="$parent.showGroup === type" class="list-group">
                 <li id="feature_{{ feature.get('osm_id') }}"
                      ng-repeat="feature in features"
-                     class="list-group-item feature">
-                    <h5 class="pointer list.group-item-heading" ng-click="toggleFeatureContent(feature)">
+                     class="list-group-item feature"
+                     ng-class="{'highlight': feature.get('highlight')">
+                    <h5 class="pointer list-group-item-heading" ng-click="toggleFeatureContent(feature)">
                         {{ feature.get('name') }}
                     </h5>
                     <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')" class="feature-content list-group-item-text">
                         <a ng-href="feature.get('website')"
                            ng-if="feature.get('website')">Homepage</a>
-                        <address ng-if="hasAddress(feature)">
+                        <div ng-if="hasAddress(feature)">
                             {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }}<br>
                             {{ feature.get('addr:zipcode') }} {{ feature.get('addr:city') }}
-                        </address>
+                        </div>
                         <div ng-repeat="tag in typeMap[type].listTags">
                             <div ng-if="feature.get(tag)">
                                 {{ tag }}: {{ feature.get(tag) }}
