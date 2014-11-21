@@ -353,7 +353,7 @@ div.print-headline-container-last {
 
 .ol-unselectable .orka-layerswitcher-toggle {
   width: 20px;
-  top: 10px;
+  top: 7px;
   right: 0px;
   border-radius: 5px 0px 0px 5px;
   background-color: rgba(0, 0, 0, 0.7);
@@ -441,7 +441,7 @@ div.print-headline-container-last {
   padding: 0px 25px 5px 5px;
   border-radius: 5px 0px 0px 5px;
   font-size: 14px;
-  top: 372px;
+  bottom: 90px;
   right: 0px;
   position: absolute;
   z-index: 1000;
@@ -450,15 +450,24 @@ div.print-headline-container-last {
 
 .ol-unselectable .orka-legend-toggle {
   width: 20px;
-  top: 375px;
-  right: 0px;
   border-radius: 5px 0px 0px 5px;
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
-  position: absolute;
   text-align: center;
   z-index: 1001;
   cursor: pointer;
+}
+
+.ol-unselectable .orka-legend-toggle.legend-hidden {
+  bottom: 90px;
+  right: 0px;
+  position: absolute;
+}
+
+.ol-unselectable .orka-legend-toggle.legend-visible {
+  position: absolute;
+  right: 0;
+  top: 3px;
 }
 
 .ol-unselectable .orka-legend .orka-poi-container {

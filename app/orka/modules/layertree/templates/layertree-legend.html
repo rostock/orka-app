@@ -1,8 +1,11 @@
-<div class="orka-legend-toggle">
-    <span class="glyphicon" ng-class="{'glyphicon-chevron-left': !showLegend, 'glyphicon-chevron-right': showLegend}" ng-click="showLegend=!showLegend"></span>
+<div class="orka-legend-toggle legend-hidden" ng-show="!showLegend">
+    <span class="glyphicon glyphicon-chevron-left" ng-click="showLegend=!showLegend"></span>
 </div>
 <div class="orka-legend" ng-show="showLegend">
     <span class="bold">Legende</span>
+    <div class="orka-legend-toggle legend-visible">
+        <span class="glyphicon glyphicon-chevron-right" ng-click="showLegend=!showLegend"></span>
+    </div>
     <div class="orka-poi-container">
         <div ng-repeat="poi in selectedPois">
             <img ng-src="{{ iconBaseUrl + typeMap[poi].icon }}" class="orka-poi-legend-icon"/>
