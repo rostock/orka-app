@@ -50,13 +50,21 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
 
                         }, 0, false);
                         if(angular.isDefined(OrkaFeatureListController)) {
-                            OrkaFeatureListController.scrollTo(feature);
+                            OrkaFeatureListController.showListFeature(feature);
                         }
+                    } else {
+                        scope.popupClosed();
                     }
                     scope.$apply(function() {
                         scope.feature = feature;
                         scope.popupVisible = visible;
                     });
+                };
+
+                scope.popupClosed = function() {
+                    if(angular.isDefined(OrkaFeatureListController)) {
+                        OrkaFeatureListController.removeHighlight();
+                    }
                 };
             },
             post: anolFeaturePopupDirective.link.post

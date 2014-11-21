@@ -196,7 +196,9 @@ label.no-style {
 .feature-content {
   margin-left: 10px;
 }
-
+.feature.highlight {
+  background-color: #ffc;
+}
 /*
  * Print content
  */

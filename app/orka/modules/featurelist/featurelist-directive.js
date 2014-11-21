@@ -56,8 +56,9 @@ angular.module('orka.featurelist', [])
                 };
 
                 scope.moveContentOutofOverflow = function() {
+                    var id;
                     if(scope.showFeatureContent !== false && scope.showFeatureContent !== undefined) {
-                        var id = 'feature_' + scope.showFeatureContent;
+                        id = 'feature_' + scope.showFeatureContent;
                         scope.scrollToFeatureById(id);
                     }
                 };
@@ -69,6 +70,12 @@ angular.module('orka.featurelist', [])
                         var elementTop = featureElement.offset().top;
                         var scrollTo = (elementTop + currentScrollTop) - containerTop;
                         element.scrollTop(scrollTo);
+                    }
+                };
+                scope.highlightFeatureById = function(id) {
+                    element.find('.feature.highlight').removeClass('highlight');
+                    if(id !== undefined) {
+                        element.find('#' + id).addClass('highlight');
                     }
                 };
                 scope.toggleFeatureContent = function(feature) {
@@ -149,7 +156,7 @@ angular.module('orka.featurelist', [])
             }
         },
         controller: function($scope, $element, $attrs) {
-            this.scrollTo = function(feature) {
+            this.showListFeature = function(feature) {
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);
                     $scope.markerFeature = undefined;
@@ -160,7 +167,11 @@ angular.module('orka.featurelist', [])
                     $scope.showFeatureContent = feature.get('osm_id');
                 });
                 var id = 'feature_' + feature.get('osm_id');
+                $scope.highlightFeatureById(id);
                 $scope.scrollToFeatureById(id);
+            };
+            this.removeHighlight = function() {
+                $scope.highlightFeatureById();
             };
         }
     };
