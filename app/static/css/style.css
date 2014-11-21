@@ -47,7 +47,6 @@ body {
     z-index: 1002;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
-    height: 50px;
     padding: 0 15px;
     border-radius: 0;
 }
@@ -63,7 +62,6 @@ body {
 
 .map-wrapper {
   display: inline-block;
-  margin-top: 50px;
   width: 100%;
   height: 500px;
 }
@@ -89,13 +87,11 @@ label.no-style {
 .sidebar {
   position: fixed;
   width: 0px;
-  top: 50px;
   z-index: 1000;
 }
 .sidebar.show {
   position: fixed;
   width: 300px;
-  top: 50px;
   z-index: 1000;
   border-right: 1px solid #ddd;
 }
@@ -103,14 +99,12 @@ label.no-style {
 .sidebar.show .sideways.tabs-right {
   position: fixed;
   left: 300px;
-  top: 50px;
   width: 0px;
 }
 
 .sidebar:not(.show) .sideways.tabs-right {
   position: fixed;
   left: 0px;
-  top: 50px;
   width: 0px;
 }
 

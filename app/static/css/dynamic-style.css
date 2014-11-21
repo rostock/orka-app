@@ -1,0 +1,23 @@
+.header,
+.navbar-brand {
+    height: 50px;
+}
+
+.sidebar,
+.sidebar.show,
+.sidebar.show .sideways.tabs-right,
+.sidebar:not(.show) .sideways.tabs-right {
+    top: 50px;
+}
+
+.map-wrapper {
+    margin-top: 50px;
+}
+
+.navbar {
+    min-height: 50px;
+}
+
+.navbar-brand {
+  padding-top: 15px;
+}

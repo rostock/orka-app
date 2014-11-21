@@ -14,7 +14,7 @@
     <link href="/anol/libs/ol3/ol3.css" rel="stylesheet">
     <link href="/static/css/lib/bootstrap.vertical-tabs.min.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
-
+    <link href="/static/css/dynamic-style.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -22,8 +22,8 @@
     <![endif]-->
   </head>
   <body ng-controller="appCtrl">
-    <div class="navbar navbar-default header" >
-      <a class="navbar-brand" href="#">Header Demo Anwendung</a>
+    <div class="navbar navbar-default header">
+      <a class="navbar-brand" href="#">ORKa.MV</a>
     </div>
 
     <div class="sidebar" ng-class="{'show': selectedTab !== false}">
@@ -145,6 +145,34 @@
         return byParam || byPath;
       };
 
+      var styleHeader = function(headerConfig) {
+        if(headerConfig.text !== undefined) {
+          $('.header a').text(headerConfig.text);
+        }
+        if(headerConfig.height !== undefined) {
+          $.each(document.styleSheets, function(idx, styleSheet) {
+            if(styleSheet.href !== null && styleSheet.href === (location.origin + '/static/css/dynamic-style.css')) {
+              $.each(styleSheet.cssRules, function(_idx, rule) {
+                var cssRuleName = rule.style[0];
+                var splittedRule = cssRuleName.split('-');
+                if(splittedRule.length > 1) {
+                  cssRuleName = splittedRule[0];
+                  for(var i = 1; i < splittedRule.length; i++) {
+                    cssRuleName += splittedRule[i][0].toUpperCase();
+                    cssRuleName += splittedRule[i].slice(1, splittedRule[i].length);
+                  }
+                }
+                if(cssRuleName === 'paddingTop') {
+                  rule.style[cssRuleName] = headerConfig.paddingTop || 0;
+                } else {
+                  rule.style[cssRuleName] = headerConfig.height;
+                }
+              });
+            }
+          });
+        }
+      };
+
       angular.element(document).ready(function() {
           var deferred = new $.Deferred();
           var loadConfig = function(url) {
@@ -167,6 +195,9 @@
           };
 
           deferred.promise().then(function() {
+            if(orkaAppConfig !== undefined && orkaAppConfig.header !== undefined) {
+              styleHeader(orkaAppConfig.header);
+            }
             angular.bootstrap(document, ['orkaApp']);
           });
 
