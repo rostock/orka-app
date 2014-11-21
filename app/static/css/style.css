@@ -102,17 +102,19 @@ label.no-style {
 
 .sidebar.show .sideways.tabs-right {
   position: fixed;
-  left: 272px;
+  left: 300px;
   top: 50px;
+  width: 0px;
 }
 
 .sidebar:not(.show) .sideways.tabs-right {
   position: fixed;
-  left: -28px;
+  left: 0px;
   top: 50px;
+  width: 0px;
 }
 
-.sidebar .nav {
+.sidebar.show .nav {
   padding-right: 0px;
   padding-left: 0px;
 }
@@ -120,6 +122,10 @@ label.no-style {
 .sidebar .tab-content {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.sideways > li {
+  left: -28px;
 }
 
 .sideways > li > a {
@@ -160,14 +166,20 @@ label.no-style {
 .orka-feature-list {
   overflow: auto;
   max-height: 90%;
+  margin-top: 10px;
 }
 
-.feature {
-  margin-left: 10px;
+.list-group-item .list-group {
+  margin: 16px -16px -11px;
+}
+
+.list-group-item .list-group .list-group-item:first-child,
+.list-group-item .list-group .list-group-item:last-child {
+  border-radius: 0px;
 }
 
 .feature:nth-child(even) {
-  background-color: #eee;
+  background-color: #f7f7f7;
 }
 .feature:nth-child(odd) {
   background-color: #fff;

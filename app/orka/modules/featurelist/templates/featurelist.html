@@ -1,17 +1,17 @@
 <ng-transclude></ng-transclude>
-<div id="orka-feature-list-container" class="list-group">
-    <div ng-repeat="(type, features) in featureGroups" class="feature-group-container list-group-item">
-        <h4 class="pointer" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
+<ul id="orka-feature-list-container" class="list-group">
+    <li ng-repeat="(type, features) in featureGroups" class="list-group-item">
+        <h4 class="pointer list-group-item-heading" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
             {{ typeMap[type].title }}
         </h4>
-        <div class="features-container" ng-show="$parent.showGroup === type">
-            <div id="feature_{{ feature.get('osm_id') }}"
+        <ul ng-show="$parent.showGroup === type" class="list-group">
+            <li id="feature_{{ feature.get('osm_id') }}"
                  ng-repeat="feature in features"
-                 class="feature">
-                <span class="pointer bold" ng-click="toggleFeatureContent(feature)">
+                 class="list-group-item feature">
+                <h5 class="pointer list.group-item-heading" ng-click="toggleFeatureContent(feature)">
                     {{ feature.get('name') }}
-                </span>
-                <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')" class="feature-content">
+                </h5>
+                <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')" class="feature-content list-group-item-text">
                     <a ng-href="feature.get('website')"
                        ng-if="feature.get('website')">Homepage</a>
                     <address ng-if="hasAddress(feature)">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </li>
+        </ul>
+    </li>
+</ul>
