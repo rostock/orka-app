@@ -55,6 +55,13 @@ angular.module('orka.featurelist', [])
                     }
                 };
 
+                scope.toggleHighlight = function(feature) {
+                    if(scope.highlightFeature === feature) {
+                        scope.highlightFeature = undefined;
+                    } else {
+                        scope.highlightFeature = feature;
+                    }
+                };
                 scope.moveContentOutofOverflow = function() {
                     var id;
                     if(scope.showFeatureContent !== false && scope.showFeatureContent !== undefined) {
@@ -72,15 +79,14 @@ angular.module('orka.featurelist', [])
                         element.scrollTop(scrollTo);
                     }
                 };
-                scope.highlightFeatureById = function(id) {
-                    element.find('.feature.highlight').removeClass('highlight');
-                    if(id !== undefined) {
-                        element.find('#' + id).addClass('highlight');
-                    }
-                };
                 scope.toggleFeatureContent = function(feature) {
                     scope.showFeatureContent = scope.showFeatureContent === feature.get('osm_id') ? false : feature.get('osm_id');
-                    scope.toggleMarker(feature);
+
+                    if(scope.markerFeature !== undefined || scope.showFeatureContent !== false) {
+                        scope.toggleMarker(feature);
+                    }
+
+                    scope.toggleHighlight(feature);
                     if(angular.isDefined(scope.popupScope)) {
                         scope.popupScope.popupVisible = false;
                     }
@@ -165,19 +171,19 @@ angular.module('orka.featurelist', [])
                     $scope.markerFeature = undefined;
                 }
                 $scope.toggleMarker();
-                $scope.$apply(function() {
-                    $scope.showGroup = feature.get('type');
-                    $scope.showFeatureContent = feature.get('osm_id');
-                });
-                var id = 'feature_' + feature.get('osm_id');
-                $scope.highlightFeatureById(id);
-                $scope.scrollToFeatureById(id);
+                if($scope.highlightFeature !== feature) {
+                    $scope.toggleHighlight(feature);
+                }
+                if(feature !== undefined) {
+                    type = feature.get('type');
+                    osmId = feature.get('osm_id');
+                    $scope.scrollToFeatureById('feature_' + osmId);
+                }
+                $scope.showGroup = type;
+                $scope.showFeatureContent = osmId;
+            };
             this.registerPopupScope = function(popupScope) {
                 $scope.popupScope = popupScope;
-            };
-            };
-            this.removeHighlight = function() {
-                $scope.highlightFeatureById();
             };
         }
     };
