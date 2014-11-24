@@ -48,13 +48,19 @@ angular.module('orka.layertree')
                 if(feature.get('highlightMarker') === true) {
                     styles.push(new ol.style.Style({
                         image: new ol.style.Icon({
-                            src: ConfigService.config.poi.markerIcon
+                            src: ConfigService.config.poi.markerIcon,
+                            anchor: ConfigService.config.poi.markerAnchor,
+                            anchorXUnits: 'pixels',
+                            anchorYUnits: 'pixels'
                         })
                     }));
                 }
                 styles.push(new ol.style.Style({
                     image: new ol.style.Icon({
-                        src: self.typeMap[feature.get('type')].icon
+                        src: self.typeMap[feature.get('type')].icon,
+                        anchor: ConfigService.config.poi.symbolAnchor,
+                        anchorXUnits: 'pixels',
+                        anchorYUnits: 'pixels'
                     })
                 }));
 

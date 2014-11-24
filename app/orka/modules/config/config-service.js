@@ -61,6 +61,8 @@ angular.module('orka.config', [])
             iconBaseURL: 'http://www.orka-mv.de/static/icons/',
             markerIcon: '/static/img/highlightMarker.png',
             legendURL: '/static/data/poi_legend_data.json',
+            symbolAnchor: [10, 26],
+            markerAnchor: [12, 28]
         },
         track: {
             layerURL: 'http://www.orka-mv.de/citymap/tracks',
