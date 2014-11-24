@@ -64,7 +64,7 @@ angular.module('orka.featurelist', [])
                 };
                 scope.moveContentOutofOverflow = function() {
                     var id;
-                    if(scope.showFeatureContent !== false && scope.showFeatureContent !== undefined) {
+                    if(scope.showFeatureContent !== false) {
                         id = 'feature_' + scope.showFeatureContent;
                         scope.scrollToFeatureById(id);
                     }
@@ -93,7 +93,6 @@ angular.module('orka.featurelist', [])
                     // timeout function is runing right after scope digest completet.
                     // before digest is not complete, browser has not updated html.
                     // so element is hidden although scope.showFeatureContent is true
-                    $timeout(scope.moveContentOutofOverflow, 0, false);
                 };
 
                 scope.hasAddress = function(feature) {
@@ -177,10 +176,16 @@ angular.module('orka.featurelist', [])
                 if(feature !== undefined) {
                     type = feature.get('type');
                     osmId = feature.get('osm_id');
-                    $scope.scrollToFeatureById('feature_' + osmId);
+                    $scope.$apply(function() {
+                        $scope.showGroup = type;
+                        $scope.showFeatureContent = osmId;
+                    });
+                    $timeout($scope.moveContentOutofOverflow, 0, false);
+                } else {
+                    $scope.showFeatureContent = osmId;
                 }
-                $scope.showGroup = type;
-                $scope.showFeatureContent = osmId;
+
+
             };
             this.registerPopupScope = function(popupScope) {
                 $scope.popupScope = popupScope;
