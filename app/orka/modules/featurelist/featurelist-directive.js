@@ -27,8 +27,13 @@ angular.module('orka.featurelist', [])
                 scope.toggleMarker = function(feature) {
                     if(scope.markerFeature !== undefined) {
                         var markerVisible = ol.extent.containsCoordinate(scope.extent, scope.markerFeature.getGeometry().getCoordinates());
-                        if(!markerVisible) {
+                        if(!markerVisible && feature === undefined) {
                             scope.markerFeature.set('highlightMarker', false);
+                            return;
+                        } else if(!markerVisible && feature !== undefined) {
+                            scope.markerFeature.set('highlightMarker', false);
+                            scope.markerFeature = feature;
+                            scope.markerFeature.set('highlightMarker', true);
                             return;
                         } else if(feature === undefined) {
                             scope.markerFeature.set('highlightMarker', true);
