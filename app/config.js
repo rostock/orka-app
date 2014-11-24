@@ -94,6 +94,25 @@ angular.module('orkaApp', [
         PrintPageServiceProvider.setPageSizes(ConfigServiceProvider.config.print.pageSizes);
         PrintPageServiceProvider.setOutputFormats(ConfigServiceProvider.config.print.outputFormats);
         PrintPageServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
+        PrintPageServiceProvider.setStyle(new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.4)'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'rgba(0, 0, 0, 1)'
+            }),
+            image: new ol.style.Circle({
+                radius: 5,
+                cursor: 'pointer',
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 255, 255, 1)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: 'rgba(0, 0, 0, 1)'
+                })
+            })
+        }));
+
         PrintServiceProvider.setCreateDownloadUrl(ConfigServiceProvider.config.print.createURL);
         PrintServiceProvider.setCheckDownloadUrl(ConfigServiceProvider.config.print.checkURL);
         PrintServiceProvider.setCheckDownloadDelay(ConfigServiceProvider.config.print.checkDelay);

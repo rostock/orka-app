@@ -3,7 +3,7 @@ angular.module('anol.print', [])
 .provider('PrintPageService', [function() {
     // Better move directive configuration in directive so
     // direcitve can be replaced by custom one?
-    var _pageSizes, _outputFormats, _defaultScale;
+    var _pageSizes, _outputFormats, _defaultScale, _style;
 
     this.setPageSizes = function(pageSizes) {
         _pageSizes = pageSizes;
@@ -13,6 +13,9 @@ angular.module('anol.print', [])
     };
     this.setDefaultScale = function(scale) {
         _defaultScale = scale;
+    };
+    this.setStyle = function(style) {
+        _style = style;
     };
 
     this.$get = ['$rootScope', 'MapService', 'LayersService', 'LayersFactory', 'InteractionsService', function($rootScope, MapService, LayersService, LayersFactory, InteractionsService) {
@@ -31,10 +34,15 @@ angular.module('anol.print', [])
         };
         var _modifyFeatures = new ol.Collection();
 
-        var _printLayer = LayersFactory.newFeatureLayer({
+        var layerOptions = {
             'title': 'PrintLayer',
             'displayInLayerswitcher': false
-        });
+        };
+        if(_style) {
+            layerOptions.style = _style;
+        }
+        var _printLayer = LayersFactory.newFeatureLayer(layerOptions);
+
         var _printSource = _printLayer.getSource();
         LayersService.addLayer(_printLayer);
 
@@ -117,7 +125,14 @@ angular.module('anol.print', [])
             if(_modify !== undefined) {
                 InteractionsService.removeInteraction(_modify);
             }
-            _modify = new ol.interaction.Modify({features: _modifyFeatures});
+            var modifyOptions = {features: _modifyFeatures};
+
+
+            if(_style !== undefined) {
+                // TODO find a way to style cursor when it's hover a feature
+                modifyOptions.style = _style;
+            }
+            _modify = new ol.interaction.Modify(modifyOptions);
 
             InteractionsService.addInteraction(_modify);
         };
@@ -132,6 +147,7 @@ angular.module('anol.print', [])
 
             var updateFeature = function(dragFeature, currentFeature, coords, handler) {
                 // TODO remove modify when we can
+                // TODO realign dragged feature after drag action complete
                 dragFeature.un('change', handler, self);
                 if(dragFeature !== currentFeature) {
                     _modifyFeatures.remove(dragFeature);
