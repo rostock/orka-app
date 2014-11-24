@@ -9,7 +9,7 @@
                 <li id="feature_{{ feature.get('osm_id') }}"
                      ng-repeat="feature in features"
                      class="list-group-item feature"
-                     ng-class="{'highlight': feature === highlightFeature}">
+                     ng-class="{'highlight': $parent.$parent.showFeatureContent === feature.get('osm_id')}">
                     <h5 class="pointer list-group-item-heading" ng-click="toggleFeatureContent(feature)">
                         {{ feature.get('name') }}
                     </h5>

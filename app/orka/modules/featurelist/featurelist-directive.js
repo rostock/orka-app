@@ -55,13 +55,6 @@ angular.module('orka.featurelist', [])
                     }
                 };
 
-                scope.toggleHighlight = function(feature) {
-                    if(scope.highlightFeature === feature) {
-                        scope.highlightFeature = undefined;
-                    } else {
-                        scope.highlightFeature = feature;
-                    }
-                };
                 scope.moveContentOutofOverflow = function() {
                     var id;
                     if(scope.showFeatureContent !== false) {
@@ -86,7 +79,6 @@ angular.module('orka.featurelist', [])
                         scope.toggleMarker(feature);
                     }
 
-                    scope.toggleHighlight(feature);
                     if(angular.isDefined(scope.popupScope)) {
                         scope.popupScope.popupVisible = false;
                     }
@@ -170,9 +162,7 @@ angular.module('orka.featurelist', [])
                     $scope.markerFeature = undefined;
                 }
                 $scope.toggleMarker();
-                if($scope.highlightFeature !== feature) {
-                    $scope.toggleHighlight(feature);
-                }
+
                 if(feature !== undefined) {
                     type = feature.get('type');
                     osmId = feature.get('osm_id');
