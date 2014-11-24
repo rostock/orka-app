@@ -157,6 +157,7 @@ angular.module('orka.featurelist', [])
         },
         controller: function($scope, $element, $attrs) {
             this.showListFeature = function(feature) {
+                var type, osmId;
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);
                     $scope.markerFeature = undefined;
