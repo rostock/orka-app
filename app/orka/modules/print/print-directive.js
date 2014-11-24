@@ -1,6 +1,6 @@
-angular.module('orka.print', [])
+angular.module('orka.print', ['anol.scale'])
 
-.directive('orkaPrint', ['$modal', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', function($modal, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService) {
+.directive('orkaPrint', ['$modal', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', 'MapService', 'calculateScale', function($modal, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService, MapService, calculateScale) {
     return {
         restrict: 'A',
         transclude: true,
@@ -11,7 +11,7 @@ angular.module('orka.print', [])
                 // TODO find a better solution to prevent directive to be executed
                 // when ConfigService.config.print is undefined
                 scope.show = ConfigService.config.print !== undefined;
-
+                scope.view = MapService.getMap().getView();
                 if(scope.show) {
                     scope.outputFormats = PrintPageService.outputFormats;
                     scope.pageSizes = PrintPageService.pageSizes;
@@ -88,6 +88,7 @@ angular.module('orka.print', [])
                         PrintPageService.createPrintArea(scope.pageSize, scope.scale);
                     }
                 };
+                // TODO use calculateScale function from anol.scale.scaletext-directive
             },
             post: function(scope, element, attrs) {
                 scope.$watch(
@@ -103,7 +104,16 @@ angular.module('orka.print', [])
                         return PrintService.status;
                     }, function(newVal, oldVal) {
                         scope.printStatus = newVal;
-                    });
+                    }
+                );
+                scope.view.on('change:resolution', function() {
+                    if(scope.pageSize === undefined) {
+                        scope.$apply(function() {
+                            scope.scale = calculateScale(scope.view);
+                        });
+                    }
+                });
+                scope.scale = calculateScale(scope.view);
             }
         }
     };
