@@ -68,38 +68,47 @@ angular.module('anol.print', [])
 
             // TOTO refactor
             _dragFeatures.left = new ol.Feature(new ol.geom.Point([left, center[1]]));
+            _dragFeatures.left.set('position', 'left');
             _dragFeatures.left.on('change', this.dragFeatureNormalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.left);
 
             _dragFeatures.right = new ol.Feature(new ol.geom.Point([right, center[1]]));
+            _dragFeatures.right.set('position', 'right');
             _dragFeatures.right.on('change', this.dragFeatureNormalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.right);
 
             _dragFeatures.top = new ol.Feature(new ol.geom.Point([center[0], top]));
+            _dragFeatures.top.set('position', 'top');
             _dragFeatures.top.on('change', this.dragFeatureNormalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.top);
 
             _dragFeatures.bottom = new ol.Feature(new ol.geom.Point([center[0], bottom]));
+            _dragFeatures.bottom.set('position', 'bottom');
             _dragFeatures.bottom.on('change', this.dragFeatureNormalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.bottom);
 
             _dragFeatures.leftbottom = new ol.Feature(new ol.geom.Point([left, bottom]));
+            _dragFeatures.leftbottom.set('position', 'leftbottom');
             _dragFeatures.leftbottom.on('change', this.dragFeatureDiagonalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.leftbottom);
 
             _dragFeatures.lefttop = new ol.Feature(new ol.geom.Point([left, top]));
+            _dragFeatures.lefttop.set('position', 'lefttop');
             _dragFeatures.lefttop.on('change', this.dragFeatureDiagonalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.lefttop);
 
             _dragFeatures.rightbottom = new ol.Feature(new ol.geom.Point([right, bottom]));
+            _dragFeatures.rightbottom.set('position', 'rightbottom');
             _dragFeatures.rightbottom.on('change', this.dragFeatureDiagonalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.rightbottom);
 
             _dragFeatures.righttop = new ol.Feature(new ol.geom.Point([right, top]));
+            _dragFeatures.righttop.set('position', 'righttop');
             _dragFeatures.righttop.on('change', this.dragFeatureDiagonalChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.righttop);
 
             _dragFeatures.center = new ol.Feature(new ol.geom.Point(center));
+            _dragFeatures.center.set('position', 'center');
             _dragFeatures.center.on('change', this.dragFeatureCenterChangeHandler, this);
             _modifyFeatures.push(_dragFeatures.center);
 
