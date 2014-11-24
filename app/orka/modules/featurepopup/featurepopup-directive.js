@@ -63,9 +63,13 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
 
                 scope.popupClosed = function() {
                     if(angular.isDefined(OrkaFeatureListController)) {
-                        OrkaFeatureListController.removeHighlight();
+                        OrkaFeatureListController.showListFeature();
                     }
                 };
+
+                if(angular.isDefined(OrkaFeatureListController)) {
+                    OrkaFeatureListController.registerPopupScope(scope);
+                }
             },
             post: anolFeaturePopupDirective.link.post
         },

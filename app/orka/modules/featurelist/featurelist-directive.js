@@ -81,6 +81,9 @@ angular.module('orka.featurelist', [])
                 scope.toggleFeatureContent = function(feature) {
                     scope.showFeatureContent = scope.showFeatureContent === feature.get('osm_id') ? false : feature.get('osm_id');
                     scope.toggleMarker(feature);
+                    if(angular.isDefined(scope.popupScope)) {
+                        scope.popupScope.popupVisible = false;
+                    }
                     // timeout function is runing right after scope digest completet.
                     // before digest is not complete, browser has not updated html.
                     // so element is hidden although scope.showFeatureContent is true
@@ -169,6 +172,9 @@ angular.module('orka.featurelist', [])
                 var id = 'feature_' + feature.get('osm_id');
                 $scope.highlightFeatureById(id);
                 $scope.scrollToFeatureById(id);
+            this.registerPopupScope = function(popupScope) {
+                $scope.popupScope = popupScope;
+            };
             };
             this.removeHighlight = function() {
                 $scope.highlightFeatureById();
