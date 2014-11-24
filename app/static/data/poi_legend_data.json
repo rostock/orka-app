@@ -40,8 +40,17 @@
       ],
       "name": "aktiv_sein",
       "title": "Aktiv sein",
-      "listTags": ["fee", "opening_hours", "brand"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "fee",
+        "title": "Gebühr"
+        }, {
+          "tag": "opening_hours",
+          "title": "Öffnungszeiten"
+        }, {
+          "tag": "brand",
+          "title": "Marke"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -63,8 +72,14 @@
       ],
       "name": "baden",
       "title": "Baden",
-      "listTags": ["fee", "opening_hours"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "fee",
+        "title": "Gebühr"
+        }, {
+          "tag": "opening_hours",
+          "title": "Öffnungszeiten"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -91,8 +106,20 @@
       ],
       "name": "essen_trinken",
       "title": "Essen & Trinken",
-      "listTags": ["cuisine", "opening_hours", "operator", "brand"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "cuisine",
+        "title": "Küche"
+      }, {
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
+        "tag": "brand",
+        "title": "Marke"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -109,8 +136,14 @@
       ],
       "name": "informieren",
       "title": "Informieren",
-      "listTags": ["opening_hours", "operator"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -147,8 +180,23 @@
       ],
       "name": "kultur_erleben",
       "title": "Kultur erleben",
-      "listTags": ["opening_hours", "religion", "operator", "fee", "cuisine"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "religion",
+        "title": "Konfession"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
+        "tag": "fee",
+        "title": "Gebühr"
+      }, {
+        "tag": "cuisine",
+        "title": "Küche"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -170,8 +218,20 @@
       ],
       "name": "natur_erleben",
       "title": "Natur erleben",
-      "listTags": ["opening_hours", "operator", "religion", "fee"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "religion",
+        "title": "Konfession"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
+        "tag": "fee",
+        "title": "Gebühr"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -188,8 +248,17 @@
       ],
       "name": "rasten",
       "title": "Rasten",
-      "listTags": ["opening_hours", "operator", "fee"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
+        "tag": "fee",
+        "title": "Gebühr"
+      }],
+      "popupTags": []
     },
     {
       "groups": [
@@ -221,8 +290,20 @@
       ],
       "name": "uebernachten",
       "title": "\u00dcbernachten",
-      "listTags": ["opening_hours", "operator", "fee", "brand"],
-      "popupTags": ["religion", "operator"]
+      "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "brand",
+        "title": "Marke"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
+        "tag": "fee",
+        "title": "Gebühr"
+      }],
+      "popupTags": []
     }
   ]
 }
