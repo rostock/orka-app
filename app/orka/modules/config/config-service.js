@@ -41,11 +41,35 @@ angular.module('orka.config', [])
         backgroundLayer: {
             'ORKA_STADTPLAN': {
                 baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
-                layer: 'stadtplan_hillshade_EPSG25833',
+                layer: 'stadtplan_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan',
                 shortcut: 'S',
                 printLayer: 'mvp-mapserver-print'
+            },
+            'ORKA_STADTPLAN_OHNE_TEXT': {
+                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                layer: 'stadtplan_notext_EPSG25833',
+                format: 'png',
+                title: 'Stadtplan ohne TEXT',
+                shortcut: 'S',
+                printLayer: 'mvp-mapserver-notext-print'
+            },
+            'ORKA_STADTPLAN_SCHUMMERUNG': {
+                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                layer: 'stadtplan_hillshade_EPSG25833',
+                format: 'png',
+                title: 'Stadtplan Schummerung',
+                shortcut: 'S',
+                printLayer: 'mvp-mapserver-hillshade-print'
+            },
+            'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT': {
+                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                layer: 'stadtplan_hillshade_notext_EPSG25833',
+                format: 'png',
+                title: 'Stadtplan Schummerung ohne Text',
+                shortcut: 'S',
+                printLayer: 'mvp-mapserver-hillshade-notext-print'
             },
             'ORKA_STADTPLAN_GRAU': {
                 baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
@@ -53,7 +77,15 @@ angular.module('orka.config', [])
                 format: 'png',
                 title: 'Stadtplan Grau',
                 shortcut: 'G',
-                printLayer: 'mvp-mapserver-greyscale-print'
+                printLayer: 'mvp-mapserver-grayscale-print'
+            },
+            'ORKA_STADTPLAN_GRAU_OHNE_TEXT': {
+                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                layer: 'stadtplan_grau_notext_EPSG25833',
+                format: 'png',
+                title: 'Stadtplan Grau ohne Text',
+                shortcut: 'S',
+                printLayer: 'mvp-mapserver-grayscale-notext-print'
             }
         },
         poi: {
