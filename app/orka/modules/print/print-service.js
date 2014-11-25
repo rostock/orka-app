@@ -37,8 +37,8 @@ angular.module('orka.print')
                 layer: layer,
                 params: {
                     'street_index': streetIndex,
-                    'poi_types': poiTypes.length === 0 ? false : poiTypes.join(','),
-                    'track_types': trackTypes.length === 0 ? false : trackTypes.join(','),
+                    'poi_types':  poiTypes.join(','),
+                    'track_types': trackTypes.join(','),
                 }
             };
             var deferred = $q.defer();
