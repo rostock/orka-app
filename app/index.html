@@ -64,8 +64,8 @@
     </script>
 
     <script type="text/ng-template" id="anol/modules/layerswitcher/templates/layerswitcher.html">
-      <div class="orka-layerswitcher-toggle" ng-show="showToggle" ng-show="backgroundLayers.length > 1 || overlayLayers.length > 0">
-        <span class="glyphicon" ng-class="{'glyphicon-chevron-left': collapsed, 'glyphicon-chevron-right': !collapsed}" ng-click="collapsed=!collapsed"></span>
+      <div class="orka-layerswitcher-toggle" ng-show="showToggle" ng-if="backgroundLayers.length > 1 || overlayLayers.length > 0">
+        <span class="glyphicon" ng-class="{'glyphicon-chevron-left': collapsed, 'glyphicon-chevron-right': !collapsed}" ng-click="$parent.collapsed=!$parent.collapsed"></span>
       </div>
       <div class="orka-layerswitcher" ng-show="!collapsed">
         <div ng-show="backgroundLayers.length > 1">
