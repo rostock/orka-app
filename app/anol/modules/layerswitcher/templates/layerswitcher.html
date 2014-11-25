@@ -1,8 +1,8 @@
-<div class="anol-layerswitcher-toggle" ng-show="showToggle">
+<div class="anol-layerswitcher-toggle" ng-show="showToggle" ng-show="backgroundLayers.length > 1 || overlayLayers.length > 0">
     <span class="glyphicon" ng-class="{'glyphicon-chevron-left': collapsed, 'glyphicon-chevron-right': !collapsed}" ng-click="collapsed=!collapsed"></span>
 </div>
 <div class="anol-layerswitcher" ng-show="!collapsed">
-    <div ng-if="backgroundLayers.length > 1">
+    <div ng-show="backgroundLayers.length > 1">
         <h4>Background Layers</h4>
         <div ng-repeat="layer in backgroundLayers">
              <!-- double $parent cause ng-if and ng-repeat create own closed scopes -->
@@ -10,7 +10,7 @@
             {{ layer.get('title') }}
         </div>
     </div>
-    <div ng-if="overlayLayers.length > 0">
+    <div ng-show="overlayLayers.length > 0">
         <h4>Overlay Layers</h4>
         <div ng-repeat="layer in overlayLayers">
             <span class="glyphicon"
