@@ -72,7 +72,7 @@
           <span class="bold">Hintergrundkarte</span>
           <div ng-repeat="layer in backgroundLayers">
             <label class="no-style pointer">
-              <input type="radio" ng-model="$parent.$parent.backgroundLayer" ng-value="layer">
+              <input type="radio" ng-model="$parent.backgroundLayer" ng-value="layer">
               {{ layer.get('title') }}
             </label>
           </div>
