@@ -110,6 +110,7 @@ angular.module('orka.config', [])
 
     this.setConfig = function(config) {
         var self = this;
+        self.config.header = config.header.height === '0px' ? false : true;
         self.config.popup = $.extend({}, defaults.popup);
         self.config.map = $.extend({}, defaults.map, config.map);
         self.config.backgroundLayer = [];

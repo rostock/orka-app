@@ -22,7 +22,7 @@
     <![endif]-->
   </head>
   <body ng-controller="appCtrl" class="hide" ng-class="{'show': appReady}">
-    <div class="navbar navbar-default header">
+    <div class="navbar navbar-default header" ng-show="showHeader">
       <a class="navbar-brand" href="#">ORKa.MV</a>
     </div>
 
@@ -97,6 +97,7 @@
         $scope.fullscreen = true;
         $scope.printAvailable = ConfigService.config.print !== undefined;
         $scope.themesAvailable = (ConfigService.config.poi !== undefined && ConfigService.config.track !== undefined);
+        $scope.showHeader = ConfigService.config.header;
 
         $scope.selectTab = function(tab) {
           $scope.selectedTab = tab === $scope.selectedTab ? false : tab;
