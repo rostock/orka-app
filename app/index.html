@@ -21,7 +21,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-controller="appCtrl">
+  <body ng-controller="appCtrl" class="hide" ng-class="{'show': appReady}">
     <div class="navbar navbar-default header">
       <a class="navbar-brand" href="#">ORKa.MV</a>
     </div>
@@ -106,6 +106,8 @@
             MapService.getMap().updateSize();
           }, 0, false);
         });
+
+        $scope.appReady = true;
       }]);
     </script>
 
