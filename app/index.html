@@ -198,9 +198,20 @@
               head.appendChild(script);
           };
 
+          var loadNoTabMapStyle = function() {
+            var head = document.getElementsByTagName('head')[0];
+            var style = document.createElement('link');
+            style.rel = 'stylesheet';
+            style.href = '/static/css/notab-mapstyle.css';
+            head.appendChild(style);
+          };
+
           deferred.promise().then(function() {
             if(orkaAppConfig !== undefined && orkaAppConfig.header !== undefined) {
               styleHeader(orkaAppConfig.header);
+            }
+            if(orkaAppConfig !== undefined && !orkaAppConfig.print && !orkaAppConfig.themes) {
+              loadNoTabMapStyle();
             }
             angular.bootstrap(document, ['orkaApp']);
           });
