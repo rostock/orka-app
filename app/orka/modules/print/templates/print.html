@@ -17,7 +17,7 @@
             Dateiformat wählen
         </span>
     </div>
-    <select class="form-control" ng-model="outputFormat" ng-options="format as format.label for format in outputFormats">
+    <select class="form-control" ng-model="$parent.outputFormat" ng-options="format as format.label for format in outputFormats">
     </select>
     <div class="print-headline-container">
         <span class="print-headline">
