@@ -42,33 +42,37 @@ angular.module('orka.layertree')
             this.typeMap = {};
             this.selectedPoiTypes = [];
             this.selectedTrackTypes = [];
-
-            this.poiLayer.setStyle(function(feature, resolution) {
-                var styles = [];
-                if(feature.get('highlightMarker') === true) {
+            if(this.poiLayer !== undefined) {
+                this.poiLayer.setStyle(function(feature, resolution) {
+                    var styles = [];
+                    if(feature.get('highlightMarker') === true) {
+                        styles.push(new ol.style.Style({
+                            image: new ol.style.Icon({
+                                src: ConfigService.config.poi.markerIcon,
+                                anchor: ConfigService.config.poi.markerAnchor,
+                                anchorXUnits: 'pixels',
+                                anchorYUnits: 'pixels'
+                            })
+                        }));
+                    }
                     styles.push(new ol.style.Style({
                         image: new ol.style.Icon({
-                            src: ConfigService.config.poi.markerIcon,
-                            anchor: ConfigService.config.poi.markerAnchor,
+                            src: self.typeMap[feature.get('type')].icon,
+                            anchor: ConfigService.config.poi.symbolAnchor,
                             anchorXUnits: 'pixels',
                             anchorYUnits: 'pixels'
                         })
                     }));
-                }
-                styles.push(new ol.style.Style({
-                    image: new ol.style.Icon({
-                        src: self.typeMap[feature.get('type')].icon,
-                        anchor: ConfigService.config.poi.symbolAnchor,
-                        anchorXUnits: 'pixels',
-                        anchorYUnits: 'pixels'
-                    })
-                }));
 
-                return styles;
-            });
+                    return styles;
+                });
 
-            this.poisLoaded = this._loadPois(poiLegendUrl);
-            this.tracksLoaded = this._loadTracks(trackLegendUrl);
+                this.poisLoaded = this._loadPois(poiLegendUrl);
+            }
+
+            if(this.trackLayer !== undefined) {
+                this.tracksLoaded = this._loadTracks(trackLegendUrl);
+            }
         };
         LayerTree.prototype.updateSelectedPoiTypes = function(selectedTypes) {
             // keep internal and external types in sync cause we need it both as service value

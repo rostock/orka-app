@@ -118,8 +118,10 @@ angular.module('orka.config', [])
             layer.attributions = config.attributions || defaults.attributions;
             self.config.backgroundLayer.push(layer);
         });
-        self.config.poi = $.extend({}, defaults.poi, config.poi);
-        self.config.track = $.extend({}, defaults.track, config.track);
+        if(config.themes === true) {
+            self.config.poi = $.extend({}, defaults.poi, config.poi);
+            self.config.track = $.extend({}, defaults.track, config.track);
+        }
         if(config.print === true) {
             self.config.print = $.extend({}, defaults.print);
         }

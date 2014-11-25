@@ -54,39 +54,41 @@ angular.module('orkaApp', [
 }])
 
 .config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', 'LayertreeServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider, LayertreeServiceProvider) {
-    var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
-        projection: ConfigServiceProvider.config.map.projection,
-        url: ConfigServiceProvider.config.poi.layerURL,
-        title: 'POI Layer',
-        layer: 'poi_layer',
-        visible: false,
-        displayInLayerswitcher: false,
-        additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
-    });
-    var trackLayer = LayersFactoryProvider.newSingleTileWMS({
-        extent: ConfigServiceProvider.config.map.extent,
-        url: ConfigServiceProvider.config.track.layerURL,
-        title: 'Track Layer',
-        layer: 'track_layer',
-        visible: false,
-        displayInLayerswitcher: false,
-        params: {
-            'LAYERS': ConfigServiceProvider.config.track.layerName,
-            'TRANSPARENT': true,
-            'SRS': ConfigServiceProvider.config.map.projection.getCode()
-        }
-    });
+    if(ConfigServiceProvider.config.poi !== undefined && ConfigServiceProvider.config.track !== undefined) {
+        var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
+            projection: ConfigServiceProvider.config.map.projection,
+            url: ConfigServiceProvider.config.poi.layerURL,
+            title: 'POI Layer',
+            layer: 'poi_layer',
+            visible: false,
+            displayInLayerswitcher: false,
+            additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
+        });
+        var trackLayer = LayersFactoryProvider.newSingleTileWMS({
+            extent: ConfigServiceProvider.config.map.extent,
+            url: ConfigServiceProvider.config.track.layerURL,
+            title: 'Track Layer',
+            layer: 'track_layer',
+            visible: false,
+            displayInLayerswitcher: false,
+            params: {
+                'LAYERS': ConfigServiceProvider.config.track.layerName,
+                'TRANSPARENT': true,
+                'SRS': ConfigServiceProvider.config.map.projection.getCode()
+            }
+        });
 
-    LayertreeServiceProvider.setPoiLayer(poiLayer);
-    LayertreeServiceProvider.setTrackLayer(trackLayer);
-    LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.poi.legendURL);
-    LayertreeServiceProvider.setTrackLegendUrl(ConfigServiceProvider.config.track.legendURL);
-    LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
+        LayertreeServiceProvider.setPoiLayer(poiLayer);
+        LayertreeServiceProvider.setTrackLayer(trackLayer);
+        LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.poi.legendURL);
+        LayertreeServiceProvider.setTrackLegendUrl(ConfigServiceProvider.config.track.legendURL);
+        LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
 
-    LayersServiceProvider.setLayers([
-        trackLayer,
-        poiLayer
-    ]);
+        LayersServiceProvider.setLayers([
+            trackLayer,
+            poiLayer
+        ]);
+    }
 }])
 
 .config(['ConfigServiceProvider', 'PrintPageServiceProvider', 'PrintServiceProvider', function(ConfigServiceProvider, PrintPageServiceProvider, PrintServiceProvider) {
