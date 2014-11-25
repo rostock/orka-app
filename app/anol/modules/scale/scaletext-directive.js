@@ -1,7 +1,7 @@
 angular.module('anol.scale')
 
 .constant('calculateScale', function(view) {
-    var INCHES_PER_METER = 39.37;
+    var INCHES_PER_METER = 1000 / 25.4;
     var DPI = 72;
     // found at https://groups.google.com/d/msg/ol3-dev/RAJa4locqaM/4AzBrkndL9AJ
     var resolution = view.getResolution();
