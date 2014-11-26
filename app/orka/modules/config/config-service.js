@@ -51,7 +51,7 @@ angular.module('orka.config', [])
                 baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
                 layer: 'stadtplan_notext_EPSG25833',
                 format: 'png',
-                title: 'Stadtplan ohne TEXT',
+                title: 'Stadtplan ohne Text',
                 shortcut: 'S',
                 printLayer: 'mvp-mapserver-notext-print'
             },
