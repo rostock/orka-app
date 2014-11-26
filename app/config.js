@@ -1,5 +1,6 @@
 angular.module('orkaApp', [
-    'ui.bootstrap', 'anol', 'anol.map', 'anol.scale', 'anol.layerswitcher', 'anol.permalink', 'anol.print',
+    'ui.bootstrap',
+    'anol.layerswitcher', 'anol.permalink',
     'orka.config', 'orka.print', 'orka.featurelist', 'orka.layertree', 'orka.featurepopup', 'orka.mouseposition'
 ])
 

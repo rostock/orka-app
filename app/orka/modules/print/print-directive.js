@@ -1,4 +1,4 @@
-angular.module('orka.print', ['anol.scale'])
+angular.module('orka.print')
 
 .directive('orkaPrint', ['$modal', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', 'MapService', 'calculateScale', function($modal, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService, MapService, calculateScale) {
     return {
@@ -46,7 +46,6 @@ angular.module('orka.print', ['anol.scale'])
                 scope.startPrint = function() {
                     scope.downloadUrl = false;
                     var layerName = LayersService.backgroundLayer().get('printLayer');
-
                     var downloadPromise = PrintService.createDownload(
                         PrintPageService.getBounds(),
                         scope.outputFormat.value,

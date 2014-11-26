@@ -1,4 +1,4 @@
-angular.module('orka.layertree', [])
+angular.module('orka.layertree')
 
 .directive('orkaLayertree', ['LayertreeService', function(LayertreeService) {
     // used to render the tree and interact with the service above

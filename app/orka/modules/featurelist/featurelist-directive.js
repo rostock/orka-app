@@ -1,4 +1,4 @@
-angular.module('orka.featurelist', [])
+angular.module('orka.featurelist')
 
 .directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', 'ConfigService', function($filter, $timeout, MapService, LayersService, LayertreeService, ConfigService) {
     return {

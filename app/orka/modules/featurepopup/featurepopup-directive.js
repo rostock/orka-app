@@ -1,4 +1,4 @@
-angular.module('orka.featurepopup', ['anol.featurepopup'])
+angular.module('orka.featurepopup')
 
 .directive('orkaFeaturePopup', ['$injector', '$timeout', 'MapService', 'ConfigService', 'LayertreeService', function($injector, $timeout, MapService, ConfigService, LayertreeService) {
     var anolFeaturePopupDirective = $injector.get('anolFeaturePopupDirective')[0];

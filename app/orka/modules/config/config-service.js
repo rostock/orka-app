@@ -1,4 +1,4 @@
-angular.module('orka.config', [])
+angular.module('orka.config')
 
 .provider('ConfigService', [function() {
     this.config = {};

@@ -1,4 +1,4 @@
-angular.module('anol.permalink', [])
+angular.module('anol.permalink')
 
 .provider('PermalinkService', [function() {
     var _urlCrs;

@@ -1,4 +1,4 @@
-angular.module('anol.layerswitcher', [])
+angular.module('anol.layerswitcher')
 
 .directive('anolLayerswitcher', ['LayersService', function(LayersService) {
     return {
