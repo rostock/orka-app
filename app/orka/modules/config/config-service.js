@@ -148,13 +148,21 @@ angular.module('orka.config')
             self.config.header = config.header.height === '0px' ? false : true;
         }
         self.config.popup = $.extend({}, defaults.popup);
-        self.config.map = $.extend({}, defaults.map, config.map);
+        self.config.map = $.extend({}, defaults.map);
         self.config.backgroundLayer = [];
-        angular.forEach(config.layers, function(layerName) {
-            var layer = defaults.backgroundLayer[layerName];
-            layer.attributions = config.attributions || defaults.attributions;
-            self.config.backgroundLayer.push(layer);
-        });
+        if(config.map !== undefined) {
+            if(config.map.center !== undefined) {
+                self.config.map.center = config.map.center;
+            }
+            if(config.map.zoom !== undefined) {
+                self.config.map.zoom = config.map.zoom;
+            }
+            angular.forEach(config.map.layers, function(layerName) {
+                var layer = defaults.backgroundLayer[layerName];
+                layer.attributions = config.attributions || defaults.attributions;
+                self.config.backgroundLayer.push(layer);
+            });
+        }
         if(config.themes === true) {
             self.config.poi = $.extend({}, defaults.poi, config.poi);
             self.config.track = $.extend({}, defaults.track, config.track);
