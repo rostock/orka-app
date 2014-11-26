@@ -1,7 +1,14 @@
+// Konfigurationsobject für die ORKaApp
+// Dieser muss immer 'orkaAppConfig' lauten
 var orkaAppConfig = {
+    // Einstellungen für die Karte
     map: {
+        // Initiales Zentrum der Karte
         center: [312313.88958, 5996030.31389],
+        // Initiales Zoomlevel der Karte
         zoom: 14,
+        // Aktivieren der Hintergrundlayer der Anwendung
+        // jeder Hintergrundlayer ist gleichzeitig ein Drucklayer
         layers: [
             'ORKA_STADTPLAN',
             'ORKA_STADTPLAN_OHNE_TEXT',
@@ -11,10 +18,19 @@ var orkaAppConfig = {
             'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT'
         ]
     },
-    themes: true,
-    print: true,
+    // Einstellungen für den Header der Anwendung
     header: {
-        text: 'ORKaMVP - FullApp',
-        height: '50px'
-    }
+        // Höhe des Headers. Die Angabe erfolgt in Pixel und muss mit 'px' enden
+        height: '50px',
+        // Text der im Header stehen soll
+        text: 'ORKa.MVP'
+    },
+    // Aktivieren des Druckmoduls.
+    // Weglassen oder ein anderer Wert als 'true'
+    // deaktiviert das Druckmodul.
+    print: true,
+    // Aktivieren der Kartenthemen-Modul.
+    // Weglassen oder ein anderer Wert als 'true'
+    // deaktiviert das Kartenthemen-Modul.
+    themes: false
 };
