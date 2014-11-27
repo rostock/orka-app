@@ -1,5 +1,15 @@
 angular.module('anol.mouseposition')
 
+/**
+ * @ngdoc directive
+ * @name anol.mouseposition.directive:anolMousePosition
+ *
+ * @requires anol.map.MapService
+ *
+ * @description
+ * Shows current mouse position in map units in container or
+ * in map if directive devined in `anolMapDirective`
+ */
 .directive('anolMousePosition', ['MapService', function(MapService) {
     return {
         restrict: 'A',

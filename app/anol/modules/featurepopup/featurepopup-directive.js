@@ -1,5 +1,17 @@
 angular.module('anol.featurepopup')
-
+/**
+ * @ngdoc directive
+ * @name anol.featurepopup.directive:anolFeaturePopup
+ *
+ * @restrict A
+ * @requires $timeout
+ * @requires anol.map.MapService
+ *
+ * @param {string} featureLayer Layer to bind popup to
+ *
+ * @description
+ * Shows a popup on feature click
+ */
 .directive('anolFeaturePopup', ['$timeout', 'MapService', function($timeout, MapService) {
     return {
         restrict: 'A',

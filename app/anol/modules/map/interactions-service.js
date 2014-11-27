@@ -1,5 +1,12 @@
 angular.module('anol.map')
 
+/**
+ * @ngdoc service
+ * @name anol.map.InteractionsService
+ *
+ * @description
+ * Stores ol3 interactions and add them to map, if map present
+ */
 .provider('InteractionsService', [function() {
     var _interactions;
 
@@ -13,15 +20,39 @@ angular.module('anol.map')
             this.interactions = interactions || ol.interaction.defaults();
             this.map = undefined;
         };
+        /**
+         * @ngdoc function
+         * @name registerMap
+         * @methodOf anol.map.InteractionsService
+         * @parameter {Object} map ol3 map object
+         * @description
+         * Registers an ol3 map in `InteractionsService`
+         */
         Interactions.prototype.registerMap = function(map) {
             this.map = map;
         };
+        /**
+         * @ngdoc function
+         * @name addInteraction
+         * @methodOf anol.map.InteractionsService
+         * @parameter {Object} interaction ol3 interaction object
+         * @description
+         * Adds an ol3 interaction
+         */
         Interactions.prototype.addInteraction = function(interaction) {
             if(this.map !== undefined) {
                 this.map.addInteraction(interaction);
             }
             this.interactions.push(interaction);
         };
+        /**
+         * @ngdoc function
+         * @name addInteractions
+         * @methodOf anol.map.InteractionsService
+         * @parameter {Array|Object} interactions array of ol3 interaction objects
+         * @description
+         * Adds an ol3 interactions
+         */
         Interactions.prototype.addInteractions = function(interactions) {
             var self = this;
             if(this.map !== undefined) {
@@ -31,6 +62,14 @@ angular.module('anol.map')
             }
             this.interactions = this.interactions.concat(interactions);
         };
+        /**
+         * @ngdoc function
+         * @name removeInteraction
+         * @methodOf anol.map.InteractionsService
+         * @parameter {Object} interaction ol3 interaction objects
+         * @description
+         * Removes given ol3 interaction
+         */
         Interactions.prototype.removeInteraction = function(interaction) {
             this.map.removeInteraction(interaction);
             var idx = $.inArray(this.interactions, interaction);

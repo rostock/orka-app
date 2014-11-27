@@ -1,5 +1,15 @@
 angular.module('anol.layerswitcher')
 
+/**
+ * @ngdoc directive
+ * @name anol.layerswitcher.directive:anolLayerswitcher
+ *
+ * @restrict A
+ * @requires anol.map.LayersService
+ *
+ * @description
+ * Shows/hides background- and overlaylayer
+ */
 .directive('anolLayerswitcher', ['LayersService', function(LayersService) {
     return {
         restrict: 'A',

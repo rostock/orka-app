@@ -1,4 +1,14 @@
 angular.module('anol.map')
+
+/**
+ * @ngdoc service
+ * @name anol.map.LayersFactory
+ *
+ * @description
+ * Provide functions for creating ol3 layers with source for common
+ * use cases
+ */
+
 // TODO think about a better solution to provide layer objects
 .provider('LayersFactory', [function() {
     var self = this;
@@ -50,6 +60,27 @@ angular.module('anol.map')
         return layer;
     };
 
+    /**
+     * @ngdoc function
+     * @name newTMS
+     * @methodOf anol.map.LayersFactory
+     * @parameters {Object} options
+     * @parameters {string} options.baseURL Layers base url
+     * @parameters {string} options.format tile image format
+     * @parameters {Array} options.extent Layer extent
+     * @parameters {Array} options.resolutions Layer resolutions
+     * @parameters {Object} options.projection Layer projection
+     * @parameters {Array|string} options.attributions Layer attributions
+     * @parameters {string} options.title Layer title
+     * @parameters {string} options.shortcut Layer shortcut
+     * @parameters {Boolean} options.visible Initial layer visibility
+     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
+     * @parameters {Boolean} options.isBackground Layer is a background layer
+     * @parameters {string} options.layer Layer name
+     *
+     * @description
+     * Creates a TMS layer
+     */
     this.newTMS = function(options) {
         var tileGrid = false;
 
@@ -87,6 +118,26 @@ angular.module('anol.map')
         return applyLayerProperties(layer, options);
     };
 
+    /**
+     * @ngdoc function
+     * @name newDynamicGeoJSON
+     * @methodOf anol.map.LayersFactory
+     * @parameters {Object} options
+     * @parameters {string} options.url source url
+     * @parameters {function} options.additionalParameters function must return a list of parameters to add to the source url for each request
+     * @parameters {Object} options.projection Layer projection
+     * @parameters {Object} options.style Layer style
+     * @parameters {string} options.title Layer title
+     * @parameters {string} options.shortcut Layer shortcut
+     * @parameters {Boolean} options.visible Initial layer visibility
+     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
+     * @parameters {string} options.layer Layer name
+     *
+     * @description
+     * Creates a DynamicGeoJSON layer
+     * This layer calls its source url when map extent changes and loads geojson-objects.
+     * Loaded objects are styled by given style or by ol3 default style if no style given.
+     */
     this.newDynamicGeoJSON = function(options) {
         var source;
 
@@ -139,6 +190,23 @@ angular.module('anol.map')
         return applyLayerProperties(layer, options);
     };
 
+    /**
+     * @ngdoc function
+     * @name newSingleTileWMS
+     * @methodOf anol.map.LayersFactory
+     * @parameters {Object} options
+     * @parameters {string} options.url source url
+     * @parameters {Object} options.params wms parameter
+     * @parameters {Object} options.projection Layer projection
+     * @parameters {string} options.title Layer title
+     * @parameters {string} options.shortcut Layer shortcut
+     * @parameters {Boolean} options.visible Initial layer visibility
+     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
+     * @parameters {string} options.layer Layer name
+     *
+     * @description
+     * Creates a SingleTileWMS layer
+     */
     this.newSingleTileWMS = function(options) {
         var sourceOptions = createBasicSourceOptions(options);
         sourceOptions.url = options.url;
@@ -148,6 +216,23 @@ angular.module('anol.map')
         return applyLayerProperties(layer, options);
     };
 
+    /**
+     * @ngdoc function
+     * @name newFeatureLayer
+     * @methodOf anol.map.LayersFactory
+     * @parameters {Object} options
+     * @parameters {Object} options.projection Layer projection
+     * @parameters {Object} options.style Layer style
+     * @parameters {string} options.title Layer title
+     * @parameters {string} options.shortcut Layer shortcut
+     * @parameters {Boolean} options.visible Initial layer visibility
+     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
+     * @parameters {string} options.layer Layer name
+     *
+     * @description
+     * Creates a FeatureLayer layer
+     * FeatureLayer is a ol3 vector layer with an ol3 vector source
+     */
     this.newFeatureLayer = function(options) {
         var sourceOptions = createBasicSourceOptions(options);
         var layer = new ol.layer.Vector({

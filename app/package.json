@@ -22,6 +22,9 @@
     "karma-safari-launcher": "latest",
     "karma-firefox-launcher": "~0.1.0",
     "karma-script-launcher": "~0.1.0",
-    "grunt-jsdoc": "~0.5.7"
+    "grunt-ngdocs": "~0.2.6",
+    "dgeni": "^0.4.0",
+    "dgeni-packages": "^0.10.0",
+    "canonical-path": "0.0.2"
   }
 }

@@ -1,5 +1,35 @@
 angular.module('anol.map')
 
+/**
+ * @ngdoc service
+ * @name anol.map.MapService
+ *
+ * @requires anol.map.LayersService
+ * @requires anol.map.ControlsService
+ * @requires anol.map.InteractionsService
+ *
+ * @description
+ * MapService handles ol3 map creation including adding interactions, controls and layers to it.
+ *
+ * The ol.View is added with the provider method addView
+ * It will only create one instance of an ol map
+ */
+
+ /**
+ * ngdoc provider // TODO readd @ when using dgeni
+ * @name anol.map.provider:MapService
+ *
+ * @requires anol.map.LayersService
+ * @requires anol.map.ControlsService
+ * @requires anol.map.InteractionsService
+ *
+ * @description
+ * MapService handles ol3 map creation including adding interactions, controls and layers to it.
+ *
+ * The ol.View is added with the provider method addView
+ * It will only create one instance of an ol map
+ */
+
 .provider('MapService', [function() {
     var _view;
 
@@ -14,6 +44,16 @@ angular.module('anol.map')
         return map;
     };
 
+    /**
+     * ngdoc function // TODO readd @ when using dgeni
+     * @name addView
+     * @methodOf anol.map.MapServiceProvider
+     *
+     * @param {object} view ol3 view object
+     *
+     * @description
+     * Set the map view
+     */
     this.addView = function(view) {
         _view = view;
     };

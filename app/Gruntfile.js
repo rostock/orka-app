@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
+  var Dgeni = require('dgeni');
 
   // Project configuration.
   grunt.initConfig({
@@ -148,11 +149,18 @@ module.exports = function(grunt) {
           configFile: 'anol/karma.conf.js',
         }
     },
-    jsdoc: {
-      src: ['anol/modules/**/*.js'],
+    ngdocs: {
       options: {
-        destination: 'doc'
-      }
+        dest: 'docs',
+        html5Mode: true,
+        startPage: '/api',
+        title: 'AnOl Documentation',
+        api: true
+      },
+      src: [
+          'anol/modules/**/*.js',
+          '!anol/modules/**/module.js'
+        ]
     }
   });
 
@@ -166,11 +174,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-common-html2js');
 
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.registerTask('dev', ['html2js', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['jshint', 'concat:anolDist', 'concat:orkaDist', 'uglify', 'jsdoc']);
+  grunt.registerTask('build', ['jshint', 'concat:anolDist', 'concat:orkaDist', 'uglify', 'ngdocs']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
+  grunt.registerTask('build_doc', ['ngdocs']);
+
+  grunt.registerTask('dgeni', 'Generate docs via dgeni.', function() {
+    var done = this.async();
+    var dgeni = new Dgeni([require('./anol/anol-dgeni.js')]);
+    dgeni.generate().then(done);
+  });
+  // grunt.registerTask('default', ['dgeni']);
 
 };

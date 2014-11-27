@@ -1,5 +1,11 @@
 angular.module('anol.map')
-
+/**
+ * @ngdoc service
+ * @name anol.map.LayersService
+ *
+ * @description
+ * Stores ol3 layerss and add them to map, if map present
+ */
 .provider('LayersService', [function() {
     var _layers = [];
 
@@ -18,9 +24,24 @@ angular.module('anol.map')
             this.shortcutMapping = {};
             this.addLayers(layers);
         };
+        /**
+         * @ngdoc function
+         * @name registerMap
+         * @methodOf anol.map.LayersService
+         * @parameter {Object} map ol3 map object
+         * @description
+         * Register an ol3 map in `LayersService`
+         */
         Layers.prototype.registerMap = function(map) {
             this.map = map;
         };
+        /**
+         * private function
+         *
+         * prepares short cut mapping,
+         * stores layer into background- or overlaylayers list
+         * adds event handler to change:visible event
+         */
         Layers.prototype.prepareLayers = function(layers, listener) {
             var self = this;
             angular.forEach(layers, function(layer) {
@@ -40,13 +61,18 @@ angular.module('anol.map')
                 // while map is undefined, don't add layers to it
                 // when map is created, all this.layers are added to map
                 // after that, this.map is registered
-                // so, wehen map is defined, added layers are not in map
+                // so, when map is defined, added layers are not in map
                 // and must be added
                 if(self.map !== undefined) {
                     self.map.addLayer(layer);
                 }
             });
         };
+        /**
+         * private function
+         *
+         * updates shortcut list on change:visible event
+         */
         Layers.prototype.visibleChangedHandler = function(evt) {
             var layer = evt.target;
             var shortcut = layer.get('shortcut');
@@ -61,6 +87,14 @@ angular.module('anol.map')
                 this.visibleLayerShortcuts.splice(shortcutIdx, 1);
             }
         };
+        /**
+         * @ngdoc function
+         * @name addLayer
+         * @methodOf anol.map.LayersService
+         * @parameter {Object} kayer ol3 layer object
+         * @description
+         * Adds a single layer
+         */
         Layers.prototype.addLayer = function(layer) {
             var self = this;
             this.prepareLayers([layer], function(evt) {
@@ -69,6 +103,14 @@ angular.module('anol.map')
 
             this.layers.push(layer);
         };
+        /**
+         * @ngdoc function
+         * @name addLayers
+         * @methodOf anol.map.LayersService
+         * @parameter {Array|Object} layers Array of ol3 layer objects
+         * @description
+         * Adds an array of layers
+         */
         Layers.prototype.addLayers = function(layers) {
             var self = this;
             this.prepareLayers(layers, function(evt) {
@@ -77,6 +119,14 @@ angular.module('anol.map')
 
             this.layers = this.layers.concat(layers);
         };
+        /**
+         * @ngdoc function
+         * @name setVisibleByShortcuts
+         * @methodOf anol.map.LayersService
+         * @parameter {string} visibleShortcuts shortcuts of layer which should be visible
+         * @description
+         * Make all layer related to given shortcuts visible
+         */
         Layers.prototype.setVisibleByShortcuts = function(visibleShortcuts) {
             var self = this;
             visibleShortcuts = visibleShortcuts.split('');
@@ -94,6 +144,14 @@ angular.module('anol.map')
                 }
             });
         };
+        /**
+         * @ngdoc function
+         * @name backgroundLayer
+         * @methodOf anol.map.LayersService
+         * @returns {Array} backgroundLayers all background layers
+         * @description
+         * Returns all background layers
+         */
         Layers.prototype.backgroundLayer = function() {
             var backgroundLayer;
             angular.forEach(this.backgroundLayers, function(layer) {
@@ -103,6 +161,16 @@ angular.module('anol.map')
             });
             return backgroundLayer;
         };
+        /**
+         * @ngdoc function
+         * @name layersByProperty
+         * @methodOf anol.map.LayersService
+         * @parameter {string} key property name
+         * @parameter {string} value property value
+         * @returns {Array|Object} all layer with key = value
+         * @description
+         * Returns all layers with key matching value
+         */
         Layers.prototype.layersByProperty = function(key, value) {
             var self = this;
             var layers = [];
