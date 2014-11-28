@@ -135,7 +135,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['anol/modules/**/*.js', 'orka/modules/**/*.js'],
-        tasks: ['clean', 'concat:anolDev', 'concat:orkaDev'],
+        tasks: ['clean', 'ngdocs', 'concat:anolDev', 'concat:orkaDev'],
         options: {
           spawn: false,
         },
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('dev', ['html2js', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('dev', ['html2js', 'ngdocs', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
   grunt.registerTask('build', ['jshint', 'concat:anolDist', 'concat:orkaDist', 'uglify', 'ngdocs']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
