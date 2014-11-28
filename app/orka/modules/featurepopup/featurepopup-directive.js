@@ -38,7 +38,7 @@ angular.module('orka.featurepopup')
                         }
                     });
                     if(feature) {
-                        scope.popup.setPosition(evt.coordinate);
+                        scope.popup.setPosition(feature.getGeometry().getCoordinates());
                         visible = true;
 
                         $timeout(function() {
