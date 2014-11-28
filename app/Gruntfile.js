@@ -125,6 +125,9 @@ module.exports = function(grunt) {
         from: '^/(.*)/config.js$',
         to: '/config.js'
       }, {
+        from: '^/api/(.*)$',
+        to: '/docs/$1'
+      }, {
         from: '^(.*)/$',
         to: '/'
       }]
