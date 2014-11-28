@@ -87,12 +87,8 @@ angular.module('orka.featurelist')
                     if(angular.isDefined(scope.popupScope)) {
                         scope.popupScope.popupVisible = false;
                     }
-                    // timeout function is runing right after scope digest completet.
-                    // before digest is not complete, browser has not updated html.
-                    // so element is hidden although scope.showFeatureContent is true
                 };
                 // TODO improve
-
                 scope.hasAddress = function(feature) {
                     return feature.get('addr:street') !== undefined && feature.get('addr:city') !== undefined;
                 };
@@ -167,6 +163,7 @@ angular.module('orka.featurelist')
         controller: function($scope, $element, $attrs) {
             this.showListFeature = function(feature) {
                 var type, osmId;
+                // TODO move into toggleMarker?
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);
                     $scope.markerFeature = undefined;
