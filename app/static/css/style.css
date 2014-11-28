@@ -200,9 +200,11 @@ label.no-style {
   margin-bottom: 5px;
 }
 
-.feature.highlight {
+.feature.highlight,
+.list-group-item.highlight {
   background-color: #ffc;
 }
+
 /*
  * Print content
  */

@@ -28,16 +28,22 @@
 
     <div class="sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
-        <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
-          <div orka-print show-print-box="selectedTab === 'print'"></div>
+        <div class="tab-pane" ng-class="{'active': selectedTab==='locations'}">
+          <div orka-locations show-location-feature="selectedTab==='locations'" ng-if="locationsAvailable"></div>
         </div>
         <div class="tab-pane" ng-class="{'active': selectedTab==='featurelist'}">
           <div orka-feature-list feature-layer="poi_layer" marker-layer="marker_layer" ng-if="themesAvailable">
             <div orka-feature-popup feature-layer="poi_layer"></div>
           </div>
         </div>
+        <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
+          <div orka-print show-print-box="selectedTab === 'print'"></div>
+        </div>
       </div>
       <ul class="nav nav-tabs tabs-right sideways">
+        <li ng-class="{'active': selectedTab==='locations'}" ng-show="locationsAvailable">
+          <a ng-click="selectTab('locations')">Orte</a>
+        </li>
         <li ng-class="{'active': selectedTab==='featurelist'}" ng-show="themesAvailable">
           <a ng-click="selectTab('featurelist')">Kartenthemen</a>
         </li>

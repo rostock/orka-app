@@ -1,0 +1,4 @@
+<h5 class="bold">Interessante Orte</h5>
+<ul class="list-group">
+    <li class="list-group-item pointer" ng-repeat="title in titles" ng-click="selectTitle(title)" ng-class="{'highlight': selectedTitle === title}">{{ title }}</li>
+</ul>

@@ -1,6 +1,6 @@
 angular.module('orka.print')
 
-.directive('orkaPrint', ['$modal', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', 'MapService', 'calculateScale', function($modal, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService, MapService, calculateScale) {
+.directive('orkaPrint', ['$modal', '$timeout', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', 'MapService', 'calculateScale', function($modal, $timeout, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService, MapService, calculateScale) {
     return {
         restrict: 'A',
         templateUrl: 'orka/modules/print/templates/print.html',
@@ -111,9 +111,10 @@ angular.module('orka.print')
                 });
                 scope.view.on('change:resolution', function() {
                     if(scope.pageSize === undefined) {
-                        scope.$apply(function() {
+                        // used $timeout instead of $apply to avoid "$apply already in progress"-error
+                        $timeout(function() {
                             scope.scale = calculateScale(scope.view);
-                        });
+                        }, 0, true);
                     }
                 });
                 scope.scale = calculateScale(scope.view);

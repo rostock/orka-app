@@ -10,7 +10,7 @@ angular.module('anol.scale')
     return Math.round(scale);
 })
 
-.directive('anolScaleText', ['MapService', 'calculateScale', function(MapService, calculateScale) {
+.directive('anolScaleText', ['$timeout', 'MapService', 'calculateScale', function($timeout, MapService, calculateScale) {
 
     return {
         restrict: 'A',
@@ -33,9 +33,10 @@ angular.module('anol.scale')
             },
             post: function(scope, element, attrs) {
                 scope.view.on('change:resolution', function() {
-                    scope.$apply(function() {
+                    // used $timeout instead of $apply to avoid "$apply already in progress"-error
+                    $timeout(function() {
                         scope.scale = calculateScale(scope.view);
-                    });
+                    }, 0, true);
                 });
 
             }

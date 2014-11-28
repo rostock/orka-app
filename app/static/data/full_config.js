@@ -25,6 +25,9 @@ var orkaAppConfig = {
         // Text der im Header stehen soll
         text: 'ORKa.MVP'
     },
+    // Pfad zu GeoJSON mit Polygonen für "Ortliste"
+    // Wenn nicht vorhanden ist das Ortemodul deaktiviert
+    locations: '/static/data/locations.geojson',
     // Aktivieren des Druckmoduls.
     // Weglassen oder ein anderer Wert als 'true'
     // deaktiviert das Druckmodul.
