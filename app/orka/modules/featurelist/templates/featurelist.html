@@ -7,7 +7,7 @@
             </h5>
             <ul ng-show="$parent.showGroup === type" class="list-group">
                 <li id="feature_{{ feature.get('osm_id') }}"
-                     ng-repeat="feature in features"
+                     ng-repeat="feature in features |orderBy:byName"
                      class="list-group-item feature"
                      ng-class="{'highlight': $parent.$parent.showFeatureContent === feature.get('osm_id')}">
                     <h5 class="pointer list-group-item-heading" ng-click="toggleFeatureContent(feature)">

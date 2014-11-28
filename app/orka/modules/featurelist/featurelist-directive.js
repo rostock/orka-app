@@ -91,17 +91,18 @@ angular.module('orka.featurelist')
                     // before digest is not complete, browser has not updated html.
                     // so element is hidden although scope.showFeatureContent is true
                 };
+                // TODO improve
 
                 scope.hasAddress = function(feature) {
                     return feature.get('addr:street') !== undefined && feature.get('addr:city') !== undefined;
+                };
+                scope.byName = function(feature) {
+                    return feature.get('name');
                 };
             },
             post: function(scope, element, attr) {
                 var calculateExtent = function(map) {
                     return map.getView().calculateExtent(map.getSize());
-                };
-                var sortFeaturesByNumValue = function(feature) {
-                    return feature.get('osm_id');
                 };
                 var featuresByExtent = function() {
                     var featureGroups = {};
@@ -120,9 +121,6 @@ angular.module('orka.featurelist')
                             }
                         });
                     }
-                    angular.forEach(featureGroups, function(features) {
-                        features = $filter('orderBy')(features, sortFeaturesByNumValue, false);
-                    });
                     if(Object.keys(featureGroups).length === 0) {
                         return false;
                     }
