@@ -1,5 +1,19 @@
 angular.module('anol.permalink')
 
+/**
+ * @ngdoc service
+ * @name anol.permalink.PermalinkService
+ *
+ * @requires $rootScope
+ * @requires $location
+ * @requires anol.map.MapService
+ * @requires anol.map.LayersService
+ *
+ * @description
+ * Looks for a `map`-parameter in current url and move map to location specified in
+ *
+ * Updates browser-url with current zoom and location when map moved
+ */
 .provider('PermalinkService', [function() {
     var _urlCrs;
     var _precision = 100000;
