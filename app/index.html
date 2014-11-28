@@ -38,11 +38,11 @@
         </div>
       </div>
       <ul class="nav nav-tabs tabs-right sideways">
-        <li ng-class="{'active': selectedTab==='print'}" ng-show="printAvailable">
-          <a ng-click="selectTab('print')">Kartenausgabe</a>
-        </li>
         <li ng-class="{'active': selectedTab==='featurelist'}" ng-show="themesAvailable">
           <a ng-click="selectTab('featurelist')">Kartenthemen</a>
+        </li>
+        <li ng-class="{'active': selectedTab==='print'}" ng-show="printAvailable">
+          <a ng-click="selectTab('print')">Kartenausgabe</a>
         </li>
       </ul>
     </div>
