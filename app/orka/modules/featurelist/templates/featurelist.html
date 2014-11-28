@@ -1,5 +1,14 @@
 <div class="orka-feature-list">
     <ng-transclude></ng-transclude>
+    <h5 class="bold">
+        <span ng-show="featureGroups === false">
+            Keine POIs im aktuellen Ausschnitt
+        </span>
+        <span ng-show="featureGroups !== false">
+            Folgende POIs werden angezeigt
+        </span>
+    </h5>
+
     <ul class="list-group" ng-show="featureGroups !== false">
         <li ng-repeat="(type, features) in featureGroups" class="list-group-item">
             <h5 class="pointer list-group-item-heading bold" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
@@ -31,7 +40,4 @@
             </ul>
         </li>
     </ul>
-    <div ng-show="featureGroups === false">
-        Keine POIs im aktuellen Ausschnitt
-    </div>
 </div>
