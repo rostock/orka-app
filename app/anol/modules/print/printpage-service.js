@@ -255,6 +255,9 @@ angular.module('anol.print')
             bounds = bounds.concat(_dragFeatures.righttop.getGeometry().getCoordinates());
             return bounds;
         };
+        PrintPage.prototype.visible = function(visibility) {
+            _printLayer.setVisible(visibility);
+        };
 
         return new PrintPage(_pageSizes, _outputFormats, _defaultScale);
     }];

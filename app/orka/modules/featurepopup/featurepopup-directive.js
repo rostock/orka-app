@@ -38,7 +38,7 @@ angular.module('orka.featurepopup')
                         }
                     });
                     if(feature) {
-                        scope.popup.setPosition(evt.coordinate);
+                        scope.popup.setPosition(feature.getGeometry().getCoordinates());
                         visible = true;
 
                         $timeout(function() {
@@ -69,6 +69,16 @@ angular.module('orka.featurepopup')
 
                 if(angular.isDefined(OrkaFeatureListController)) {
                     OrkaFeatureListController.registerPopupScope(scope);
+                    scope.$watch(
+                        function() {
+                            return LayertreeService.selectedPoiTypes;
+                        },
+                        function(newVal, oldVal) {
+                            if(scope.feature !== undefined && scope.popupVisible && $.inArray(scope.feature.get('type'), newVal)) {
+                                scope.popupVisible = false;
+                            }
+                        }
+                    );
                 }
             },
             post: anolFeaturePopupDirective.link.post

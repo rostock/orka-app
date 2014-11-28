@@ -87,21 +87,18 @@ angular.module('orka.featurelist')
                     if(angular.isDefined(scope.popupScope)) {
                         scope.popupScope.popupVisible = false;
                     }
-                    // timeout function is runing right after scope digest completet.
-                    // before digest is not complete, browser has not updated html.
-                    // so element is hidden although scope.showFeatureContent is true
                 };
-
+                // TODO improve
                 scope.hasAddress = function(feature) {
                     return feature.get('addr:street') !== undefined && feature.get('addr:city') !== undefined;
+                };
+                scope.byName = function(feature) {
+                    return feature.get('name');
                 };
             },
             post: function(scope, element, attr) {
                 var calculateExtent = function(map) {
                     return map.getView().calculateExtent(map.getSize());
-                };
-                var sortFeaturesByNumValue = function(feature) {
-                    return feature.get('osm_id');
                 };
                 var featuresByExtent = function() {
                     var featureGroups = {};
@@ -120,9 +117,6 @@ angular.module('orka.featurelist')
                             }
                         });
                     }
-                    angular.forEach(featureGroups, function(features) {
-                        features = $filter('orderBy')(features, sortFeaturesByNumValue, false);
-                    });
                     if(Object.keys(featureGroups).length === 0) {
                         return false;
                     }
@@ -169,6 +163,7 @@ angular.module('orka.featurelist')
         controller: function($scope, $element, $attrs) {
             this.showListFeature = function(feature) {
                 var type, osmId;
+                // TODO move into toggleMarker?
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);
                     $scope.markerFeature = undefined;

@@ -190,6 +190,17 @@ angular.module('anol.map')
         return applyLayerProperties(layer, options);
     };
 
+    this.newGeoJSON = function(options) {
+        var sourceOptions = createBasicSourceOptions(options);
+        sourceOptions.url = options.url;
+        source = new ol.source.GeoJSON(sourceOptions);
+        var layer = new ol.layer.Vector({
+            source: source
+        });
+
+        return applyLayerProperties(layer, options);
+    };
+
     /**
      * @ngdoc function
      * @name newSingleTileWMS

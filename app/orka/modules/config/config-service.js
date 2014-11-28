@@ -163,6 +163,9 @@ angular.module('orka.config')
                 self.config.backgroundLayer.push(layer);
             });
         }
+        if(config.locations !== undefined) {
+            self.config.locations = config.locations;
+        }
         if(config.themes === true) {
             self.config.poi = $.extend({}, defaults.poi, config.poi);
             self.config.track = $.extend({}, defaults.track, config.track);
