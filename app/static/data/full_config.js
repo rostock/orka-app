@@ -32,5 +32,5 @@ var orkaAppConfig = {
     // Aktivieren der Kartenthemen-Modul.
     // Weglassen oder ein anderer Wert als 'true'
     // deaktiviert das Kartenthemen-Modul.
-    themes: false
+    themes: true
 };
