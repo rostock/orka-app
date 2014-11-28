@@ -3,9 +3,10 @@ angular.module('orka.print')
 .directive('orkaPrint', ['$modal', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', 'MapService', 'calculateScale', function($modal, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService, MapService, calculateScale) {
     return {
         restrict: 'A',
-        transclude: true,
         templateUrl: 'orka/modules/print/templates/print.html',
-        scope: {},
+        scope: {
+            showPrintBox: '=showPrintBox'
+        },
         link: {
             pre: function(scope, element, attrs) {
                 // TODO find a better solution to prevent directive to be executed
@@ -105,6 +106,9 @@ angular.module('orka.print')
                         scope.printStatus = newVal;
                     }
                 );
+                scope.$watch('showPrintBox', function(newVal, oldVal) {
+                    PrintPageService.visible(newVal);
+                });
                 scope.view.on('change:resolution', function() {
                     if(scope.pageSize === undefined) {
                         scope.$apply(function() {
