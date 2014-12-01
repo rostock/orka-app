@@ -74,7 +74,7 @@ angular.module('orka.featurepopup')
                             return LayertreeService.selectedPoiTypes;
                         },
                         function(newVal, oldVal) {
-                            if(scope.feature !== undefined && scope.popupVisible && $.inArray(scope.feature.get('type'), newVal)) {
+                            if(scope.feature !== undefined && scope.popupVisible && $.inArray(scope.feature.get('type'), newVal) === -1) {
                                 scope.popupVisible = false;
                             }
                         }
