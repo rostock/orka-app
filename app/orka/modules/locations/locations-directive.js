@@ -39,7 +39,7 @@ angular.module('orka.locations')
                 scope.selectTitle = function(title) {
                     scope.selectedTitle = title;
                     var source = scope.layer.getSource();
-                    if(scope.title !== undefined) {
+                    if(scope.selectedTitle !== undefined) {
                         source.forEachFeature(function(feature) {
                             if(feature.get('title') === scope.selectedTitle) {
                                 var map = MapService.getMap();
