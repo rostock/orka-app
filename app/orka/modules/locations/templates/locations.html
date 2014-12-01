@@ -1,4 +1,9 @@
-<h5 class="bold">Interessante Orte</h5>
+<h5 class="bold">Ausgewählte Bereiche</h5>
 <ul class="list-group">
-    <li class="list-group-item pointer" ng-repeat="title in titles" ng-click="selectTitle(title)" ng-class="{'highlight': selectedTitle === title}">{{ title }}</li>
+    <li class="list-group-item pointer"
+        ng-repeat="feature in features"
+        ng-click="selectFeature(feature)"
+        ng-class="{'highlight': selectedFeature === feature}">
+        {{ feature.get('title') }}
+    </li>
 </ul>

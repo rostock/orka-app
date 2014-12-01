@@ -16,7 +16,9 @@ var orkaAppConfig = {
             'ORKA_STADTPLAN_GRAU_OHNE_TEXT',
             'ORKA_STADTPLAN_SCHUMMERUNG',
             'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT'
-        ]
+        ],
+        openLayerswitcher: true,
+        openLegend: true
     },
     // Einstellungen für den Header der Anwendung
     header: {

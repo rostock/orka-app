@@ -10,8 +10,20 @@
         {
             "type": "Feature",
             "properties": {
-                "title": "Toitenwinkel"
+                "title": "Toitenwinkel",
+                "name": "toitenwinkel",
+                "style": {
+                    "stroke": {
+                        "width": 3,
+                        "opacity": 1,
+                        "color": "rgba(0, 255, 0, 1)"
+                    },
+                    "fill": {
+                        "color": "rgba(255, 255, 255, 0)"
+                    }
+                }
             },
+
             "geometry": {
                 "type": "MultiPolygon",
                 "coordinates": [
@@ -1057,7 +1069,18 @@
         {
             "type": "Feature",
             "properties": {
-                "title": "Reutershagen"
+                "title": "Reutershagen",
+                "name": "reutershagen",
+                "style": {
+                    "stroke": {
+                        "width": 3,
+                        "opacity": 1,
+                        "color": "rgba(255, 0, 0, 1)"
+                    },
+                    "fill": {
+                        "color": "rgba(255, 255, 255, 0)"
+                    }
+                }
             },
             "geometry": {
                 "type": "MultiPolygon",
