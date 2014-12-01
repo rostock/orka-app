@@ -142,7 +142,7 @@ angular.module('anol.map')
     this.newGeoJSON = function(options) {
         var sourceOptions = createBasicSourceOptions(options);
         sourceOptions.url = options.url;
-        source = new ol.source.GeoJSON(sourceOptions);
+        var source = new ol.source.GeoJSON(sourceOptions);
         var layer = new ol.layer.Vector({
             source: source
         });
