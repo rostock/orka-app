@@ -76,6 +76,7 @@ angular.module('orka.featurepopup')
                         function(newVal, oldVal) {
                             if(scope.feature !== undefined && scope.popupVisible && $.inArray(scope.feature.get('type'), newVal) === -1) {
                                 scope.popupVisible = false;
+                                OrkaFeatureListController.showListFeature();
                             }
                         }
                     );
