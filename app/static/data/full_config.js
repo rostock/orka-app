@@ -17,13 +17,17 @@ var orkaAppConfig = {
             'ORKA_STADTPLAN_SCHUMMERUNG',
             'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT'
         ],
+        // Anwendung startet mit geöffneten Layerswitcher, sofern vorhanden
         openLayerswitcher: true,
+        // Anwendung startet mit geöffneter Legende, sofern vorhanden
         openLegend: true
     },
     // Einstellungen für den Header der Anwendung
     header: {
         // Höhe des Headers. Die Angabe erfolgt in Pixel und muss mit 'px' enden
         height: '50px',
+        // Abstand des Textes im Header zum oberen Browserfensterrand
+        paddingTop: '12px',
         // Text der im Header stehen soll
         text: 'ORKa.MVP'
     },
