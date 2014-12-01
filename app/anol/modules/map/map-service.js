@@ -65,7 +65,7 @@ angular.module('anol.map')
         /**
          * @ngdoc function
          * @name getMap
-         * @methodOf anol.map.MapSerice
+         * @methodOf anol.map.MapService
          *
          * @returns {Object} ol.Map
          *
