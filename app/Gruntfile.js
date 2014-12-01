@@ -38,7 +38,9 @@ module.exports = function(grunt) {
       },
       anolDist: {
         src: [
-          'anol/libs/**/*.js',
+          'anol/libs/jquery/jquery-2.1.1.min.js',
+          'anol/libs/angular/angular.min.js',
+          'anol/libs/ol3/ol3.min.js',
           'anol/modules/**/*.js',
           '!anol/**/angular-mocks.js',
           '!anol/test/**/*.*',
