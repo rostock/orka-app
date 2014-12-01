@@ -11,6 +11,7 @@
             "type": "Feature",
             "properties": {
                 "title": "Toitenwinkel",
+                "name": "toitenwinkel",
                 "style": {
                     "stroke": {
                         "width": 3,
@@ -1069,6 +1070,7 @@
             "type": "Feature",
             "properties": {
                 "title": "Reutershagen",
+                "name": "reutershagen",
                 "style": {
                     "stroke": {
                         "width": 3,
