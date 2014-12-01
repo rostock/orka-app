@@ -18,12 +18,20 @@ angular.module('orka.locations')
                     style: function(feature, resolution) {
                         var styles = [];
                         if(scope.selectedTitle === feature.get('title')) {
-                            styles.push(new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: 'rgba(0, 0, 0, 1)',
-                                    width: 3
-                                })
-                            }));
+                            var style = feature.get('style');
+                            if(style !== undefined) {
+                                var stroke, fill;
+                                if(style.stroke !== undefined) {
+                                    stroke = new ol.style.Stroke(style.stroke);
+                                }
+                                if(style.fill !== undefined) {
+                                    fill = new ol.style.Fill(style.fill);
+                                }
+                                styles.push(new ol.style.Style({
+                                    stroke: stroke,
+                                    fill: fill
+                                }));
+                            }
                         }
                         return styles;
                     },
