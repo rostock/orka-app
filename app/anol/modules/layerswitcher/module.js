@@ -1,7 +1,7 @@
 /**
- * @ngdoc module
+ * @ngdoc overview
  * @name anol.layerswitcher
  * @description
- * The `anol.layerswitcher` module provides the layerswitcher directive
+ * Module providing the layerswitcher directive
  */
 angular.module('anol.layerswitcher', ['anol.map']);

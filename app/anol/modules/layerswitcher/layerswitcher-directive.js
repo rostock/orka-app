@@ -7,6 +7,8 @@ angular.module('anol.layerswitcher')
  * @restrict A
  * @requires anol.map.LayersService
  *
+ * @param {string=} anolLayerswitcher If containing "open" layerswitcher initial state is expanded. Otherweise it is collapsed.
+ *
  * @description
  * Shows/hides background- and overlaylayer
  */

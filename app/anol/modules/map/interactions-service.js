@@ -1,30 +1,39 @@
 angular.module('anol.map')
 
 /**
- * @ngdoc service
- * @name anol.map.InteractionsService
- *
- * @description
- * Stores ol3 interactions and add them to map, if map present
+ * @ngdoc object
+ * @name anol.map.InteractionsServiceProvider
  */
 .provider('InteractionsService', [function() {
     var _interactions;
 
+    /**
+     * @ngdoc method
+     * @name setInteractions
+     * @methodOf anol.map.InteractionsServiceProvider
+     * @param {Array.<Object>} interactions ol3 interactions
+     */
     this.setInteractions = function(interactions) {
         _interactions = interactions;
     };
 
     this.$get = [function() {
-        // and this is the service part
+        /**
+         * @ngdoc service
+         * @name anol.map.InteractionsService
+         *
+         * @description
+         * Stores ol3 interactions and add them to map, if map present
+         */
         var Interactions = function(interactions) {
             this.interactions = interactions || ol.interaction.defaults();
             this.map = undefined;
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name registerMap
          * @methodOf anol.map.InteractionsService
-         * @parameter {Object} map ol3 map object
+         * @param {Object} map ol3 map object
          * @description
          * Registers an ol3 map in `InteractionsService`
          */
@@ -32,10 +41,10 @@ angular.module('anol.map')
             this.map = map;
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name addInteraction
          * @methodOf anol.map.InteractionsService
-         * @parameter {Object} interaction ol3 interaction object
+         * @param {Object} interaction ol3 interaction
          * @description
          * Adds an ol3 interaction
          */
@@ -46,10 +55,10 @@ angular.module('anol.map')
             this.interactions.push(interaction);
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name addInteractions
          * @methodOf anol.map.InteractionsService
-         * @parameter {Array|Object} interactions array of ol3 interaction objects
+         * @param {Array.<Object>} interactions ol3 interactions
          * @description
          * Adds an ol3 interactions
          */
@@ -63,10 +72,10 @@ angular.module('anol.map')
             this.interactions = this.interactions.concat(interactions);
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name removeInteraction
          * @methodOf anol.map.InteractionsService
-         * @parameter {Object} interaction ol3 interaction objects
+         * @param {Object} interaction ol3 interaction object to remove
          * @description
          * Removes given ol3 interaction
          */

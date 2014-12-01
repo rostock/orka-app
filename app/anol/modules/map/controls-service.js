@@ -1,30 +1,39 @@
 angular.module('anol.map')
 
 /**
- * @ngdoc service
- * @name anol.map.ControlsService
- *
- * @description
- * Stores ol3 controls and add them to map, if map present
+ * @ngdoc object
+ * @name anol.map.ControlsServiceProvider
  */
 .provider('ControlsService', [function() {
     var _controls;
 
+    /**
+     * @ngdoc method
+     * @name setControls
+     * @methodOf anol.map.ControlsServiceProvider
+     * @param {Array.<Object>} controls ol3 controls
+     */
     this.setControls = function(controls) {
         _controls = controls;
     };
 
     this.$get = [function() {
-        // and this is the service part
+        /**
+         * @ngdoc service
+         * @name anol.map.ControlsService
+         *
+         * @description
+         * Stores ol3 controls and add them to map, if map present
+         */
         var Controls = function(controls) {
             this.controls = controls || ol.control.defaults();
             this.map = undefined;
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name registerMap
          * @methodOf anol.map.ControlsService
-         * @parameter {Object} map ol3 map object
+         * @param {Object} map ol3 map
          * @description
          * Register an ol3 map in `ControlsService`
          */
@@ -32,10 +41,10 @@ angular.module('anol.map')
             this.map = map;
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name addControl
          * @methodOf anol.map.ControlsService
-         * @parameter {Object} control ol3 control object
+         * @param {Object} control ol3 control
          * @description
          * Adds a single control
          */
@@ -46,10 +55,10 @@ angular.module('anol.map')
             this.controls.push(control);
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name addControls
          * @methodOf anol.map.ControlsService
-         * @parameter {Array|Object} controls Array of ol3 control objects
+         * @param {Array.<Object>} controls ol3 controls
          * @description
          * Adds an array of controls
          */

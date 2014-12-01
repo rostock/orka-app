@@ -1,35 +1,56 @@
 angular.module('anol.print')
 
 /**
- * @ngdoc service
- * @name anol.print.PrintPageService
- *
- * @requires $rootScope
- * @requires MapService
- * @requires LayersService
- * @requires LayersFactory
- * @requires InteractionsService
- *
- * @description
- * Provides a rectabgular ol geometry representing a paper size.
- * Geometry can be moved or resized. With a given scale, the needed
- * paper size for selected area is calculated.
- *
+ * @ngdoc object
+ * @name anol.print.PrintPageServiceProvider
  */
 .provider('PrintPageService', [function() {
     // Better move directive configuration in directive so
     // direcitve can be replaced by custom one?
     var _pageSizes, _outputFormats, _defaultScale, _style;
 
+    /**
+     * @ngdoc method
+     * @name setPageSizes
+     * @methodOf anol.print.PrintPageServiceProvider
+     * @param {Array.<Object>} pageSizes List of page sizes.
+     * Each page size is an object, containing the following elements
+     * - **label** - {string} - Label of defined page size. Will be displayed in html
+     * - **icon** - {string} - Icon of defined page size
+     * - **value** - {Array.<number>} - Height, width of defined page size
+     */
     this.setPageSizes = function(pageSizes) {
         _pageSizes = pageSizes;
     };
+    /**
+     * @ngdoc method
+     * @name setOutputFormats
+     * @methodOf anol.print.PrintPageServiceProvider
+     * @param {Array.<Object>} outputFormats List of available output formats
+     * Each output format is an object, containing the following elements
+     * - **label** - {string} - Label of defined output format. Will be displayed in html
+     * - **value** - {string} - File format ending
+     */
     this.setOutputFormats = function(outputFormats) {
         _outputFormats = outputFormats;
     };
+    /**
+     * @ngdoc method
+     * @name setDefaultScale
+     * @methodOf anol.print.PrintPageServiceProvider
+     * @param {number} scale Initial scale
+     */
     this.setDefaultScale = function(scale) {
         _defaultScale = scale;
     };
+    /**
+     * @ngdoc method
+     * @name setStyle
+     * @methodOf anol.print.PrintPageServiceProvider
+     * @param {Object} ol3 style object
+     * @description
+     * Define styling of print page feature displayed in map
+     */
     this.setStyle = function(style) {
         _style = style;
     };
@@ -61,7 +82,22 @@ angular.module('anol.print')
 
         var _printSource = _printLayer.getSource();
         LayersService.addLayer(_printLayer);
-
+        /**
+         * @ngdoc service
+         * @name anol.print.PrintPageService
+         *
+         * @requires $rootScope
+         * @requires MapService
+         * @requires LayersService
+         * @requires LayersFactory
+         * @requires InteractionsService
+         *
+         * @description
+         * Provides a rectabgular ol geometry representing a paper size.
+         * Geometry can be moved or resized. With a given scale, the needed
+         * paper size for selected area is calculated.
+         *
+         */
         var PrintPage = function(pageSizes, outputFormats, defaultScale) {
             this.pageSizes = pageSizes;
             this.outputFormats = outputFormats;
@@ -69,6 +105,18 @@ angular.module('anol.print')
             this.currentPageSize = undefined;
             this.currentScale = undefined;
         };
+        /**
+         * @ngdoc method
+         * @name createPrintArea
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Array.<number>} pageSize Width, height of page in mm
+         * @param {number} scale Map scale in printed output
+         * @param {Array.<number>} center Center of print page. optional
+         *
+         * @description
+         * Creates the print area geometry visible in map
+         */
         PrintPage.prototype.createPrintArea = function(pageSize, scale, center) {
             this.currentPageSize = pageSize;
             this.currentScale = scale;
@@ -87,6 +135,20 @@ angular.module('anol.print')
             this.updatePrintArea(left, top, right, bottom);
             this.createDragFeatures(left, top, right, bottom, center);
         };
+        /**
+         * @private
+         * @name createDragFeatures
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {number} left left coordinate
+         * @prarm {number} top top coordinate
+         * @param {number} right right coordinate
+         * @param {number} bottom bottom coordinate
+         * @param {Array.<number>} center center coordinates
+         *
+         * @description
+         * Creates draggable points to modify print area
+         */
         PrintPage.prototype.createDragFeatures = function(left, top, right, bottom, center) {
             _modifyFeatures.clear();
 
@@ -152,6 +214,16 @@ angular.module('anol.print')
 
             InteractionsService.addInteraction(_modify);
         };
+        /**
+         * @private
+         * @name updateDragFeatures
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} currentFeature dragged feature
+         *
+         * @description
+         * Update draggable points after one points (currentFeature) was dragged
+         */
         PrintPage.prototype.updateDragFeatures = function(currentFeature) {
             var self = this;
             var edgePoints = _printArea.getGeometry().getCoordinates()[0];
@@ -186,6 +258,16 @@ angular.module('anol.print')
             updateFeature(_dragFeatures.center, currentFeature, center, this.dragFeatureCenterChangeHandler);
         };
 
+        /**
+         * @private
+         * @name dragFeatureNormalChangeHandler
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} evt ol3 event
+         *
+         * @description
+         * Perfroms actions for horizontal or vertical dragging
+         */
         PrintPage.prototype.dragFeatureNormalChangeHandler = function(evt) {
             var currentFeature = evt.target;
             this.updatePrintAreaNormal();
@@ -193,17 +275,47 @@ angular.module('anol.print')
             this.updatePrintSize();
         };
 
+        /**
+         * @private
+         * @name dragFeatureDiagonalChangeHandler
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} evt ol3 event
+         *
+         * @description
+         * Perfroms actions for diagonal dragging
+         */
         PrintPage.prototype.dragFeatureDiagonalChangeHandler = function(evt) {
             var currentFeature = evt.target;
             this.updatePrintAreaDiagonal(currentFeature);
             this.updateDragFeatures(currentFeature);
             this.updatePrintSize();
         };
+        /**
+         * @private
+         * @name dragFeatureCenterChangeHandler
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} evt ol3 event
+         *
+         * @description
+         * Performs actions for dragging the center point
+         */
         PrintPage.prototype.dragFeatureCenterChangeHandler = function(evt) {
             var currentFeature = evt.target;
             this.updatePrintAreaCenter(currentFeature);
             this.updateDragFeatures(currentFeature);
         };
+        /**
+         * @private
+         * @name updatePrintAreaDiagonal
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} currentFeature dragged feature
+         *
+         * @description
+         * Calculates print area bbox after diagonal dragging
+         */
         PrintPage.prototype.updatePrintAreaDiagonal = function(currentFeature) {
             var lefttop, righttop, leftbottom, rightbottom;
             if(_dragFeatures.lefttop === currentFeature || _dragFeatures.rightbottom === currentFeature) {
@@ -216,6 +328,16 @@ angular.module('anol.print')
                 this.updatePrintArea(leftbottom[0], righttop[1], righttop[0], leftbottom[1]);
             }
         };
+        /**
+         * @private
+         * @name updatePrintAreaNormal
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} currentFeature dragged feature
+         *
+         * @description
+         * Calculates print area bbox after horizontal or vertical dragging
+         */
         PrintPage.prototype.updatePrintAreaNormal = function() {
             var left = _dragFeatures.left.getGeometry().getCoordinates()[0];
             var right = _dragFeatures.right.getGeometry().getCoordinates()[0];
@@ -224,6 +346,16 @@ angular.module('anol.print')
 
             this.updatePrintArea(left, top, right, bottom);
         };
+        /**
+         * @private
+         * @name updatePrintAreaCenter
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Object} currentFeature dragged feature
+         *
+         * @description
+         * Calculates print area bbox after center point was dragged
+         */
         PrintPage.prototype.updatePrintAreaCenter = function(currentFeature) {
             var center = currentFeature.getGeometry().getCoordinates();
             var top = center[1] + (this.mapHeight / 2);
@@ -232,6 +364,19 @@ angular.module('anol.print')
             var right = center[0] + (this.mapWidth / 2);
             this.updatePrintArea(left, top, right, bottom);
         };
+        /**
+         * @private
+         * @name updatePrintArea
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {number} left left coordinate
+         * @param {number} top top coordinate
+         * @param {number} right right coordinate
+         * @param {number} bottom bottom coordinate
+         *
+         * @description
+         * Updates print area geometry
+         */
         PrintPage.prototype.updatePrintArea = function(left, top, right, bottom) {
             var coords = [[
                 [left, top],
@@ -247,6 +392,14 @@ angular.module('anol.print')
             _printArea = new ol.Feature(new ol.geom.Polygon(coords));
             _printSource.addFeatures([_printArea]);
         };
+        /**
+         * @private
+         * @name updatePrintSize
+         * @methodOf anol.print.PrintPageService
+         *
+         * @description
+         * Recalculate page size in mm
+         */
         PrintPage.prototype.updatePrintSize = function() {
             var self = this;
             $rootScope.$apply(function() {
@@ -258,6 +411,17 @@ angular.module('anol.print')
                 ];
             });
         };
+        /**
+         * @ngdoc method
+         * @name addFeatureFromPageSize
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {Array.<number>} pageSize Width, height of page in mm
+         * @param {number} scale Map scale in printed output
+         *
+         * @description
+         * Create or update print page geometry by given pageSize and scale
+         */
         PrintPage.prototype.addFeatureFromPageSize = function(pageSize, scale) {
             if(_printArea === undefined) {
                 this.createPrintArea(pageSize, scale);
@@ -265,12 +429,32 @@ angular.module('anol.print')
                 this.createPrintArea(pageSize, scale, _printArea.getGeometry().getInteriorPoint().getCoordinates());
             }
         };
+        /**
+         * @ngdoc method
+         * @name getBounds
+         * @methodOf anol.print.PrintPageService
+         *
+         * @returns {Array.<number>} Current bounds of area to print in map units
+         *
+         * @description
+         * Returns the current print area bounds in map units
+         */
         PrintPage.prototype.getBounds = function() {
             var bounds = [];
             bounds = bounds.concat(_dragFeatures.leftbottom.getGeometry().getCoordinates());
             bounds = bounds.concat(_dragFeatures.righttop.getGeometry().getCoordinates());
             return bounds;
         };
+        /**
+         * @ngdoc method
+         * @name visible
+         * @methodOf anol.print.PrintPageService
+         *
+         * @param {boolean} visibility Set page geometry visibility
+         *
+         * @description
+         * Set visibility of print page geometry
+         */
         PrintPage.prototype.visible = function(visibility) {
             _printLayer.setVisible(visibility);
         };

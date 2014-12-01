@@ -156,15 +156,14 @@ module.exports = function(grunt) {
     ngdocs: {
       options: {
         dest: 'docs',
-        html5Mode: true,
-        startPage: '/api',
-        title: 'AnOl Documentation',
-        api: true
+        html5Mode: false,
+        startPage: '/api/anol',
+        title: 'AnOl Documentation'
       },
-      src: [
-          'anol/modules/**/*.js',
-          '!anol/modules/**/module.js'
-        ]
+      api: {
+        title: 'AnOl API',
+        src: ['anol/modules/**/*.js'],
+      }
     }
   });
 

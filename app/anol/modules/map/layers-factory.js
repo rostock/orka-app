@@ -1,8 +1,8 @@
 angular.module('anol.map')
 
 /**
- * @ngdoc service
- * @name anol.map.LayersFactory
+ * @ngdoc object
+ * @name anol.map.LayersFactoryProvider
  *
  * @description
  * Provide functions for creating ol3 layers with source for common
@@ -65,19 +65,42 @@ angular.module('anol.map')
     /**
      * @ngdoc method
      * @name newTMS
+     * @methodOf anol.map.LayersFactoryProvider
+     * @param {Object} options
+     * - **baseURL** - {string} - Layers base url
+     * - **format ** - {string} - Tile image format
+     * - **extent** - {Array.<number>} - Layer extent
+     * - **resolutions** - {Array.<number>} - Layer resolutions
+     * - **projection** - {Object} - Layer projection (ol.proj.Projection)
+     * - **attributions** - {Array.<string>|string} - Layer attributions
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
+     * - **isBackground** - {boolean} - Layer is a background layer
+     * - **layer** - {string} - Layer name
+     *
+     * @returns {Object} ol.layer.Tile with ol.source.TileImage
+     *
+     * @description
+     * Creates a TMS layer
+     */
+    /**
+     * @ngdoc method
+     * @name newTMS
      * @methodOf anol.map.LayersFactory
      * @param {Object} options
      * - **baseURL** - {string} - Layers base url
      * - **format ** - {string} - Tile image format
-     * - **extent** - {Array} - Layer extent
-     * - **resolutions** - {Array} - Layer resolutions
+     * - **extent** - {Array.<number>} - Layer extent
+     * - **resolutions** - {Array.<number>} - Layer resolutions
      * - **projection** - {Object} - Layer projection (ol.proj.Projection)
-     * - **attributions** - {Array|string} - Layer attributions
+     * - **attributions** - {Array.<string>|string} - Layer attributions
      * - **title** - {string} - Layer title
      * - **shortcut** - {string} - Layer shortcut
-     * - **visible** - {Boolean} - Initial layer visibility
-     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
-     * - **isBackground** - {Boolean} - Layer is a background layer
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
+     * - **isBackground** - {boolean} - Layer is a background layer
      * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Tile with ol.source.TileImage
@@ -125,16 +148,38 @@ angular.module('anol.map')
     /**
      * @ngdoc method
      * @name newDynamicGeoJSON
-     * @methodOf anol.map.LayersFactory
+     * @methodOf anol.map.LayersFactoryProvider
      * @param {Object} options
      * - **url** - {string} - source url
-     * - **additionalParameters** - {function} - function must return a list of parameters to add to the source url for each request
+     * - **additionalParameters** - {Function} - function must return a list of parameters to add to the source url for each request
      * - **projection** - {Object} - Layer projection
      * - **style** - {Object} - Layer style
      * - **title** - {string} - Layer title
      * - **shortcut** - {string} - Layer shortcut
-     * - **visible** - {Boolean} - Initial layer visibility
-     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
+     *
+     * @returns {Object} ol.layer.Vector with ol.source.ServerVector
+     *
+     * @description
+     * Creates a DynamicGeoJSON layer
+     * This layer calls its source url when map extent changes and loads geojson-objects.
+     * Loaded objects are styled by given style or by ol3 default style if no style given.
+     */
+    /**
+     * @ngdoc method
+     * @name newDynamicGeoJSON
+     * @methodOf anol.map.LayersFactory
+     * @param {Object} options
+     * - **url** - {string} - source url
+     * - **additionalParameters** - {Function} - function must return a list of parameters to add to the source url for each request
+     * - **projection** - {Object} - Layer projection
+     * - **style** - {Object} - Layer style
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
      * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Vector with ol.source.ServerVector
@@ -199,6 +244,25 @@ angular.module('anol.map')
     /**
      * @ngdoc method
      * @name newGeoJSON
+     * @methodOf anol.map.LayersFactoryProvider
+     * @param {Object} options
+     * - **url** - {string} - url of geojson file
+     * - **projection** - {Object} - Layer projection
+     * - **style** - {Object} - Layer style
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
+     *
+     * @returns {Object} ol.layer.Vector with ol.source.GeoJSON
+     *
+     * @description
+     * Create a vector lyer including all geometries from given geojson file
+     */
+    /**
+     * @ngdoc method
+     * @name newGeoJSON
      * @methodOf anol.map.LayersFactory
      * @param {Object} options
      * - **url** - {string} - url of geojson file
@@ -206,8 +270,8 @@ angular.module('anol.map')
      * - **style** - {Object} - Layer style
      * - **title** - {string} - Layer title
      * - **shortcut** - {string} - Layer shortcut
-     * - **visible** - {Boolean} - Initial layer visibility
-     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
      * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Vector with ol.source.GeoJSON
@@ -229,6 +293,25 @@ angular.module('anol.map')
     /**
      * @ngdoc method
      * @name newSingleTileWMS
+     * @methodOf anol.map.LayersFactoryProvider
+     * @param {Object} options
+     * - **url** - {string} - source url
+     * - **params** - {Object} - wms parameter
+     * - **projection** - {Object} - Layer projection
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
+     *
+     * @returns {Object} ol.layer.Image with ol.source.ImageWMS
+     *
+     * @description
+     * Creates a SingleTileWMS layer
+     */
+    /**
+     * @ngdoc method
+     * @name newSingleTileWMS
      * @methodOf anol.map.LayersFactory
      * @param {Object} options
      * - **url** - {string} - source url
@@ -236,8 +319,8 @@ angular.module('anol.map')
      * - **projection** - {Object} - Layer projection
      * - **title** - {string} - Layer title
      * - **shortcut** - {string} - Layer shortcut
-     * - **visible** - {Boolean} - Initial layer visibility
-     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
      * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Image with ol.source.ImageWMS
@@ -257,14 +340,33 @@ angular.module('anol.map')
     /**
      * @ngdoc method
      * @name newFeatureLayer
+     * @methodOf anol.map.LayersFactoryProvider
+     * @param {Object} options
+     * - **projection** - {Object} - Layer projection
+     * - **style** - {Object} - Layer style
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
+     *
+     * @returns {Object} ol.layer.Vector with ol.source.Vector
+     *
+     * @description
+     * Creates a FeatureLayer layer
+     * FeatureLayer is a ol3 vector layer with an ol3 vector source
+     */
+    /**
+     * @ngdoc method
+     * @name newFeatureLayer
      * @methodOf anol.map.LayersFactory
      * @param {Object} options
      * - **projection** - {Object} - Layer projection
      * - **style** - {Object} - Layer style
      * - **title** - {string} - Layer title
      * - **shortcut** - {string} - Layer shortcut
-     * - **visible** - {Boolean} - Initial layer visibility
-     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **visible** - {boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {boolean} - Layer should apear in layerswitcher
      * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Vector with ol.source.Vector
@@ -282,6 +384,14 @@ angular.module('anol.map')
     };
 
     this.$get = [function() {
+        /**
+         * @ngdoc service
+         * @name anol.map.LayersFactory
+         *
+         * @description
+         * Provide functions for creating ol3 layers with source for common
+         * use cases
+         */
         return self;
     }];
 }]);

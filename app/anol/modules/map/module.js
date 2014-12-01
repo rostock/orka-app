@@ -1,7 +1,7 @@
 /**
- * @ngdoc module
+ * @ngdoc overview
  * @name anol.map
  * @description
- * The `anol.map` module provides ol3 map related services and directives
+ * Module providing ol3 map related services and directives
  */
 angular.module('anol.map', ['anol']);

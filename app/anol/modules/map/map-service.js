@@ -1,27 +1,8 @@
 angular.module('anol.map')
 
-/**
- * @ngdoc service
- * @name anol.map.MapService
- *
- * @requires anol.map.LayersService
- * @requires anol.map.ControlsService
- * @requires anol.map.InteractionsService
- *
- * @description
- * MapService handles ol3 map creation including adding interactions, controls and layers to it.
- *
- * The ol.View is added with the provider method addView
- * It will only create one instance of an ol map
- */
-
  /**
- * ngdoc provider // TODO readd @ when using dgeni
- * @name anol.map.provider:MapService
- *
- * @requires anol.map.LayersService
- * @requires anol.map.ControlsService
- * @requires anol.map.InteractionsService
+ * @ngdoc object
+ * @name anol.map.MapServiceProvider
  *
  * @description
  * MapService handles ol3 map creation including adding interactions, controls and layers to it.
@@ -29,7 +10,6 @@ angular.module('anol.map')
  * The ol.View is added with the provider method addView
  * It will only create one instance of an ol map
  */
-
 .provider('MapService', [function() {
     var _view;
 
@@ -45,11 +25,11 @@ angular.module('anol.map')
     };
 
     /**
-     * ngdoc function // TODO readd @ when using dgeni
+     * @ngdoc method
      * @name addView
      * @methodOf anol.map.MapServiceProvider
      *
-     * @param {object} view ol3 view object
+     * @param {Object} view ol3 view object
      *
      * @description
      * Set the map view
@@ -59,11 +39,25 @@ angular.module('anol.map')
     };
 
     this.$get = ['LayersService', 'ControlsService', 'InteractionsService', function(LayersService, ControlsService, InteractionsService) {
+        /**
+         * @ngdoc service
+         * @name anol.map.MapService
+         *
+         * @requires anol.map.LayersService
+         * @requires anol.map.ControlsService
+         * @requires anol.map.InteractionsService
+         *
+         * @description
+         * MapService handles ol3 map creation including adding interactions, controls and layers to it.
+         *
+         * The ol.View is added with the provider method addView
+         * It will only create one instance of an ol map
+         */
         var MapService = function() {
             this.map = undefined;
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name getMap
          * @methodOf anol.map.MapService
          *

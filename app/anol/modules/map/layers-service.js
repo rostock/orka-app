@@ -1,20 +1,30 @@
 angular.module('anol.map')
+
 /**
- * @ngdoc service
- * @name anol.map.LayersService
- *
- * @description
- * Stores ol3 layerss and add them to map, if map present
+ * @ngdoc object
+ * @name anol.map.LayersServiceProvider
  */
 .provider('LayersService', [function() {
     var _layers = [];
 
+    /**
+     * @ngdoc method
+     * @name setLayers
+     * @methodOf anol.map.LayersServiceProvider
+     * @param {Array.<Object>} layers ol3 layers
+     */
     this.setLayers = function(layers) {
         _layers = _layers.concat(layers);
     };
 
     this.$get = [function() {
-        // and this is the service part
+        /**
+         * @ngdoc service
+         * @name anol.map.LayersService
+         *
+         * @description
+         * Stores ol3 layerss and add them to map, if map present
+         */
         var Layers = function(layers) {
             this.map = undefined;
             this.layers = [];
@@ -25,10 +35,10 @@ angular.module('anol.map')
             this.addLayers(layers);
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name registerMap
          * @methodOf anol.map.LayersService
-         * @parameter {Object} map ol3 map object
+         * @param {Object} map ol3 map object
          * @description
          * Register an ol3 map in `LayersService`
          */
@@ -88,10 +98,10 @@ angular.module('anol.map')
             }
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name addLayer
          * @methodOf anol.map.LayersService
-         * @parameter {Object} kayer ol3 layer object
+         * @param {Object} layer ol3 layer object
          * @description
          * Adds a single layer
          */
@@ -104,10 +114,10 @@ angular.module('anol.map')
             this.layers.push(layer);
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name addLayers
          * @methodOf anol.map.LayersService
-         * @parameter {Array|Object} layers Array of ol3 layer objects
+         * @param {Array.<Object>} layers ol3 layers
          * @description
          * Adds an array of layers
          */
@@ -120,10 +130,10 @@ angular.module('anol.map')
             this.layers = this.layers.concat(layers);
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name setVisibleByShortcuts
          * @methodOf anol.map.LayersService
-         * @parameter {string} visibleShortcuts shortcuts of layer which should be visible
+         * @param {string} visibleShortcuts shortcuts of layer which should be visible
          * @description
          * Make all layer related to given shortcuts visible
          */
@@ -145,10 +155,10 @@ angular.module('anol.map')
             });
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name backgroundLayer
          * @methodOf anol.map.LayersService
-         * @returns {Array} backgroundLayers all background layers
+         * @returns {Array.<Object>} backgroundLayers all background layers
          * @description
          * Returns all background layers
          */
@@ -162,12 +172,12 @@ angular.module('anol.map')
             return backgroundLayer;
         };
         /**
-         * @ngdoc function
+         * @ngdoc method
          * @name layersByProperty
          * @methodOf anol.map.LayersService
-         * @parameter {string} key property name
-         * @parameter {string} value property value
-         * @returns {Array|Object} all layer with key = value
+         * @param {string} key property name
+         * @param {string} value property value
+         * @returns {Array.<Object>} all layer with key = value
          * @description
          * Returns all layers with key matching value
          */

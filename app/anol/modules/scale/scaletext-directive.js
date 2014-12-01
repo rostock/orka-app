@@ -1,5 +1,13 @@
 angular.module('anol.scale')
 
+/**
+ * @ngdoc function
+ * @name anol.scale.function:calculateScale
+ *
+ * @param {Object} view ol.View object
+ *
+ * @returns {number} current scale
+ */
 .constant('calculateScale', function(view) {
     var INCHES_PER_METER = 1000 / 25.4;
     var DPI = 72;
@@ -10,6 +18,18 @@ angular.module('anol.scale')
     return Math.round(scale);
 })
 
+/**
+ * @ngdoc directive
+ * @name anol.scale.directive:anolScaleText
+ *
+ * @requires $timeout
+ * @requires MapService
+ * @requires anol.scale.calculateScale
+ *
+ * @description
+ * Add scaletext to element directive is used in.
+ * If element is defined inside anol-map-directive, scaletext is added to map
+ */
 .directive('anolScaleText', ['$timeout', 'MapService', 'calculateScale', function($timeout, MapService, calculateScale) {
 
     return {
