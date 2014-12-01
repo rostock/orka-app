@@ -135,7 +135,7 @@ angular.module('orka.config')
         },
         popup: {
             positioning: 'center-left',
-            offset: [10, 0],
+            offset: [10, -15],
             buffer: [5, 5, 5, 5]
         }
     };
