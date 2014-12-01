@@ -1,5 +1,14 @@
 <div class="orka-feature-list">
     <ng-transclude></ng-transclude>
+    <h5 class="bold">
+        <span ng-show="featureGroups === false">
+            Keine POIs im aktuellen Ausschnitt
+        </span>
+        <span ng-show="featureGroups !== false">
+            POIs im aktuellen Ausschnitt:
+        </span>
+    </h5>
+
     <ul class="list-group" ng-show="featureGroups !== false">
         <li ng-repeat="(type, features) in featureGroups" class="list-group-item">
             <h5 class="pointer list-group-item-heading bold" ng-click="$parent.showGroup=$parent.showGroup === type ? false : type;">
@@ -7,15 +16,16 @@
             </h5>
             <ul ng-show="$parent.showGroup === type" class="list-group">
                 <li id="feature_{{ feature.get('osm_id') }}"
-                     ng-repeat="feature in features"
+                     ng-repeat="feature in features |orderBy:byName"
                      class="list-group-item feature"
                      ng-class="{'highlight': $parent.$parent.showFeatureContent === feature.get('osm_id')}">
                     <h5 class="pointer list-group-item-heading" ng-click="toggleFeatureContent(feature)">
                         {{ feature.get('name') }}
                     </h5>
                     <div ng-show="$parent.$parent.showFeatureContent === feature.get('osm_id')" class="feature-content list-group-item-text">
-                        <a ng-href="feature.get('website')"
-                           ng-if="feature.get('website')">Homepage</a>
+                        <a ng-href="{{ feature.get('website') }}"
+                           ng-if="feature.get('website')"
+                           target="_blank">Homepage</a>
                         <div ng-if="hasAddress(feature)">
                             {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }}<br>
                             {{ feature.get('addr:zipcode') }} {{ feature.get('addr:city') }}
@@ -30,7 +40,4 @@
             </ul>
         </li>
     </ul>
-    <div ng-show="featureGroups === false">
-        Keine POIs im aktuellen Ausschnitt
-    </div>
 </div>

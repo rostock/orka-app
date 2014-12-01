@@ -10,10 +10,11 @@ module.exports = function(grunt) {
         // When using AngularJS you have to disable the mangle option.
         mangle: false
       },
-      // TODO add orka
       build: {
-        src: 'build/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        files: {
+          'build/anol.min.js': ['build/anol.js'],
+          'build/orka.min.js': ['build/orka.js']
+        }
       }
     },
     jshint: {
@@ -32,7 +33,9 @@ module.exports = function(grunt) {
       },
       anolDev: {
         src: [
-          'anol/modules/**/*.js',
+          'anol/modules/module.js',
+          'anol/modules/**/module.js',
+          'anol/modules/**/*.js'
         ],
         dest: 'build/<%= pkg.name %>.js'
       },
@@ -41,6 +44,8 @@ module.exports = function(grunt) {
           'anol/libs/jquery/jquery-2.1.1.min.js',
           'anol/libs/angular/angular.min.js',
           'anol/libs/ol3/ol3.min.js',
+          'anol/modules/module.js',
+          'anol/modules/**/module.js',
           'anol/modules/**/*.js',
           '!anol/**/angular-mocks.js',
           '!anol/test/**/*.*',
@@ -50,13 +55,15 @@ module.exports = function(grunt) {
       },
       orkaDev: {
         src: [
-          'orka/modules/**/*.js',
+          'orka/modules/**/module.js',
+          'orka/modules/**/*.js'
         ],
         dest: 'build/orka.js'
       },
       orkaDist: {
         src: [
           'orka/libs/**/*.js',
+          'orka/modules/**/module.js',
           'orka/modules/**/*.js',
           '!orka/**/angular-mocks.js',
           '!orka/test/**/*.*',

@@ -1,4 +1,4 @@
-angular.module('orka.mouseposition', ['anol.mouseposition'])
+angular.module('orka.mouseposition')
 
 .directive('orkaMousePosition', ['$injector', 'MapService', function($injector, MapService) {
     var anolMousePositionDirective = $injector.get('anolMousePositionDirective')[0];

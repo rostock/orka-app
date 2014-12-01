@@ -5,7 +5,10 @@ angular.module('orkaApp')
     $scope.fullscreen = true;
     $scope.printAvailable = ConfigService.config.print !== undefined;
     $scope.themesAvailable = (ConfigService.config.poi !== undefined && ConfigService.config.track !== undefined);
+    $scope.locationsAvailable = ConfigService.config.locations !== undefined;
     $scope.showHeader = ConfigService.config.header;
+    $scope.layerswitcherStatus = ConfigService.config.map.layerswitcher;
+    $scope.legendStatus = ConfigService.config.map.legend;
 
     $scope.selectTab = function(tab) {
         $scope.selectedTab = tab === $scope.selectedTab ? false : tab;

@@ -1,4 +1,4 @@
-angular.module('anol.featurepopup', [])
+angular.module('anol.featurepopup')
 
 .directive('anolFeaturePopup', ['$timeout', 'MapService', function($timeout, MapService) {
     return {

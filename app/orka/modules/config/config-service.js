@@ -1,4 +1,4 @@
-angular.module('orka.config', [])
+angular.module('orka.config')
 
 .provider('ConfigService', [function() {
     this.config = {};
@@ -51,7 +51,7 @@ angular.module('orka.config', [])
                 baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
                 layer: 'stadtplan_notext_EPSG25833',
                 format: 'png',
-                title: 'Stadtplan ohne TEXT',
+                title: 'Stadtplan ohne Text',
                 shortcut: 'S',
                 printLayer: 'mvp-mapserver-notext-print'
             },
@@ -135,7 +135,7 @@ angular.module('orka.config', [])
         },
         popup: {
             positioning: 'center-left',
-            offset: [10, 0],
+            offset: [10, -15],
             buffer: [5, 5, 5, 5]
         }
     };
@@ -148,13 +148,30 @@ angular.module('orka.config', [])
             self.config.header = config.header.height === '0px' ? false : true;
         }
         self.config.popup = $.extend({}, defaults.popup);
-        self.config.map = $.extend({}, defaults.map, config.map);
+        self.config.map = $.extend({}, defaults.map);
         self.config.backgroundLayer = [];
-        angular.forEach(config.layers, function(layerName) {
-            var layer = defaults.backgroundLayer[layerName];
-            layer.attributions = config.attributions || defaults.attributions;
-            self.config.backgroundLayer.push(layer);
-        });
+        if(config.map !== undefined) {
+            if(config.map.center !== undefined) {
+                self.config.map.center = config.map.center;
+            }
+            if(config.map.zoom !== undefined) {
+                self.config.map.zoom = config.map.zoom;
+            }
+            angular.forEach(config.map.layers, function(layerName) {
+                var layer = defaults.backgroundLayer[layerName];
+                layer.attributions = config.attributions || defaults.attributions;
+                self.config.backgroundLayer.push(layer);
+            });
+            if(config.map.openLayerswitcher !== undefined) {
+                self.config.map.layerswitcher = config.map.openLayerswitcher === true ? 'open' : 'closed';
+            }
+            if(config.map.openLegend !== undefined) {
+                self.config.map.legend = config.map.openLegend === true ? 'open' : 'closed';
+            }
+        }
+        if(config.locations !== undefined) {
+            self.config.locations = config.locations;
+        }
         if(config.themes === true) {
             self.config.poi = $.extend({}, defaults.poi, config.poi);
             self.config.track = $.extend({}, defaults.track, config.track);

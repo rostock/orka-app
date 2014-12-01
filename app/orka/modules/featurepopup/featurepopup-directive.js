@@ -1,4 +1,4 @@
-angular.module('orka.featurepopup', ['anol.featurepopup'])
+angular.module('orka.featurepopup')
 
 .directive('orkaFeaturePopup', ['$injector', '$timeout', 'MapService', 'ConfigService', 'LayertreeService', function($injector, $timeout, MapService, ConfigService, LayertreeService) {
     var anolFeaturePopupDirective = $injector.get('anolFeaturePopupDirective')[0];
@@ -38,7 +38,7 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
                         }
                     });
                     if(feature) {
-                        scope.popup.setPosition(evt.coordinate);
+                        scope.popup.setPosition(feature.getGeometry().getCoordinates());
                         visible = true;
 
                         $timeout(function() {
@@ -69,6 +69,17 @@ angular.module('orka.featurepopup', ['anol.featurepopup'])
 
                 if(angular.isDefined(OrkaFeatureListController)) {
                     OrkaFeatureListController.registerPopupScope(scope);
+                    scope.$watch(
+                        function() {
+                            return LayertreeService.selectedPoiTypes;
+                        },
+                        function(newVal, oldVal) {
+                            if(scope.feature !== undefined && scope.popupVisible && $.inArray(scope.feature.get('type'), newVal) === -1) {
+                                scope.popupVisible = false;
+                                OrkaFeatureListController.showListFeature();
+                            }
+                        }
+                    );
                 }
             },
             post: anolFeaturePopupDirective.link.post

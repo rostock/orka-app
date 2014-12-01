@@ -1,4 +1,4 @@
-angular.module('anol.mouseposition', [])
+angular.module('anol.mouseposition')
 
 .directive('anolMousePosition', ['MapService', function(MapService) {
     return {

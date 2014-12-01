@@ -1,4 +1,4 @@
-angular.module('orka.layertree', [])
+angular.module('orka.layertree')
 
 .directive('orkaLayertree', ['LayertreeService', function(LayertreeService) {
     // used to render the tree and interact with the service above
@@ -41,8 +41,8 @@ angular.module('orka.layertree', [])
                 };
 
                 scope.updatePois = function(pois) {
-                    var selectedTypes = scope.collectSelectedTypes(pois);
-                    LayertreeService.updateSelectedPoiTypes(selectedTypes);
+                    scope.selectedPoiTypes = scope.collectSelectedTypes(pois);
+                    LayertreeService.updateSelectedPoiTypes(scope.selectedPoiTypes);
                 };
 
                 scope.togglePoiTopic = function(topic) {
@@ -51,8 +51,8 @@ angular.module('orka.layertree', [])
                 };
 
                 scope.updateTracks = function(tracks) {
-                    var selectedTypes = scope.collectSelectedTypes(tracks);
-                    LayertreeService.updateSelectedTrackTypes(selectedTypes);
+                    scope.selectedTrackTypes = scope.collectSelectedTypes(tracks);
+                    LayertreeService.updateSelectedTrackTypes(scope.selectedTrackTypes);
                 };
 
                 scope.toggleTrackTopic = function(topic) {

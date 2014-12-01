@@ -6,6 +6,3 @@ angular.module('anol', [])
         return $sce.trustAsHtml(input);
     };
 }]);
-// TODO: We need a structure for modules
-angular.module('anol.map', []);
-angular.module('anol.scale', []);

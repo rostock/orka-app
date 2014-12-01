@@ -1,4 +1,4 @@
-angular.module('anol.layerswitcher', [])
+angular.module('anol.layerswitcher')
 
 .directive('anolLayerswitcher', ['LayersService', function(LayersService) {
     return {
@@ -6,7 +6,9 @@ angular.module('anol.layerswitcher', [])
         require: '?^anolMap',
         transclude: true,
         templateUrl: 'anol/modules/layerswitcher/templates/layerswitcher.html',
-        scope: {},
+        scope: {
+            anolLayerswitcher: '@anolLayerswitcher'
+        },
         link: {
             pre: function(scope, element, attrs, AnolMapController) {
                 scope.collapsed = false;
@@ -22,7 +24,7 @@ angular.module('anol.layerswitcher', [])
                 scope.overlayLayers = overlayLayers;
 
                 if(angular.isDefined(AnolMapController)) {
-                    scope.collapsed = true;
+                    scope.collapsed = scope.anolLayerswitcher !== 'open';
                     scope.showToggle = true;
                     element.addClass('ol-unselectable');
                     AnolMapController.getMap().addControl(

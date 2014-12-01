@@ -28,21 +28,27 @@
 
     <div class="sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
-        <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
-          <div orka-print ></div>
+        <div class="tab-pane" ng-class="{'active': selectedTab==='locations'}">
+          <div orka-locations show-location-feature="selectedTab==='locations'" ng-if="locationsAvailable"></div>
         </div>
         <div class="tab-pane" ng-class="{'active': selectedTab==='featurelist'}">
           <div orka-feature-list feature-layer="poi_layer" marker-layer="marker_layer" ng-if="themesAvailable">
             <div orka-feature-popup feature-layer="poi_layer"></div>
           </div>
         </div>
+        <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
+          <div orka-print show-print-box="selectedTab === 'print'"></div>
+        </div>
       </div>
       <ul class="nav nav-tabs tabs-right sideways">
-        <li ng-class="{'active': selectedTab==='print'}" ng-show="printAvailable">
-          <a ng-click="selectTab('print')">Kartenausgabe</a>
+        <li ng-class="{'active': selectedTab==='locations'}" ng-show="locationsAvailable">
+          <a ng-click="selectTab('locations')">Bereiche</a>
         </li>
         <li ng-class="{'active': selectedTab==='featurelist'}" ng-show="themesAvailable">
           <a ng-click="selectTab('featurelist')">Kartenthemen</a>
+        </li>
+        <li ng-class="{'active': selectedTab==='print'}" ng-show="printAvailable">
+          <a ng-click="selectTab('print')">Kartenausgabe</a>
         </li>
       </ul>
     </div>
@@ -51,11 +57,11 @@
       <div class="map-wrapper" anol-map auto-resize="height">
         <div orka-mouse-position></div>
         <div anol-scale-text></div>
-        <div anol-layerswitcher>
+        <div anol-layerswitcher="{{ layerswitcherStatus }}">
           <hr>
           <div orka-layertree ng-if="themesAvailable"></div>
         </div>
-        <div orka-layertree-legend ng-if="themesAvailable"></div>
+        <div orka-layertree-legend="{{ legendStatus }}" ng-if="themesAvailable"></div>
        </div>
     </div>
 
@@ -64,7 +70,7 @@
     </script>
 
     <script type="text/ng-template" id="anol/modules/layerswitcher/templates/layerswitcher.html">
-      <div class="orka-layerswitcher-toggle" ng-show="showToggle" ng-if="backgroundLayers.length > 1 || overlayLayers.length > 0">
+      <div class="orka-layerswitcher-toggle" ng-show="showToggle" ng-if="$parent.themesAvailable || backgroundLayers.length > 1">
         <span class="glyphicon" ng-class="{'glyphicon-chevron-left': collapsed, 'glyphicon-chevron-right': !collapsed}" ng-click="$parent.collapsed=!$parent.collapsed"></span>
       </div>
       <div class="orka-layerswitcher" ng-show="!collapsed">
