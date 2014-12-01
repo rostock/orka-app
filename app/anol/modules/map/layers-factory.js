@@ -63,22 +63,22 @@ angular.module('anol.map')
     };
 
     /**
-     * @ngdoc function
+     * @ngdoc method
      * @name newTMS
      * @methodOf anol.map.LayersFactory
-     * @parameters {Object} options
-     * @parameters {string} options.baseURL Layers base url
-     * @parameters {string} options.format tile image format
-     * @parameters {Array} options.extent Layer extent
-     * @parameters {Array} options.resolutions Layer resolutions
-     * @parameters {Object} options.projection Layer projection
-     * @parameters {Array|string} options.attributions Layer attributions
-     * @parameters {string} options.title Layer title
-     * @parameters {string} options.shortcut Layer shortcut
-     * @parameters {Boolean} options.visible Initial layer visibility
-     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
-     * @parameters {Boolean} options.isBackground Layer is a background layer
-     * @parameters {string} options.layer Layer name
+     * @param {Object} options
+     * - **baseURL** - {string} - Layers base url
+     * - **format ** - {string} - Tile image format
+     * - **extent** - {Array} - Layer extent
+     * - **resolutions** - {Array} - Layer resolutions
+     * - **projection** - {Object} - Layer projection (ol.proj.Projection)
+     * - **attributions** - {Array|string} - Layer attributions
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {Boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **isBackground** - {Boolean} - Layer is a background layer
+     * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Tile with ol.source.TileImage
      *
@@ -123,19 +123,19 @@ angular.module('anol.map')
     };
 
     /**
-     * @ngdoc function
+     * @ngdoc method
      * @name newDynamicGeoJSON
      * @methodOf anol.map.LayersFactory
-     * @parameters {Object} options
-     * @parameters {string} options.url source url
-     * @parameters {function} options.additionalParameters function must return a list of parameters to add to the source url for each request
-     * @parameters {Object} options.projection Layer projection
-     * @parameters {Object} options.style Layer style
-     * @parameters {string} options.title Layer title
-     * @parameters {string} options.shortcut Layer shortcut
-     * @parameters {Boolean} options.visible Initial layer visibility
-     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
-     * @parameters {string} options.layer Layer name
+     * @param {Object} options
+     * - **url** - {string} - source url
+     * - **additionalParameters** - {function} - function must return a list of parameters to add to the source url for each request
+     * - **projection** - {Object} - Layer projection
+     * - **style** - {Object} - Layer style
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {Boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Vector with ol.source.ServerVector
      *
@@ -197,18 +197,18 @@ angular.module('anol.map')
     };
 
     /**
-     * @ngdoc function
+     * @ngdoc method
      * @name newGeoJSON
      * @methodOf anol.map.LayersFactory
-     * @parameters {Object} options
-     * @parameters {string} options.url url of geojson file
-     * @parameters {Object} options.projection Layer projection
-     * @parameters {Object} options.style Layer style
-     * @parameters {string} options.title Layer title
-     * @parameters {string} options.shortcut Layer shortcut
-     * @parameters {Boolean} options.visible Initial layer visibility
-     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
-     * @parameters {string} options.layer Layer name
+     * @param {Object} options
+     * - **url** - {string} - url of geojson file
+     * - **projection** - {Object} - Layer projection
+     * - **style** - {Object} - Layer style
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {Boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Vector with ol.source.GeoJSON
      *
@@ -227,18 +227,18 @@ angular.module('anol.map')
     };
 
     /**
-     * @ngdoc function
+     * @ngdoc method
      * @name newSingleTileWMS
      * @methodOf anol.map.LayersFactory
-     * @parameters {Object} options
-     * @parameters {string} options.url source url
-     * @parameters {Object} options.params wms parameter
-     * @parameters {Object} options.projection Layer projection
-     * @parameters {string} options.title Layer title
-     * @parameters {string} options.shortcut Layer shortcut
-     * @parameters {Boolean} options.visible Initial layer visibility
-     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
-     * @parameters {string} options.layer Layer name
+     * @param {Object} options
+     * - **url** - {string} - source url
+     * - **params** - {Object} - wms parameter
+     * - **projection** - {Object} - Layer projection
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {Boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
      *
      * @returns {Object} ol.layer.Image with ol.source.ImageWMS
      *
@@ -255,19 +255,19 @@ angular.module('anol.map')
     };
 
     /**
-     * @ngdoc function
+     * @ngdoc method
      * @name newFeatureLayer
      * @methodOf anol.map.LayersFactory
-     * @parameters {Object} options
-     * @parameters {Object} options.projection Layer projection
-     * @parameters {Object} options.style Layer style
-     * @parameters {string} options.title Layer title
-     * @parameters {string} options.shortcut Layer shortcut
-     * @parameters {Boolean} options.visible Initial layer visibility
-     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
-     * @parameters {string} options.layer Layer name
+     * @param {Object} options
+     * - **projection** - {Object} - Layer projection
+     * - **style** - {Object} - Layer style
+     * - **title** - {string} - Layer title
+     * - **shortcut** - {string} - Layer shortcut
+     * - **visible** - {Boolean} - Initial layer visibility
+     * - **displayInLayerswitcher** - {Boolean} - Layer should apear in layerswitcher
+     * - **layer** - {string} - Layer name
      *
-     * @returns ol.layer.Vector with ol.source.Vector
+     * @returns {Object} ol.layer.Vector with ol.source.Vector
      *
      * @description
      * Creates a FeatureLayer layer
