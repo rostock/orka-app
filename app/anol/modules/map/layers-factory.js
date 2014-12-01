@@ -13,6 +13,7 @@ angular.module('anol.map')
 .provider('LayersFactory', [function() {
     var self = this;
 
+    // prepares ol.source with common source opitons
     var createBasicSourceOptions = function(options) {
         var sourceOptions = {};
         if(options.projection !== undefined) {
@@ -32,6 +33,7 @@ angular.module('anol.map')
         return sourceOptions;
     };
 
+    // adds common properties to ol.layer
     var applyLayerProperties = function(layer, options) {
         if(options.title !== undefined) {
             layer.set('title', options.title);
@@ -77,6 +79,8 @@ angular.module('anol.map')
      * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
      * @parameters {Boolean} options.isBackground Layer is a background layer
      * @parameters {string} options.layer Layer name
+     *
+     * @returns {Object} ol.layer.Tile with ol.source.TileImage
      *
      * @description
      * Creates a TMS layer
@@ -132,6 +136,8 @@ angular.module('anol.map')
      * @parameters {Boolean} options.visible Initial layer visibility
      * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
      * @parameters {string} options.layer Layer name
+     *
+     * @returns {Object} ol.layer.Vector with ol.source.ServerVector
      *
      * @description
      * Creates a DynamicGeoJSON layer
@@ -190,6 +196,25 @@ angular.module('anol.map')
         return applyLayerProperties(layer, options);
     };
 
+    /**
+     * @ngdoc function
+     * @name newGeoJSON
+     * @methodOf anol.map.LayersFactory
+     * @parameters {Object} options
+     * @parameters {string} options.url url of geojson file
+     * @parameters {Object} options.projection Layer projection
+     * @parameters {Object} options.style Layer style
+     * @parameters {string} options.title Layer title
+     * @parameters {string} options.shortcut Layer shortcut
+     * @parameters {Boolean} options.visible Initial layer visibility
+     * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
+     * @parameters {string} options.layer Layer name
+     *
+     * @returns {Object} ol.layer.Vector with ol.source.GeoJSON
+     *
+     * @description
+     * Create a vector lyer including all geometries from given geojson file
+     */
     this.newGeoJSON = function(options) {
         var sourceOptions = createBasicSourceOptions(options);
         sourceOptions.url = options.url;
@@ -215,6 +240,8 @@ angular.module('anol.map')
      * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
      * @parameters {string} options.layer Layer name
      *
+     * @returns {Object} ol.layer.Image with ol.source.ImageWMS
+     *
      * @description
      * Creates a SingleTileWMS layer
      */
@@ -239,6 +266,8 @@ angular.module('anol.map')
      * @parameters {Boolean} options.visible Initial layer visibility
      * @parameters {Boolean} options.displayInLayerswitcher Layer should apear in layerswitcher
      * @parameters {string} options.layer Layer name
+     *
+     * @returns ol.layer.Vector with ol.source.Vector
      *
      * @description
      * Creates a FeatureLayer layer

@@ -62,6 +62,17 @@ angular.module('anol.map')
         var MapService = function() {
             this.map = undefined;
         };
+        /**
+         * @ngdoc function
+         * @name getMap
+         * @methodOf anol.map.MapSerice
+         *
+         * @returns {Object} ol.Map
+         *
+         * @description
+         * Get the current ol map. If not previosly requested, a new map
+         * is created.
+         */
         MapService.prototype.getMap = function() {
             if(angular.isUndefined(this.map)) {
                 this.map = buildMapConfig(

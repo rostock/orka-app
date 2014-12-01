@@ -1,5 +1,21 @@
 angular.module('anol.print')
 
+/**
+ * @ngdoc service
+ * @name anol.print.PrintPageService
+ *
+ * @requires $rootScope
+ * @requires MapService
+ * @requires LayersService
+ * @requires LayersFactory
+ * @requires InteractionsService
+ *
+ * @description
+ * Provides a rectabgular ol geometry representing a paper size.
+ * Geometry can be moved or resized. With a given scale, the needed
+ * paper size for selected area is calculated.
+ *
+ */
 .provider('PrintPageService', [function() {
     // Better move directive configuration in directive so
     // direcitve can be replaced by custom one?
