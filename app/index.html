@@ -57,11 +57,11 @@
       <div class="map-wrapper" anol-map auto-resize="height">
         <div orka-mouse-position></div>
         <div anol-scale-text></div>
-        <div anol-layerswitcher="open">
+        <div anol-layerswitcher="{{ layerswitcherStatus }}">
           <hr>
           <div orka-layertree ng-if="themesAvailable"></div>
         </div>
-        <div orka-layertree-legend="open" ng-if="themesAvailable"></div>
+        <div orka-layertree-legend="{{ legendStatus }}" ng-if="themesAvailable"></div>
        </div>
     </div>
 

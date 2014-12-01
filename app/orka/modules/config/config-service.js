@@ -162,6 +162,12 @@ angular.module('orka.config')
                 layer.attributions = config.attributions || defaults.attributions;
                 self.config.backgroundLayer.push(layer);
             });
+            if(config.map.openLayerswitcher !== undefined) {
+                self.config.map.layerswitcher = config.map.openLayerswitcher === true ? 'open' : 'closed';
+            }
+            if(config.map.openLegend !== undefined) {
+                self.config.map.legend = config.map.openLegend === true ? 'open' : 'closed';
+            }
         }
         if(config.locations !== undefined) {
             self.config.locations = config.locations;

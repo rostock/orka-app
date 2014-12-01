@@ -7,6 +7,8 @@ angular.module('orkaApp')
     $scope.themesAvailable = (ConfigService.config.poi !== undefined && ConfigService.config.track !== undefined);
     $scope.locationsAvailable = ConfigService.config.locations !== undefined;
     $scope.showHeader = ConfigService.config.header;
+    $scope.layerswitcherStatus = ConfigService.config.map.layerswitcher;
+    $scope.legendStatus = ConfigService.config.map.legend;
 
     $scope.selectTab = function(tab) {
         $scope.selectedTab = tab === $scope.selectedTab ? false : tab;
