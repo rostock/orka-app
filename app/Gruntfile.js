@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
-  var Dgeni = require('dgeni');
 
   // Project configuration.
   grunt.initConfig({
@@ -186,12 +185,4 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build_doc', ['ngdocs']);
-
-  grunt.registerTask('dgeni', 'Generate docs via dgeni.', function() {
-    var done = this.async();
-    var dgeni = new Dgeni([require('./anol/anol-dgeni.js')]);
-    dgeni.generate().then(done);
-  });
-  // grunt.registerTask('default', ['dgeni']);
-
 };
