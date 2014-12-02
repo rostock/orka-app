@@ -32,8 +32,8 @@
           <div orka-locations show-location-feature="selectedTab==='locations'" ng-if="locationsAvailable"></div>
         </div>
         <div class="tab-pane" ng-class="{'active': selectedTab==='featurelist'}">
-          <div orka-feature-list feature-layer="poi_layer" marker-layer="marker_layer" ng-if="themesAvailable">
-            <div orka-feature-popup feature-layer="poi_layer"></div>
+          <div orka-feature-list ng-if="themesAvailable">
+            <div orka-feature-popup></div>
           </div>
         </div>
         <div class="tab-pane" ng-class="{'active': selectedTab==='print'}">
