@@ -26,6 +26,7 @@ angular.module('orka.locations')
         link: {
             pre: function(scope, element, attrs) {
                 scope.features = [];
+                scope.featureLayer = LayersService.layersByProperty('layer', ConfigService.config.poi.layerName)[0];
                 scope.selectedFeature = undefined;
                 scope.layer = LayersFactory.newGeoJSON({
                     projection: ConfigService.config.map.projection,
@@ -68,6 +69,7 @@ angular.module('orka.locations')
                     if(scope.selectedFeature !== undefined) {
                         var map = MapService.getMap();
                         map.getView().fitExtent(scope.selectedFeature.getGeometry().getExtent(), map.getSize());
+                        scope.featureLayer.getSource().clear();
                     }
                     source.dispatchChangeEvent();
                 };
