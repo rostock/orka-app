@@ -10,8 +10,6 @@ angular.module('orka.featurelist')
  * @requires LayertreeService
  * @requires orka.config.ConfigService
  *
- * @param {string} featureLayer Name of POI-layer to use. Highlight marker will also placed in this layer.
- *
  * @description
  * Add a list of currently visible POIs. When clicking on list entry, corresponding POI in map will be highlighted.
  */
@@ -19,16 +17,14 @@ angular.module('orka.featurelist')
     return {
         restrict: 'A',
         replace: true,
-        scope: {
-            'featureLayerName': '@featureLayer'
-        },
+        scope: {},
         transclude: true,
         templateUrl: 'orka/modules/featurelist/templates/featurelist.html',
         link: {
             pre: function(scope, element, attr) {
                 scope.map = MapService.getMap();
                 scope.featureGroups = false;
-                scope.featureLayer = LayersService.layersByProperty('layer', scope.featureLayerName)[0];
+                scope.featureLayer = LayersService.layersByProperty('layer', ConfigService.config.poi.layerName)[0];
 
                 scope.typeMap = {};
 

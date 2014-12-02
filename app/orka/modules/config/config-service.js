@@ -27,6 +27,7 @@ angular.module('orka.config')
      * - **backgroundLayer** - {Object} - Available background layer configuration. At the moment, only {@link anolApi/anol.map.LayersFactory#methods_newTMS `TMS layer`} supported.
      * - **poi** - {Object} - Configuration of POI map themes.
      *   - layerURL - {string} - URI to poi request backend
+     *   - layerName - {string} - Name of layer POIs shown in
      *   - iconBaseURL - {string} - Base URI of used POI-icons
      *   - markerIcon - {string} - URI to used marker icon for highlighting selected POIs
      *   - legendURL - {string} - URI to POI-legend JSON
@@ -137,6 +138,7 @@ angular.module('orka.config')
             }
         },
         poi: {
+            layerName: 'poi_layer',
             layerURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:4000/poi.geojson?',
             iconBaseURL: 'http://www.orka-mv.de/static/icons/',
             markerIcon: '/static/img/highlightMarker.png',

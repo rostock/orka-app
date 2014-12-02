@@ -60,7 +60,7 @@ angular.module('orkaApp', [
             projection: ConfigServiceProvider.config.map.projection,
             url: ConfigServiceProvider.config.poi.layerURL,
             title: 'POI Layer',
-            layer: 'poi_layer',
+            layer: ConfigServiceProvider.config.poi.layerName,
             visible: false,
             displayInLayerswitcher: false,
             additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
@@ -69,7 +69,7 @@ angular.module('orkaApp', [
             extent: ConfigServiceProvider.config.map.extent,
             url: ConfigServiceProvider.config.track.layerURL,
             title: 'Track Layer',
-            layer: 'track_layer',
+            layer: ConfigServiceProvider.config.track.layerName,
             visible: false,
             displayInLayerswitcher: false,
             params: {

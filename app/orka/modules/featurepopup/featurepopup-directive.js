@@ -9,8 +9,6 @@ angular.module('orka.featurepopup')
  * @requires orka.config.ConfigService
  * @requires LayertreeService
  *
- * @param {string} featureLayer Name of POI-layer to use.
- *
  * @description
  * Shows a popup when click on POI in map.
  *
@@ -22,15 +20,14 @@ angular.module('orka.featurepopup')
     var anolFeaturePopupDirective = $injector.get('anolFeaturePopupDirective')[0];
     return {
         restrict: 'A',
-        scope: {
-            'featureLayer': '@featureLayer'
-        },
+        scope: {},
         require: '?^orkaFeatureList',
         replace: true,
         templateUrl: 'orka/modules/featurepopup/templates/popup.html',
         link: {
             pre: function(scope, element, attrs, OrkaFeatureListController) {
                 scope.map = MapService.getMap();
+                scope.featureLayer = ConfigService.config.poi.layerName;
                 scope.feature = undefined;
                 scope.popupVisible = false;
                 var offset = ConfigService.config.popup.offset;
