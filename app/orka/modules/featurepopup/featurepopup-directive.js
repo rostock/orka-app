@@ -1,5 +1,23 @@
 angular.module('orka.featurepopup')
-
+/**
+ * @ngdoc directive
+ * @name orka.featurelist.directive:orkaFeaturePopup
+ *
+ * @requires $injector
+ * @requires $timeout
+ * @requires anolApi/anol.map.MapService
+ * @requires orka.config.ConfigService
+ * @requires LayertreeService
+ *
+ * @param {string} featureLayer Name of POI-layer to use.
+ *
+ * @description
+ * Shows a popup when click on POI in map.
+ *
+ * If placed inside a {@link orka.featurelist.directive:orkaFeatureList `orkaFeatureList directive`}, list will scroll to selected POI in map.
+ *
+ * *Note* This is an extension of {@link anolApi/anol.featurepopup.directive:anolFeaturePopup `anolFeaturePopup`}
+ */
 .directive('orkaFeaturePopup', ['$injector', '$timeout', 'MapService', 'ConfigService', 'LayertreeService', function($injector, $timeout, MapService, ConfigService, LayertreeService) {
     var anolFeaturePopupDirective = $injector.get('anolFeaturePopupDirective')[0];
     return {

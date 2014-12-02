@@ -1,5 +1,13 @@
 angular.module('orka.layertree')
-
+/**
+ * @ngdoc directive
+ * @name orka.layertree.directive:orkaLayertree
+ *
+ * @requires orka.layertree.LayertreeService
+ *
+ * @description
+ * Adds a tree like themes chooser for POI- and Track-Themes
+ */
 .directive('orkaLayertree', ['LayertreeService', function(LayertreeService) {
     // used to render the tree and interact with the service above
     return {

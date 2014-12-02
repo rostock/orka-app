@@ -1,5 +1,15 @@
 angular.module('orka.layertree')
-
+/**
+ * @ngdoc directive
+ * @name orka.layertree.directive:orkaLayertreeLegend
+ *
+ * @requires orka.layertree.LayertreeService
+ *
+ * @param {string=} orkaLayertreeLegend If containing "open" `layertreeLegend` initial state is expanded. Otherweise it is collapsed.
+ *
+ * @description
+ * Shows selected POI icons and title in as a legend
+ */
 .directive('orkaLayertreeLegend', ['LayertreeService', function(LayertreeService) {
     return {
         restrict: 'A',

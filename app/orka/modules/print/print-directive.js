@@ -1,5 +1,25 @@
 angular.module('orka.print')
-
+/**
+ * @ngdoc directive
+ * @name orka.print.directive:orkaPrint
+ *
+ * @requires $modal
+ * @requires $timeout
+ * @requires orka.config.ConfigService
+ * @requires anolApi/anol.print.PrintPageService
+ * @requires orka.layertree.LayertreeService
+ * @requires anolApi/anol.map.LayersService
+ * @requires orka.print.PrintService
+ * @requires anolApi/anol.map.MapService
+ * @requires anolApi/anol.scale.calculateScale
+ *
+ * @param {expression} showPrintBox show/hide print box geometry in map
+ *
+ * @description
+ * Frontend of orka print module.
+ *
+ * Here all print related user input is collected. Also user interface for requesting, checking and downloading printed pages is provided.
+ */
 .directive('orkaPrint', ['$modal', '$timeout', 'ConfigService', 'PrintPageService', 'LayertreeService', 'LayersService', 'PrintService', 'MapService', 'calculateScale', function($modal, $timeout, ConfigService, PrintPageService, LayertreeService, LayersService, PrintService, MapService, calculateScale) {
     return {
         restrict: 'A',

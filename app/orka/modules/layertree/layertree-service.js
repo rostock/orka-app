@@ -1,31 +1,74 @@
 angular.module('orka.layertree')
-
+/**
+ * @ngdoc object
+ * @name orka.layertree.LayertreeServiceProvider
+ */
 // TODO rename
 .provider('LayertreeService', [function() {
     var _poiLayer, _poiLegendUrl, _iconBaseUrl, _trackLegendUrl, _trackLayer;
     var _selectedPoiTypes = [];
-
+    /**
+     * @ngdoc method
+     * @name setPoiLayer
+     * @methodOf orka.layertree.LayertreeServiceProvider
+     *
+     * @param {Object} poiLayer Layer containing POIs
+     *
+     * @description
+     * Register layer to display POIs in
+     */
     this.setPoiLayer = function(poiLayer) {
         _poiLayer = poiLayer;
     };
-
+    /**
+     * @ngdoc method
+     * @name setTrackLayer
+     * @methodOf orka.layertree.LayertreeServiceProvider
+     *
+     * @param {Object} trackLayer Layer containing Tracks
+     *
+     * @description
+     * Register layer to display Tracks in
+     */
     this.setTrackLayer = function(trackLayer) {
         _trackLayer = trackLayer;
     };
-
+    /**
+     * @ngdoc method
+     * @name setPoiLegendUrl
+     * @methodOf orka.layertree.LayertreeServiceProvider
+     *
+     * @param {string} url URI to POI legend JSON
+     */
     this.setPoiLegendUrl = function(url) {
         _poiLegendUrl = url;
     };
+    /**
+     * @ngdoc method
+     * @name setTrackLegendUrl
+     * @methodOf orka.layertree.LayertreeServiceProvider
+     *
+     * @param {string} url URI to Track legend JSON
+     */
     this.setTrackLegendUrl = function(url) {
         _trackLegendUrl = url;
     };
-
+    /**
+     * @ngdoc method
+     * @name setIconBaseUrl
+     * @methodOf orka.layertree.LayertreeServiceProvider
+     *
+     * @param {string} url Base URI of used POI icons
+     */
     this.setIconBaseUrl = function(url) {
         _iconBaseUrl = url || '';
     };
-
-    // the dynamicGeoJSON layer needs a function at config time to add
-    // aditional parameters to it's request
+    /**
+     * @private
+     * @name getAdditionalPoiParametersCallback
+     *
+     * @returns {string} List of selected POIs to use in DynamicGeoJSON layer as additional parameters
+     */
     this.getAdditionalPoiParametersCallback = function() {
         return function() {
             var param = 'poi_types=' + _selectedPoiTypes.join(',');
@@ -34,6 +77,16 @@ angular.module('orka.layertree')
     };
 
     this.$get = ['$q', 'ConfigService', function($q, ConfigService) {
+        /**
+         * @ngdoc service
+         * @name orka.layertree.LayerTreeService
+         *
+         * @requires $q
+         * @requires orka.config.ConfigService
+         *
+         * @description
+         * Updates given poi- / trackLayer and prepare structure for {@link orka.layertree.directive:orkaLayertree `orkaLayertree directive`} as well as {@link orka.layertree.directive:orkaLayertreeLegend `orkaLayertreeLegend directive`}
+         */
         var LayerTree = function(poiLayer, trackLayer, poiLegendUrl, trackLegendUrl, iconBaseUrl) {
             var self = this;
             this.iconBaseUrl = iconBaseUrl;
@@ -74,6 +127,13 @@ angular.module('orka.layertree')
                 this.tracksLoaded = this._loadTracks(trackLegendUrl);
             }
         };
+        /**
+         * @ngdoc method
+         * @name updateSelectedPoiTypes
+         * @methodOf orka.layertree.LayerTreeService
+         *
+         * @param {Array.<string>} selectedTypes List of POI types that should be visible in map
+         */
         LayerTree.prototype.updateSelectedPoiTypes = function(selectedTypes) {
             // keep internal and external types in sync cause we need it both as service value
             // and as internal otherwise getAdditionalPoiParametersCallback won't work
@@ -84,6 +144,13 @@ angular.module('orka.layertree')
             this.poiLayer.getSource().clear();
             this.poiLayer.setVisible(_selectedPoiTypes.length > 0);
         };
+        /**
+         * @ngdoc method
+         * @name updateSelectedTrackTypes
+         * @methodOf orka.layertree.LayerTreeService
+         *
+         * @param {Array.<string>} selectedTypes List of Track types that should be visible in map
+         */
         LayerTree.prototype.updateSelectedTrackTypes = function(selectedTypes) {
             var source = this.trackLayer.getSource();
             var params = source.getParams();
@@ -92,6 +159,15 @@ angular.module('orka.layertree')
             this.trackLayer.setVisible(selectedTypes.length > 0);
             source.updateParams(params);
         };
+        /**
+         * @private
+         * @name _prepareTopics
+         * @methodOf orka.layertree.LayerTreeService
+         *
+         * @param {Array.<Object>} topics Topics object received from poiLegend.json / trackLegend.json
+         *
+         * @returns {Array.<Object>} Extended giben topics object
+         */
         LayerTree.prototype._prepareTopics = function(topics) {
             var self = this;
             angular.forEach(topics, function(topic) {
@@ -115,6 +191,15 @@ angular.module('orka.layertree')
             });
             return topics;
         };
+        /**
+         * @private
+         * @name _loadPois
+         * @methodOf orka.layertree.LayerTreeService
+         *
+         * @param {string} url URI of poiLegend.json
+         *
+         * @returns {Object} promise
+         */
         LayerTree.prototype._loadPois = function(url) {
             var self = this;
             var deferred = $q.defer();
@@ -127,7 +212,15 @@ angular.module('orka.layertree')
             });
             return deferred.promise;
         };
-
+        /**
+         * @private
+         * @name _loadTracks
+         * @methodOf orka.layertree.LayerTreeService
+         *
+         * @param {string} url URI of trackLegend.json
+         *
+         * @returns {Object} promise
+         */
         LayerTree.prototype._loadTracks = function(url) {
             var self = this;
             var deferred = $q.defer();

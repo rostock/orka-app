@@ -1,5 +1,22 @@
 angular.module('orka.locations')
-
+/**
+ * @ngdoc directive
+ * @name orka.locations.directive:orkaLocations
+ *
+ * @requires anolApi/anol.map.LayersFactory
+ * @requires anolApi/anol.map.LayersService
+ * @requires anolApi/anol.map.MapService
+ * @requires orka.config.ConfigService
+ *
+ * @param {expression} showLocationFeature show/hide feature in map
+ *
+ * @description
+ * Shows a list of selectable geometries. Selected geometry will be shown in map. Map will be centered on selected geometry.
+ *
+ * List of selectable geometries is provided by {@link orka.config.ConfigServiceProvider#property_config `ConfigServiceProvider.config.locations`}.
+ *
+ * With `showLocationFeature` === `false` shown geometry will be hidden.
+ */
 .directive('orkaLocations', ['LayersFactory', 'LayersService', 'ConfigService', 'MapService', function(LayersFactory, LayersService, ConfigService, MapService) {
     return {
         scope: {

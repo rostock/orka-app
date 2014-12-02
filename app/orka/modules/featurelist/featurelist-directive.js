@@ -1,12 +1,26 @@
 angular.module('orka.featurelist')
-
+/**
+ * @ngdoc directive
+ * @name orka.featurelist.directive:orkaFeatureList
+ *
+ * @requires $filter
+ * @requires $timeout
+ * @requires anolApi/anol.map.MapService
+ * @requires anolApi/anol.map.LayersService
+ * @requires LayertreeService
+ * @requires orka.config.ConfigService
+ *
+ * @param {string} featureLayer Name of POI-layer to use. Highlight marker will also placed in this layer.
+ *
+ * @description
+ * Add a list of currently visible POIs. When clicking on list entry, corresponding POI in map will be highlighted.
+ */
 .directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', 'ConfigService', function($filter, $timeout, MapService, LayersService, LayertreeService, ConfigService) {
     return {
         restrict: 'A',
         replace: true,
         scope: {
-            'featureLayerName': '@featureLayer',
-            'markerLayerName': '@markerLayer'
+            'featureLayerName': '@featureLayer'
         },
         transclude: true,
         templateUrl: 'orka/modules/featurelist/templates/featurelist.html',
@@ -15,7 +29,6 @@ angular.module('orka.featurelist')
                 scope.map = MapService.getMap();
                 scope.featureGroups = false;
                 scope.featureLayer = LayersService.layersByProperty('layer', scope.featureLayerName)[0];
-                scope.markerLayer = LayersService.layersByProperty('layer', scope.markerLayerName)[0];
 
                 scope.typeMap = {};
 

@@ -157,12 +157,16 @@ module.exports = function(grunt) {
       options: {
         dest: 'docs',
         html5Mode: false,
-        startPage: '/api/anol',
-        title: 'AnOl Documentation'
+        startPage: '/api/',
+        title: 'ORKaApp API Documentation'
       },
-      api: {
+      anolApi: {
         title: 'AnOl API',
         src: ['anol/modules/**/*.js'],
+      },
+      orkaApi: {
+        title: 'ORKa API',
+        src: ['orka/modules/**/*.js'],
       }
     }
   });

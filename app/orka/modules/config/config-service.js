@@ -1,6 +1,54 @@
 angular.module('orka.config')
 
+/**
+ * @ngdoc object
+ * @name orka.config.ConfigServiceProvider
+ */
 .provider('ConfigService', [function() {
+    /**
+     * @ngdoc object
+     * @name config
+     * @propertyOf orka.config.ConfigServiceProvider
+     *
+     * @description
+     * This object contains all configurateble values for orka-app.
+     *
+     * Most values can be set using {@link orka.config.ConfigServiceProvider#methods_setConfig `setConfig()`}.
+     *
+     * Below the config structure is documented.
+     *
+     * - **map** - {Object} - Containing configurations for ol.Map and ol.View
+     *   - projection - {Object} - ol.proj.Projection object containing app projection
+     *   - extent - {Array.<number>} - View extent
+     *   - resolutions - {Array.<number>} - Resolutions used in view
+     *   - center - {Array.<number} - Initial center
+     *   - zoom - {number} - Initial zoom
+     * - **attributions** - {Array.<string>|string} - Attributions added to all background layer
+     * - **backgroundLayer** - {Object} - Available background layer configuration. At the moment, only {@link anolApi/anol.map.LayersFactory#methods_newTMS `TMS layer`} supported.
+     * - **poi** - {Object} - Configuration of POI map themes.
+     *   - layerURL - {string} - URI to poi request backend
+     *   - iconBaseURL - {string} - Base URI of used POI-icons
+     *   - markerIcon - {string} - URI to used marker icon for highlighting selected POIs
+     *   - legendURL - {string} - URI to POI-legend JSON
+     *   - symbolAnchor - {Array.<number>} - Placement offset of POI-icons
+     *   - markerAnchor - {Array.<number>} - Placement offset of highlight marker icon
+     * - **track** - {Object} - Configuration if Track map themes.
+     *   - layerURL - {string} - URI to track request backend
+     *   - layerName - {string} - Name of layer tracks shown in
+     *   - legendURL - {string} - URI to Track-legend json
+     * - **print** - {Object} - Configuration of print module
+     *   - defaultScale - {number} - Initial scale factor
+     *   - createURL - {string} - URI to create endpoint of printqueue
+     *   - checkURL - {string} - URI to check endpoint of printqueue to receive current state of requested document
+     *   - downloadURL - {string} - URI to download endpoint in printqueue for downloading requested document
+     *   - checkDelay - {number} - Time in ms between requests to `checkURL`
+     *   - pageSizes - {Array.<Object>} - List of available default print page sizes. See {@link anolApi/anol.print.PrintPageServiceProvider#methods_setPageSizes `PrintPageServiceProvider.setPageSizes`}
+     *   - outputFormats - {Array.<Object>} - List of available output formats. See {@link anolApi/anol.print.PrintPageServiceProvider#methods_setOutputFormats `PrintPageServiceProvider.setOutputFormats`}
+     * - **popup** - {Object} - Configuration of feature popup
+     *   - positioning - {string} - Popup placement type. Currently only `center-left` supported. See {@link http://openlayers.org/en/v3.0.0/apidoc/ol.html#OverlayPositioning `ol3 Overlay positioning`} for valid values.
+     *   - offset - {Array.<number>} - Popup placement offset.
+     *   - buffer - {Array.<number>} - Min distance between popup element and map border for automatical popup movement into view.
+     */
     this.config = {};
     var defaults = {
         map: {
@@ -140,6 +188,23 @@ angular.module('orka.config')
         }
     };
 
+    /**
+     * @ngdoc method
+     * @name setConfig
+     * @methodOf orka.config.ConfigServiceProvider
+     *
+     * @param {Object} config
+     * - **header** - {string|boolean} - If containing '0px' header is set to false, otherwise it will be true
+     * - **map** - {Object} - Containing map related configurations
+     *   - **center** - {Array.<number>} - Initial map center
+     *   - **zoom** - {number} - Initial map zoom
+     *   - **layers** - {Array.<string>} - Background layer names to include in map
+     *   - **openLayerswitcher** - {boolean} - Expand layerswitcher at startup
+     *   - **openLagend** - {boolean} - Expand legend at startup
+     * - **locations** - {string} - Path/url to geojson containing locations
+     * - **themes** - {boolean} - Activate themes module
+     * - **print** - {boolean} - Activate print module
+     */
     this.setConfig = function(config) {
         var self = this;
         if(config.header === undefined) {
@@ -183,6 +248,20 @@ angular.module('orka.config')
     };
 
     this.$get = [function() {
+        /**
+         * @ngdoc service
+         * @name orka.config.ConfigService
+         * @description
+         * Service to receive config
+         */
+
+        /**
+         * @ngdoc object
+         * @name config
+         * @propertyOf orka.config.ConfigService
+         * @description
+         * `ConfigService.config` is the same object as {@link orkaApi/orka.config.ConfigServiceProvider#properties_config `ConfigServiceProvider.config`}.
+         */
         return this;
     }];
 }]);
