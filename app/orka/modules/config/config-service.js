@@ -45,6 +45,15 @@ angular.module('orka.config')
      *   - checkDelay - {number} - Time in ms between requests to `checkURL`
      *   - pageSizes - {Array.<Object>} - List of available default print page sizes. See {@link anolApi/anol.print.PrintPageServiceProvider#methods_setPageSizes `PrintPageServiceProvider.setPageSizes`}
      *   - outputFormats - {Array.<Object>} - List of available output formats. See {@link anolApi/anol.print.PrintPageServiceProvider#methods_setOutputFormats `PrintPageServiceProvider.setOutputFormats`}
+     *   - style - {Object} - Styling of print area geometry in map
+     *     - fillColor {string} - RGBA value for area color
+     *     - strokeColor {string} - RGBA value for area outline color
+     *     - strokeWidth {number} - Width of area outline
+     *     - pointRadius {number} - Radius of draggable points
+     *     - pointCursor {string} - Define which cursur apears when mouse over draggeble point
+     *     - pointFillColor {string} - RGBA value for point area color
+     *     - pointStrokeColor {string} - RGBA value for point outline color
+     *     - pointStrokeWidth {number} - Width of point outline
      * - **popup** - {Object} - Configuration of feature popup
      *   - positioning - {string} - Popup placement type. Currently only `center-left` supported. See {@link http://openlayers.org/en/v3.0.0/apidoc/ol.html#OverlayPositioning `ol3 Overlay positioning`} for valid values.
      *   - offset - {Array.<number>} - Popup placement offset.
@@ -181,7 +190,17 @@ angular.module('orka.config')
             {
                 'label': 'PNG',
                 'value': 'png'
-            }]
+            }],
+            style: {
+                areaFillColor: 'rgba(255, 255, 255, 0.4)',
+                strokeFillColor: 'rgba(0, 0, 0, 1)',
+                strokeWidth: 1,
+                pointRadius: 5,
+                pointCursor: 'pointer',
+                pointFillColor: 'rgba(255, 255, 255, 1)',
+                pointStrokeColor: 'rgba(0, 0, 0, 1)',
+                pointStrokeWidth: 1
+            }
         },
         popup: {
             positioning: 'center-left',

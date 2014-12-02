@@ -99,19 +99,21 @@ angular.module('orkaApp', [
         PrintPageServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
         PrintPageServiceProvider.setStyle(new ol.style.Style({
             fill: new ol.style.Fill({
-                color: 'rgba(255, 255, 255, 0.4)'
+                color: ConfigServiceProvider.config.print.style.areaFillColor
             }),
             stroke: new ol.style.Stroke({
-                color: 'rgba(0, 0, 0, 1)'
+                color: ConfigServiceProvider.config.print.style.strokeFillColor,
+                width: ConfigServiceProvider.config.print.style.strokeWidth
             }),
             image: new ol.style.Circle({
-                radius: 5,
-                cursor: 'pointer',
+                radius: ConfigServiceProvider.config.print.style.pointRadius,
+                cursor: ConfigServiceProvider.config.print.style.pointCursor,
                 fill: new ol.style.Fill({
-                    color: 'rgba(255, 255, 255, 1)'
+                    color: ConfigServiceProvider.config.print.style.pointFillColor
                 }),
                 stroke: new ol.style.Stroke({
-                    color: 'rgba(0, 0, 0, 1)'
+                    color: ConfigServiceProvider.config.print.style.pointStrokeColor,
+                    width: ConfigServiceProvider.config.print.style.pointStrokeWidth
                 })
             })
         }));
