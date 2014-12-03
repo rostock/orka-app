@@ -99,7 +99,7 @@ angular.module('orkaApp', [
         PrintPageServiceProvider.setDefaultScale(ConfigServiceProvider.config.print.defaultScale);
         PrintPageServiceProvider.setStyle(new ol.style.Style({
             fill: new ol.style.Fill({
-                color: ConfigServiceProvider.config.print.style.areaFillColor
+                color: ConfigServiceProvider.config.print.style.fillColor
             }),
             stroke: new ol.style.Stroke({
                 color: ConfigServiceProvider.config.print.style.strokeColor,

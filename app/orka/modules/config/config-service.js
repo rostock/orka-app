@@ -192,7 +192,7 @@ angular.module('orka.config')
                 'value': 'png'
             }],
             style: {
-                areaFillColor: 'rgba(255, 255, 255, 0.4)',
+                fillColor: 'rgba(255, 255, 255, 0.4)',
                 strokeColor: 'rgba(0, 0, 0, 1)',
                 strokeWidth: 1,
                 pointRadius: 5,
