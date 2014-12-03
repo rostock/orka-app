@@ -222,7 +222,7 @@ angular.module('orka.config')
      *   - **layers** - {Array.<string>} - Background layer names to include in map
      *   - **attributions** - {Array.<string>|string} - Map attributions
      *   - **openLayerswitcher** - {boolean} - Expand layerswitcher at startup
-     *   - **openLagend** - {boolean} - Expand legend at startup
+     *   - **openLegend** - {boolean} - Expand legend at startup
      * - **locations** - {string} - Path/url to geojson containing locations
      * - **themes** - {boolean} - Activate themes module
      * - **print** - {boolean} - Activate print module
