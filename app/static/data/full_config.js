@@ -46,5 +46,9 @@ var orkaAppConfig = {
     // Aktivieren der Kartenthemen-Modul.
     // Weglassen oder ein anderer Wert als 'true'
     // deaktiviert das Kartenthemen-Modul.
-    themes: true
+    themes: true,
+    // Zu verwendende POIs Definition
+    poi: {
+        legendURL: '/static/data/poi_legend_data.json'
+    }
 };

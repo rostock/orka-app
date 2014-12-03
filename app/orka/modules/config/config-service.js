@@ -260,8 +260,11 @@ angular.module('orka.config')
             self.config.locations = config.locations;
         }
         if(config.themes === true) {
-            self.config.poi = $.extend({}, defaults.poi, config.poi);
-            self.config.track = $.extend({}, defaults.track, config.track);
+            self.config.poi = $.extend({}, defaults.poi);
+            if(config.poi !== undefined && config.poi.legendURL !== undefined) {
+                self.config.poi.legendURL = config.poi.legendURL;
+            }
+            self.config.track = $.extend({}, defaults.track);
         }
         if(config.print === true) {
             self.config.print = $.extend({}, defaults.print);
