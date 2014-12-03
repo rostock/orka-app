@@ -12,8 +12,8 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'build/anol.min.js': ['build/anol.js'],
-          'build/orka.min.js': ['build/orka.js']
+          'build/anol.min.js': ['build/anol.ngmin.js'],
+          'build/orka.min.js': ['build/orka.ngmin.js']
         }
       }
     },
