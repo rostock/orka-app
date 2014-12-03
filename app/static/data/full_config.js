@@ -17,6 +17,11 @@ var orkaAppConfig = {
             'ORKA_STADTPLAN_SCHUMMERUNG',
             'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT'
         ],
+        // Festlegung der Kartenattributionen
+        attributions: [
+            '<div>Kartenbild © Hansestadt Oldenburg (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
+            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a>(<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a></div>'
+        ],
         // Anwendung startet mit geöffneten Layerswitcher, sofern vorhanden
         openLayerswitcher: true,
         // Anwendung startet mit geöffneter Legende, sofern vorhanden

@@ -220,6 +220,7 @@ angular.module('orka.config')
      *   - **center** - {Array.<number>} - Initial map center
      *   - **zoom** - {number} - Initial map zoom
      *   - **layers** - {Array.<string>} - Background layer names to include in map
+     *   - **attributions** - {Array.<string>|string} - Map attributions
      *   - **openLayerswitcher** - {boolean} - Expand layerswitcher at startup
      *   - **openLagend** - {boolean} - Expand legend at startup
      * - **locations** - {string} - Path/url to geojson containing locations
@@ -245,7 +246,7 @@ angular.module('orka.config')
             }
             angular.forEach(config.map.layers, function(layerName) {
                 var layer = defaults.backgroundLayer[layerName];
-                layer.attributions = config.attributions || defaults.attributions;
+                layer.attributions = config.map.attributions || defaults.attributions;
                 self.config.backgroundLayer.push(layer);
             });
             if(config.map.openLayerswitcher !== undefined) {
