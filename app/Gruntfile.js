@@ -205,7 +205,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.registerTask('dev', ['ngtemplates', 'ngdocs', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['clean', 'jshint', 'ngtemplates', 'ngmin:anolDist', 'concat:anolDist', 'ngmin:orkaDist', 'concat:orkaDist', 'uglify']);
+  grunt.registerTask('build', ['clean', 'jshint', 'ngtemplates', 'ngmin:anolDist', 'ngmin:orkaDist', 'uglify', 'concat:anolDist', 'concat:orkaDist']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build_doc', ['ngdocs']);
