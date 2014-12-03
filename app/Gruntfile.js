@@ -46,9 +46,9 @@ module.exports = function(grunt) {
           '!orka/**/angular-mocks.js',
           '!orka/test/**/*.*',
           '!orka/**/*-debug.js',
-          'config.js',
-          'controller.js',
-          'init.js'
+          'orka/config.js',
+          'orka/controller.js',
+          'orka/init.js'
         ],
         dest: 'build/orka.ngmin.js'
       }
