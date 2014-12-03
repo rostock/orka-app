@@ -102,7 +102,7 @@ angular.module('orkaApp', [
                 color: ConfigServiceProvider.config.print.style.areaFillColor
             }),
             stroke: new ol.style.Stroke({
-                color: ConfigServiceProvider.config.print.style.strokeFillColor,
+                color: ConfigServiceProvider.config.print.style.strokeColor,
                 width: ConfigServiceProvider.config.print.style.strokeWidth
             }),
             image: new ol.style.Circle({
