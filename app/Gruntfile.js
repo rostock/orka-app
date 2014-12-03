@@ -70,7 +70,7 @@ module.exports = function(grunt) {
           'anol/libs/jquery/jquery-2.1.1.min.js',
           'anol/libs/angular/angular.min.js',
           'anol/libs/ol3/ol.custom.min.js',
-          'build/anol.ngmin.js'
+          'build/anol.min.js'
         ],
         dest: 'build/anol.js'
       },
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
       orkaDist: {
         src: [
           'orka/libs/**/*.js',
-          'build/orka.ngmin.js'
+          'build/orka.min.js'
         ],
         dest: 'build/orka.js'
       }
