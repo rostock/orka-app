@@ -90,8 +90,19 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      temp: {
+      prebuild: {
         src: [ 'build' ]
+      },
+      postbuild: {
+        src: [
+          'build/anol.ngmin.js',
+          'build/anol.ugly.js',
+          'build/orka.ngmin.js',
+          'build/orka.ugly.js'
+        ]
+      },
+      docs: {
+        src: [ 'docs' ]
       }
     },
     configureRewriteRules: {
@@ -204,9 +215,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('dev', ['ngtemplates', 'ngdocs', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['clean', 'jshint', 'ngtemplates', 'ngmin:anolDist', 'ngmin:orkaDist', 'uglify', 'concat:anolDist', 'concat:orkaDist']);
+  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates', 'ngmin:anolDist', 'ngmin:orkaDist', 'uglify', 'concat:anolDist', 'concat:orkaDist', 'clean:postbuild']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
-  grunt.registerTask('build_doc', ['ngdocs']);
+  grunt.registerTask('build-doc', ['clean:docs', 'ngdocs']);
 };
