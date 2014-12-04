@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label class="control-label" for="width">Breite</label>
                 <div class="input-group">
-                    <input class="form-control" name="width" type="number" ng-model="pageSize[0]" ng-change="updatePrintPage()">
+                    <input class="form-control" name="width" type="number" ng-model="$parent.pageSize[0]" ng-change="updatePrintPage()">
                     <span class="input-group-addon">mm</span>
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label class="control-label" for="height">Höhe</label>
                 <div class="input-group">
-                    <input class="form-control" name="height" type="number" ng-model="pageSize[1]" ng-change="updatePrintPage()">
+                    <input class="form-control" name="height" type="number" ng-model="$parent.pageSize[1]" ng-change="updatePrintPage()">
                     <span class="input-group-addon">mm</span>
                 </div>
             </div>
