@@ -12,8 +12,8 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'build/anol.min.js': ['build/anol.ngmin.js'],
-          'build/orka.min.js': ['build/orka.ngmin.js']
+          'build/anol.ugly.js': ['build/anol.ngmin.js'],
+          'build/orka.ugly.js': ['build/orka.ngmin.js']
         }
       }
     },
@@ -70,9 +70,9 @@ module.exports = function(grunt) {
           'anol/libs/jquery/jquery-2.1.1.min.js',
           'anol/libs/angular/angular.min.js',
           'anol/libs/ol3/ol.custom.min.js',
-          'build/anol.min.js'
+          'build/anol.ugly.js'
         ],
-        dest: 'build/anol.js'
+        dest: 'build/anol.min.js'
       },
       orkaDev: {
         src: [
@@ -84,9 +84,9 @@ module.exports = function(grunt) {
       orkaDist: {
         src: [
           'orka/libs/**/*.js',
-          'build/orka.min.js'
+          'build/orka.ugly.js'
         ],
-        dest: 'build/orka.js'
+        dest: 'build/orka.min.js'
       }
     },
     clean: {
