@@ -38,6 +38,7 @@ angular.module('orka.config')
      *   - layerName - {string} - Name of layer tracks shown in
      *   - legendURL - {string} - URI to Track-legend json
      * - **print** - {Object} - Configuration of print module
+     *   - maxPageSize - {number} - Largest printable page size in square mm
      *   - defaultScale - {number} - Initial scale factor
      *   - createURL - {string} - URI to create endpoint of printqueue
      *   - checkURL - {string} - URI to check endpoint of printqueue to receive current state of requested document
@@ -161,6 +162,7 @@ angular.module('orka.config')
             legendURL: '/static/data/track_legend_data.json'
         },
         print: {
+            maxPageSize: 200000,
             defaultScale: 250000,
             createURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000/print',
             checkURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000',

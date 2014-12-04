@@ -36,6 +36,8 @@ angular.module('orka.print')
                 if(scope.show) {
                     scope.outputFormats = PrintPageService.outputFormats;
                     scope.pageSizes = PrintPageService.pageSizes;
+                    scope.maxPageSize = ConfigService.config.print.maxPageSize;
+                    scope.pageSizeError = false;
                     scope.scale = angular.copy(PrintPageService.defaultScale);
                     scope.streetIndex = false;
                     scope.licenceAgreed = false;
@@ -49,6 +51,7 @@ angular.module('orka.print')
                     return angular.equals(size, scope.pageSize);
                 };
                 scope.isPrintable = function() {
+                    scope.pageSizeError = false;
                     if(scope.scale === undefined || scope.scale <= 0) {
                         return false;
                     }
@@ -59,6 +62,10 @@ angular.module('orka.print')
                         return false;
                     }
                     if(scope.pageSize[1] === undefined || scope.pageSize[1] <= 0) {
+                        return false;
+                    }
+                    if(scope.pageSize[0] * scope.pageSize[1] > scope.maxPageSize) {
+                        scope.pageSizeError = true;
                         return false;
                     }
                     return true;

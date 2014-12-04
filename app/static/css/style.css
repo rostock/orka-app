@@ -262,6 +262,10 @@ div.print-headline-container-last {
   margin-bottom: 0px;
 }
 
+.orka-print .alert-danger {
+  margin-top: 5px;
+}
+
 /*
  * Map components
  */
