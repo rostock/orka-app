@@ -99,7 +99,7 @@ angular.module('orka.config')
         ],
         backgroundLayer: {
             'ORKA_STADTPLAN': {
-                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/',
                 layer: 'stadtplan_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan',
@@ -107,7 +107,7 @@ angular.module('orka.config')
                 printLayer: 'mvp-mapserver-print'
             },
             'ORKA_STADTPLAN_OHNE_TEXT': {
-                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/',
                 layer: 'stadtplan_notext_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan ohne Text',
@@ -115,7 +115,7 @@ angular.module('orka.config')
                 printLayer: 'mvp-mapserver-notext-print'
             },
             'ORKA_STADTPLAN_SCHUMMERUNG': {
-                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/',
                 layer: 'stadtplan_hillshade_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan Schummerung',
@@ -123,7 +123,7 @@ angular.module('orka.config')
                 printLayer: 'mvp-mapserver-hillshade-print'
             },
             'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT': {
-                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/',
                 layer: 'stadtplan_hillshade_notext_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan Schummerung ohne Text',
@@ -131,7 +131,7 @@ angular.module('orka.config')
                 printLayer: 'mvp-mapserver-hillshade-notext-print'
             },
             'ORKA_STADTPLAN_GRAU': {
-                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/',
                 layer: 'stadtplan_grau_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan Grau',
@@ -139,7 +139,7 @@ angular.module('orka.config')
                 printLayer: 'mvp-mapserver-grayscale-print'
             },
             'ORKA_STADTPLAN_GRAU_OHNE_TEXT': {
-                baseURL: 'http://10.1.1.49:8080/tms/1.0.0',
+                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms/',
                 layer: 'stadtplan_grau_notext_EPSG25833',
                 format: 'png',
                 title: 'Stadtplan Grau ohne Text',
@@ -149,24 +149,24 @@ angular.module('orka.config')
         },
         poi: {
             layerName: 'poi_layer',
-            layerURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:4000/poi.geojson?',
-            iconBaseURL: 'http://www.orka-mv.de/static/icons/',
-            markerIcon: '/static/img/highlightMarker.png',
-            legendURL: '/static/data/poi_legend_data.json',
+            layerURL: '/citymap/poi.geojson?',
+            iconBaseURL: 'static/icons/',
+            markerIcon: 'static/img/highlightMarker.png',
+            legendURL: 'js/poi_legend_data.json',
             symbolAnchor: [10, 26],
             markerAnchor: [17, 33]
         },
         track: {
-            layerURL: 'http://www.orka-mv.de/citymap/tracks',
+            layerURL: '/citymap/tracks',
             layerName: 'tracks',
-            legendURL: '/static/data/track_legend_data.json'
+            legendURL: 'js/track_legend_data.json'
         },
         print: {
             maxPageSize: 200000,
             defaultScale: 250000,
-            createURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000/print',
-            checkURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000',
-            downloadURL: 'http://10.1.1.49:8888/proxy/http://10.1.1.49:5000',
+            createURL: '/print/print',
+            checkURL: '',
+            downloadURL: '',
             checkDelay: 2000,
             pageSizes: [{
                 'label': 'A4',
