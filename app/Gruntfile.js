@@ -72,7 +72,7 @@ module.exports = function(grunt) {
           'anol/libs/ol3/ol.custom.min.js',
           'build/anol.ugly.js'
         ],
-        dest: 'build/anol.min.js'
+        dest: 'build/dist/js/anol.min.js'
       },
       orkaDev: {
         src: [
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
           'orka/libs/**/*.js',
           'build/orka.ugly.js'
         ],
-        dest: 'build/orka.min.js'
+        dest: 'build/dist/js/orka.min.js'
       }
     },
     clean: {
@@ -103,6 +103,30 @@ module.exports = function(grunt) {
       },
       docs: {
         src: [ 'docs' ]
+      }
+    },
+    copy: {
+      main: {
+        files: [
+          {
+            flatten: true,
+            src: ['index.html'],
+            dest: 'build/dist/'
+          },
+          {
+            flatten:true,
+            expand: true,
+            src: [
+              'anol/libs/bootstrap/bootstrap.css',
+              'anol/libs/ol3/ol3.css',
+              'static/css/lib/bootstrap.vertical-tabs.min.css',
+              'static/css/style.css',
+              'static/css/dynamic-style.css',
+              'static/css/notab-mapstyle.css'
+            ],
+            dest: 'build/dist/css/'
+          }
+        ]
       }
     },
     configureRewriteRules: {
@@ -189,9 +213,19 @@ module.exports = function(grunt) {
       }
     },
     ngtemplates:  {
-      orkaApp: {
+      dev: {
+        options: {
+          module: 'orkaApp'
+        },
         src: ['anol/**/templates/*.html', 'orka/**/templates/*.html'],
         dest: 'build/templates.js'
+      },
+      dist: {
+        options: {
+          module: 'orkaApp'
+        },
+        src: ['anol/**/templates/*.html', 'orka/**/templates/*.html'],
+        dest: 'build/dist/js/templates.js'
       }
     }
   });
@@ -203,14 +237,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-connect-rewrite');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-ngmin');
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates', 'ngmin:anolDist', 'ngmin:orkaDist', 'uglify', 'concat:anolDist', 'concat:orkaDist', 'clean:postbuild']);
+  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates:dist', 'ngmin:anolDist', 'ngmin:orkaDist', 'uglify', 'concat:anolDist', 'concat:orkaDist', 'clean:postbuild', 'copy']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build-doc', ['clean:docs', 'ngdocs']);
