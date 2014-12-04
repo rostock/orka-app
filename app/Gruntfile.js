@@ -110,11 +110,6 @@ module.exports = function(grunt) {
         files: [
           {
             flatten: true,
-            src: ['index.html'],
-            dest: 'build/dist/'
-          },
-          {
-            flatten:true,
             expand: true,
             src: [
               'anol/libs/bootstrap/bootstrap.css',
