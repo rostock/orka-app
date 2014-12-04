@@ -167,12 +167,6 @@ module.exports = function(grunt) {
         },
       },
     },
-    html2js: {
-      main: {
-        src: ['anol/**/templates/*.html', 'orka/**/templates/*.html'],
-        dest: 'build/templates.js'
-      },
-    },
     karma: {
         unit: {
           configFile: 'anol/karma.conf.js',
