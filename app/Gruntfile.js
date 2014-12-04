@@ -126,6 +126,12 @@ module.exports = function(grunt) {
             expand: true,
             src: ['orka/orka-templates.js'],
             dest: 'build/dist/js/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: ['static/img/highlightMarker.png'],
+            dest: 'build/dist/img/'
           }
         ]
       }
