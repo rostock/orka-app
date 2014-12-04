@@ -39,7 +39,7 @@ angular.element(document).ready(function() {
         }
         if(headerConfig.height !== undefined) {
             $.each(document.styleSheets, function(idx, styleSheet) {
-                if(styleSheet.href !== null && styleSheet.href === (location.origin + '/static/css/dynamic-style.css')) {
+                if(styleSheet.href !== null && styleSheet.href === (location.origin + cssPath + 'dynamic-style.css')) {
                     $.each(styleSheet.cssRules, function(_idx, rule) {
                         var cssRuleName = rule.style[0];
                         var splittedRule = cssRuleName.split('-');
@@ -84,7 +84,7 @@ angular.element(document).ready(function() {
         var head = document.getElementsByTagName('head')[0];
         var style = document.createElement('link');
         style.rel = 'stylesheet';
-        style.href = '/static/css/notab-mapstyle.css';
+        style.href = cssPath + 'notab-mapstyle.css';
         head.appendChild(style);
     };
 
@@ -101,5 +101,5 @@ angular.element(document).ready(function() {
     });
 
     // TODO load app without config or use default one?
-    loadConfig('/static/data/' + getConfigName() + '_config.js');
+    loadConfig(orkaConfigPath + getConfigName() + '_config.js');
 });
