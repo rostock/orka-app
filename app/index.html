@@ -10,11 +10,22 @@
 
     <title>ORKa.MV</title>
 
-    <link href="/anol/libs/bootstrap/bootstrap.css" rel="stylesheet">
-    <link href="/anol/libs/ol3/ol3.css" rel="stylesheet">
-    <link href="/static/css/lib/bootstrap.vertical-tabs.min.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet">
-    <link href="/static/css/dynamic-style.css" rel="stylesheet">
+    <!-- develop css -->
+      <link href="/anol/libs/bootstrap/bootstrap.css" rel="stylesheet">
+      <link href="/anol/libs/ol3/ol3.css" rel="stylesheet">
+      <link href="/static/css/lib/bootstrap.vertical-tabs.min.css" rel="stylesheet">
+      <link href="/static/css/style.css" rel="stylesheet">
+      <link href="/static/css/dynamic-style.css" rel="stylesheet">
+    <!-- end -->
+
+    <!-- production css -->
+      <!-- <link href="css/bootstrap.css" rel="stylesheet">
+      <link href="css/ol3.css" rel="stylesheet">
+      <link href="css/bootstrap.vertical-tabs.min.css" rel="stylesheet">
+      <link href="css/style.css" rel="stylesheet">
+      <link href="css/dynamic-style.css" rel="stylesheet"> -->
+    <!-- end -->
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -65,21 +76,35 @@
        </div>
     </div>
 
-    <!-- Remove libs when build dist -->
     <script type="text/javascript">
-      var orkaConfigPath = '/static/data/';
-      var cssPath = '/static/css/';
+      /* develop paths */
+      var orkaConfigPath = 'static/data/';
+      var cssPath = 'static/css/';
+
+      /* production paths */
+      // var orkaConfigPath = 'static/data/';
+      // var cssPath = 'css/';
     </script>
-    <script type="text/javascript" src="/anol/libs/jquery/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="/anol/libs/angular/angular-debug.js"></script>
-    <script type="text/javascript" src="/orka/libs/angular-ui/ui-bootstrap-tpls-0.11.2.min.js"></script>
-    <script type="text/javascript" src="/anol/libs/ol3/ol.custom.min.js"></script>
-    <script type="text/javascript" src="/build/anol.js"></script>
-    <script type="text/javascript" src="/build/orka.js"></script>
-    <script type="text/javascript" src="/orka/config.js"></script>
-    <script type="text/javascript" src="/orka/controller.js"></script>
-    <script type="text/javascript" src="/build/templates.js"></script>
-    <script type="text/javascript" src="/orka/orka-templates.js"></script>
-    <script type="text/javascript" src="/orka/init.js"></script>
+
+    <!-- develop js -->
+      <script type="text/javascript" src="/anol/libs/jquery/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="/anol/libs/angular/angular-debug.js"></script>
+      <script type="text/javascript" src="/orka/libs/angular-ui/ui-bootstrap-tpls-0.11.2.min.js"></script>
+      <script type="text/javascript" src="/anol/libs/ol3/ol.custom.min.js"></script>
+      <script type="text/javascript" src="/build/anol.js"></script>
+      <script type="text/javascript" src="/build/orka.js"></script>
+      <script type="text/javascript" src="/orka/config.js"></script>
+      <script type="text/javascript" src="/orka/controller.js"></script>
+      <script type="text/javascript" src="/build/templates.js"></script>
+      <script type="text/javascript" src="/orka/orka-templates.js"></script>
+      <script type="text/javascript" src="/orka/init.js"></script>
+    <!-- end -->
+
+    <!-- production js -->
+      <!--<script type="text/javascript" src="js/anol.js"></script>
+      <script type="text/javascript" src="js/orka.js"></script>
+      <script type="text/javascript" src="js/templates.js"></script>
+      <script type="text/javascript" src="js/orka-templates.js"></script>-->
+    <!-- end -->
   </body>
 </html>
