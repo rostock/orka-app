@@ -120,6 +120,12 @@ module.exports = function(grunt) {
               'static/css/notab-mapstyle.css'
             ],
             dest: 'build/dist/css/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: ['orka/orka-templates.js'],
+            dest: 'build/dist/js/'
           }
         ]
       }
