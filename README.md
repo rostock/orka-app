@@ -1,31 +1,23 @@
+# ORKa-App
 
-Use Grunt for Development
-=========================
+#### Modular configuratable open map app of and from Mecklenburg-Western Pomerania
 
-For development and testing we use the JavaScript task runner Grunt. You can install all packages you need with::
-	
-	npm install -g grunt-cli
+ORKa-App is an application to provide map- and metadata in a userfriendly way.
 
-	npm install
+It is highly configuratable in an easy way.
 
-Test if all packages are installed correct::
+## Get Started
 
-	grunt -v
+**(1)** Get ORKa-App
 
-Start a development server
---------------------------
+  - clone this repository
 
-	grunt dev
+**(2)** Install dependencies
 
-Open the browser on port 7000 to see the app.
+  - npm install
 
+**(3)** Run development environment
 
-TODO
-----
+  - grunt dev
 
-Add repository to package.json if project arrived to final destination::
-
-"repository": {
-  "type": "git",
-  "url": "git://github.com/username/repository.git"
-}
+When you're done you can reach the app under `localhost:7000`
