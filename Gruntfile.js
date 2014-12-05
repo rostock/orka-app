@@ -169,7 +169,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['src/modules/**/*.js'],
-        tasks: ['clean', 'ngdocs', 'concat:dev'],
+        tasks: ['clean:prebuild', 'ngtemplates:dev', 'concat:dev'],
         options: {
           spawn: false,
         },
