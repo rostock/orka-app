@@ -1,4 +1,4 @@
-app/build/
-app/docs/
-app/node_modules/
-app/npm-debug.log
+build/
+docs/
+node_modules/
+npm-debug.log
