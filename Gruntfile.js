@@ -109,6 +109,12 @@ module.exports = function(grunt) {
             expand: true,
             src: ['static/img/highlightMarker.png'],
             dest: 'build/dist/img/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: ['static/data/full_config.js'],
+            dest: 'build/dist/data'
           }
         ]
       }
