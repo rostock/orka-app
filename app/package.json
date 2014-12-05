@@ -1,7 +1,7 @@
 {
-  "name": "anol",
+  "name": "orka",
   "version": "0.0.1",
-  "description": "Framework to create a cool map with AngularJS, Bootstrap and OpenLayers3",
+  "description": "Open regional map",
   "readme": "README.md",
   "devDependencies": {
     "canonical-path": "0.0.2",

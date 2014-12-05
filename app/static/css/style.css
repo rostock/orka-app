@@ -3,7 +3,7 @@
     font-style:normal;
     font-weight:normal;
     local:'PT Sans';
-    src:url(../fonts/PTS55F_W.ttf);
+    src:url(./fonts/PTS55F_W.ttf);
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     font-style:italic;
     font-weight:normal;
     local:'PT Sans Italic';
-    src:url(../fonts/PTS56F_W.ttf);
+    src:url(./fonts/PTS56F_W.ttf);
 }
 
 @font-face {
@@ -19,7 +19,7 @@
     font-style:normal;
     font-weight:bold;
     local:'PT Sans Bold';
-    src:url(../fonts/PTS75F_W.ttf);
+    src:url(./fonts/PTS75F_W.ttf);
 }
 
 @font-face {
@@ -27,7 +27,7 @@
     font-style:italic;
     font-weight:bold;
     local:'PT Sans Bold Italic';
-    src:url(../fonts/PTS76F_W.ttf);
+    src:url(./fonts/PTS76F_W.ttf);
 }
 
 html, body {

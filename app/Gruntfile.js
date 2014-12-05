@@ -12,13 +12,12 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'build/anol.ugly.js': ['build/anol.ngmin.js'],
-          'build/orka.ugly.js': ['build/orka.ngmin.js']
+          'build/<%= pkg.name %>.ugly.js': ['build/<%= pkg.name %>.ngmin.js']
         }
       }
     },
     jshint: {
-      files: [ 'Gruntfile.js', 'anol/modules/**/*.js', 'orka/modules/**/*.js' ],
+      files: [ 'Gruntfile.js', 'src/modules/**/*.js' ],
       options: {
         globals: {
           jQuery: true,
@@ -28,65 +27,39 @@ module.exports = function(grunt) {
       }
     },
     ngmin: {
-      anolDist: {
+      dist: {
         src: [
-          'anol/modules/module.js',
-          'anol/modules/**/module.js',
-          'anol/modules/**/*.js',
-          '!anol/**/angular-mocks.js',
-          '!anol/test/**/*.*',
-          '!anol/**/*-debug.js'
+          'src/modules/**/module.js',
+          'src/modules/**/*.js',
+          'src/config.js',
+          'src/controller.js',
+          'src/init.js'
         ],
-        dest: 'build/anol.ngmin.js'
-      },
-      orkaDist: {
-        src: [
-          'orka/modules/**/module.js',
-          'orka/modules/**/*.js',
-          '!orka/**/angular-mocks.js',
-          '!orka/test/**/*.*',
-          '!orka/**/*-debug.js',
-          'orka/config.js',
-          'orka/controller.js',
-          'orka/init.js'
-        ],
-        dest: 'build/orka.ngmin.js'
+        dest: 'build/<%= pkg.name %>.ngmin.js'
       }
     },
     concat: {
       options: {
         separator: ';'
       },
-      anolDev: {
+      dev: {
         src: [
-          'anol/modules/module.js',
-          'anol/modules/**/module.js',
-          'anol/modules/**/*.js'
+          'src/modules/**/module.js',
+          'src/modules/**/*.js'
         ],
         dest: 'build/<%= pkg.name %>.js'
       },
-      anolDist: {
+      dist: {
         src: [
-          'anol/libs/jquery/jquery-2.1.1.min.js',
-          'anol/libs/angular/angular.min.js',
-          'anol/libs/ol3/ol.custom.min.js',
-          'build/anol.ugly.js'
+          'static/libs/jquery/jquery-2.1.1.min.js',
+          'static/libs/angular/angular.min.js',
+          'static/libs/angular/ui-bootstrap-tpls-0.11.2.min.js',
+          'static/libs/ol3/ol.custom.min.js',
+          'static/libs/anol/anol.min.js',
+          'build/<%= pkg.name %>.ugly.js',
+          '!static/libs/anol/anol-templates.js'
         ],
-        dest: 'build/dist/js/anol.min.js'
-      },
-      orkaDev: {
-        src: [
-          'orka/modules/**/module.js',
-          'orka/modules/**/*.js'
-        ],
-        dest: 'build/orka.js'
-      },
-      orkaDist: {
-        src: [
-          'orka/libs/**/*.js',
-          'build/orka.ugly.js'
-        ],
-        dest: 'build/dist/js/orka.min.js'
+        dest: 'build/dist/js/<%= pkg.name %>.min.js'
       }
     },
     clean: {
@@ -95,10 +68,8 @@ module.exports = function(grunt) {
       },
       postbuild: {
         src: [
-          'build/anol.ngmin.js',
-          'build/anol.ugly.js',
-          'build/orka.ngmin.js',
-          'build/orka.ugly.js'
+          'build/<%= pkg.name %>.ngmin.js',
+          'build/<%= pkg.name %>.ugly.js'
         ]
       },
       docs: {
@@ -112,9 +83,9 @@ module.exports = function(grunt) {
             flatten: true,
             expand: true,
             src: [
-              'anol/libs/bootstrap/bootstrap.css',
-              'anol/libs/ol3/ol3.css',
-              'static/css/lib/bootstrap.vertical-tabs.min.css',
+              'static/libs/bootstrap/bootstrap.css',
+              'static/libs/ol3/ol3.css',
+              'static/libs/bootstrap/bootstrap.vertical-tabs.min.css',
               'static/css/style.css',
               'static/css/dynamic-style.css',
               'static/css/notab-mapstyle.css'
@@ -122,9 +93,15 @@ module.exports = function(grunt) {
             dest: 'build/dist/css/'
           },
           {
+            flatten:true,
+            expand: true,
+            src: ['static/css/fonts/*', 'static/libs/bootstrap/fonts/*'],
+            dest: 'build/dist/css/fonts/'
+          },
+          {
             flatten: true,
             expand: true,
-            src: ['orka/orka-templates.js'],
+            src: ['src/overwrite-templates.js', 'static/libs/anol/anol-templates.js'],
             dest: 'build/dist/js/'
           },
           {
@@ -170,17 +147,11 @@ module.exports = function(grunt) {
         }
       },
       rules: [{
-        from: '^/(.*)/anol/(.*)$',
-        to: '/anol/$2'
-      }, {
-        from: '^/(.*)/orka/(.*)$',
-        to: '/orka/$2'
+        from: '^/(.*)/src/(.*)$',
+        to: '/src/$2'
       }, {
         from: '^/(.*)/static/(.*)$',
         to: '/static/$2'
-      }, {
-        from: '^/(.*)/build/(.*)$',
-        to: '/build/$2'
       }, {
         from: '^/api/(.*)$',
         to: '/docs/$1'
@@ -191,8 +162,8 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['anol/modules/**/*.js', 'orka/modules/**/*.js'],
-        tasks: ['clean', 'ngdocs', 'concat:anolDev', 'concat:orkaDev'],
+        files: ['src/modules/**/*.js'],
+        tasks: ['clean', 'ngdocs', 'concat:dev'],
         options: {
           spawn: false,
         },
@@ -200,23 +171,19 @@ module.exports = function(grunt) {
     },
     karma: {
         unit: {
-          configFile: 'anol/karma.conf.js',
+          configFile: 'config/karma.conf.js',
         }
     },
     ngdocs: {
       options: {
         dest: 'docs',
         html5Mode: false,
-        startPage: '/api/',
-        title: 'ORKaApp API Documentation'
+        startPage: '/',
+        title: 'ORKaApp Documentation'
       },
-      anolApi: {
-        title: 'AnOl API',
-        src: ['anol/modules/**/*.js'],
-      },
-      orkaApi: {
+      api: {
         title: 'ORKa API',
-        src: ['orka/modules/**/*.js'],
+        src: ['src/modules/**/*.js'],
       }
     },
     ngtemplates:  {
@@ -224,15 +191,15 @@ module.exports = function(grunt) {
         options: {
           module: 'orkaApp'
         },
-        src: ['anol/**/templates/*.html', 'orka/**/templates/*.html'],
-        dest: 'build/templates.js'
+        src: ['src/**/templates/*.html'],
+        dest: 'build/orka-templates.js'
       },
       dist: {
         options: {
           module: 'orkaApp'
         },
-        src: ['anol/**/templates/*.html', 'orka/**/templates/*.html'],
-        dest: 'build/dist/js/templates.js'
+        src: ['src/**/templates/*.html'],
+        dest: 'build/dist/js/orka-templates.js'
       }
     }
   });
@@ -251,8 +218,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:anolDev', 'concat:orkaDev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates:dist', 'ngmin:anolDist', 'ngmin:orkaDist', 'uglify', 'concat:anolDist', 'concat:orkaDist', 'clean:postbuild', 'copy']);
+  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:dev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates:dist', 'ngmin:dist', 'uglify', 'concat:dist', 'clean:postbuild', 'copy']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build-doc', ['clean:docs', 'ngdocs']);
