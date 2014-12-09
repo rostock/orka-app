@@ -113,7 +113,7 @@ module.exports = function(grunt) {
           {
             flatten: true,
             expand: true,
-            src: ['static/data/full_config.js'],
+            src: ['static/data/full_config.js', 'static/data/locations.geojson', 'static/data/track_legend_data.json', 'static/data/poi_legend_data.json'],
             dest: 'build/dist/data'
           }
         ]
