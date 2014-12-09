@@ -12,10 +12,7 @@ var orkaAppConfig = {
         layers: [
             'ORKA_STADTPLAN',
             'ORKA_STADTPLAN_OHNE_TEXT',
-            'ORKA_STADTPLAN_GRAU',
-            'ORKA_STADTPLAN_GRAU_OHNE_TEXT',
-            'ORKA_STADTPLAN_SCHUMMERUNG',
-            'ORKA_STADTPLAN_SCHUMMERUNG_OHNE_TEXT'
+            'ORKA_STADTPLAN_GRAU'
         ],
         // Festlegung der Kartenattributionen
         attributions: [
@@ -38,7 +35,7 @@ var orkaAppConfig = {
     },
     // Pfad zu GeoJSON mit Polygonen für "Ortliste"
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
-    locations: '/static/data/locations.geojson',
+    locations: 'data/locations.geojson',
     // Aktivieren des Druckmoduls.
     // Weglassen oder ein anderer Wert als 'true'
     // deaktiviert das Druckmodul.
@@ -49,6 +46,6 @@ var orkaAppConfig = {
     themes: true,
     // Zu verwendende POIs Definition
     poi: {
-        legendURL: '/static/data/poi_legend_data.json'
+        legendURL: 'data/poi_legend_data.json'
     }
 };
