@@ -135,7 +135,7 @@ angular.module('orka.config')
         track: {
             layerURL: '/citymap/tracks',
             layerName: 'tracks',
-            legendURL: 'js/track_legend_data.json'
+            legendURL: 'data/track_legend_data.json'
         },
         print: {
             maxPageSize: 200000,
