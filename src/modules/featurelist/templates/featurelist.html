@@ -30,10 +30,8 @@
                             {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }}<br>
                             {{ feature.get('addr:zipcode') }} {{ feature.get('addr:city') }}
                         </div>
-                        <div ng-repeat="tag in typeMap[type].listTags">
-                            <div ng-if="feature.get(tag.tag)">
-                                {{ tag.title }}: {{ feature.get(tag.tag) }}
-                            </div>
+                        <div ng-repeat="tag in typeMap[type].listTags" ng-if="feature.get(tag.tag)">
+                            {{ tag.title }}: {{ feature.get(tag.tag) }}
                         </div>
                     </div>
                 </li>
