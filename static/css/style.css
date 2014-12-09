@@ -186,6 +186,10 @@ label.no-style {
   border-radius: 0px;
 }
 
+.list-group-item .list-group .list-group-item:last-child {
+  margin-bottom: 10px;
+}
+
 .list-group-item .list-group .list-group-item .list-group-item-heading {
   margin-top: 0px;
 }
@@ -196,13 +200,15 @@ label.no-style {
 
 .feature-content {
   padding-left: 10px;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
 }
 
 .feature.highlight,
 .list-group-item.highlight {
   background-color: #ffc;
+}
+
+.list-group-item .list-group .list-group-item .list-group-item-text:last-child {
+  margin-bottom: 2px;
 }
 
 /*
