@@ -177,8 +177,10 @@ label.no-style {
 }
 
 .list-group-item .list-group .list-group-item {
-  padding: 0px 15px;
-  border: none;
+    border: medium none;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding: 0 20px;
 }
 
 .list-group-item .list-group .list-group-item:first-child,
