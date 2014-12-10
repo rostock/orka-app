@@ -41,14 +41,13 @@ body {
 }
 
 .header {
-    left: 0;
-    position: fixed;
-    right: 0;
     z-index: 1002;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
     padding: 0 15px;
     border-radius: 0;
+    height: 50px;
+    margin: 0;
 }
 
 .main-content {
@@ -115,11 +114,11 @@ label.no-style {
   }
 }
 
-
 .sidebar:not(.show) .sideways.tabs-right {
-  position: relative;
+  position: fixed;
   left: 0px;
   width: 0px;
+  margin-top: 50px;
 }
 
 .sidebar.show .nav {

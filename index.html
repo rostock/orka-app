@@ -35,10 +35,9 @@
     <![endif]-->
   </head>
   <body ng-controller="appCtrl" class="hide" ng-class="{'show': appReady}">
-    <div class="navbar navbar-default header" ng-show="showHeader">
+    <div class="navbar navbar-default navbar-static-top header" ng-show="showHeader">
       <a class="navbar-brand" href="#">ORKa.MV</a>
     </div>
-
     <div class="col-xs-6 col-sm-3 col-md-2 sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
         <div class="tab-pane" ng-class="{'active': selectedTab==='locations'}">
