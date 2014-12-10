@@ -10,23 +10,21 @@
 
     <title>ORKa.MV</title>
 
-    <!-- develop -->
+    <!-- @if node_env = 'develop' -->
       <link href="/static/libs/bootstrap/bootstrap.css" rel="stylesheet">
       <link href="/static/libs/bootstrap/bootstrap.vertical-tabs.min.css" rel="stylesheet">
       <link href="/static/libs/ol3/ol3.css" rel="stylesheet">
       <link href="/static/css/style.css" rel="stylesheet">
       <link href="/static/css/dynamic-style.css" rel="stylesheet">
-    <!-- end -->
+    <!-- @endif -->
 
-    <!-- production -->
-    <!--
+    <!-- @if node_env = 'production' -->
       <link href="css/bootstrap.css" rel="stylesheet">
       <link href="css/bootstrap.vertical-tabs.min.css" rel="stylesheet">
       <link href="css/ol3.css" rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
       <link href="css/dynamic-style.css" rel="stylesheet">
-    -->
-    <!-- end -->
+    <!-- @endif -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -77,19 +75,13 @@
 
     <script type="text/javascript">
       var defaultConfigName = 'full';
-
-      /* develop */
-      var orkaConfigPath = 'static/data/';
-      var cssPath = 'static/css/';
-      /* end */
-
-      /* production */
-      // var orkaConfigPath = 'data/';
-      // var cssPath = 'css/';
-      /* end */
     </script>
 
-    <!-- develop -->
+    <!-- @if node_env = 'develop' -->
+      <script type="text/javascript">
+        var orkaConfigPath = 'static/data/';
+        var cssPath = 'static/css/';
+      </script>
       <script type="text/javascript" src="/static/libs/jquery/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="/static/libs/angular/angular-debug.js"></script>
       <script type="text/javascript" src="/static/libs/angular/ui-bootstrap-tpls-0.11.2.min.js"></script>
@@ -102,15 +94,18 @@
       <script type="text/javascript" src="/build/orka-templates.js"></script>
       <script type="text/javascript" src="/src/overwrite-templates.js"></script>
       <script type="text/javascript" src="/src/init.js"></script>
-    <!-- end -->
 
-    <!-- production -->
-    <!--
+    <!-- @endif -->
+
+    <!-- @if node_env = 'production' -->
+      <script type="text/javascript">
+        var orkaConfigPath = 'data/';
+        var cssPath = 'css/';
+      </script>
       <script type="text/javascript" src="js/orka.min.js"></script>
       <script type="text/javascript" src="js/anol-templates.js"></script>
       <script type="text/javascript" src="js/orka-templates.js"></script>
       <script type="text/javascript" src="js/overwrite-templates.js"></script>
-    -->
-    <!-- end -->
+    <!-- @endif -->
   </body>
 </html>

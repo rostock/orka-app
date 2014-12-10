@@ -117,6 +117,28 @@ module.exports = function(grunt) {
         ]
       }
     },
+    preprocess: {
+      dev: {
+        options: {
+          inline: true,
+          context: {
+            node_env: 'develop'
+          }
+        },
+        src: 'static/index.html',
+        dest: 'index.html'
+      },
+      dist: {
+        options: {
+          inline: true,
+          context: {
+            node_env: 'production'
+          }
+        },
+        src: 'static/index.html',
+        dest: 'build/dist/index.html'
+      },
+    },
     connect: {
       server: {
         options: {
@@ -178,12 +200,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-preprocess');
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:dev', 'connect:server', 'watch:scripts']);
-  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates:dist', 'ngmin:dist', 'uglify', 'concat:dist', 'clean:postbuild', 'copy']);
+  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:dev', 'preprocess:dev', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates:dist', 'ngmin:dist', 'uglify', 'concat:dist', 'clean:postbuild', 'copy', 'preprocess:dist']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build-doc', ['clean:docs', 'ngdocs']);
