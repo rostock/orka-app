@@ -8,3 +8,7 @@
 .sidebar.show .sideways.tabs-right {
     top: 50px;
 }
+
+.main-content {
+	top: 50px;
+}
