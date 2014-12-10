@@ -103,6 +103,19 @@ label.no-style {
   margin-top: 50px;
 }
 
+@media (max-width: 979px) {
+  .sidebar.show .sideways.tabs-right {
+    left: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar.show .sideways.tabs-right {
+    left: 50%;
+  }
+}
+
+
 .sidebar:not(.show) .sideways.tabs-right {
   position: relative;
   left: 0px;
@@ -130,6 +143,7 @@ label.no-style {
 .sidebar.show .tab-content,
 .sidebar.show .tab-content .tab-pane {
   height: 100%;
+  background-color: white;
   max-height: 100%;
 }
 
