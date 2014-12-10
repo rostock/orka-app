@@ -52,12 +52,13 @@ body {
 }
 
 .main-content {
-  margin-left: 300px;
   height: 100%;
+  padding: 0;
 }
 
 .fullscreen {
   margin-left: 0px;
+  width: 100%;
 }
 
 .map-wrapper {
@@ -86,24 +87,24 @@ label.no-style {
  */
 .sidebar {
   position: fixed;
-  width: 0px;
+  padding: 0;
   z-index: 1000;
 }
+
 .sidebar.show {
-  position: fixed;
-  width: 300px;
   z-index: 1000;
   border-right: 1px solid #ddd;
 }
 
 .sidebar.show .sideways.tabs-right {
   position: fixed;
-  left: 300px;
+  left: 16.6667%;
   width: 0px;
+  margin-top: 50px;
 }
 
 .sidebar:not(.show) .sideways.tabs-right {
-  position: fixed;
+  position: relative;
   left: 0px;
   width: 0px;
 }
@@ -113,9 +114,8 @@ label.no-style {
   padding-left: 0px;
 }
 
-.sidebar .tab-content {
-  padding-left: 10px;
-  padding-right: 10px;
+.sideways {
+  margin-top: 0;
 }
 
 .sideways > li {
@@ -133,10 +133,13 @@ label.no-style {
   max-height: 100%;
 }
 
+.tab-content > .tab-pane {
+  padding: 10px;
+}
+
 /*
  * Vertical tabs
  */
-
 .nav-tabs > li > a {
   background-color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
@@ -244,7 +247,6 @@ span.print-headline-first {
 div.print-headline-container {
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 280px;
 }
 div.print-headline-container-first {
     background-color: #f5ca8d;
@@ -254,7 +256,6 @@ div.print-headline-container-first {
 }
 div.print-interheadline-container {
     margin-top: 10px;
-    width: 280px;
 }
 select.output-format-select {
   width: 218px;
@@ -264,7 +265,6 @@ div.print-headline-container-last {
     border-radius: 6px;
     margin: 10px 0;
     padding: 10px;
-    width: 280px;
 }
 .orka-print .form-group {
   margin-bottom: 0px;
@@ -277,7 +277,6 @@ div.print-headline-container-last {
 /*
  * Map components
  */
-
 .ol-zoomslider {
   left: 50px;
   top: 29px;
