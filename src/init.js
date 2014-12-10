@@ -23,7 +23,7 @@ angular.element(document).ready(function() {
         });
         var byParam = params.page;
 
-        return byParam || byPath;
+        return byParam || byPath || defaultConfigName;
     };
 
     var styleHeader = function(headerConfig) {
