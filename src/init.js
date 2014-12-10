@@ -32,7 +32,7 @@ angular.element(document).ready(function() {
         }
         if(headerConfig.height !== undefined) {
             $.each(document.styleSheets, function(idx, styleSheet) {
-                if(styleSheet.href !== null && styleSheet.href === (location.origin + cssPath + 'dynamic-style.css')) {
+                if(styleSheet.href !== null && styleSheet.href.match('dynamic-style.css') !== null) {
                     $.each(styleSheet.cssRules, function(_idx, rule) {
                         var cssRuleName = rule.style[0];
                         var splittedRule = cssRuleName.split('-');
