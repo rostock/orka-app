@@ -1,20 +1,8 @@
 angular.element(document).ready(function() {
-    // TODO replace by jquery plugin or improve
     var getConfigName = function() {
-        var path = [];
-        $.each(window.location.pathname.split('/'), function(idx, pathComponent) {
-            if(pathComponent !== '') {
-                path.push(pathComponent);
-            }
-        });
-        var byPath = path[path.length -1];
-
         var search = window.location.search;
         if(search[0] === '?') {
             search = search.slice(1, search.length);
-        }
-        if(search[search.length - 1] === '/') {
-            search = search.slice(0, search.length - 1);
         }
         var params = {};
         $.each(search.split('&'), function(idx, param) {
@@ -23,7 +11,7 @@ angular.element(document).ready(function() {
         });
         var byParam = params.page;
 
-        return byParam || byPath || defaultConfigName;
+        return byParam || defaultConfigName;
     };
 
     var styleHeader = function(headerConfig) {

@@ -1,6 +1,4 @@
 module.exports = function(grunt) {
-  var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
-
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -119,52 +117,13 @@ module.exports = function(grunt) {
         ]
       }
     },
-    configureRewriteRules: {
-      options: {
-          rulesProvider: 'connect.rules'
-      }
-    },
     connect: {
       server: {
         options: {
           hostname: '*',
-          port: 7000,
-          middleware: function (connect, options) {
-            var middlewares = [];
-
-            // RewriteRules support
-            middlewares.push(rewriteRulesSnippet);
-
-            if (!Array.isArray(options.base)) {
-              options.base = [options.base];
-            }
-
-            var directory = options.directory || options.base[options.base.length - 1];
-            options.base.forEach(function (base) {
-              // Serve static files.
-              middlewares.push(connect.static(base));
-            });
-
-            // Make directory browse-able.
-            middlewares.push(connect.directory(directory));
-
-            return middlewares;
-          }
+          port: 7000
         }
-      },
-      rules: [{
-        from: '^/(.*)/src/(.*)$',
-        to: '/src/$2'
-      }, {
-        from: '^/(.*)/static/(.*)$',
-        to: '/static/$2'
-      }, {
-        from: '^/api/(.*)$',
-        to: '/docs/$1'
-      }, {
-        from: '^(.*)/$',
-        to: '/'
-      }]
+      }
     },
     watch: {
       scripts: {
@@ -216,7 +175,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-connect-rewrite');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-ngmin');
@@ -224,7 +182,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:dev', 'configureRewriteRules', 'connect:server', 'watch:scripts']);
+  grunt.registerTask('dev', ['clean:prebuild', 'ngtemplates:dev', 'concat:dev', 'connect:server', 'watch:scripts']);
   grunt.registerTask('build', ['clean:prebuild', 'jshint', 'ngtemplates:dist', 'ngmin:dist', 'uglify', 'concat:dist', 'clean:postbuild', 'copy']);
   grunt.registerTask('default', ['jshint', 'concat']);
   grunt.registerTask('test', ['karma:unit']);
