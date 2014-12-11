@@ -1,12 +1,12 @@
-# ORKa-App
+Welcome to ORKa-App
+===================
 
-#### Modular configuratable open map app of and from Mecklenburg-Western Pomerania
+ORKA-App is a javascript map application develop for Mecklenburg-Western Pomerania. ORKa-App is an application to provide map and metadata user-friendly.
 
-ORKa-App is an application to provide map- and metadata in a userfriendly way.
+It is developed and supported by Omniscale and is released as open source under the MIT License.
 
-It is highly configuratable in an easy way.
-
-## Get Started
+Get Started
+-----------
 
 **(1)** Get ORKa-App
 
@@ -20,4 +20,4 @@ It is highly configuratable in an easy way.
 
   - grunt dev
 
-When you're done you can reach the app under `localhost:7000`
+View the app in the browser: `localhost:7000`
