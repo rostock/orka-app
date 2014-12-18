@@ -81,6 +81,5 @@ angular.element(document).ready(function() {
         angular.bootstrap(document, ['orkaApp']);
     });
 
-    // TODO load app without config or use default one?
     loadConfig(orkaConfigPath + getConfigName() + '_config.js');
 });

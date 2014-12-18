@@ -59,7 +59,6 @@ angular.module('orka.featurepopup')
                         $timeout(function() {
                             var popupExtent = scope.calculatePopupExtent(evt.pixel);
                             scope.moveMap(popupExtent);
-                            // TODO add support for other popup-placements than center-left
                             var noseElement = element.find('.orka-popup-nose');
                             noseElement.css('top', (scope.popupInnerHeight() / 2) + (noseElement.height() / 2) + 'px');
 

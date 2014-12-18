@@ -97,7 +97,7 @@ angular.module('orka.featurelist')
                         scope.popupScope.popupVisible = false;
                     }
                 };
-                // TODO improve
+                // minimum requirements for address are street and city
                 scope.hasAddress = function(feature) {
                     return feature.get('addr:street') !== undefined && feature.get('addr:city') !== undefined;
                 };
@@ -172,7 +172,6 @@ angular.module('orka.featurelist')
         controller: function($scope, $element, $attrs) {
             this.showListFeature = function(feature) {
                 var type, osmId;
-                // TODO move into toggleMarker?
                 if($scope.markerFeature !== undefined) {
                     $scope.markerFeature.set('highlightMarker', false);
                     $scope.markerFeature = undefined;

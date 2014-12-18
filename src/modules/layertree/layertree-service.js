@@ -3,7 +3,6 @@ angular.module('orka.layertree')
  * @ngdoc object
  * @name orka.layertree.LayertreeServiceProvider
  */
-// TODO rename
 .provider('LayertreeService', [function() {
     var _poiLayer, _poiLegendUrl, _iconBaseUrl, _trackLegendUrl, _trackLayer;
     var _selectedPoiTypes = [];
@@ -138,9 +137,6 @@ angular.module('orka.layertree')
             // keep internal and external types in sync cause we need it both as service value
             // and as internal otherwise getAdditionalPoiParametersCallback won't work
             this.selectedPoiTypes = _selectedPoiTypes = selectedTypes;
-            // TODO find a better solution to make a new request after selectedTypes has change
-            // using clear result in removing all points and redraw them. So the vector data
-            // are flickering
             this.poiLayer.getSource().clear();
             this.poiLayer.setVisible(_selectedPoiTypes.length > 0);
         };

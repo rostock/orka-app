@@ -29,8 +29,6 @@ angular.module('orka.print')
         },
         link: {
             pre: function(scope, element, attrs) {
-                // TODO find a better solution to prevent directive to be executed
-                // when ConfigService.config.print is undefined
                 scope.show = ConfigService.config.print !== undefined;
                 scope.view = MapService.getMap().getView();
                 if(scope.show) {
@@ -70,7 +68,6 @@ angular.module('orka.print')
                     }
                     return true;
                 };
-                // TODO test with running printqueue & gearmand
                 scope.startPrint = function() {
                     scope.downloadUrl = false;
                     var layerName = LayersService.backgroundLayer().get('printLayer');
@@ -94,7 +91,7 @@ angular.module('orka.print')
                     });
 
                     modalInstance.result.then(
-                        function() { /* TODO somethink on success */},
+                        function() {},
                         function() { PrintService.abort = true; }
                     );
                 };
@@ -115,7 +112,6 @@ angular.module('orka.print')
                         PrintPageService.createPrintArea(scope.pageSize, scope.scale);
                     }
                 };
-                // TODO use calculateScale function from anol.scale.scaletext-directive
             },
             post: function(scope, element, attrs) {
                 scope.$watch(
