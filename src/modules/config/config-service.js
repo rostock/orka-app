@@ -140,6 +140,8 @@ angular.module('orka.config')
         print: {
             maxPageSize: 200000,
             defaultScale: 250000,
+            maxScale: 250000,
+            minScale: 500,
             createURL: '/print/print',
             checkURL: '',
             downloadURL: '',
