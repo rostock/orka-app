@@ -1,4 +1,4 @@
-<div ng-if="show" class="orka-print">
+<form ng-if="show" class="orka-print" name="printform">
     <div class="print-headline-container print-headline-container-first">
         <span class="print-headline print-headline-first">
             <span class="number-in-circle number-in-circle-first">5</span>
@@ -60,6 +60,9 @@
     <div class="alert alert-danger" ng-show="pageSizeError">
         Der Ausgabebereich darf nicht größer als {{ maxPageSize }} mm² sein
     </div>
+    <div class="alert alert-danger" ng-hide="(printform.width.$valid || printform.width.$pristine) && (printform.height.$valid || printform.height.$pristine)">
+        Es sind nur Ziffern erlaubt
+    </div>
     <div class="print-headline-container">
         <span id="valid-scale-range-hint" class="print-headline">
             <span class="number-in-circle">4</span>
@@ -69,8 +72,11 @@
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon">1 :</span>
-            <input class="form-control" type="number" ng-model="$parent.scale" ng-change="updatePrintPage()">
+            <input class="form-control" type="number" ng-model="$parent.scale" ng-change="updatePrintPage()" name="scale">
         </div>
+    </div>
+    <div class="alert alert-danger" ng-hide="printform.scale.$valid || printform.scale.$pristine">
+        Es sind nur Ziffern erlaubt
     </div>
     <div class="alert alert-danger" ng-show="$parent.scale < $parent.minScale">
         Ausgabemaßstab muss größer als 1 : {{ $parent.minScale }} sein
@@ -108,4 +114,4 @@
         <span class="print-headline">Ausgabebereich nicht mehr im Kartenbild?</span>
     </div>
     <button class="btn btn-default" ng-click="resetPrintPage()">Ausgabebereich zentrieren</button>
-</div>
+</form>
