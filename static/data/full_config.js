@@ -4,9 +4,9 @@ var orkaAppConfig = {
     // Einstellungen für die Karte
     map: {
         // Initiales Zentrum der Karte
-        center: [312313.88958, 5996030.31389],
+        center: [313282, 6003693],
         // Initiales Zoomlevel der Karte
-        zoom: 14,
+        zoom: 5,
         // Aktivieren der Hintergrundlayer der Anwendung
         // jeder Hintergrundlayer ist gleichzeitig ein Drucklayer
         layers: [
@@ -16,7 +16,7 @@ var orkaAppConfig = {
         ],
         // Festlegung der Kartenattributionen
         attributions: [
-            '<div>Kartenbild © Hansestadt Oldenburg (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
+            '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
             '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a>(<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a></div>'
         ],
         // Anwendung startet mit geöffneten Layerswitcher, sofern vorhanden
@@ -29,9 +29,9 @@ var orkaAppConfig = {
         // Höhe des Headers. Die Angabe erfolgt in Pixel und muss mit 'px' enden
         height: '50px',
         // Abstand des Textes im Header zum oberen Browserfensterrand
-        paddingTop: '12px',
+        paddingTop: '10px',
         // Text der im Header stehen soll
-        text: 'ORKa.MVP'
+        text: 'ORKa.MV – Offenen Regionalkarte Mecklenburg-Vorpommern'
     },
     // Pfad zu GeoJSON mit Polygonen für "Ortliste"
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
