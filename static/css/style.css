@@ -44,7 +44,7 @@ body {
   z-index: 3;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
-  padding: 0 15px;
+  padding: 0 9px;
   border-radius: 0;
   height: 50px;
   margin: 0;
@@ -288,6 +288,27 @@ div.print-headline-container-last {
   margin-top: 5px;
 }
 
+div.btn-group {
+  width: 100%;
+}
+
+button.output-format-button {
+  width: 25.25%;
+}
+
+.btn-success {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn-default {
+  width: 100%;
+}
+
+.default {
+  cursor: default;
+}
+
 /*
  * Map components
  */
@@ -342,7 +363,7 @@ div.print-headline-container-last {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .ol-attribution:not(.ol-collapsed) {
@@ -402,9 +423,17 @@ div.print-headline-container-last {
 }
 
 .ol-unselectable .orka-layerswitcher hr {
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   margin-right: -20px;
+  border-width: 2px;
+  border-color: #999;
+}
+
+.ol-unselectable .orka-layerswitcher hr.ng-scope {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-width: 3px;
 }
 
 .orka-popup {
