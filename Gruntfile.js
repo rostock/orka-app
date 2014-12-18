@@ -31,6 +31,7 @@ module.exports = function(grunt) {
           'src/modules/**/*.js',
           'src/config.js',
           'src/controller.js',
+          'src/filters.js',
           'src/init.js'
         ],
         dest: 'build/<%= pkg.name %>.ngmin.js'
