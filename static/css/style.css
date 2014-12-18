@@ -54,6 +54,10 @@ body {
   width: 100%;
 }
 
+.navbar-brand {
+  padding: 15px 0;
+}
+
 .main-content {
   bottom: 0;
   display: block;
