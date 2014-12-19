@@ -6,5 +6,6 @@ angular.module('orkaApp')
         if(externalLinkRegex.exec(link) === null) {
             return 'http://' + link;
         }
+        return link;
     };
 });
