@@ -95,14 +95,15 @@ angular.module('orka.config')
         },
         attributions: [
             '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
-            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a>(<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a></div>'
+            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a> (<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a></div>',
+            '<div>Daten für Overlay-Themen © OpenStreetMap (ODbL)</div>'
         ],
         backgroundLayer: {
             'ORKA_STADTPLAN': {
                 baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms',
                 layer: 'stadtplan_EPSG25833',
                 format: 'png',
-                title: 'Stadtplan',
+                title: 'ORKa.MV',
                 shortcut: 'S',
                 printLayer: 'mvp-mapserver-print'
             },
@@ -110,7 +111,7 @@ angular.module('orka.config')
                 baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms',
                 layer: 'stadtplan_notext_EPSG25833',
                 format: 'png',
-                title: 'Stadtplan ohne Text',
+                title: 'ORKa.MV ohne Text',
                 shortcut: 'O',
                 printLayer: 'mvp-mapserver-notext-print'
             },
@@ -118,22 +119,22 @@ angular.module('orka.config')
                 baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms',
                 layer: 'stadtplan_greyscale_EPSG25833',
                 format: 'png',
-                title: 'Stadtplan Grau',
+                title: 'ORKa.MV in Graustufen',
                 shortcut: 'G',
                 printLayer: 'mvp-mapserver-grayscale-print'
             }
         },
         poi: {
             layerName: 'poi_layer',
-            layerURL: '/citymap/poi.geojson?',
-            iconBaseURL: 'icons/',
+            layerURL: '/citymapper/poi.geojson?',
+            iconBaseURL: '/icons/',
             markerIcon: 'img/highlightMarker.png',
             legendURL: 'js/poi_legend_data.json',
             symbolAnchor: [10, 26],
             markerAnchor: [17, 33]
         },
         track: {
-            layerURL: '/citymap/tracks',
+            layerURL: '/citymapper/tracks',
             layerName: 'tracks',
             legendURL: 'data/track_legend_data.json'
         },
@@ -142,7 +143,7 @@ angular.module('orka.config')
             defaultScale: 250000,
             maxScale: 250000,
             minScale: 500,
-            createURL: '/print/print',
+            createURL: '/printqueue/print',
             checkURL: '',
             downloadURL: '',
             checkDelay: 2000,
@@ -168,8 +169,20 @@ angular.module('orka.config')
                 'value': 'pdf'
             },
             {
+                'label': 'JPG',
+                'value': 'jpg'
+            },
+            {
                 'label': 'PNG',
                 'value': 'png'
+            },
+            {
+                'label': 'SVG',
+                'value': 'svg'
+            },
+            {
+                'label': 'TIFF',
+                'value': 'tiff'
             }],
             style: {
                 fillColor: 'rgba(255, 255, 255, 0.4)',

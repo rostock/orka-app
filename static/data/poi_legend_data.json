@@ -41,14 +41,17 @@
       "name": "aktiv_sein",
       "title": "Aktiv sein",
       "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "brand",
+        "title": "Marke"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
         "tag": "fee",
         "title": "Gebühr"
-        }, {
-          "tag": "opening_hours",
-          "title": "Öffnungszeiten"
-        }, {
-          "tag": "brand",
-          "title": "Marke"
       }],
       "popupTags": []
     },
@@ -73,11 +76,17 @@
       "name": "baden",
       "title": "Baden",
       "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "brand",
+        "title": "Marke"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
         "tag": "fee",
         "title": "Gebühr"
-        }, {
-          "tag": "opening_hours",
-          "title": "Öffnungszeiten"
       }],
       "popupTags": []
     },
@@ -108,7 +117,7 @@
       "title": "Essen & Trinken",
       "listTags": [{
         "tag": "cuisine",
-        "title": "Küche"
+        "title": "Angebot"
       }, {
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
@@ -185,7 +194,7 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "religion",
-        "title": "Konfession"
+        "title": "Religion"
       }, {
         "tag": "operator",
         "title": "Betreiber"
@@ -194,7 +203,7 @@
         "title": "Gebühr"
       }, {
         "tag": "cuisine",
-        "title": "Küche"
+        "title": "Angebot"
       }],
       "popupTags": []
     },
@@ -222,9 +231,6 @@
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
       }, {
-        "tag": "religion",
-        "title": "Konfession"
-      }, {
         "tag": "operator",
         "title": "Betreiber"
       }, {
@@ -237,12 +243,12 @@
       "groups": [
         {
           "icon": "rasten/raststelle-zu-lande.png",
-          "title": "Rastellen zu Lande",
+          "title": "Raststellen zu Lande",
           "type": "raststelle-zu-lande"
         },
         {
           "icon": "rasten/raststelle-zu-wasser.png",
-          "title": "Rastellen zu Wasser",
+          "title": "Raststellen zu Wasser",
           "type": "raststelle-zu-wasser"
         }
       ],
