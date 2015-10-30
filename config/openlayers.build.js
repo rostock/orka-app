@@ -29,6 +29,7 @@
     "ol.control.ZoomSlider#*",
     "ol.extent.containsCoordinate",
     "ol.extent.intersects",
+    "ol.extent.getTopLeft",
     "ol.format.GeoJSON",
     "ol.format.GeoJSON#*",
     "ol.geom.Point",
@@ -49,6 +50,7 @@
     "ol.proj.addProjection",
     "ol.proj.Projection",
     "ol.proj.Projection#getCode",
+    "ol.proj.Projection#getExtent",
     "ol.proj.Projection#getMetersPerUnit",
     "ol.proj.transform",
     "ol.source.GeoJSON",
@@ -59,6 +61,8 @@
     "ol.source.ServerVector#*",
     "ol.source.TileImage",
     "ol.source.TileImage#*",
+    "ol.source.WMTS",
+    "ol.source.WMTS#*",
     "ol.source.Vector",
     "ol.source.Vector#*",
     "ol.style.Circle",
@@ -72,7 +76,9 @@
     "ol.style.Style",
     "ol.style.Style#*",
     "ol.tilegrid.TileGrid",
-    "ol.tilegrid.TileGrid#*"
+    "ol.tilegrid.TileGrid#*",
+    "ol.tilegrid.WMTS",
+    "ol.tilegrid.WMTS#*"
   ],
   "compile": {
     "externs": [
