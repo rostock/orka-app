@@ -65,9 +65,9 @@ angular.module('orka.config')
         map: {
             projection: new ol.proj.Projection({
                 code: 'EPSG:25833',
-                units: 'm'
+                units: 'm',
+                extent: [200000, 5880000, 480000, 6075000]
             }),
-            extent: [200000, 5880000, 480000, 6075000],
             resolutions:  [
                 529.166666667,
                 352.777777778,
