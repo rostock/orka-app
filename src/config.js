@@ -36,18 +36,37 @@ angular.module('orkaApp', [
 .config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider) {
     var layers = [];
     angular.forEach(ConfigServiceProvider.config.backgroundLayer, function(backgroundLayer) {
-        var layer = LayersFactoryProvider.newTMS({
-            projection: ConfigServiceProvider.config.map.projection,
-            resolutions: ConfigServiceProvider.config.map.resolutions,
-            extent: ConfigServiceProvider.config.map.extent,
-            format: backgroundLayer.format,
-            baseURL: backgroundLayer.baseURL,
-            layer: backgroundLayer.layer,
-            title: backgroundLayer.title,
-            shortcut: backgroundLayer.shortcut,
-            isBackground: true,
-            attributions: backgroundLayer.attributions
-        });
+        var layer;
+        console.log(ConfigServiceProvider.config.map.projection)
+        if(backgroundLayer.matrixSet !== undefined) {
+            console.log(backgroundLayer)
+            layer = LayersFactoryProvider.newWMTS({
+                projection: ConfigServiceProvider.config.map.projection,
+                resolutions: ConfigServiceProvider.config.map.resolutions,
+                extent: ConfigServiceProvider.config.map.projection.getExtent(),
+                matrixSet: backgroundLayer.matrixSet,
+                format: backgroundLayer.format,
+                baseURL: backgroundLayer.baseURL,
+                layer: backgroundLayer.layer,
+                title: backgroundLayer.title,
+                shortcut: backgroundLayer.shortcut,
+                isBackground: true,
+                attributions: backgroundLayer.attributions
+            });
+        } else {
+            layer = LayersFactoryProvider.newTMS({
+                projection: ConfigServiceProvider.config.map.projection,
+                resolutions: ConfigServiceProvider.config.map.resolutions,
+                extent: ConfigServiceProvider.config.map.projection.getExtent(),
+                format: backgroundLayer.format,
+                baseURL: backgroundLayer.baseURL,
+                layer: backgroundLayer.layer,
+                title: backgroundLayer.title,
+                shortcut: backgroundLayer.shortcut,
+                isBackground: true,
+                attributions: backgroundLayer.attributions
+            });
+        }
         layer.set('printLayer', backgroundLayer.printLayer);
         layers.push(layer);
     });
