@@ -227,40 +227,44 @@ angular.module('orka.config')
         } else {
             self.config.header = config.header.height === '0px' ? false : true;
         }
-        self.config.popup = $.extend({}, defaults.popup);
-        self.config.map = $.extend({}, defaults.map);
-        self.config.backgroundLayer = [];
-        if(config.map !== undefined) {
-            if(config.map.center !== undefined) {
-                self.config.map.center = config.map.center;
+        if(config.fullConfig === true) {
+            self.config = $.extend({}, config);
+        } else {
+            self.config.popup = $.extend({}, defaults.popup);
+            self.config.map = $.extend({}, defaults.map);
+            self.config.backgroundLayer = [];
+            if(config.map !== undefined) {
+                if(config.map.center !== undefined) {
+                    self.config.map.center = config.map.center;
+                }
+                if(config.map.zoom !== undefined) {
+                    self.config.map.zoom = config.map.zoom;
+                }
+                angular.forEach(config.map.layers, function(layerName) {
+                    var layer = defaults.backgroundLayer[layerName];
+                    layer.attributions = config.map.attributions || defaults.attributions;
+                    self.config.backgroundLayer.push(layer);
+                });
+                if(config.map.openLayerswitcher !== undefined) {
+                    self.config.map.layerswitcher = config.map.openLayerswitcher === true ? 'open' : 'closed';
+                }
+                if(config.map.openLegend !== undefined) {
+                    self.config.map.legend = config.map.openLegend === true ? 'open' : 'closed';
+                }
             }
-            if(config.map.zoom !== undefined) {
-                self.config.map.zoom = config.map.zoom;
+            if(config.locations !== undefined) {
+                self.config.locations = config.locations;
             }
-            angular.forEach(config.map.layers, function(layerName) {
-                var layer = defaults.backgroundLayer[layerName];
-                layer.attributions = config.map.attributions || defaults.attributions;
-                self.config.backgroundLayer.push(layer);
-            });
-            if(config.map.openLayerswitcher !== undefined) {
-                self.config.map.layerswitcher = config.map.openLayerswitcher === true ? 'open' : 'closed';
+            if(config.themes === true) {
+                self.config.poi = $.extend({}, defaults.poi);
+                if(config.poi !== undefined && config.poi.legendURL !== undefined) {
+                    self.config.poi.legendURL = config.poi.legendURL;
+                }
+                self.config.track = $.extend({}, defaults.track);
             }
-            if(config.map.openLegend !== undefined) {
-                self.config.map.legend = config.map.openLegend === true ? 'open' : 'closed';
+            if(config.print === true) {
+                self.config.print = $.extend({}, defaults.print);
             }
-        }
-        if(config.locations !== undefined) {
-            self.config.locations = config.locations;
-        }
-        if(config.themes === true) {
-            self.config.poi = $.extend({}, defaults.poi);
-            if(config.poi !== undefined && config.poi.legendURL !== undefined) {
-                self.config.poi.legendURL = config.poi.legendURL;
-            }
-            self.config.track = $.extend({}, defaults.track);
-        }
-        if(config.print === true) {
-            self.config.print = $.extend({}, defaults.print);
         }
         ol.proj.addProjection(self.config.map.projection);
     };
