@@ -37,9 +37,7 @@ angular.module('orkaApp', [
     var layers = [];
     angular.forEach(ConfigServiceProvider.config.backgroundLayer, function(backgroundLayer) {
         var layer;
-        console.log(ConfigServiceProvider.config.map.projection)
         if(backgroundLayer.matrixSet !== undefined) {
-            console.log(backgroundLayer)
             layer = LayersFactoryProvider.newWMTS({
                 projection: ConfigServiceProvider.config.map.projection,
                 resolutions: ConfigServiceProvider.config.map.resolutions,
