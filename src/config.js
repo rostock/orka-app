@@ -19,7 +19,10 @@ angular.module('orkaApp', [
 
 .config(['ControlsServiceProvider', function(ControlsServiceProvider) {
     ControlsServiceProvider.setControls([
-        new ol.control.Zoom(),
+        new ol.control.Zoom({
+            zoomInTipLabel: 'hineinzoomen',
+            zoomOutTipLabel: 'herauszoomen'
+        }),
         new ol.control.Rotate(),
         new ol.control.Attribution({
             collapsed: false,
