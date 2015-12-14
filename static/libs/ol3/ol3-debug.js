@@ -31757,9 +31757,9 @@ ol.control.Zoom = function(opt_options) {
       options.zoomOutLabel : '\u2212';
 
   var zoomInTipLabel = goog.isDef(options.zoomInTipLabel) ?
-      options.zoomInTipLabel : 'Zoom in';
+      options.zoomInTipLabel : 'hineinzoomen';
   var zoomOutTipLabel = goog.isDef(options.zoomOutTipLabel) ?
-      options.zoomOutTipLabel : 'Zoom out';
+      options.zoomOutTipLabel : 'herauszoomen';
 
   var tTipZoomIn = goog.dom.createDom(goog.dom.TagName.SPAN, {
     'role' : 'tooltip'

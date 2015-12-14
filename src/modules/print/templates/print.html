@@ -46,10 +46,10 @@
         </div>
     </div>
     <div class="alert alert-danger" ng-show="pageSizeError">
-        Der Ausgabebereich darf nicht größer als 200.000 mm² sein
+        Der Ausgabebereich darf nicht größer als 200.000 mm² sein.
     </div>
     <div class="alert alert-danger" ng-hide="(printform.width.$valid || printform.width.$pristine) && (printform.height.$valid || printform.height.$pristine)">
-        Es sind nur Ziffern erlaubt
+        Es sind nur Ziffern erlaubt.
     </div>
     <div class="print-headline-container">
         <span id="valid-scale-range-hint" class="print-headline">
@@ -63,13 +63,13 @@
         </div>
     </div>
     <div class="alert alert-danger" ng-hide="printform.scale.$valid || printform.scale.$pristine">
-        Es sind nur Ziffern erlaubt
+        Es sind nur Ziffern erlaubt.
     </div>
     <div class="alert alert-danger" ng-show="$parent.scale < $parent.minScale">
-        Ausgabemaßstab muss größer als 1 : 500 sein
+        Der Ausgabemaßstab darf nicht größer als 1&thinsp;:&thinsp;500 sein.
     </div>
     <div class="alert alert-danger" ng-show="$parent.scale > $parent.maxScale">
-        Ausgabemaßstab muss kleiner als 1 : 250.000 sein
+        Der Ausgabemaßstab darf nicht kleiner als 1&thinsp;:&thinsp;250.000 sein.
     </div>
     <div class="print-headline-container">
         <span class="print-headline">
