@@ -105,7 +105,7 @@ angular.module('orka.config')
             'ORKA_STADTPLAN_OHNE_TEXT': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-ohnetext',
-                matrixSet: 'epsg_25833',
+                matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
                 matrixIds: layerMatrixIds,
                 format: 'png',
@@ -116,7 +116,7 @@ angular.module('orka.config')
             'ORKA_STADTPLAN_GRAU': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-graustufen',
-                matrixSet: 'epsg_25833',
+                matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
                 matrixIds: layerMatrixIds,
                 format: 'png',
