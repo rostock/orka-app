@@ -62,6 +62,18 @@ angular.module('orka.config')
      */
     this.config = {};
 
+    var maxResolution = 4891.96981025;
+    var mapResolutions = [];
+    var matrixIds = [];
+
+    // calculate the resoltuion
+    for (var i = 0; i < 15; i++) {
+        matrixIds[i] = i.toString();
+        mapResolutions[i] = maxResolution / Math.pow(2, i);
+    }
+    var layerResolution = mapResolutions.slice(3, mapResolutions.length);
+    var layerMatrixIds = matrixIds.slice(3, matrixIds.length);
+
     var defaults = {
         map: {
             projection: new ol.proj.Projection({
@@ -69,39 +81,7 @@ angular.module('orka.config')
                 units: 'm',
                 extent: [-464849.38, 5057815.86858, 787494.891424, 6310160.14]
             }),
-            resolutions:  [
-               4891.96981025,
-               3459.14502619,
-               2445.98490513,
-               1729.57251309,
-               1222.99245256,
-               864.786256547,
-               611.496226281,
-               432.393128274,
-               305.748113141,
-               216.196564137,
-               152.87405657,
-               108.098282068,
-               76.4370282852,
-               54.0491410342,
-               38.2185141426,
-               27.0245705171,
-               19.1092570713,
-               13.5122852585,
-               9.55462853565,
-               6.75614262927,
-               4.77731426782,
-               3.37807131464,
-               2.38865713391,
-               1.68903565732,
-               1.19432856696,
-               0.844517828659,
-               0.597164283478,
-               0.42225891433,
-               0.298582141739,
-               0.211129457165,
-               0.149291070869
-            ],
+            resolutions:  layerResolution,
             center: [313282, 6003693],
             zoom: 12
         },
@@ -114,7 +94,9 @@ angular.module('orka.config')
             'ORKA_STADTPLAN': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv',
-                matrixSet: 'epsg_25833',
+                matrixSet: 'epsg_25833_adv',
+                resolutions: layerResolution,
+                matrixIds: layerMatrixIds,
                 format: 'png',
                 title: 'ORKa.MV',
                 shortcut: 'S',
@@ -124,6 +106,8 @@ angular.module('orka.config')
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-ohnetext',
                 matrixSet: 'epsg_25833',
+                resolutions: layerResolution,
+                matrixIds: layerMatrixIds,
                 format: 'png',
                 title: 'ORKa.MV ohne Text',
                 shortcut: 'O',
@@ -133,6 +117,8 @@ angular.module('orka.config')
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-graustufen',
                 matrixSet: 'epsg_25833',
+                resolutions: layerResolution,
+                matrixIds: layerMatrixIds,
                 format: 'png',
                 title: 'ORKa.MV in Graustufen',
                 shortcut: 'G',

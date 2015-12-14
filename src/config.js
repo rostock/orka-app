@@ -43,8 +43,9 @@ angular.module('orkaApp', [
         if(backgroundLayer.matrixSet !== undefined) {
             layer = LayersFactoryProvider.newWMTS({
                 projection: ConfigServiceProvider.config.map.projection,
-                resolutions: ConfigServiceProvider.config.map.resolutions,
+                resolutions: backgroundLayer.resolutions,
                 extent: ConfigServiceProvider.config.map.projection.getExtent(),
+                matrixIds: backgroundLayer.matrixIds,
                 matrixSet: backgroundLayer.matrixSet,
                 format: backgroundLayer.format,
                 baseURL: backgroundLayer.baseURL,
