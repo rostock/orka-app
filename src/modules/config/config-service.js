@@ -100,7 +100,7 @@ angular.module('orka.config')
                 format: 'png',
                 title: 'ORKa.MV',
                 shortcut: 'S',
-                printLayer: 'mvp-mapserver-print'
+                printLayer: 'orkamv-printqueue'
             },
             'ORKA_STADTPLAN_OHNE_TEXT': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
@@ -111,7 +111,7 @@ angular.module('orka.config')
                 format: 'png',
                 title: 'ORKa.MV ohne Text',
                 shortcut: 'O',
-                printLayer: 'mvp-mapserver-notext-print'
+                printLayer: 'orkamv-printqueue-ohnetext'
             },
             'ORKA_STADTPLAN_GRAU': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
@@ -122,7 +122,7 @@ angular.module('orka.config')
                 format: 'png',
                 title: 'ORKa.MV in Graustufen',
                 shortcut: 'G',
-                printLayer: 'mvp-mapserver-grayscale-print'
+                printLayer: 'orkamv-printqueue-graustufen'
             }
         },
         poi: {
