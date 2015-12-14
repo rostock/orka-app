@@ -61,37 +61,49 @@ angular.module('orka.config')
      *   - buffer - {Array.<number>} - Min distance between popup element and map border for automatical popup movement into view.
      */
     this.config = {};
+
     var defaults = {
         map: {
             projection: new ol.proj.Projection({
                 code: 'EPSG:25833',
                 units: 'm',
-                extent: [200000, 5880000, 480000, 6075000]
+                extent: [-464849.38, 5057815.86858, 787494.891424, 6310160.14]
             }),
             resolutions:  [
-                529.166666667,
-                352.777777778,
-                264.583333333,
-                176.388888889,
-                88.1944444444,
-                52.9166666667,
-                35.2777777778,
-                28.2222222222,
-                22.9305555556,
-                17.6388888889,
-                12.3472222222,
-                8.8194444444,
-                7.0555555556,
-                5.2916666667,
-                3.5277777778,
-                2.6458333333,
-                1.7638888889,
-                0.8819444444,
-                0.3527777778,
-                0.1763888889
+               4891.96981025,
+               3459.14502619,
+               2445.98490513,
+               1729.57251309,
+               1222.99245256,
+               864.786256547,
+               611.496226281,
+               432.393128274,
+               305.748113141,
+               216.196564137,
+               152.87405657,
+               108.098282068,
+               76.4370282852,
+               54.0491410342,
+               38.2185141426,
+               27.0245705171,
+               19.1092570713,
+               13.5122852585,
+               9.55462853565,
+               6.75614262927,
+               4.77731426782,
+               3.37807131464,
+               2.38865713391,
+               1.68903565732,
+               1.19432856696,
+               0.844517828659,
+               0.597164283478,
+               0.42225891433,
+               0.298582141739,
+               0.211129457165,
+               0.149291070869
             ],
             center: [313282, 6003693],
-            zoom: 9
+            zoom: 12
         },
         attributions: [
             '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
@@ -100,24 +112,27 @@ angular.module('orka.config')
         ],
         backgroundLayer: {
             'ORKA_STADTPLAN': {
-                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms',
-                layer: 'stadtplan_EPSG25833',
+                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                layer: 'orkamv',
+                matrixSet: 'epsg_25833',
                 format: 'png',
                 title: 'ORKa.MV',
                 shortcut: 'S',
                 printLayer: 'mvp-mapserver-print'
             },
             'ORKA_STADTPLAN_OHNE_TEXT': {
-                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms',
-                layer: 'stadtplan_notext_EPSG25833',
+                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                layer: 'orkamv-ohnetext',
+                matrixSet: 'epsg_25833',
                 format: 'png',
                 title: 'ORKa.MV ohne Text',
                 shortcut: 'O',
                 printLayer: 'mvp-mapserver-notext-print'
             },
             'ORKA_STADTPLAN_GRAU': {
-                baseURL: 'http://geo.sv.rostock.de/geodienste/stadtplan/tms',
-                layer: 'stadtplan_greyscale_EPSG25833',
+                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                layer: 'orkamv-graustufen',
+                matrixSet: 'epsg_25833',
                 format: 'png',
                 title: 'ORKa.MV in Graustufen',
                 shortcut: 'G',
