@@ -128,7 +128,7 @@ angular.module('orka.config')
         poi: {
             layerName: 'poi_layer',
             layerURL: '/citymapper/poi.geojson?',
-            iconBaseURL: '/icons/',
+            iconBaseURL: '/anwendung/icons/',
             markerIcon: 'img/highlightMarker.png',
             legendURL: 'js/poi_legend_data.json',
             symbolAnchor: [10, 26],
