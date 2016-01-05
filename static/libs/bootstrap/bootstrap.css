@@ -910,13 +910,13 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #428bca;
+  color: #006cb7;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #2a6496;
-  text-decoration: underline;
+  color: #d81920;
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -3880,7 +3880,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
+  padding: 15px 0;
   font-size: 18px;
   line-height: 20px;
 }
