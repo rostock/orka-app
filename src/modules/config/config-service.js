@@ -100,35 +100,35 @@ angular.module('orka.config')
                 format: 'png',
                 title: 'ORKa.MV',
                 shortcut: 'S',
-                printLayer: 'mvp-mapserver-print'
+                printLayer: 'orkamv-printqueue'
             },
             'ORKA_STADTPLAN_OHNE_TEXT': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-ohnetext',
-                matrixSet: 'epsg_25833',
+                matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
                 matrixIds: layerMatrixIds,
                 format: 'png',
                 title: 'ORKa.MV ohne Text',
                 shortcut: 'O',
-                printLayer: 'mvp-mapserver-notext-print'
+                printLayer: 'orkamv-printqueue-ohnetext'
             },
             'ORKA_STADTPLAN_GRAU': {
                 baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-graustufen',
-                matrixSet: 'epsg_25833',
+                matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
                 matrixIds: layerMatrixIds,
                 format: 'png',
                 title: 'ORKa.MV in Graustufen',
                 shortcut: 'G',
-                printLayer: 'mvp-mapserver-grayscale-print'
+                printLayer: 'orkamv-printqueue-graustufen'
             }
         },
         poi: {
             layerName: 'poi_layer',
             layerURL: '/citymapper/poi.geojson?',
-            iconBaseURL: '/icons/',
+            iconBaseURL: '/anwendung/icons/',
             markerIcon: 'img/highlightMarker.png',
             legendURL: 'js/poi_legend_data.json',
             symbolAnchor: [10, 26],
