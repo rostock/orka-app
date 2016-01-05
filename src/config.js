@@ -19,7 +19,10 @@ angular.module('orkaApp', [
 
 .config(['ControlsServiceProvider', function(ControlsServiceProvider) {
     ControlsServiceProvider.setControls([
-        new ol.control.Zoom(),
+        new ol.control.Zoom({
+            zoomInTipLabel: 'hineinzoomen',
+            zoomOutTipLabel: 'herauszoomen'
+        }),
         new ol.control.Rotate(),
         new ol.control.Attribution({
             collapsed: false,
@@ -40,8 +43,9 @@ angular.module('orkaApp', [
         if(backgroundLayer.matrixSet !== undefined) {
             layer = LayersFactoryProvider.newWMTS({
                 projection: ConfigServiceProvider.config.map.projection,
-                resolutions: ConfigServiceProvider.config.map.resolutions,
+                resolutions: backgroundLayer.resolutions,
                 extent: ConfigServiceProvider.config.map.projection.getExtent(),
+                matrixIds: backgroundLayer.matrixIds,
                 matrixSet: backgroundLayer.matrixSet,
                 format: backgroundLayer.format,
                 baseURL: backgroundLayer.baseURL,
