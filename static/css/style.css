@@ -386,6 +386,7 @@ button.output-format-button {
   line-height: 15px;
 }
 
+.ol-scale-line,
 .ol-unselectable .anol-map-scale {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
@@ -397,6 +398,10 @@ button.output-format-button {
   position: absolute;
 }
 
+.ol-scale-line-inner {
+  color: #333;
+  border-color: #333;
+}
 .ol-unselectable .orka-layerswitcher {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 0px 25px 5px 5px;
