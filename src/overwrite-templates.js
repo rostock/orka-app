@@ -2,8 +2,7 @@ angular.module('orkaApp').run(['$templateCache', function($templateCache) {
     'use strict';
 
     $templateCache.put('src/modules/scale/templates/scaletext.html',
-        "<div class=\"anol-map-scale\">Maßstab 1 : {{ scale }}</div>" +
-        "<div id=\"imprint-link\"><a href='/datenschutz.html' target='_blank'>Datenschutz</a> | <a href='/impressum.html' target='_blank'>Impressum</a> | <a href='/nutzungsbedingungen.html' target='_blank'>Nutzungsbedingungen</a></div>"
+        "<div class=\"anol-map-scale\">Maßstab 1 : {{ scale }}</div>"
     );
 
     $templateCache.put('src/modules/layerswitcher/templates/layerswitcher.html',
