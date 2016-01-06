@@ -51,6 +51,8 @@ module.exports = function(grunt) {
       dist: {
         src: [
           'static/libs/jquery/jquery-2.1.1.min.js',
+          'static/libs/proj4/proj4.js',
+          'static/libs/proj4/proj4.defs.js',
           'static/libs/angular/angular.min.js',
           'static/libs/angular/ui-bootstrap-tpls-0.11.2.min.js',
           'static/libs/ol3/ol.custom.min.js',

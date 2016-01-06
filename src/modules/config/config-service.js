@@ -267,7 +267,6 @@ angular.module('orka.config')
                 self.config.print = $.extend({}, defaults.print);
             }
         }
-        ol.proj.addProjection(self.config.map.projection);
     };
 
     this.$get = [function() {
