@@ -6,7 +6,7 @@ var orkaAppConfig = {
         // Initiales Zentrum der Karte
         center: [313282, 6003693],
         // Initiales Zoomlevel der Karte
-        zoom: 5,
+        zoom: 1,
         // Aktivieren der Hintergrundlayer der Anwendung
         // jeder Hintergrundlayer ist gleichzeitig ein Drucklayer
         layers: [

@@ -71,19 +71,19 @@ angular.module('orka.config')
         matrixIds[i] = i.toString();
         mapResolutions[i] = maxResolution / Math.pow(2, i);
     }
-    var layerResolution = mapResolutions.slice(3, mapResolutions.length);
-    var layerMatrixIds = matrixIds.slice(3, matrixIds.length);
+    var minZoomLevel = 6;
+    var layerResolution = mapResolutions.slice(minZoomLevel, mapResolutions.length);
+    var layerMatrixIds = matrixIds.slice(minZoomLevel, matrixIds.length);
 
     var defaults = {
         map: {
             projection: new ol.proj.Projection({
                 code: 'EPSG:25833',
-                units: 'm',
                 extent: [-464849.38, 5057815.86858, 787494.891424, 6310160.14]
             }),
             resolutions:  layerResolution,
             center: [313282, 6003693],
-            zoom: 12
+            zoom: 2
         },
         attributions: [
             '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
