@@ -112,10 +112,10 @@ module.exports = function(grunt) {
             dest: 'build/dist/'
           },
           {
-            flatten:true,
             expand: true,
-            src: ['static/icons/*'],
-            dest: 'build/dist/icons/'
+            cwd: 'static/icons',
+            src: '**/*',
+            dest: 'build/dist/icons'
           },
           {
             flatten: true,
@@ -124,10 +124,10 @@ module.exports = function(grunt) {
             dest: 'build/dist/img/'
           },
           {
-            flatten:true,
             expand: true,
-            src: ['static/meta/*'],
-            dest: 'build/dist/meta/'
+            cwd: 'static/meta',
+            src: '**/*',
+            dest: 'build/dist/meta'
           },
           {
             flatten: true,
