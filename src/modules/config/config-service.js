@@ -33,10 +33,6 @@ angular.module('orka.config')
      *   - legendURL - {string} - URI to POI-legend JSON
      *   - symbolAnchor - {Array.<number>} - Placement offset of POI-icons
      *   - markerAnchor - {Array.<number>} - Placement offset of highlight marker icon
-     * - **track** - {Object} - Configuration if Track map themes.
-     *   - layerURL - {string} - URI to track request backend
-     *   - layerName - {string} - Name of layer tracks shown in
-     *   - legendURL - {string} - URI to Track-legend json
      * - **print** - {Object} - Configuration of print module
      *   - maxPageSize - {number} - Largest printable page size in square mm
      *   - defaultScale - {number} - Initial scale factor
@@ -134,11 +130,6 @@ angular.module('orka.config')
             legendURL: 'js/poi_legend_data.json',
             symbolAnchor: [10, 26],
             markerAnchor: [17, 33]
-        },
-        track: {
-            layerURL: '/citymap/tracks',
-            layerName: 'tracks',
-            legendURL: 'data/track_legend_data.json'
         },
         print: {
             maxPageSize: 200000,
@@ -262,7 +253,6 @@ angular.module('orka.config')
                 if(config.poi !== undefined && config.poi.legendURL !== undefined) {
                     self.config.poi.legendURL = config.poi.legendURL;
                 }
-                self.config.track = $.extend({}, defaults.track);
             }
             if(config.print === true) {
                 self.config.print = $.extend({}, defaults.print);

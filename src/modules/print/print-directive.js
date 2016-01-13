@@ -79,8 +79,7 @@ angular.module('orka.print')
                         PrintPageService.currentScale,
                         layerName,
                         scope.streetIndex,
-                        LayertreeService.selectedPoiTypes,
-                        LayertreeService.selectedTrackTypes
+                        LayertreeService.selectedPoiTypes
                     );
 
                     downloadPromise.then(function(url) {

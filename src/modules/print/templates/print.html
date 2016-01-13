@@ -4,11 +4,11 @@
             Dateiformat wählen
         </span>
     </div>
-    <select class="form-control pointer" ng-model="$parent.outputFormat" ng-options="format as format.label for format in outputFormats" title="Wählen Sie das Dateiformat für die Ausgabe.">
+    <select class="form-control pointer" ng-model="$parent.outputFormat" ng-options="format as format.label for format in outputFormats" title="Wählen Sie das Dateiformat für den Druck.">
     </select>
     <div class="print-headline-container">
         <span class="print-headline">
-            Größe des Ausgabebereichs wählen…
+            Größe des Druckbereichs wählen…
         </span>
     </div>
     <div class="btn-group">
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="control-label" for="width">Breite</label>
                 <div class="input-group">
-                    <input class="form-control" name="width" type="number" ng-model="$parent.pageSize[0]" ng-change="updatePrintPage()" title="Definieren Sie die Breite des Ausgabebereiches.">
+                    <input class="form-control" name="width" type="number" ng-model="$parent.pageSize[0]" ng-change="updatePrintPage()" title="Definieren Sie die Breite des Druckbereichs.">
                     <span class="input-group-addon default">mm</span>
                 </div>
             </div>
@@ -39,42 +39,42 @@
             <div class="form-group">
                 <label class="control-label" for="height">Höhe</label>
                 <div class="input-group">
-                    <input class="form-control" name="height" type="number" ng-model="$parent.pageSize[1]" ng-change="updatePrintPage()" title="Definieren Sie die Höhe des Ausgabebereiches.">
+                    <input class="form-control" name="height" type="number" ng-model="$parent.pageSize[1]" ng-change="updatePrintPage()" title="Definieren Sie die Höhe des Druckbereichs.">
                     <span class="input-group-addon default">mm</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="alert alert-danger" ng-show="pageSizeError">
-        Der Ausgabebereich darf nicht größer als 200.000 mm² sein.
+        Der Druckbereich darf nicht größer als 200.000 mm² sein.
     </div>
     <div class="alert alert-danger" ng-hide="(printform.width.$valid || printform.width.$pristine) && (printform.height.$valid || printform.height.$pristine)">
         Es sind nur Ziffern erlaubt.
     </div>
     <div class="print-headline-container">
         <span id="valid-scale-range-hint" class="print-headline">
-            Ausgabemaßstab definieren
+            Druckmaßstab definieren
         </span>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon default">1 :</span>
-            <input class="form-control" type="number" ng-model="$parent.scale" ng-change="updatePrintPage()" name="scale" title="Definieren Sie den Maßstab für die Ausgabe.">
+            <input class="form-control" type="number" ng-model="$parent.scale" ng-change="updatePrintPage()" name="scale" title="Definieren Sie den Maßstab für den Druck.">
         </div>
     </div>
     <div class="alert alert-danger" ng-hide="printform.scale.$valid || printform.scale.$pristine">
         Es sind nur Ziffern erlaubt.
     </div>
     <div class="alert alert-danger" ng-show="$parent.scale < $parent.minScale">
-        Der Ausgabemaßstab darf nicht größer als 1&thinsp;:&thinsp;500 sein.
+        Der Druckmaßstab darf nicht größer als 1&thinsp;:&thinsp;500 sein.
     </div>
     <div class="alert alert-danger" ng-show="$parent.scale > $parent.maxScale">
-        Der Ausgabemaßstab darf nicht kleiner als 1&thinsp;:&thinsp;250.000 sein.
+        Der Druckmaßstab darf nicht kleiner als 1&thinsp;:&thinsp;250.000 sein.
     </div>
     <div class="print-headline-container">
         <span class="print-headline">
             <label class="pointer">
-                <input type="checkbox" class="pointer" ng-model="$parent.streetIndex" title="Soll zusätzlich ein PDF mit dem Verzeichnis aller Straßen im Ausgabebereich erzeugt werden?">
+                <input type="checkbox" class="pointer" ng-model="$parent.streetIndex" title="Soll zusätzlich ein PDF mit dem Verzeichnis aller Straßen im Druckbereich erzeugt werden?">
                 Straßenverzeichnis erzeugen
             </label>
         </span>
@@ -83,21 +83,21 @@
     <div class="create_export">
         <div class="print-headline-container-last">
             <span class="print-headline print-headline-last">
-                <label title="Sie müssen den Nutzungsbedingungen für die Ausgabe der ORKa.MV zustimmen, bevor Sie die Ausgabe erstellen können!" for="aggree_license" style="display:none"></label>
+                <label title="Sie müssen den Nutzungsbedingungen für den Druck der ORKa.MV zustimmen, bevor Sie den Druck erstellen können!" for="aggree_license" style="display:none"></label>
                 <span class="print-headline">
-                    <input type="checkbox" class="pointer" ng-model="$parent.licenceAgreed" title="Sie müssen den Nutzungsbedingungen für die Ausgabe der ORKa.MV zustimmen, bevor Sie die Ausgabe erstellen können!">
-                    <a href="http://www.orka-mv.de/ausgabebedingungen.html" target="_blank">Nutzungsbedingungen</a>
+                    <input type="checkbox" class="pointer" ng-model="$parent.licenceAgreed" title="Sie müssen den Nutzungsbedingungen für den Druck der ORKa.MV zustimmen, bevor Sie den Druck erstellen können!">
+                    <a href="meta/druckbedingungen.html" target="_blank">Nutzungsbedingungen</a>
                     zustimmen
                 </span>
                 <span class="print-headline">
-                    <button class="btn btn-success" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()" title="Erstellen Sie die Ausgabe.">Ausgabe erstellen</button>
+                    <button class="btn btn-success" ng-click="startPrint()" ng-disabled="!licenceAgreed || !isPrintable()" title="Erstellen Sie den Druck.">Druck erstellen</button>
                 </span>
             </span>
         </div>
     </div>
 
     <div class="print-headline-container">
-        <span class="print-headline">Ausgabebereich nicht mehr im Kartenbild?</span>
+        <span class="print-headline">Druckbereich nicht mehr im Kartenbild?</span>
     </div>
-    <button class="btn btn-default" ng-click="resetPrintPage()" title="Zentrieren Sie den Ausgabebereich im aktuellen Kartenbild.">Ausgabebereich zentrieren</button>
+    <button class="btn btn-default" ng-click="resetPrintPage()" title="Zentrieren Sie den Druckbereich im aktuellen Kartenbild.">Druckbereich zentrieren</button>
 </form>

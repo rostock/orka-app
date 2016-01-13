@@ -30,6 +30,10 @@
     src:url(./fonts/PTS76F_W.ttf);
 }
 
+.normal {
+    font-weight:normal;
+}
+
 html, body {
   width: 100%;
   height: 100%;
@@ -44,14 +48,24 @@ body {
   z-index: 3;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
-  padding: 0 9px;
+  padding: 0 10px;
   border-radius: 0;
-  height: 50px;
+  height: 80px;
   margin: 0;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
+  background-image: url("../img/logo.svg");
+  background-position: left center;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  line-height: 80px;
+}
+
+.header  span{
+  margin-left: 10px;
 }
 
 .main-content {
@@ -369,7 +383,7 @@ button.output-format-button {
 .ol-attribution:not(.ol-collapsed) {
   top: auto;
   left: auto;
-  bottom: 40px;
+  bottom: 5px;
   right: 5px;
   background-color: rgba(255, 255, 255, 0.7);
   padding: 5px;
@@ -411,7 +425,7 @@ button.output-format-button {
   right: 0px;
   position: absolute;
   z-index: 1000;
-  width: 265px;
+  width: 300px;
 }
 
 .ol-unselectable .orka-layerswitcher-toggle {
@@ -428,25 +442,15 @@ button.output-format-button {
 }
 
 .ol-unselectable .orka-layerswitcher hr {
-  margin-top: 4px;
-  margin-bottom: 4px;
-  margin-right: -20px;
-  border-width: 2px;
-  border-color: #999;
-}
-
-.ol-unselectable .orka-layerswitcher hr.ng-scope {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border-width: 3px;
+  display: none;
 }
 
 .orka-popup {
   background-color: #f5f5f5;
   padding: 8px;
   border-radius: 5px;
-  min-width: 100px;
-  max-width: 200px;
+  min-width: 150px;
+  max-width: 300px;
   border: 1px solid #d9d9d9;
 }
 
@@ -487,22 +491,11 @@ button.output-format-button {
   opacity: 1;
 }
 
-.orka-track-legend-icon {
-  width: 18px;
-  height: 6px;
-  opacity: 1;
+.orka-poi-container {
+  max-height: 300px;
 }
 
 .orka-poi-container {
-  max-height: 180px;
-}
-
-.orka-tracks-container {
-  max-height: 90px;
-}
-
-.orka-poi-container,
-.orka-tracks-container {
   margin-right: -20px;
   overflow: auto;
 }
@@ -512,11 +505,11 @@ button.output-format-button {
   padding: 0px 25px 5px 5px;
   border-radius: 5px 0px 0px 5px;
   font-size: 14px;
-  bottom: 105px;
+  bottom: 65px;
   right: 0px;
   position: absolute;
   z-index: 1000;
-  width: 265px;
+  width: 300px;
 }
 
 .ol-unselectable .orka-legend-toggle {
@@ -542,12 +535,8 @@ button.output-format-button {
 }
 
 .ol-unselectable .orka-legend .orka-poi-container {
-  max-height: 120px;
+  max-height: 150px;
   margin-top: 5px;
-}
-
-.ol-unselectable .orka-legend .orka-tracks-container {
-  max-height: 60px;
 }
 
 #imprint-link {
@@ -560,4 +549,24 @@ button.output-format-button {
   left: 5px;
   position: absolute;
   z-index: 2001;
+}
+
+.navbar-brand {
+  padding-left: 140px;
+}
+
+.navbar-brand-subtitle {
+  display: inline-block;
+  padding-top: 1px;
+}
+
+#logo-hro {
+  float: right;
+  height: 60px;
+  width: 96px;
+  margin-top: 10px;
+  background-image: url("../img/logo_hro.svg");
+  background-position: center center;
+  background-origin: content-box;
+  background-repeat: no-repeat;
 }

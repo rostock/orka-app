@@ -4,7 +4,7 @@ angular.module('orkaApp')
     $scope.selectedTab = false;
     $scope.fullscreen = true;
     $scope.printAvailable = ConfigService.config.print !== undefined;
-    $scope.themesAvailable = (ConfigService.config.poi !== undefined && ConfigService.config.track !== undefined);
+    $scope.themesAvailable = (ConfigService.config.poi !== undefined);
     $scope.locationsAvailable = ConfigService.config.locations !== undefined;
     $scope.showHeader = ConfigService.config.header;
     $scope.layerswitcherStatus = ConfigService.config.map.layerswitcher;

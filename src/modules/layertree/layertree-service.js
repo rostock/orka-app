@@ -4,7 +4,7 @@ angular.module('orka.layertree')
  * @name orka.layertree.LayertreeServiceProvider
  */
 .provider('LayertreeService', [function() {
-    var _poiLayer, _poiLegendUrl, _iconBaseUrl, _trackLegendUrl, _trackLayer;
+    var _poiLayer, _poiLegendUrl, _iconBaseUrl;
     var _selectedPoiTypes = [];
     /**
      * @ngdoc method
@@ -21,19 +21,6 @@ angular.module('orka.layertree')
     };
     /**
      * @ngdoc method
-     * @name setTrackLayer
-     * @methodOf orka.layertree.LayertreeServiceProvider
-     *
-     * @param {Object} trackLayer Layer containing Tracks
-     *
-     * @description
-     * Register layer to display Tracks in
-     */
-    this.setTrackLayer = function(trackLayer) {
-        _trackLayer = trackLayer;
-    };
-    /**
-     * @ngdoc method
      * @name setPoiLegendUrl
      * @methodOf orka.layertree.LayertreeServiceProvider
      *
@@ -41,16 +28,6 @@ angular.module('orka.layertree')
      */
     this.setPoiLegendUrl = function(url) {
         _poiLegendUrl = url;
-    };
-    /**
-     * @ngdoc method
-     * @name setTrackLegendUrl
-     * @methodOf orka.layertree.LayertreeServiceProvider
-     *
-     * @param {string} url URI to Track legend JSON
-     */
-    this.setTrackLegendUrl = function(url) {
-        _trackLegendUrl = url;
     };
     /**
      * @ngdoc method
@@ -84,16 +61,14 @@ angular.module('orka.layertree')
          * @requires orka.config.ConfigService
          *
          * @description
-         * Updates given poi- / trackLayer and prepare structure for {@link orka.layertree.directive:orkaLayertree `orkaLayertree directive`} as well as {@link orka.layertree.directive:orkaLayertreeLegend `orkaLayertreeLegend directive`}
+         * Updates given poiLayer and prepare structure for {@link orka.layertree.directive:orkaLayertree `orkaLayertree directive`} as well as {@link orka.layertree.directive:orkaLayertreeLegend `orkaLayertreeLegend directive`}
          */
-        var LayerTree = function(poiLayer, trackLayer, poiLegendUrl, trackLegendUrl, iconBaseUrl) {
+        var LayerTree = function(poiLayer, poiLegendUrl, iconBaseUrl) {
             var self = this;
             this.iconBaseUrl = iconBaseUrl;
             this.poiLayer = poiLayer;
-            this.trackLayer = trackLayer;
             this.typeMap = {};
             this.selectedPoiTypes = [];
-            this.selectedTrackTypes = [];
             if(this.poiLayer !== undefined) {
                 this.poiLayer.setStyle(function(feature, resolution) {
                     var styles = [];
@@ -121,10 +96,6 @@ angular.module('orka.layertree')
 
                 this.poisLoaded = this._loadPois(poiLegendUrl);
             }
-
-            if(this.trackLayer !== undefined) {
-                this.tracksLoaded = this._loadTracks(trackLegendUrl);
-            }
         };
         /**
          * @ngdoc method
@@ -141,26 +112,11 @@ angular.module('orka.layertree')
             this.poiLayer.setVisible(_selectedPoiTypes.length > 0);
         };
         /**
-         * @ngdoc method
-         * @name updateSelectedTrackTypes
-         * @methodOf orka.layertree.LayerTreeService
-         *
-         * @param {Array.<string>} selectedTypes List of Track types that should be visible in map
-         */
-        LayerTree.prototype.updateSelectedTrackTypes = function(selectedTypes) {
-            var source = this.trackLayer.getSource();
-            var params = source.getParams();
-            this.selectedTrackTypes = selectedTypes;
-            params.track_types = selectedTypes.join(',');
-            this.trackLayer.setVisible(selectedTypes.length > 0);
-            source.updateParams(params);
-        };
-        /**
          * @private
          * @name _prepareTopics
          * @methodOf orka.layertree.LayerTreeService
          *
-         * @param {Array.<Object>} topics Topics object received from poiLegend.json / trackLegend.json
+         * @param {Array.<Object>} topics Topics object received from poiLegend.json
          *
          * @returns {Array.<Object>} Extended giben topics object
          */
@@ -208,27 +164,6 @@ angular.module('orka.layertree')
             });
             return deferred.promise;
         };
-        /**
-         * @private
-         * @name _loadTracks
-         * @methodOf orka.layertree.LayerTreeService
-         *
-         * @param {string} url URI of trackLegend.json
-         *
-         * @returns {Object} promise
-         */
-        LayerTree.prototype._loadTracks = function(url) {
-            var self = this;
-            var deferred = $q.defer();
-            $.ajax({
-                url: url,
-                dataType: 'json'
-            }).done(function(response) {
-                var topics = self._prepareTopics(response.topics);
-                deferred.resolve(topics);
-            });
-            return deferred.promise;
-        };
-        return new LayerTree(_poiLayer, _trackLayer, _poiLegendUrl, _trackLegendUrl, _iconBaseUrl);
+        return new LayerTree(_poiLayer, _poiLegendUrl, _iconBaseUrl);
     }];
 }]);

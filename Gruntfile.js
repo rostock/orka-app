@@ -108,13 +108,31 @@ module.exports = function(grunt) {
           {
             flatten: true,
             expand: true,
-            src: ['static/img/highlightMarker.png'],
-            dest: 'build/dist/img/'
+            src: ['static/favicon.ico'],
+            dest: 'build/dist/'
+          },
+          {
+            flatten:true,
+            expand: true,
+            src: ['static/icons/*'],
+            dest: 'build/dist/icons/'
           },
           {
             flatten: true,
             expand: true,
-            src: ['static/data/full_config.js', 'static/data/locations.geojson', 'static/data/track_legend_data.json', 'static/data/poi_legend_data.json'],
+            src: ['static/img/highlightMarker.png', 'static/img/logo*.svg'],
+            dest: 'build/dist/img/'
+          },
+          {
+            flatten:true,
+            expand: true,
+            src: ['static/meta/*'],
+            dest: 'build/dist/meta/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: ['static/data/full_config.js', 'static/data/locations.geojson', 'static/data/poi_legend_data.json'],
             dest: 'build/dist/data'
           }
         ]

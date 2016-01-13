@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="keywords" content="Mecklenburg-Vorpommern,OpenStreetMap,ORKa.MV,Regionalkarte" />
-    <meta name="description" content="Offene Regionalkarte Mecklenburg-Vorpommern (ORKa.MV) auf Basis von Katasterdaten und OpenStreetMap-Daten" />
+    <meta name="keywords" content="Rostock,Stadtteil,Ortsteil,Stadtteillotse" />
+    <meta name="description" content="Stadtteillotse Rostock" />
 
-    <title>ORKa.MV</title>
+    <title>Stadtteillotse Rostock</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
     <!-- @if node_env = 'develop' -->
       <link href="/static/libs/bootstrap/bootstrap.css" rel="stylesheet">
@@ -34,7 +36,9 @@
   </head>
   <body ng-controller="appCtrl" class="hide" ng-class="{'show': appReady}">
     <div class="navbar navbar-default navbar-static-top header" ng-show="showHeader">
-      <a class="navbar-brand" href="#">ORKa.MV</a>
+      <a class="navbar-brand" href="#">Stadtteillotse Rostock</a>
+      <span class="navbar-brand-subtitle">Informationen rund um den Alltag in Ihrem Stadtteil</span>
+      <span id="logo-hro"></span>
     </div>
     <div class="col-xs-6 col-sm-3 col-md-2 sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
@@ -52,19 +56,18 @@
       </div>
       <ul class="nav nav-tabs tabs-right sideways">
         <li ng-class="{'active': selectedTab==='locations'}" ng-show="locationsAvailable">
-          <a ng-click="selectTab('locations')">Bereiche</a>
+          <a ng-click="selectTab('locations')">Stadtteile</a>
         </li>
         <li ng-class="{'active': selectedTab==='featurelist'}" ng-show="themesAvailable">
-          <a ng-click="selectTab('featurelist')">Kartenthemen</a>
+          <a ng-click="selectTab('featurelist')">Details</a>
         </li>
         <li ng-class="{'active': selectedTab==='print'}" ng-show="printAvailable">
-          <a ng-click="selectTab('print')">Kartenausgabe</a>
+          <a ng-click="selectTab('print')">Druck</a>
         </li>
       </ul>
     </div>
 
     <div anol-map class="col-xs-6 col-xs-offset-6 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content" ng-class="{ 'fullscreen': fullscreen }">
-        <div orka-mouse-position></div>
         <div anol-scale-line></div>
         <div id="imprint-link">
           <a href='/datenschutz.html' target='_blank'>Datenschutz</a> |

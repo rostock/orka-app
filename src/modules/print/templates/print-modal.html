@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <h4 class="modal-title">Ausgabe erstellen</h4>
+    <h4 class="modal-title">Druck erstellen</h4>
 </div>
 <div class="modal-body alert" ng-class="{'alert-success': printStatus === 'done', 'alert-danger': printStatus === 'error', 'alert-info': printStatus === 'waiting' || printStatus === 'processing'}">
-    <p ng-show="printStatus === 'error'">Es ist ein Problem beim Erstellen der Ausgabe aufgetreten. Bitte versuchen Sie es erneut.</p>
-    <p ng-show="printStatus === 'waiting'">Die Ausgabe wurde zur Warteschlange hinzugefügt. Bitte warten Sie, bis die Ausgabe erstellt wird.</p>
-    <p ng-show="printStatus === 'processing'">Bitte warten, die Ausgabe wird erstellt…</p>
-    <p ng-show="printStatus === 'done'">Die Ausgabe wurde erfolgreich erstellt. Mit dem Download-Button können Sie die Ausgabe nun lokal auf Ihrem Rechner speichern.</p>
+    <p ng-show="printStatus === 'error'">Es ist ein Problem beim Erstellen des Drucks aufgetreten. Bitte versuchen Sie es erneut.</p>
+    <p ng-show="printStatus === 'waiting'">Der Druck wurde zur Warteschlange hinzugefügt. Bitte warten Sie, bis der Druck erstellt wird.</p>
+    <p ng-show="printStatus === 'processing'">Bitte warten, der Druck wird erstellt…</p>
+    <p ng-show="printStatus === 'done'">Der Druck wurde erfolgreich erstellt. Mit dem Download-Button können Sie der Druck nun lokal auf Ihrem Rechner speichern.</p>
 </div>
 <div class="modal-footer">
     <button ng-show="printStatus === 'waiting' || printStatus ==='processing'" class="btn btn-danger pull-left" ng-click="$dismiss()">Abbrechen</button>

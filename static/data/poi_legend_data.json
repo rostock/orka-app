@@ -3,98 +3,437 @@
     {
       "groups": [
         {
-          "icon": "aktiv_sein/angelstelle.png",
-          "title": "Angelstellen",
-          "type": "angelstelle"
-        },
-        {
-          "icon": "aktiv_sein/bootsverleih_kanuverleih.png",
-          "title": "Boots- & Kanuverleihe",
-          "type": "bootsverleih_kanuverleih"
-        },
-        {
-          "icon": "aktiv_sein/fahrrad-service.png",
-          "title": "Fahrrad-Service",
-          "type": "fahrrad-service"
-        },
-        {
-          "icon": "aktiv_sein/fahrradverleih.png",
-          "title": "Fahrradverleihe",
-          "type": "fahrradverleih"
-        },
-        {
-          "icon": "aktiv_sein/pferdehof_pferdeverleih.png",
-          "title": "Pferdeh\u00f6fe & -verleihe",
-          "type": "pferdehof_pferdeverleih"
-        },
-        {
-          "icon": "aktiv_sein/spielplatz.png",
-          "title": "Spielpl\u00e4tze",
-          "type": "spielplatz"
-        },
-        {
-          "icon": "aktiv_sein/sportanlage.png",
-          "title": "Sportanlagen",
-          "type": "sportanlage"
+          "icon": "begegnung/sbz.png", 
+          "title": "Stadtteil- \u0026 Begegnungszentren", 
+          "type": "sbz"
         }
-      ],
-      "name": "aktiv_sein",
-      "title": "Aktiv sein",
+      ], 
+      "name": "begegnung", 
+      "title": "Begegnungs- \u0026 Veranstaltungsorte",
       "listTags": [{
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
       }, {
-        "tag": "brand",
-        "title": "Marke"
+        "tag": "telefon",
+        "title": "Telefon"
       }, {
-        "tag": "operator",
-        "title": "Betreiber"
+        "tag": "fax",
+        "title": "Telefax"
       }, {
-        "tag": "fee",
-        "title": "Gebühr"
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
+      }, {
+        "tag": "traeger",
+        "title": "Träger"
+      }, {
+        "tag": "traeger_art",
+        "title": "Art des Trägers"
       }],
       "popupTags": []
     },
     {
       "groups": [
         {
-          "icon": "baden/freibad.png",
-          "title": "Freib\u00e4der",
-          "type": "freibad"
+          "icon": "hilfe/arbeit.png", 
+          "title": "Arbeit", 
+          "type": "arbeit"
         },
         {
-          "icon": "baden/hallenbad.png",
-          "title": "Hallenb\u00e4der",
-          "type": "hallenbad"
+          "icon": "hilfe/senioren.png", 
+          "title": "Erwachsene \u0026 Senioren", 
+          "type": "senioren"
         },
         {
-          "icon": "baden/naturbadestelle.png",
-          "title": "Naturbadestellen",
-          "type": "naturbadestelle"
+          "icon": "hilfe/familien.png", 
+          "title": "Familien", 
+          "type": "familien"
+        },
+        {
+          "icon": "hilfe/kinder_jugend.png", 
+          "title": "Kinder \u0026 Jugendliche", 
+          "type": "kinder_jugend"
+        },
+        {
+          "icon": "hilfe/selbsthilfegruppen.png", 
+          "title": "Selbsthilfegruppen", 
+          "type": "selbsthilfegruppen"
+        },
+        {
+          "icon": "hilfe/verbraucher.png", 
+          "title": "Verbraucher", 
+          "type": "verbraucher"
         }
-      ],
-      "name": "baden",
-      "title": "Baden",
+      ], 
+      "name": "hilfe", 
+      "title": "Hilfe \u0026 Beratung",
       "listTags": [{
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
       }, {
-        "tag": "brand",
-        "title": "Marke"
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
+      }, {
+        "tag": "traeger",
+        "title": "Träger"
+      }, {
+        "tag": "traeger_art",
+        "title": "Art des Trägers"
+      }],
+      "popupTags": []
+    },
+    {
+      "groups": [
+        {
+          "icon": "sport/fitnessstudio.png", 
+          "title": "Fitnessstudios", 
+          "type": "fitnessstudio"
+        },
+        {
+          "icon": "sport/schwimmbad.png", 
+          "title": "Schwimmb\u00e4der", 
+          "type": "schwimmbad"
+        },
+        {
+          "icon": "sport/spielanlage.png", 
+          "title": "Spielanlagen", 
+          "type": "spielanlage"
+        },
+        {
+          "icon": "sport/sportanlage.png", 
+          "title": "Sportanlagen", 
+          "type": "sl_sportanlage"
+        },
+        {
+          "icon": "sport/sporthalle.png", 
+          "title": "Sporthallen", 
+          "type": "sporthalle"
+        }
+      ], 
+      "name": "sport", 
+      "title": "Sport \u0026 Spiel",
+      "listTags": [{
+        "tag": "art",
+        "title": "Art"
+      }, {
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
+      }, {
+        "tag": "traeger",
+        "title": "Träger"
+      }, {
+        "tag": "traeger_art",
+        "title": "Art des Trägers"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }],
+      "popupTags": []
+    },
+    {
+      "groups": [
+        {
+          "icon": "kultur/buehne_theater.png",
+          "title": "B\u00fchnen \u0026 Theater",
+          "type": "buehne_theater"
+        },
+        {
+          "icon": "kultur/denkmal.png",
+          "title": "Denkmale",
+          "type": "denkmal"
+        },
+        {
+          "icon": "kultur/galerie.png",
+          "title": "Galerien",
+          "type": "galerie"
+        },
+        {
+          "icon": "kultur/kino.png",
+          "title": "Kinos",
+          "type": "sl_kino"
+        },
+        {
+          "icon": "kultur/kunst_im_oeffentlichen_raum.png",
+          "title": "Kunst im \u00f6ffentlichen Raum",
+          "type": "kunst_im_oeffentlichen_raum"
+        },
+        {
+          "icon": "kultur/museum.png",
+          "title": "Museen",
+          "type": "museum"
+        },
+        {
+          "icon": "kultur/musikclub.png",
+          "title": "Musikclubs",
+          "type": "musikclub"
+        }
+      ], 
+      "name": "kultur", 
+      "title": "Kultur \u0026 Kunst",
+      "listTags": [{
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
       }, {
         "tag": "operator",
         "title": "Betreiber"
       }, {
-        "tag": "fee",
-        "title": "Gebühr"
+        "tag": "ausfuehrung",
+        "title": "Ausführung"
+      }, {
+        "tag": "schoepfer",
+        "title": "Schöpfer"
+      }, {
+        "tag": "entstehungsjahr",
+        "title": "Entstehungsjahr"
       }],
       "popupTags": []
+    },
+    {
+      "groups": [
+        {
+          "icon": "bildung/berufsschule.png",
+          "title": "Berufsschulen",
+          "type": "berufsschule"
+        },
+        {
+          "icon": "bildung/bibliothek.png",
+          "title": "Bibliotheken",
+          "type": "bibliothek"
+        },
+        {
+          "icon": "bildung/weiterbildung.png",
+          "title": "Fort- \u0026 Weiterbildungseinrichtungen",
+          "type": "weiterbildung"
+        },
+        {
+          "icon": "bildung/hochschule.png",
+          "title": "Hochschulen",
+          "type": "hochschule"
+        },
+        {
+          "icon": "bildung/kinderbetreuungseinrichtung.png",
+          "title": "Kinderbetreuungseinrichtungen",
+          "type": "kinderbetreuungseinrichtung"
+        },
+        {
+          "icon": "bildung/kindertagespflegeeinrichtung.png",
+          "title": "Kindertagespflegeeinrichtungen",
+          "type": "kindertagespflegeeinrichtung"
+        },
+        {
+          "icon": "bildung/musikschule.png",
+          "title": "Musikschulen",
+          "type": "musikschule"
+        },
+        {
+          "icon": "bildung/schule.png",
+          "title": "Schulen",
+          "type": "schule"
+        },
+        {
+          "icon": "bildung/tanzschule.png",
+          "title": "Tanzschulen",
+          "type": "tanzschule"
+        }
+      ], 
+      "name": "bildung", 
+      "title": "Bildung \u0026 Erziehung",
+      "listTags": [{
+        "tag": "art",
+        "title": "Art"
+      }, {
+        "tag": "bildungsschwerpunkt",
+        "title": "Bildungsschwerpunkt"
+      }, {
+        "tag": "konzept",
+        "title": "Konzept"
+      }, {
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
+      }, {
+        "tag": "plaetze",
+        "title": "Plätze"
+      }, {
+        "tag": "traeger",
+        "title": "Träger"
+      }, {
+        "tag": "traeger_art",
+        "title": "Art des Trägers"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }, {
+        "tag": "leitung",
+        "title": "Leitung"
+      }],
+      "popupTags": []
+    },
+    {
+      "groups": [
+        {
+          "icon": "gesundheit/apotheke.png",
+          "title": "Apotheken",
+          "type": "apotheke"
+        },
+        {
+          "icon": "gesundheit/aerztehaus.png",
+          "title": "\u00c4rzteh\u00e4user",
+          "type": "aerztehaus"
+        },
+        {
+          "icon": "gesundheit/augenoptiker.png",
+          "title": "Augenoptiker",
+          "type": "augenoptiker"
+        },
+        {
+          "icon": "gesundheit/blutspendeeinrichtung.png",
+          "title": "Blutspendeeinrichtungen",
+          "type": "blutspendeeinrichtung"
+        },
+        {
+          "icon": "gesundheit/hoergeraeteakustiker.png",
+          "title": "H\u00f6rgeraeteakustiker",
+          "type": "hoergeraeteakustiker"
+        },
+        {
+          "icon": "gesundheit/klinik.png",
+          "title": "Kliniken",
+          "type": "klinik"
+        },
+        {
+          "icon": "gesundheit/pflegeeinrichtung.png",
+          "title": "Pflegeeinrichtungen",
+          "type": "pflegeeinrichtung"
+        },
+        {
+          "icon": "gesundheit/sanitaetshaus.png",
+          "title": "Sanit\u00e4tsh\u00e4user",
+          "type": "sanitaetshaus"
+        },
+        {
+          "icon": "gesundheit/tagespflegeeinrichtung.png",
+          "title": "Tagespflegeeinrichtungen",
+          "type": "tagespflegeeinrichtung"
+        }
+      ], 
+      "name": "gesundheit", 
+      "title": "Gesundheit \u0026 Pflege",
+      "listTags": [{
+        "tag": "art",
+        "title": "Art"
+      }, {
+        "tag": "opening_hours",
+        "title": "Öffnungszeiten"
+      }, {
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
+      }, {
+        "tag": "plaetze",
+        "title": "Plätze"
+      }, {
+        "tag": "traeger",
+        "title": "Träger"
+      }, {
+        "tag": "traeger_art",
+        "title": "Art des Trägers"
+      }, {
+        "tag": "operator",
+        "title": "Betreiber"
+      }],
+      "popupTags": []
+    },
+    {
+      "groups": [
+        {
+          "icon": "natur/botanischer_garten.png",
+          "title": "Botanischer Garten",
+          "type": "botanischer_garten"
+        },
+        {
+          "icon": "natur/friedhof.png",
+          "title": "Friedh\u00f6fe",
+          "type": "friedhof"
+        },
+        {
+          "icon": "natur/kleingartenanlage.png",
+          "title": "Kleingartenanlagen",
+          "type": "kleingartenanlage"
+        },
+        {
+          "icon": "natur/parkanlage.png",
+          "title": "Parkanlagen",
+          "type": "parkanlage"
+        },
+        {
+          "icon": "natur/zoo.png",
+          "title": "Zoologischer Garten",
+          "type": "zoo"
+        }
+      ], 
+      "name": "natur", 
+      "title": "Natur \u0026 Umwelt"
     },
     {
       "groups": [
         {
           "icon": "essen_trinken/bar_nachtclub.png",
-          "title": "Bars & Nachtclubs",
+          "title": "Bars \u0026 Nachtclubs",
           "type": "bar_nachtclub"
         },
         {
@@ -112,9 +451,9 @@
           "title": "Schnellimbisse",
           "type": "schnellimbiss"
         }
-      ],
-      "name": "essen_trinken",
-      "title": "Essen & Trinken",
+      ], 
+      "name": "essen_trinken", 
+      "title": "Essen \u0026 Trinken",
       "listTags": [{
         "tag": "cuisine",
         "title": "Angebot"
@@ -124,30 +463,73 @@
       }, {
         "tag": "operator",
         "title": "Betreiber"
-      }, {
-        "tag": "brand",
-        "title": "Marke"
       }],
       "popupTags": []
     },
     {
       "groups": [
         {
-          "icon": "informieren/info-zentrum.png",
-          "title": "Informationszentren",
-          "type": "info-zentrum"
+          "icon": "einkauf/baeckerei.png", 
+          "title": "B\u00e4ckereien", 
+          "type": "baeckerei"
         },
         {
-          "icon": "informieren/tourist-info.png",
-          "title": "Touristeninformationen",
-          "type": "tourist-info"
+          "icon": "einkauf/bank.png", 
+          "title": "Banken", 
+          "type": "bank"
+        },
+        {
+          "icon": "einkauf/bau_gartenmarkt.png", 
+          "title": "Bau- \u0026 Gartenm\u00e4rkte", 
+          "type": "bau_gartenmarkt"
+        },
+        {
+          "icon": "einkauf/drogerie.png", 
+          "title": "Drogerien", 
+          "type": "drogerie"
+        },
+        {
+          "icon": "einkauf/getraenkemarkt.png", 
+          "title": "Getr\u00e4nkem\u00e4rkte", 
+          "type": "getraenkemarkt"
+        },
+        {
+          "icon": "einkauf/poststelle.png", 
+          "title": "Poststellen", 
+          "type": "poststelle"
+        },
+        {
+          "icon": "einkauf/supermarkt.png", 
+          "title": "Superm\u00e4rkte \u0026 Discounter", 
+          "type": "supermarkt"
         }
-      ],
-      "name": "informieren",
-      "title": "Informieren",
+      ], 
+      "name": "einkauf", 
+      "title": "Einkauf \u0026 Dienstleistungen",
       "listTags": [{
+        "tag": "bic",
+        "title": "BIC"
+      }, {
+        "tag": "lokalitaet",
+        "title": "Lokalität"
+      }, {
+        "tag": "art",
+        "title": "Art"
+      }, {
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
+      }, {
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
       }, {
         "tag": "operator",
         "title": "Betreiber"
@@ -157,157 +539,213 @@
     {
       "groups": [
         {
-          "icon": "kultur_erleben/kino.png",
-          "title": "Kinos",
-          "type": "kino"
+          "icon": "verkehr/altkleidercontainer.png", 
+          "title": "Altkleidercontainer", 
+          "type": "altkleidercontainer"
         },
         {
-          "icon": "kultur_erleben/kirche_kloster.png",
-          "title": "Kirchen & Kl\u00f6ster",
-          "type": "kirche_kloster"
+          "icon": "verkehr/faehranleger.png", 
+          "title": "F\u00e4hranleger", 
+          "type": "faehranleger"
         },
         {
-          "icon": "kultur_erleben/monument_baudenkmal.png",
-          "title": "Monumente & Baudenkmale",
-          "type": "monument_baudenkmal"
+          "icon": "verkehr/geldautomat.png", 
+          "title": "Geldautomaten", 
+          "type": "geldautomat"
         },
         {
-          "icon": "kultur_erleben/museum_ausstellung.png",
-          "title": "Museen & Ausstellungen",
-          "type": "museum_ausstellung"
+          "icon": "verkehr/glascontainer.png", 
+          "title": "Glascontainer", 
+          "type": "glascontainer"
         },
         {
-          "icon": "kultur_erleben/schloss_gutshaus.png",
-          "title": "Schl\u00f6sser & Gutsh\u00e4user",
-          "type": "schloss_gutshaus"
+          "icon": "verkehr/haltestelle.png", 
+          "title": "Haltestellen", 
+          "type": "haltestelle"
         },
         {
-          "icon": "kultur_erleben/theater.png",
-          "title": "Theater",
-          "type": "theater"
+          "icon": "verkehr/paketautomat.png", 
+          "title": "Paketautomaten", 
+          "type": "paketautomat"
+        },
+        {
+          "icon": "verkehr/papiercontainer.png", 
+          "title": "Papiercontainer", 
+          "type": "papiercontainer"
+        },
+        {
+          "icon": "verkehr/parkmoeglichkeit.png", 
+          "title": "Parkm\u00f6glichkeiten", 
+          "type": "parkmoeglichkeit"
+        },
+        {
+          "icon": "verkehr/postbriefkasten.png", 
+          "title": "Postbriefk\u00e4sten", 
+          "type": "postbriefkasten"
+        },
+        {
+          "icon": "verkehr/recyclinghof.png", 
+          "title": "Recyclingh\u00f6fe", 
+          "type": "recyclinghof"
+        },
+        {
+          "icon": "verkehr/tankstelle.png", 
+          "title": "Tankstellen", 
+          "type": "tankstelle"
+        },
+        {
+          "icon": "verkehr/taxistand.png", 
+          "title": "Taxist\u00e4nde", 
+          "type": "taxistand"
+        },
+        {
+          "icon": "verkehr/toilette.png", 
+          "title": "Toiletten", 
+          "type": "toilette"
         }
-      ],
-      "name": "kultur_erleben",
-      "title": "Kultur erleben",
+      ], 
+      "name": "verkehr", 
+      "title": "Verkehr \u0026 Infrastruktur",
       "listTags": [{
+        "tag": "bankverbundnetzwerk",
+        "title": "Bankverbundnetzwerk"
+      }, {
+        "tag": "art",
+        "title": "Art"
+      }, {
+        "tag": "beschreibung",
+        "title": "Beschreibung"
+      }, {
+        "tag": "code",
+        "title": "Code"
+      }, {
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
       }, {
-        "tag": "religion",
-        "title": "Religion"
+        "tag": "leerungszeiten",
+        "title": "Leerungszeiten"
+      }, {
+        "tag": "betrieb",
+        "title": "Betrieb"
+      }, {
+        "tag": "dusche",
+        "title": "Dusche"
+      }, {
+        "tag": "wickelmoeglichkeit",
+        "title": "Wickelmöglichkeit"
+      }, {
+        "tag": "autogas",
+        "title": "Autogas"
+      }, {
+        "tag": "benzin",
+        "title": "Benzin"
+      }, {
+        "tag": "biodiesel",
+        "title": "Biodiesel"
+      }, {
+        "tag": "diesel",
+        "title": "Diesel"
+      }, {
+        "tag": "erdgas",
+        "title": "Erdgas"
+      }, {
+        "tag": "ethanol",
+        "title": "Ethanol"
+      }, {
+        "tag": "lkwdiesel",
+        "title": "Lkw-Diesel"
+      }, {
+        "tag": "pflanzenoel",
+        "title": "Pflanzenöl"
+      }, {
+        "tag": "wasserstoff",
+        "title": "Wasserstoff"
+      }, {
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
+      }, {
+        "tag": "plaetze",
+        "title": "Plätze"
       }, {
         "tag": "operator",
         "title": "Betreiber"
       }, {
-        "tag": "fee",
-        "title": "Gebühr"
+        "tag": "relation",
+        "title": "Relation"
       }, {
-        "tag": "cuisine",
-        "title": "Angebot"
+        "tag": "bewirtschafter",
+        "title": "Bewirtschafter"
+      }, {
+        "tag": "nur_ausstieg",
+        "title": "nur Ausstieg"
+      }, {
+        "tag": "nur_einstieg",
+        "title": "nur Einstieg"
+      }, {
+        "tag": "nur_ersatzverkehr",
+        "title": "nur Ersatzverkehr"
+      }, {
+        "tag": "plattform",
+        "title": "Plattform"
+      }, {
+        "tag": "richtungsinformation",
+        "title": "Richtungsinformation"
+      }, {
+        "tag": "linien",
+        "title": "haltende Linien"
+      }, {
+        "tag": "automat",
+        "title": "Automat vorhanden"
+      }, {
+        "tag": "tarifzone",
+        "title": "Tarifzone"
       }],
       "popupTags": []
     },
     {
       "groups": [
         {
-          "icon": "natur_erleben/naturdenkmal_bodendenkmal.png",
-          "title": "Natur- & Bodendenkmale",
-          "type": "naturdenkmal_bodendenkmal"
+          "icon": "verwaltung/behoerde_kommunal.png", 
+          "title": "Beh\u00f6rden (kommunal)", 
+          "type": "behoerde_kommunal"
         },
         {
-          "icon": "natur_erleben/park_garten.png",
-          "title": "Parke & G\u00e4rten",
-          "type": "park_garten"
+          "icon": "verwaltung/behoerde_nicht_kommunal.png", 
+          "title": "Beh\u00f6rden (nicht-kommunal)", 
+          "type": "behoerde_nicht_kommunal"
         },
         {
-          "icon": "natur_erleben/tierpark_gehege.png",
-          "title": "Tierparke & -gehege",
-          "type": "tierpark_gehege"
+          "icon": "verwaltung/politische_bildung.png", 
+          "title": "Politische Bildung", 
+          "type": "politische_bildung"
         }
-      ],
-      "name": "natur_erleben",
-      "title": "Natur erleben",
+      ], 
+      "name": "verwaltung", 
+      "title": "Verwaltung \u0026 Politik",
       "listTags": [{
-        "tag": "opening_hours",
-        "title": "Öffnungszeiten"
+        "tag": "sprechzeiten",
+        "title": "Sprechzeiten"
       }, {
-        "tag": "operator",
-        "title": "Betreiber"
+        "tag": "telefon",
+        "title": "Telefon"
       }, {
-        "tag": "fee",
-        "title": "Gebühr"
-      }],
-      "popupTags": []
-    },
-    {
-      "groups": [
-        {
-          "icon": "rasten/raststelle-zu-lande.png",
-          "title": "Raststellen zu Lande",
-          "type": "raststelle-zu-lande"
-        },
-        {
-          "icon": "rasten/raststelle-zu-wasser.png",
-          "title": "Raststellen zu Wasser",
-          "type": "raststelle-zu-wasser"
-        }
-      ],
-      "name": "rasten",
-      "title": "Rasten",
-      "listTags": [{
-        "tag": "opening_hours",
-        "title": "Öffnungszeiten"
+        "tag": "fax",
+        "title": "Telefax"
       }, {
-        "tag": "operator",
-        "title": "Betreiber"
+        "tag": "email",
+        "title": "E-Mail"
       }, {
-        "tag": "fee",
-        "title": "Gebühr"
-      }],
-      "popupTags": []
-    },
-    {
-      "groups": [
-        {
-          "icon": "uebernachten/camping.png",
-          "title": "Camping",
-          "type": "camping"
-        },
-        {
-          "icon": "uebernachten/caravaning.png",
-          "title": "Caravaning",
-          "type": "caravaning"
-        },
-        {
-          "icon": "uebernachten/herberge.png",
-          "title": "Herbergen",
-          "type": "herberge"
-        },
-        {
-          "icon": "uebernachten/hotel.png",
-          "title": "Hotels",
-          "type": "hotel"
-        },
-        {
-          "icon": "uebernachten/pension.png",
-          "title": "Pensionen",
-          "type": "pension"
-        }
-      ],
-      "name": "uebernachten",
-      "title": "\u00dcbernachten",
-      "listTags": [{
-        "tag": "opening_hours",
-        "title": "Öffnungszeiten"
-      }, {
-        "tag": "brand",
-        "title": "Marke"
-      }, {
-        "tag": "operator",
-        "title": "Betreiber"
-      }, {
-        "tag": "fee",
-        "title": "Gebühr"
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
       }],
       "popupTags": []
     }

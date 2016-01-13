@@ -10,15 +10,13 @@ var orkaAppConfig = {
         // Aktivieren der Hintergrundlayer der Anwendung
         // jeder Hintergrundlayer ist gleichzeitig ein Drucklayer
         layers: [
-            'ORKA_STADTPLAN',
-            'ORKA_STADTPLAN_OHNE_TEXT',
-            'ORKA_STADTPLAN_GRAU'
+            'ORKA_STADTPLAN'
         ],
         // Festlegung der Kartenattributionen
         attributions: [
             '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
             '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a> (<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a></div>',
-            '<div>Daten für Overlay-Themen © OpenStreetMap (ODbL)</div>'
+            '<div>Daten für Overlay-Themen © Hansestadt Rostock (<a target="_blank" href="http://opendatacommons.org/category/odc-by/">ODC-By</a>), OpenStreetMap (ODbL) und <a target="_blank" href="meta/sbz.php">SBZ-HRO</a></div>'
         ],
         // Anwendung startet mit geöffneten Layerswitcher, sofern vorhanden
         openLayerswitcher: true,
@@ -28,11 +26,11 @@ var orkaAppConfig = {
     // Einstellungen für den Header der Anwendung
     header: {
         // Höhe des Headers. Die Angabe erfolgt in Pixel und muss mit 'px' enden
-        height: '50px',
+        height: '80px',
         // Abstand des Textes im Header zum oberen Browserfensterrand
         paddingTop: '10px',
         // Text der im Header stehen soll
-        text: 'ORKa.MV – Offene Regionalkarte Mecklenburg-Vorpommern'
+        text: 'Stadtteillotse Rostock'
     },
     // Pfad zu GeoJSON mit Polygonen für "Ortliste"
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
