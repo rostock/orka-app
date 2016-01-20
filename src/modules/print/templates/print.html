@@ -25,24 +25,18 @@
             …oder frei definieren (maximal 200.000 mm²)
         </span>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label class="control-label" for="width">Breite</label>
-                <div class="input-group">
-                    <input class="form-control" name="width" type="number" ng-model="$parent.pageSize[0]" ng-change="updatePrintPage()" title="Definieren Sie die Breite des Druckbereichs.">
-                    <span class="input-group-addon default">mm</span>
-                </div>
-            </div>
+    <div class="form-group">
+        <label class="control-label" for="width">Breite</label>
+        <div class="input-group">
+            <input class="form-control" name="width" type="number" ng-model="$parent.pageSize[0]" ng-change="updatePrintPage()" title="Definieren Sie die Breite des Druckbereichs.">
+            <span class="input-group-addon default">mm</span>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label class="control-label" for="height">Höhe</label>
-                <div class="input-group">
-                    <input class="form-control" name="height" type="number" ng-model="$parent.pageSize[1]" ng-change="updatePrintPage()" title="Definieren Sie die Höhe des Druckbereichs.">
-                    <span class="input-group-addon default">mm</span>
-                </div>
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="height">Höhe</label>
+        <div class="input-group">
+            <input class="form-control" name="height" type="number" ng-model="$parent.pageSize[1]" ng-change="updatePrintPage()" title="Definieren Sie die Höhe des Druckbereichs.">
+            <span class="input-group-addon default">mm</span>
         </div>
     </div>
     <div class="alert alert-danger" ng-show="pageSizeError">
