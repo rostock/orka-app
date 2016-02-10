@@ -117,5 +117,23 @@
       <script type="text/javascript" src="js/orka-templates.js"></script>
       <script type="text/javascript" src="js/overwrite-templates.js"></script>
     <!-- @endif -->
+    
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+      (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://geo.sv.rostock.de/piwik/";
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "12"]);
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript>
+        <img src="http://geo.sv.rostock.de/piwik/piwik.php?idsite=12&amp;rec=1" style="border:0" alt="Piwik" />
+    </noscript>
+    <!-- End Piwik Tracking Code -->
   </body>
 </html>
