@@ -14,8 +14,8 @@ var orkaAppConfig = {
         ],
         // Festlegung der Kartenattributionen
         attributions: [
-            '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/3.0/deed.de">CC BY 3.0</a>)<div>',
-            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a> (<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und <a target="_blank" href="https://geo.sv.rostock.de/uvgb.html">uVGB-MV</a></div>',
+            '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>)<div>',
+            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a> (<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und LkKfS-MV</div>',
             '<div>Daten für Overlay-Themen © Hansestadt Rostock (<a target="_blank" href="http://opendatacommons.org/category/odc-by/">ODC-By</a>), OpenStreetMap (ODbL) und <a target="_blank" href="meta/sbz.php">SBZ-HRO</a></div>'
         ],
         // Anwendung startet mit geöffneten Layerswitcher, sofern vorhanden
