@@ -189,15 +189,23 @@ label.no-style {
   margin-top: 10px;
 }
 
+.list-group-item.feature:nth-child(2n):not(.highlight) {
+    background-color: #f6f6f6;
+}
+.list-group-item.feature:hover:not(.highlight) {
+  background-color: #eee;
+}
+.list-group-item
+
 .list-group-item .list-group {
   margin: 0px -10px -15px -11px;
 }
 
 .list-group-item .list-group .list-group-item {
     border: medium none;
-    margin-left: -4px;
-    margin-right: -4px;
-    padding: 0 20px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0 20px 5px;
 }
 
 .list-group-item .list-group .list-group-item:first-child,
@@ -211,6 +219,7 @@ label.no-style {
 
 .list-group-item .list-group .list-group-item .list-group-item-heading {
   margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .list-group-item .list-group .list-group-item .list-group-item-text {
