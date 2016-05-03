@@ -83,8 +83,8 @@ angular.module('orka.config')
             zoom: 2
         },
         attributions: [
-            '<div>Kartenbild © Hansestadt Rostock (<a target="_blank" href="http://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>)<div>',
-            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org/">OpenStreetMap</a> (<a target="_blank" href="http://opendatacommons.org/licenses/odbl/">ODbL</a>) und LkKfS-MV</div>',
+            '<div>Kartenbild © Hansestadt Rostock (<a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>)<div>',
+            '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap</a> (<a rel="license" target="_blank" href="http://opendatacommons.org/licenses/odbl">ODbL</a>) und LkKfS-MV</div>',
             '<div>Daten für Overlay-Themen © OpenStreetMap (ODbL)</div>'
         ],
         backgroundLayer: {
