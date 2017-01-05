@@ -89,7 +89,7 @@ angular.module('orka.config')
         ],
         backgroundLayer: {
             'ORKA_STADTPLAN': {
-                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                baseURL: 'https://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv',
                 matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
