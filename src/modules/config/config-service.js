@@ -93,7 +93,7 @@ angular.module('orka.config')
         ],
         backgroundLayer: {
             'ORKA_STADTPLAN': {
-                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                baseURL: 'https://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv',
                 matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
@@ -104,7 +104,7 @@ angular.module('orka.config')
                 printLayer: 'orkamv-printqueue'
             },
             'ORKA_STADTPLAN_OHNE_TEXT': {
-                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                baseURL: 'https://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-ohnetext',
                 matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
@@ -115,7 +115,7 @@ angular.module('orka.config')
                 printLayer: 'orkamv-printqueue-ohnetext'
             },
             'ORKA_STADTPLAN_GRAU': {
-                baseURL: 'http://www.orka-mv.de/geodienste/orkamv/wmts',
+                baseURL: 'https://www.orka-mv.de/geodienste/orkamv/wmts',
                 layer: 'orkamv-graustufen',
                 matrixSet: 'epsg_25833_adv',
                 resolutions: layerResolution,
