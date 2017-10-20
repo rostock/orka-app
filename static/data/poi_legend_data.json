@@ -434,35 +434,41 @@
         {
           "icon": "essen_trinken/bar_nachtclub.png",
           "title": "Bars \u0026 Nachtclubs",
-          "type": "bar_nachtclub"
+          "type": "hro_bar_nachtclub"
         },
         {
           "icon": "essen_trinken/cafe.png",
           "title": "Caf\u00e9s",
-          "type": "cafe"
+          "type": "hro_cafe"
         },
         {
           "icon": "essen_trinken/restaurant.png",
           "title": "Restaurants",
-          "type": "restaurant"
+          "type": "hro_restaurant"
         },
         {
           "icon": "essen_trinken/schnellimbiss.png",
           "title": "Schnellimbisse",
-          "type": "schnellimbiss"
+          "type": "hro_schnellimbiss"
         }
       ], 
-      "name": "essen_trinken", 
+      "name": "hro_essen_trinken", 
       "title": "Essen \u0026 Trinken",
       "listTags": [{
-        "tag": "cuisine",
-        "title": "Angebot"
-      }, {
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
       }, {
-        "tag": "operator",
-        "title": "Betreiber"
+        "tag": "telefon",
+        "title": "Telefon"
+      }, {
+        "tag": "fax",
+        "title": "Telefax"
+      }, {
+        "tag": "email",
+        "title": "E-Mail"
+      }, {
+        "tag": "barrierefrei",
+        "title": "barrierefrei"
       }],
       "popupTags": []
     },
