@@ -332,6 +332,10 @@ button.output-format-button {
   cursor: default;
 }
 
+.btn.pull-left {
+  margin-left: 0 !important;
+}
+
 /*
  * Map components
  */

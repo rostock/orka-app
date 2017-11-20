@@ -117,7 +117,7 @@ angular.module('orka.config')
             createURL: '/printqueue/print',
             checkURL: '',
             downloadURL: '',
-            checkDelay: 2000,
+            checkDelay: 1000,
             pageSizes: [{
                 'label': 'A4',
                 'icon': 'glyphicon-resize-vertical',
