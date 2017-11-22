@@ -140,8 +140,12 @@ angular.module('orka.config')
                 'value': 'pdf'
             },
             {
-                'label': 'JPG',
-                'value': 'jpg'
+                'label': 'GeoTIFF',
+                'value': 'tiff'
+            },
+            {
+                'label': 'JPEG',
+                'value': 'jpeg'
             },
             {
                 'label': 'PNG',
@@ -150,10 +154,6 @@ angular.module('orka.config')
             {
                 'label': 'SVG',
                 'value': 'svg'
-            },
-            {
-                'label': 'TIFF',
-                'value': 'tiff'
             }],
             style: {
                 fillColor: 'rgba(255, 255, 255, 0.4)',
