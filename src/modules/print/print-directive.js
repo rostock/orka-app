@@ -73,6 +73,8 @@ angular.module('orka.print')
                 scope.startPrint = function() {
                     scope.downloadUrl = false;
                     var layerName = LayersService.backgroundLayer().get('printLayer');
+                    if (!scope.streetIndex && LayertreeService.selectedPoiTypes.length < 1 && LayertreeService.selectedTrackTypes.length < 1)
+                        layerName = layerName + '_nogrid';
                     var downloadPromise = PrintService.createDownload(
                         PrintPageService.getBounds(),
                         scope.outputFormat.value,
