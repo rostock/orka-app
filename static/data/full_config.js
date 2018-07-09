@@ -61,7 +61,7 @@ var orkaAppConfig = {
         url: 'https://geo.sv.rostock.de/geocodr/query',
         key: '5c5281c45c5f4a729e8ecdb716637859',
         type: 'search',
-        class: 'orka-app',
+        class: 'stadtteillotse',
         shape: 'bbox',
         limit: '10'
     }

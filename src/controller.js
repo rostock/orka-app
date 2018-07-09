@@ -35,7 +35,7 @@ angular.module('orkaApp')
                 limit: $scope.searchType === 'address' ? ConfigService.config.addressSearch.limit : ConfigService.config.poiSearch.limit,
                 bbox: x1 + ',' + y1 + ',' + x2 + ',' + y2,
                 bbox_epsg: '25833',
-                query: query
+                query: $scope.searchType === 'address' ? 'rostock + ' + query : query
             };
         } else {
             ajaxData = {
@@ -44,7 +44,7 @@ angular.module('orkaApp')
                 class: $scope.searchType === 'address' ? ConfigService.config.addressSearch.class : ConfigService.config.poiSearch.class,
                 shape: $scope.searchType === 'address' ? ConfigService.config.addressSearch.shape : ConfigService.config.poiSearch.shape,
                 limit: $scope.searchType === 'address' ? ConfigService.config.addressSearch.limit : ConfigService.config.poiSearch.limit,
-                query: query
+                query: $scope.searchType === 'address' ? 'rostock + ' + query : query
             };
         }
         $.ajax({
@@ -80,40 +80,35 @@ angular.module('orkaApp')
     $scope.populateSearchResults = function(resultsData) {
         var results = '';
         jQuery.each(resultsData, function(index, item) {
-          var geometry = item.geometry;
-          if (geometry.type === 'Point') {
-              var x1 = geometry.coordinates[0];
-              var y1 = geometry.coordinates[1];
-              var x2 = geometry.coordinates[0];
-              var y2 = geometry.coordinates[1];
-          } else {
-              var x1 = geometry.coordinates[0][0][0];
-              var y1 = geometry.coordinates[0][0][1];
-              var x2 = geometry.coordinates[0][2][0];
-              var y2 = geometry.coordinates[0][2][1];
-          }
-          if ($scope.searchType === 'poi') {
-              results += '<li class="list-group-item feature orka-search-result" data-theme="' + item.properties.category_title + '" data-x1="' + x1 + '" data-y1="' + y1 + '" data-x2="' + x2 + '" data-y2="' + y2 + '">';
-          } else {
-              results += '<li class="list-group-item feature orka-search-result" data-x1="' + x1 + '" data-y1="' + y1 + '" data-x2="' + x2 + '" data-y2="' + y2 + '">';
-          }
-          if ($scope.searchType === 'address') {
-              results += item.properties.gemeinde_name.indexOf(',') !== -1 ? item.properties.gemeinde_name.substring(0, item.properties._title_.indexOf(',')) : item.properties.gemeinde_name;
-              if (item.properties.objektgruppe === 'Gemeindeteil') {
-                  results += ', ';
-                  results += item.properties.gemeindeteil_name;
-              } else if (item.properties.objektgruppe !== 'Gemeinde') {
-                  results += ', ';
-                  if (item.properties.gemeindeteil_name) {
-                      results += item.properties.gemeindeteil_name;
-                      results += ', ';
-                  }
-                  results += item.properties._title_.substring(item.properties._title_.lastIndexOf(',') + 2);
-              }
-          } else {
-              results += item.properties._title_;
-          }
-          results += '</li>';
+            if (!item.properties.objektgruppe || item.properties.objektgruppe !== 'Gemeinde') {
+                var geometry = item.geometry;
+                if (geometry.type === 'Point') {
+                    var x1 = geometry.coordinates[0];
+                    var y1 = geometry.coordinates[1];
+                    var x2 = geometry.coordinates[0];
+                    var y2 = geometry.coordinates[1];
+                } else {
+                    var x1 = geometry.coordinates[0][0][0];
+                    var y1 = geometry.coordinates[0][0][1];
+                    var x2 = geometry.coordinates[0][2][0];
+                    var y2 = geometry.coordinates[0][2][1];
+                }
+                if ($scope.searchType === 'poi') {
+                    results += '<li class="list-group-item feature orka-search-result" data-theme="' + item.properties.category_title + '" data-x1="' + x1 + '" data-y1="' + y1 + '" data-x2="' + x2 + '" data-y2="' + y2 + '">';
+                } else {
+                    results += '<li class="list-group-item feature orka-search-result" data-x1="' + x1 + '" data-y1="' + y1 + '" data-x2="' + x2 + '" data-y2="' + y2 + '">';
+                }
+                if ($scope.searchType === 'address') {
+                    results += item.properties.gemeindeteil_name;
+                    if (item.properties.objektgruppe !== 'Gemeindeteil') {
+                        results += ', ';
+                        results += item.properties._title_.substring(item.properties._title_.lastIndexOf(',') + 2);
+                    }
+                } else {
+                    results += item.properties._title_;
+                }
+                results += '</li>';
+            }
         });
         $('#orka-search-results').html(results);
     };
