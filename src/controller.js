@@ -20,32 +20,22 @@ angular.module('orkaApp')
     $scope.searchCurrentBboxOnly = false;
     
     $scope.search = function(query) {
-        var ajaxData = "";
+        var ajaxData = {
+            key: $scope.searchType === 'address' ? ConfigService.config.addressSearch.key : ConfigService.config.poiSearch.key,
+            type: $scope.searchType === 'address' ? ConfigService.config.addressSearch.type : ConfigService.config.poiSearch.type,
+            class: $scope.searchType === 'address' ? ConfigService.config.addressSearch.class : ConfigService.config.poiSearch.class,
+            shape: $scope.searchType === 'address' ? ConfigService.config.addressSearch.shape : ConfigService.config.poiSearch.shape,
+            limit: $scope.searchType === 'address' ? ConfigService.config.addressSearch.limit : ConfigService.config.poiSearch.limit,
+            query: $scope.searchType === 'address' ? 'rostock + ' + query : query
+        };
         if ($scope.searchCurrentBboxOnly) {
             var map = MapService.getMap();
             var x1 = map.getView().calculateExtent(map.getSize())[0];
             var y1 = map.getView().calculateExtent(map.getSize())[1];
             var x2 = map.getView().calculateExtent(map.getSize())[2];
             var y2 = map.getView().calculateExtent(map.getSize())[3];
-            ajaxData = {
-                key: $scope.searchType === 'address' ? ConfigService.config.addressSearch.key : ConfigService.config.poiSearch.key,
-                type: $scope.searchType === 'address' ? ConfigService.config.addressSearch.type : ConfigService.config.poiSearch.type,
-                class: $scope.searchType === 'address' ? ConfigService.config.addressSearch.class : ConfigService.config.poiSearch.class,
-                shape: $scope.searchType === 'address' ? ConfigService.config.addressSearch.shape : ConfigService.config.poiSearch.shape,
-                limit: $scope.searchType === 'address' ? ConfigService.config.addressSearch.limit : ConfigService.config.poiSearch.limit,
-                bbox: x1 + ',' + y1 + ',' + x2 + ',' + y2,
-                bbox_epsg: '25833',
-                query: $scope.searchType === 'address' ? 'rostock + ' + query : query
-            };
-        } else {
-            ajaxData = {
-                key: $scope.searchType === 'address' ? ConfigService.config.addressSearch.key : ConfigService.config.poiSearch.key,
-                type: $scope.searchType === 'address' ? ConfigService.config.addressSearch.type : ConfigService.config.poiSearch.type,
-                class: $scope.searchType === 'address' ? ConfigService.config.addressSearch.class : ConfigService.config.poiSearch.class,
-                shape: $scope.searchType === 'address' ? ConfigService.config.addressSearch.shape : ConfigService.config.poiSearch.shape,
-                limit: $scope.searchType === 'address' ? ConfigService.config.addressSearch.limit : ConfigService.config.poiSearch.limit,
-                query: $scope.searchType === 'address' ? 'rostock + ' + query : query
-            };
+            ajaxData.bbox = x1 + ',' + y1 + ',' + x2 + ',' + y2;
+            ajaxData.bbox_epsg = '25833';
         }
         $.ajax({
             url: $scope.searchType === 'address' ? ConfigService.config.addressSearch.url : ConfigService.config.poiSearch.url,
