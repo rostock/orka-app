@@ -257,6 +257,12 @@ angular.module('orka.config')
             if(config.locations !== undefined) {
                 self.config.locations = config.locations;
             }
+            if(config.addressSearch !== undefined) {
+                self.config.addressSearch = config.addressSearch;
+            }
+            if(config.poiSearch !== undefined) {
+                self.config.poiSearch = config.poiSearch;
+            }
             if(config.themes === true) {
                 self.config.poi = $.extend({}, defaults.poi);
                 if(config.poi !== undefined && config.poi.legendURL !== undefined) {
