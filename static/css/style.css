@@ -97,6 +97,40 @@ label.no-style {
 }
 
 /*
+ * Search
+ */
+#search-container {
+  position: absolute;
+  top: 55px;
+  z-index: 1;
+  width: 100%;
+}
+
+.form-control-feedback, .input-group-addon {
+  top: 0;
+}
+
+.search-radio-group, .search-checkbox-group {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 3px;
+  padding: 3px 5px 0 5px;
+  border-radius: 4px;
+}
+
+.search-radio.right {
+  margin-left: 8px;
+}
+
+#orka-search-results {
+  margin-top: 3px;
+}
+
+.orka-search-result {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/*
  * Sidebar
  */
 .sidebar {

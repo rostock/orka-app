@@ -39,6 +39,35 @@
       <span class="navbar-brand-subtitle">Informationen rund um den Alltag in Ihrem Stadtteil</span>
       <span id="logo-hro"></span>
     </div>
+    <div class="col-md-2 col-md-offset-5">
+      <div id="search-container">
+        <div class="input-group">
+          <span class="glyphicon glyphicon-search input-group-addon" aria-hidden="true"></span>
+          <input type="text" id="search-input" class="form-control" placeholder="Suche…" ng-model="searchInput" ng-keyup="searchInputKeyup()" />
+        </div>
+        <span class="glyphicon glyphicon-remove-circle form-control-feedback form-control-clear" aria-hidden="true" ng-click="clearSearchInput()"></span>
+        <div class="input-group search-radio-group">
+          <label>
+            <input id="search-radio-address" name="search-radio" value="address" type="radio" ng-model="searchType" ng-change="searchChange()" />
+            Adressen
+          </label>
+          <label class="search-radio right">
+            <input id="search-radio-poi" name="search-radio" value="poi" type="radio" ng-model="searchType" ng-change="searchChange()" />
+            Themen
+          </label>
+        </div>
+        <div class="input-group search-checkbox-group">
+          <label>
+            <input id="search-checkbox" name="search-checkbox" type="checkbox" ng-model="searchCurrentBboxOnly" ng-change="searchChange()" />
+            nur im aktuellen Kartenausschnitt
+          </label>
+        </div>
+        <div id="orka-search-results" ng-if="showSearchResults">
+          <ul class="list-group">
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="col-xs-6 col-sm-3 col-md-2 sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
         <div class="tab-pane" ng-class="{'active': selectedTab==='locations'}">

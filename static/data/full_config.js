@@ -46,5 +46,23 @@ var orkaAppConfig = {
     // Zu verwendende POIs Definition
     poi: {
         legendURL: 'data/poi_legend_data.json'
+    },
+    // Adressensuche
+    addressSearch: {
+        url: 'https://geo.sv.rostock.de/geocodr/query',
+        key: '5c5281c45c5f4a729e8ecdb716637859',
+        type: 'search',
+        class: 'address',
+        shape: 'bbox',
+        limit: '10'
+    },
+    // POI-Suche
+    poiSearch: {
+        url: 'https://geo.sv.rostock.de/geocodr/query',
+        key: '5c5281c45c5f4a729e8ecdb716637859',
+        type: 'search',
+        class: 'orka-app',
+        shape: 'bbox',
+        limit: '10'
     }
 };
