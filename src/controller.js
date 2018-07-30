@@ -128,7 +128,7 @@ angular.module('orkaApp')
         var y1 = parseInt($(e.target).data('y1'));
         var x2 = parseInt($(e.target).data('x2'));
         var y2 = parseInt($(e.target).data('y2'));
-        map.getView().fitExtent([x1, y2, x2, y2], map.getSize());
+        map.getView().fitExtent([x1, y1, x2, y2], map.getSize());
         if ($scope.searchType === 'poi') {
             var theme = $('label:contains(' + $(e.target).data('theme') + ') > :input');
             if (!theme.is(':checked'))
