@@ -91,11 +91,23 @@ angular.module('orkaApp')
                 results += '<li class="list-group-item feature orka-search-result" data-x1="' + x1 + '" data-y1="' + y1 + '" data-x2="' + x2 + '" data-y2="' + y2 + '">';
             }
             if ($scope.searchType === 'address') {
-                results += item.properties.gemeinde_name.indexOf(',') !== -1 ? item.properties.gemeinde_name.substring(0, item.properties._title_.indexOf(',')) : item.properties.gemeinde_name;
-                if (item.properties.objektgruppe === 'Gemeindeteil') {
+                var gemeinde = item.properties.gemeinde_name.indexOf(',') !== -1 ? item.properties.gemeinde_name.substring(0, item.properties._title_.indexOf(',')) : item.properties.gemeinde_name;
+                if (item.properties.gemeinde_name_suchzusatz)
+                    gemeinde += ' <small>' + item.properties.gemeinde_name_suchzusatz + '</small>';
+                if (item.properties.objektgruppe === 'Gemeinde') {
+                    results += '<span title="Gemeinde">&#x25cf;</span> ';
+                    results += gemeinde;
+                } else if (item.properties.objektgruppe === 'Gemeindeteil') {
+                    results += '<span title="Gemeindeteil">&#x25cb;</span> ';
+                    results += gemeinde;
                     results += ', ';
                     results += item.properties.gemeindeteil_name;
-                } else if (item.properties.objektgruppe !== 'Gemeinde') {
+                } else {
+                    if (item.properties.objektgruppe === 'Straße')
+                        results += '<span class="glyphicon glyphicon-road" title="Straße"></span> ';
+                    else
+                        results += '<span title="Adresse">&#x1f3e0;</span> ';
+                    results += gemeinde;
                     results += ', ';
                     if (item.properties.gemeindeteil_name) {
                         results += item.properties.gemeindeteil_name;
