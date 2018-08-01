@@ -26,7 +26,7 @@ angular.module('orkaApp')
             class: $scope.searchType === 'address' ? ConfigService.config.addressSearch.class : ConfigService.config.poiSearch.class,
             shape: $scope.searchType === 'address' ? ConfigService.config.addressSearch.shape : ConfigService.config.poiSearch.shape,
             limit: $scope.searchType === 'address' ? ConfigService.config.addressSearch.limit : ConfigService.config.poiSearch.limit,
-            query: $scope.searchType === 'address' ? 'rostock + ' + query : query
+            query: $scope.searchType === 'address' ? 'rostock,' + query : query
         };
         if ($scope.searchCurrentBboxOnly) {
             var map = MapService.getMap();
@@ -70,7 +70,7 @@ angular.module('orkaApp')
     $scope.populateSearchResults = function(resultsData) {
         var results = '';
         jQuery.each(resultsData, function(index, item) {
-            if (!item.properties.objektgruppe || item.properties.objektgruppe !== 'Gemeinde') {
+            if (item.properties.objektgruppe != 'Gemeinde') {
                 var geometry = item.geometry;
                 if (geometry.type === 'Point') {
                     var x1 = geometry.coordinates[0];
@@ -89,8 +89,15 @@ angular.module('orkaApp')
                     results += '<li class="list-group-item feature orka-search-result" data-x1="' + x1 + '" data-y1="' + y1 + '" data-x2="' + x2 + '" data-y2="' + y2 + '">';
                 }
                 if ($scope.searchType === 'address') {
-                    results += item.properties.gemeindeteil_name;
-                    if (item.properties.objektgruppe !== 'Gemeindeteil') {
+                    if (item.properties.objektgruppe === 'Gemeindeteil') {
+                        results += '<span title="Stadtteil">&#x25cb;</span> ';
+                        results += item.properties.gemeindeteil_name;
+                    } else {
+                        if (item.properties.objektgruppe === 'Straße')
+                            results += '<span class="glyphicon glyphicon-road" title="Straße"></span> ';
+                        else
+                            results += '<span title="Adresse">&#x1f3e0;</span> ';
+                        results += item.properties.gemeindeteil_name;
                         results += ', ';
                         results += item.properties._title_.substring(item.properties._title_.lastIndexOf(',') + 2);
                     }
