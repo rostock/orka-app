@@ -87,6 +87,7 @@ module.exports = function(grunt) {
               'static/libs/bootstrap/bootstrap.css',
               'static/libs/ol3/ol3.css',
               'static/libs/bootstrap/bootstrap.vertical-tabs.min.css',
+              'static/libs/fontawesome/css/fontawesome.min.css',
               'static/css/style.css',
               'static/css/dynamic-style.css',
               'static/css/notab-mapstyle.css'
@@ -96,7 +97,11 @@ module.exports = function(grunt) {
           {
             flatten:true,
             expand: true,
-            src: ['static/css/fonts/*', 'static/libs/bootstrap/fonts/*'],
+            src: [
+              'static/css/fonts/*',
+              'static/libs/bootstrap/fonts/*',
+              'static/libs/fontawesome/css/fonts/*'
+            ],
             dest: 'build/dist/css/fonts/'
           },
           {
