@@ -95,18 +95,18 @@ angular.module('orkaApp')
                 if (item.properties.gemeinde_name_suchzusatz)
                     gemeinde += ' <small>' + item.properties.gemeinde_name_suchzusatz + '</small>';
                 if (item.properties.objektgruppe === 'Gemeinde') {
-                    results += '<span title="Gemeinde">&#x25cf;</span> ';
+                    results += '<i class="fas fa-circle" title="Gemeinde"></i> ';
                     results += gemeinde;
                 } else if (item.properties.objektgruppe === 'Gemeindeteil') {
-                    results += '<span title="Gemeindeteil">&#x25cb;</span> ';
+                    results += '<i class="far fa-circle" title="Gemeindeteil"></i> ';
                     results += gemeinde;
                     results += ', ';
                     results += item.properties.gemeindeteil_name;
                 } else {
                     if (item.properties.objektgruppe === 'Straße')
-                        results += '<span class="glyphicon glyphicon-road" title="Straße"></span> ';
+                        results += '<i class="fas fa-road" title="Straße"></i> ';
                     else
-                        results += '<span title="Adresse">&#x1f3e0;</span> ';
+                        results += '<i class="fas fa-home" title="Adresse"></i> ';
                     results += gemeinde;
                     results += ', ';
                     if (item.properties.gemeindeteil_name) {
