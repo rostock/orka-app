@@ -1,0 +1,68 @@
+<div id="search-container">
+    <div class="input-group">
+        <span class="glyphicon glyphicon-search input-group-addon" aria-hidden="true"></span>
+        <input 
+            type="text"
+            id="search-input"
+            class="form-control"
+            placeholder="Suche…"
+            ng-model="searchInput"
+            ng-model-options='{ debounce: 250 }'
+            ng-focus="showList()" />
+    </div>
+    <!-- <span class="glyphicon glyphicon-remove-circle form-control-feedback form-control-clear" 
+        ng-click="clearSearchInput()"></span> -->
+    <div class="input-group search-radio-group">
+        <label>
+            <input 
+                id="search-radio-address"
+                name="search-radio"
+                value="address"
+                type="radio"
+                ng-model="searchType"/>
+            Adressen
+        </label>
+        <label class="search-radio right">
+            <input
+                id="search-radio-poi" 
+                name="search-radio" 
+                value="poi" 
+                type="radio" 
+                ng-model="searchType" />
+            Themen
+        </label>
+    </div>
+    <div class="input-group search-checkbox-group">
+        <label>
+            <input 
+                id="search-checkbox"
+                name="search-checkbox"
+                type="checkbox"
+                ng-model="searchCurrentBboxOnly"
+                ng-change="searchChange()" />
+            nur im aktuellen Kartenausschnitt
+        </label>
+    </div>
+    <div id="orka-search-results" ng-if="showSearchResults">
+        <ul class="list-group">
+            <li ng-repeat="item in resultData" ng-click=loadResult(item) 
+                 class="list-group-item feature orka-search-result">
+                 <span ng-if="searchType == 'address'">
+                    <i class="fas fa-circle" 
+                        title="{{ item.properties.objektgruppe }}"
+                        ng-if="item.properties.objektgruppe == 'Gemeinde' || item.properties.objektgruppe == 'Gemeindeteil'">
+                    </i>
+                    <i class="fas fa-road" title="Straße" ng-if="item.properties.objektgruppe == 'Straße'"></i>
+                    <i class="fas fa-home" title="Adresse" 
+                        ng-if="item.properties.objektgruppe != 'Gemeinde' && 
+                        item.properties.objektgruppe != 'Gemeindeteil' && 
+                        item.properties.objektgruppe != 'Straße'"></i>
+                    {{ item | title }}
+                </span>                   
+                <span ng-if="searchType == 'poi'">
+                    {{ item.properties._title_ }}
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>

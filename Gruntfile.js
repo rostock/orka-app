@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: [ 'Gruntfile.js', 'src/modules/**/*.js' ],
+      files: [ 'Gruntfile.js', 'src/modules/**/*.js', 'src/anol/**/*.js'],
       options: {
         globals: {
           jQuery: true,
@@ -27,6 +27,8 @@ module.exports = function(grunt) {
     ngmin: {
       dist: {
         src: [
+          'src/anol/**/module.js',
+          'src/anol/**/*.js',
           'src/modules/**/module.js',
           'src/modules/**/*.js',
           'src/config.js',
@@ -43,6 +45,8 @@ module.exports = function(grunt) {
       },
       dev: {
         src: [
+          'src/anol/**/module.js',
+          'src/anol/**/*.js',
           'src/modules/**/module.js',
           'src/modules/**/*.js'
         ],
@@ -50,13 +54,13 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
-          'static/libs/jquery/jquery-2.1.1.min.js',
+          'static/libs/jquery/jquery-3.4.1.min.js',
           'static/libs/proj4/proj4.js',
           'static/libs/proj4/proj4.defs.js',
           'static/libs/angular/angular.min.js',
+          'static/libs/angular/angular.touch.min.js',
           'static/libs/angular/ui-bootstrap-tpls-0.11.2.min.js',
-          'static/libs/ol3/ol.custom.min.js',
-          'static/libs/anol/anol.min.js',
+          'static/libs/openlayers/ol-4.6.5-custom.min.js',
           'build/<%= pkg.name %>.ugly.js',
           '!static/libs/anol/anol-templates.js'
         ],
@@ -85,9 +89,9 @@ module.exports = function(grunt) {
             expand: true,
             src: [
               'static/libs/bootstrap/bootstrap.css',
-              'static/libs/ol3/ol3.css',
               'static/libs/bootstrap/bootstrap.vertical-tabs.min.css',
               'static/libs/fontawesome/css/fontawesome.min.css',
+              'static/css/ol.css',
               'static/css/style.css',
               'static/css/dynamic-style.css',
               'static/css/notab-mapstyle.css'
@@ -103,12 +107,6 @@ module.exports = function(grunt) {
               'static/libs/fontawesome/css/fonts/*'
             ],
             dest: 'build/dist/css/fonts/'
-          },
-          {
-            flatten: true,
-            expand: true,
-            src: ['src/overwrite-templates.js', 'static/libs/anol/anol-templates.js'],
-            dest: 'build/dist/js/'
           },
           {
             flatten: true,
@@ -157,7 +155,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['src/modules/**/*.js'],
+        files: ['src/*.js', 'src/modules/**/*.js', 'src/anol/**/*.js', ],
         tasks: ['clean:prebuild', 'ngtemplates:dev', 'concat:dev'],
         options: {
           spawn: false,
@@ -178,7 +176,7 @@ module.exports = function(grunt) {
       },
       api: {
         title: 'ORKa API',
-        src: ['src/modules/**/*.js'],
+        src: ['src/modules/**/*.js', 'src/anol/**/*.js'],
       }
     },
     ngtemplates:  {

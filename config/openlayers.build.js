@@ -53,12 +53,8 @@
     "ol.proj.Projection#getExtent",
     "ol.proj.Projection#getMetersPerUnit",
     "ol.proj.transform",
-    "ol.source.GeoJSON",
-    "ol.source.GeoJSON#*",
     "ol.source.ImageWMS",
     "ol.source.ImageWMS#*",
-    "ol.source.ServerVector",
-    "ol.source.ServerVector#*",
     "ol.source.TileImage",
     "ol.source.TileImage#*",
     "ol.source.WMTS",
@@ -82,13 +78,17 @@
   ],
   "compile": {
     "externs": [
+      "externs/cartodb.js",
+      "externs/bingmaps.js",
+      "externs/esrijson.js",
+      "externs/topojson.js",
+      "externs/tilejson.js",
       "externs/geojson.js",
       "externs/oli.js",
       "externs/olx.js",
       "externs/proj4js.js"
     ],
     "define": [
-      "goog.dom.ASSUME_STANDARDS_MODE=true",
       "goog.DEBUG=false"
     ],
     "compilation_level": "ADVANCED",

@@ -68,10 +68,11 @@ angular.module('orka.locations')
                     var source = scope.layer.getSource();
                     if(scope.selectedFeature !== undefined) {
                         var map = MapService.getMap();
-                        map.getView().fitExtent(scope.selectedFeature.getGeometry().getExtent(), map.getSize());
+                        map.getView().fit(scope.selectedFeature.getGeometry().getExtent(), map.getSize());
                         scope.featureLayer.getSource().clear();
                     }
-                    source.dispatchChangeEvent();
+
+                    // source.dispatchChangeEvent();
                 };
             },
             post: function(scope, element, attrs) {

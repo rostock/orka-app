@@ -11,8 +11,8 @@ module.exports = function(config) {
     files: [
       // 'libs/jquery/jquery.js',
       'libs/angular/angular-debug.js',
-      'libs/angular/angular-mocks.js',
-      'libs/ol3/ol3.custom.min.js',
+      // 'libs/angular/angular-mocks.js',
+      'libs/openlayers/ol-4.6.5-custom.min.js',
       'test/spec/**/*.js',
       'src/modules/**/*.js'
     ],

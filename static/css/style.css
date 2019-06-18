@@ -364,14 +364,12 @@ button.output-format-button {
   top: 29px;
   width: 22px;
   border-radius: 0;
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding: 0px;
 }
 
 .ol-zoomslider .ol-zoomslider-thumb {
   background-color: rgba(0, 0, 0, 0.7);
   margin: 0;
-
 }
 
 .ol-zoom,
@@ -382,7 +380,6 @@ button.output-format-button {
   padding: 0;
   left: 50px;
   height: 200px;
-
 }
 
 .ol-zoom .ol-zoom-in {
@@ -577,7 +574,7 @@ button.output-format-button {
 }
 
 .ol-unselectable .orka-legend-toggle.legend-hidden {
-  bottom: 90px;
+  bottom: 100px;
   right: 0px;
   position: absolute;
 }

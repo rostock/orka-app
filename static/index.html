@@ -12,8 +12,8 @@
     <!-- @if node_env = 'develop' -->
       <link href="/static/libs/bootstrap/bootstrap.css" rel="stylesheet">
       <link href="/static/libs/bootstrap/bootstrap.vertical-tabs.min.css" rel="stylesheet">
-      <link href="/static/libs/ol3/ol3.css" rel="stylesheet">
       <link href="/static/libs/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+      <link href="/static/css/ol.css" rel="stylesheet">
       <link href="/static/css/style.css" rel="stylesheet">
       <link href="/static/css/dynamic-style.css" rel="stylesheet">
     <!-- @endif -->
@@ -21,7 +21,7 @@
     <!-- @if node_env = 'production' -->
       <link href="css/bootstrap.css" rel="stylesheet">
       <link href="css/bootstrap.vertical-tabs.min.css" rel="stylesheet">
-      <link href="css/ol3.css" rel="stylesheet">
+      <link href="css/ol.css" rel="stylesheet">
       <link href="css/fontawesome.min.css" rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
       <link href="css/dynamic-style.css" rel="stylesheet">
@@ -38,33 +38,7 @@
       <a class="navbar-brand" href="#">ORKa.MV</a>
     </div>
     <div class="col-md-2 col-md-offset-5">
-      <div id="search-container">
-        <div class="input-group">
-          <span class="glyphicon glyphicon-search input-group-addon" aria-hidden="true"></span>
-          <input type="text" id="search-input" class="form-control" placeholder="Suche…" ng-model="searchInput" ng-keyup="searchInputKeyup()" />
-        </div>
-        <span class="glyphicon glyphicon-remove-circle form-control-feedback form-control-clear" aria-hidden="true" ng-click="clearSearchInput()"></span>
-        <div class="input-group search-radio-group">
-          <label>
-            <input id="search-radio-address" name="search-radio" value="address" type="radio" ng-model="searchType" ng-change="searchChange()" />
-            Adressen
-          </label>
-          <label class="search-radio right">
-            <input id="search-radio-poi" name="search-radio" value="poi" type="radio" ng-model="searchType" ng-change="searchChange()" />
-            Themen
-          </label>
-        </div>
-        <div class="input-group search-checkbox-group">
-          <label>
-            <input id="search-checkbox" name="search-checkbox" type="checkbox" ng-model="searchCurrentBboxOnly" ng-change="searchChange()" />
-            nur im aktuellen Kartenausschnitt
-          </label>
-        </div>
-        <div id="orka-search-results" ng-if="showSearchResults">
-          <ul class="list-group">
-          </ul>
-        </div>
-      </div>
+      <div orka-search></div>
     </div>
     <div class="col-xs-6 col-sm-3 col-md-2 sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
@@ -104,7 +78,7 @@
         <div anol-layerswitcher="{{ layerswitcherStatus }}">
           <hr>
           <div orka-layertree ng-if="themesAvailable"></div>
-        </div>
+        </div>        
         <div orka-layertree-legend="{{ legendStatus }}" ng-if="themesAvailable"></div>
     </div>
 
@@ -117,20 +91,47 @@
         var orkaConfigPath = 'static/data/';
         var cssPath = 'static/css/';
       </script>
-      <script type="text/javascript" src="/static/libs/jquery/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="/static/libs/jquery/jquery-3.4.1.min.js"></script>
       <script type="text/javascript" src="/static/libs/proj4/proj4.js"></script>
       <script type="text/javascript" src="/static/libs/proj4/proj4.defs.js"></script>
 
       <script type="text/javascript" src="/static/libs/angular/angular-debug.js"></script>
       <script type="text/javascript" src="/static/libs/angular/ui-bootstrap-tpls-0.11.2.min.js"></script>
-      <script type="text/javascript" src="/static/libs/ol3/ol.custom.min.js"></script>
-      <script type="text/javascript" src="/static/libs/anol/anol.min.js"></script>
+      <script type="text/javascript" src="/static/libs/openlayers/ol-4.6.5-custom.min.js"></script>
+
+      <!-- <script type="text/javascript" src="/src/anol/module.js"></script>
+      <script type="text/javascript" src="/src/anol/featurepopup/module.js"></script>
+      <script type="text/javascript" src="/src/anol/featurepopup/featurepopup-directive.js"></script>
+
+      <script type="text/javascript" src="/src/anol/layerswitcher/module.js"></script>
+      <script type="text/javascript" src="/src/anol/layerswitcher/layerswitcher-directive.js"></script>
+
+      <script type="text/javascript" src="/src/anol/map/module.js"></script>
+      <script type="text/javascript" src="/src/anol/map/controls-service.js"></script>
+      <script type="text/javascript" src="/src/anol/map/interactions-service.js"></script>
+      <script type="text/javascript" src="/src/anol/map/layers-factory.js"></script>
+      <script type="text/javascript" src="/src/anol/map/layers-service.js"></script>
+      <script type="text/javascript" src="/src/anol/map/map-directive.js"></script>
+      <script type="text/javascript" src="/src/anol/map/map-service.js"></script>
+
+      <script type="text/javascript" src="/src/anol/mouseposition/module.js"></script>
+      <script type="text/javascript" src="/src/anol/mouseposition/mouseposition-directive.js"></script>
+
+      <script type="text/javascript" src="/src/anol/permalink/module.js"></script>
+      <script type="text/javascript" src="/src/anol/permalink/permalink-service.js"></script>
+      
+      <script type="text/javascript" src="/src/anol/print/module.js"></script>
+      <script type="text/javascript" src="/src/anol/print/printpage-service.js"></script>
+
+      <script type="text/javascript" src="/src/anol/scale/module.js"></script>
+      <script type="text/javascript" src="/src/anol/scale/scaleline-directive.js"></script>
+      <script type="text/javascript" src="/src/anol/scale/scaletext-directive.js"></script> -->
+
       <script type="text/javascript" src="/build/orka.js"></script>
       <script type="text/javascript" src="/src/config.js"></script>
       <script type="text/javascript" src="/src/controller.js"></script>
       <script type="text/javascript" src="/src/filters.js"></script>
       <script type="text/javascript" src="/build/orka-templates.js"></script>
-      <script type="text/javascript" src="/src/overwrite-templates.js"></script>
       <script type="text/javascript" src="/src/init.js"></script>
 
     <!-- @endif -->
@@ -142,9 +143,9 @@
       </script>
       <script type="text/javascript" src="js/orka.min.js"></script>
       <script type="text/javascript" src="js/orka-templates.js"></script>
-      <script type="text/javascript" src="js/overwrite-templates.js"></script>
     <!-- @endif -->
     
+    <!-- @if node_env = 'production' -->
     <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];
@@ -163,5 +164,7 @@
     </script>
     <noscript><p><img src="//geo.sv.rostock.de/piwik/piwik.php?idsite=5" style="border:0;" alt="" /></p></noscript>
     <!-- End Piwik Code -->
+    <!-- @endif -->
+
   </body>
 </html>

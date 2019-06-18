@@ -23,13 +23,12 @@ angular.module('orka.layertree')
                 scope.selectedPois = LayertreeService.selectedPoiTypes;
                 scope.selectedTracks = LayertreeService.selectedTrackTypes;
                 scope.typeMap = LayertreeService.typeMap;
-
                 if(angular.isDefined(AnolMapController)) {
                     scope.collapsed = scope.orkaLayertreeLegend !== 'open';
                     element.addClass('ol-unselectable');
                     AnolMapController.getMap().addControl(
                         new ol.control.Control({
-                            element: element.first().context
+                            element: element[0]
                         })
                     );
                 }
