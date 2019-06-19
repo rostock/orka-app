@@ -255,7 +255,9 @@ angular.module('orka.config')
                 }
             }
             if(config.locations !== undefined) {
-                self.config.locations = config.locations;
+                self.config.locations = config.locations.url;
+                self.config.locationsTitle = config.locations.title;
+
             }
             if(config.addressSearch !== undefined) {
                 self.config.addressSearch = config.addressSearch;
@@ -266,6 +268,9 @@ angular.module('orka.config')
             if(config.themes === true) {
                 self.config.poi = $.extend({}, defaults.poi);
                 if(config.poi !== undefined) {
+                    if (config.poi.title !== undefined) {
+                        self.config.poi.title = config.poi.title;
+                    }
                     if (config.poi.legendURL !== undefined) {
                         self.config.poi.legendURL = config.poi.legendURL;
                     }

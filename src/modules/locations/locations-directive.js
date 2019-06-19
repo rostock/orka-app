@@ -28,6 +28,7 @@ angular.module('orka.locations')
                 scope.features = [];
                 scope.featureLayer = LayersService.layersByProperty('layer', ConfigService.config.poi.layerName)[0];
                 scope.selectedFeature = undefined;
+                scope.title = ConfigService.config.locationsTitle
                 scope.layer = LayersFactory.newGeoJSON({
                     projection: ConfigService.config.map.projection,
                     url: ConfigService.config.locations,

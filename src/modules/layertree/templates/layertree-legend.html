@@ -6,13 +6,13 @@
     <div class="orka-legend-toggle legend-visible">
         <span class="glyphicon glyphicon-chevron-right" ng-click="collapsed=!collapsed"></span>
     </div>
-    <div class="orka-poi-container">
+    <div class="orka-poi-container" ng-if="selectedPois">
         <div ng-repeat="poi in selectedPois">
             <img ng-src="{{ iconBaseUrl + typeMap[poi].icon }}" class="orka-poi-legend-icon"/>
             <span ng-bind-html="typeMap[poi].title | html"></span>
         </div>
     </div>
-    <div class="orka-tracks-container">
+    <div class="orka-tracks-container" ng-if="selectedTracks">
         <div ng-repeat="track in selectedTracks">
             <img ng-src="{{ iconBaseUrl + typeMap[track].icon }}" class="orka-track-legend-icon" />
             <span ng-bind-html="typeMap[track].title | html"></span>

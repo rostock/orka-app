@@ -34,9 +34,6 @@ var orkaAppConfig = {
         // Text der im Header stehen soll
         text: 'ORKa.MV – Offene Regionalkarte Mecklenburg-Vorpommern'
     },
-    // Pfad zu GeoJSON mit Polygonen für "Ortliste"
-    // Wenn nicht vorhanden ist das Ortemodul deaktiviert
-    locations: 'data/locations.geojson',
     // Aktivieren des Druckmoduls.
     // Weglassen oder ein anderer Wert als 'true'
     // deaktiviert das Druckmodul.
@@ -47,7 +44,14 @@ var orkaAppConfig = {
     themes: true,
     // Zu verwendende POIs Definition
     poi: {
-        legendURL: 'data/poi_legend_data.json'
+        legendURL: 'data/poi_legend_data.json',
+        title: 'Themen'
+    },
+    // Pfad zu GeoJSON mit Polygonen für "Ortliste"
+    // Wenn nicht vorhanden ist das Ortemodul deaktiviert
+    locations: {
+        url: 'data/locations.geojson',
+        title: 'verfügbare Bereiche'
     },
     // Adressensuche
     addressSearch: {

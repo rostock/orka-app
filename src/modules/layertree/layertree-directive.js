@@ -4,11 +4,12 @@ angular.module('orka.layertree')
  * @name orka.layertree.directive:orkaLayertree
  *
  * @requires orka.layertree.LayertreeService
+ * @requires orka.config.ConfigService
  *
  * @description
  * Adds a tree like themes chooser for POI- and Track-Themes
  */
-.directive('orkaLayertree', ['LayertreeService', function(LayertreeService) {
+.directive('orkaLayertree', ['LayertreeService', 'ConfigService', function(LayertreeService, ConfigService) {
     // used to render the tree and interact with the service above
     return {
         restrict: 'A',
@@ -17,6 +18,7 @@ angular.module('orka.layertree')
         scope: {},
         link: {
             pre: function(scope, element, attrs) {
+                scope.title = ConfigService.config.poi.title;
                 LayertreeService.poisLoaded.then(function(pois) {
                     scope.pois = pois;
                 });
