@@ -2,10 +2,10 @@
     <ng-transclude></ng-transclude>
     <h5 class="bold">
         <span ng-show="featureGroups === false">
-            Es befinden sich keine Themenelemente im aktuellen Kartenausschnitt.
+            Es befinden sich keine Informationen im aktuellen Kartenausschnitt.
         </span>
         <span ng-show="featureGroups !== false">
-            Themenelemente im aktuellen Kartenausschnitt:
+            Informationen im aktuellen Kartenausschnitt:
         </span>
     </h5>
 
@@ -27,6 +27,10 @@
                            ng-if="feature.get('website')"
                            class="pointer"
                            target="_blank">Website</a>
+                        <a ng-href="{{ feature.get('foto') | externalLink }}"
+                           ng-if="feature.get('foto')"
+                           class="pointer"
+                           target="_blank">Foto</a>
                         <div ng-if="hasAddress(feature)">
                             {{ feature.get('addr:street') }} {{ feature.get('addr:housenumber') }},
                             {{ feature.get('addr:postal') }} {{ feature.get('addr:city') }}

@@ -7,7 +7,7 @@ angular.module('orka.layertree')
  * @requires orka.config.ConfigService
  *
  * @description
- * Adds a tree like themes chooser for POI- and Track-Themes
+ * Adds a tree like themes chooser for POI-Themes
  */
 .directive('orkaLayertree', ['LayertreeService', 'ConfigService', function(LayertreeService, ConfigService) {
     // used to render the tree and interact with the service above
@@ -61,16 +61,6 @@ angular.module('orka.layertree')
                 scope.togglePoiTopic = function(topic) {
                     scope.toggleTopic(topic);
                     scope.updatePois(scope.pois);
-                };
-
-                scope.updateTracks = function(tracks) {
-                    scope.selectedTrackTypes = scope.collectSelectedTypes(tracks);
-                    LayertreeService.updateSelectedTrackTypes(scope.selectedTrackTypes);
-                };
-
-                scope.toggleTrackTopic = function(topic) {
-                    scope.toggleTopic(topic);
-                    scope.updateTracks(scope.tracks);
                 };
             }
         }

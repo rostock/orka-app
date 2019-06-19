@@ -10,15 +10,13 @@ var orkaAppConfig = {
         // Aktivieren der Hintergrundlayer der Anwendung
         // jeder Hintergrundlayer ist gleichzeitig ein Drucklayer
         layers: [
-            'ORKA_STADTPLAN',
-            'ORKA_STADTPLAN_OHNE_TEXT',
-            'ORKA_STADTPLAN_GRAU'
+            'ORKA_STADTPLAN'
         ],
         // Festlegung der Kartenattributionen
         attributions: [
             '<div>Kartenbild © Hanse- und Universitätsstadt Rostock (<a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>)<div>',
             '<div>Kartendaten © <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap</a> (<a rel="license" target="_blank" href="http://opendatacommons.org/licenses/odbl">ODbL</a>) und LkKfS-MV</div>',
-            '<div>Daten für Overlay-Themen © OpenStreetMap (ODbL)</div>'
+            '<div>Daten für Overlay-Themen: Hanse- und Universitätsstadt Rostock und <a target="_blank" href="meta/sbz.php">SBZ-HRO</a> (<a rel="license" target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/deed.de">CC0 1.0</a>), © OpenStreetMap (ODbL)</div>'
         ],
         // Anwendung startet mit geöffneten Layerswitcher, sofern vorhanden
         openLayerswitcher: true,
@@ -28,11 +26,11 @@ var orkaAppConfig = {
     // Einstellungen für den Header der Anwendung
     header: {
         // Höhe des Headers. Die Angabe erfolgt in Pixel und muss mit 'px' enden
-        height: '50px',
+        height: '80px',
         // Abstand des Textes im Header zum oberen Browserfensterrand
         paddingTop: '10px',
         // Text der im Header stehen soll
-        text: 'ORKa.MV – Offene Regionalkarte Mecklenburg-Vorpommern'
+        text: 'Stadtteillotse Rostock'
     },
     // Aktivieren des Druckmoduls.
     // Weglassen oder ein anderer Wert als 'true'
@@ -51,14 +49,14 @@ var orkaAppConfig = {
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
     locations: {
         url: 'data/locations.geojson',
-        title: 'verfügbare Bereiche'
+        title: false
     },
     // Adressensuche
     addressSearch: {
         url: 'https://geo.sv.rostock.de/geocodr/query',
         key: '5c5281c45c5f4a729e8ecdb716637859',
         type: 'search',
-        class: 'address',
+        class: 'address_hro',
         shape: 'bbox',
         limit: '10'
     },
@@ -67,7 +65,7 @@ var orkaAppConfig = {
         url: 'https://geo.sv.rostock.de/geocodr/query',
         key: '5c5281c45c5f4a729e8ecdb716637859',
         type: 'search',
-        class: 'orka-app',
+        class: 'stadtteillotse',
         shape: 'bbox',
         limit: '10'
     }

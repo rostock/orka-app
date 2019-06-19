@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Offene Regionalkarte Mecklenburg-Vorpommern (ORKa.MV) auf Basis von Katasterdaten und OpenStreetMap-Daten" />
+    <meta name="description" content="Interaktive Karte mit Informationen rund um den Alltag in Ihrem Stadtteil" />
 
-    <title>ORKa.MV</title>
+    <title>Stadtteillotse Rostock</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
     <!-- @if node_env = 'develop' -->
       <link href="/static/libs/bootstrap/bootstrap.css" rel="stylesheet">
@@ -35,7 +37,38 @@
   </head>
   <body ng-controller="appCtrl" class="hide" ng-class="{'show': appReady}">
     <div class="navbar navbar-default navbar-static-top header" ng-show="showHeader">
-      <a class="navbar-brand" href="#">ORKa.MV</a>
+      <a class="navbar-brand" href="#">Stadtteillotse Rostock</a>
+      <span class="navbar-brand-subtitle">Informationen rund um den Alltag in Ihrem Stadtteil</span>
+      <span id="logo-hro"></span>
+    </div>
+    <div class="col-md-2 col-md-offset-5">
+      <div id="search-container">
+        <div class="input-group">
+          <span class="glyphicon glyphicon-search input-group-addon" aria-hidden="true"></span>
+          <input type="text" id="search-input" class="form-control" placeholder="Suche…" ng-model="searchInput" ng-keyup="searchInputKeyup()" />
+        </div>
+        <span class="glyphicon glyphicon-remove-circle form-control-feedback form-control-clear" aria-hidden="true" ng-click="clearSearchInput()"></span>
+        <div class="input-group search-radio-group">
+          <label>
+            <input id="search-radio-address" name="search-radio" value="address" type="radio" ng-model="searchType" ng-change="searchChange()" />
+            Adressen
+          </label>
+          <label class="search-radio right">
+            <input id="search-radio-poi" name="search-radio" value="poi" type="radio" ng-model="searchType" ng-change="searchChange()" />
+            Themen
+          </label>
+        </div>
+        <div class="input-group search-checkbox-group">
+          <label>
+            <input id="search-checkbox" name="search-checkbox" type="checkbox" ng-model="searchCurrentBboxOnly" ng-change="searchChange()" />
+            nur im aktuellen Kartenausschnitt
+          </label>
+        </div>
+        <div id="orka-search-results" ng-if="showSearchResults">
+          <ul class="list-group">
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="col-xs-6 col-sm-3 col-md-2 sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
@@ -53,13 +86,13 @@
       </div>
       <ul class="nav nav-tabs tabs-right sideways">
         <li ng-class="{'active': selectedTab==='locations'}" ng-show="locationsAvailable">
-          <a ng-click="selectTab('locations')">Bereiche</a>
+          <a ng-click="selectTab('locations')">Stadtteile</a>
         </li>
         <li ng-class="{'active': selectedTab==='featurelist'}" ng-show="themesAvailable">
-          <a ng-click="selectTab('featurelist')">Kartenthemen</a>
+          <a ng-click="selectTab('featurelist')">Details</a>
         </li>
         <li ng-class="{'active': selectedTab==='print'}" ng-show="printAvailable">
-          <a ng-click="selectTab('print')">Kartenausgabe</a>
+          <a ng-click="selectTab('print')">Druck</a>
         </li>
       </ul>
     </div>
@@ -68,12 +101,11 @@
         <div class="col-md-2 col-md-offset-5">
             <div orka-search></div>
         </div>
-        <div orka-mouse-position></div>
         <div anol-scale-line></div>
         <div id="imprint-link">
-          <a href='/datenschutz.html' target='_blank'>Datenschutz</a> |
-          <a href='/impressum.html' target='_blank'>Impressum</a> |
-          <a href='/nutzungsbedingungen.html' target='_blank'>Nutzungsbedingungen</a>
+          <a href='/meta/datenschutz.html' target='_blank'>Datenschutz</a> |
+          <a href='/meta/impressum.html' target='_blank'>Impressum</a> |
+          <a href='/meta/nutzungsbedingungen.html' target='_blank'>Nutzungsbedingungen</a>
         </div>
         <div anol-layerswitcher="{{ layerswitcherStatus }}">
           <hr>
@@ -150,21 +182,20 @@
     <script type="text/javascript">
       var _paq = _paq || [];
       _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-      _paq.push(["setCookieDomain", "*.orka-mv.de"]);
-      _paq.push(["setDomains", ["*.orka-mv.de/app"]]);
+      _paq.push(["setCookieDomain", "*.stadtteillotse-hro.de"]);
+      _paq.push(["setDomains", ["*.stadtteillotse-hro.de"]]);
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
         var u="//geo.sv.rostock.de/piwik/";
         _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '5']);
+        _paq.push(['setSiteId', '1']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
       })();
     </script>
-    <noscript><p><img src="//geo.sv.rostock.de/piwik/piwik.php?idsite=5" style="border:0;" alt="" /></p></noscript>
+    <noscript><p><img src="//geo.sv.rostock.de/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
     <!-- End Piwik Code -->
     <!-- @endif -->
-
   </body>
 </html>

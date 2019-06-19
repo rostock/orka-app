@@ -6,9 +6,9 @@
         </span>
     </div>
     <div class="orka-popup-container">
-        <div class="orka-popup-title">{{ feature.get('name') }}</div>
+        <div class="orka-popup-title">{{ feature.get('name') }}<span ng-if="feature.get('art')" class="normal"> ({{ feature.get('art') }})</span></div>
         <div class="orka-popup-content">
-            <a class="pointer" ng-if="feature.get('website')" ng-href="{{ feature.get('website') | externalLink }}" target="_blank">Website</a>
+            <a class="pointer" ng-if="feature.get('website')" ng-href="{{ feature.get('website') | externalLink }}" target="_blank">Website</a><br/>
         </div>
     </div>
 </div>
