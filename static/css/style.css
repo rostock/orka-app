@@ -87,7 +87,7 @@ label.no-style {
  */
 #search-container {
   position: absolute;
-  top: 55px;
+  top: 10px;
   z-index: 1;
   width: 100%;
 }

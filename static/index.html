@@ -37,9 +37,6 @@
     <div class="navbar navbar-default navbar-static-top header" ng-show="showHeader">
       <a class="navbar-brand" href="#">ORKa.MV</a>
     </div>
-    <div class="col-md-2 col-md-offset-5">
-      <div orka-search></div>
-    </div>
     <div class="col-xs-6 col-sm-3 col-md-2 sidebar" ng-class="{'show': selectedTab !== false}">
       <div class="tab-content">
         <div class="tab-pane" ng-class="{'active': selectedTab==='locations'}">
@@ -68,6 +65,9 @@
     </div>
 
     <div anol-map class="col-xs-6 col-xs-offset-6 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main-content" ng-class="{ 'fullscreen': fullscreen }">
+        <div class="col-md-2 col-md-offset-5">
+            <div orka-search></div>
+        </div>
         <div orka-mouse-position></div>
         <div anol-scale-line></div>
         <div id="imprint-link">
