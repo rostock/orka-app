@@ -14,7 +14,7 @@
         </div>
     </div>
 </div>
-<hr>
+<hr ng-show="tracks">
 <div class="orka-tracks-container">
     <div ng-repeat="track in tracks">
         <input type="checkbox" ng-model="track.active" ng-change="toggleTrackTopic(track)" class="pointer"/>

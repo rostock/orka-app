@@ -121,10 +121,10 @@ angular.module('orka.layertree')
 
                 this.poisLoaded = this._loadPois(poiLegendUrl);
             }
-
+            this.tracksLoaded = undefined;
             if(this.trackLayer !== undefined) {
                 this.tracksLoaded = this._loadTracks(trackLegendUrl);
-            }
+            } 
         };
         /**
          * @ngdoc method

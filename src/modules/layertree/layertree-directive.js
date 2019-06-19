@@ -20,9 +20,12 @@ angular.module('orka.layertree')
                 LayertreeService.poisLoaded.then(function(pois) {
                     scope.pois = pois;
                 });
-                LayertreeService.tracksLoaded.then(function(tracks) {
-                    scope.tracks = tracks;
-                });
+
+                if (angular.isDefined(LayertreeService.tracksLoaded)) {
+                    LayertreeService.tracksLoaded.then(function(tracks) {
+                        scope.tracks = tracks;
+                    });
+                }
 
                 scope.collectSelectedTypes = function(topics) {
                     var selectedTypes = [];

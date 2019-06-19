@@ -265,11 +265,34 @@ angular.module('orka.config')
             }
             if(config.themes === true) {
                 self.config.poi = $.extend({}, defaults.poi);
-                if(config.poi !== undefined && config.poi.legendURL !== undefined) {
-                    self.config.poi.legendURL = config.poi.legendURL;
+                if(config.poi !== undefined) {
+                    if (config.poi.legendURL !== undefined) {
+                        self.config.poi.legendURL = config.poi.legendURL;
+                    }
                 }
                 self.config.track = $.extend({}, defaults.track);
+                if(config.track !== undefined) {
+                    if (config.track.layerURL !== undefined) {
+                        self.config.track.layerURL = config.track.layerURL;
+                    }
+                    if (config.track.layerName !== undefined) {
+                        self.config.track.layerName = config.track.layerName;
+                    }
+                    if (config.track.legendURL !== undefined) {
+                        self.config.track.legendURL = config.track.legendURL;
+                    }
+                }
+                if(config.track === false) {
+                    self.config.track = false;
+                }
             }
+
+            if(config.trackLayer !== undefined) {
+                self.config.trackLayer = config.trackLayer;
+            } else {
+                self.config.trackLayer = true;
+            }
+
             if(config.print === true) {
                 self.config.print = $.extend({}, defaults.print);
             }

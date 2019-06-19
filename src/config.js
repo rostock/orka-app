@@ -79,16 +79,8 @@ angular.module('orkaApp', [
 }])
 
 .config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', 'LayertreeServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider, LayertreeServiceProvider) {
-    if(ConfigServiceProvider.config.poi !== undefined && ConfigServiceProvider.config.track !== undefined) {
-        var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
-            projection: ConfigServiceProvider.config.map.projection,
-            url: ConfigServiceProvider.config.poi.layerURL,
-            title: 'POI Layer',
-            layer: ConfigServiceProvider.config.poi.layerName,
-            visible: false,
-            displayInLayerswitcher: false,
-            additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
-        });
+    var layers = [];
+    if(ConfigServiceProvider.config.track !== undefined) {
         var trackLayer = LayersFactoryProvider.newSingleTileWMS({
             extent: ConfigServiceProvider.config.map.extent,
             url: ConfigServiceProvider.config.track.layerURL,
@@ -102,18 +94,27 @@ angular.module('orkaApp', [
                 'SRS': ConfigServiceProvider.config.map.projection.getCode()
             }
         });
-
-        LayertreeServiceProvider.setPoiLayer(poiLayer);
         LayertreeServiceProvider.setTrackLayer(trackLayer);
-        LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.poi.legendURL);
         LayertreeServiceProvider.setTrackLegendUrl(ConfigServiceProvider.config.track.legendURL);
-        LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
-
-        LayersServiceProvider.setLayers([
-            trackLayer,
-            poiLayer
-        ]);
+        layers.push(trackLayer);
     }
+
+    if (ConfigServiceProvider.config.poi !== undefined) {
+        var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
+            projection: ConfigServiceProvider.config.map.projection,
+            url: ConfigServiceProvider.config.poi.layerURL,
+            title: 'POI Layer',
+            layer: ConfigServiceProvider.config.poi.layerName,
+            visible: false,
+            displayInLayerswitcher: false,
+            additionalParameters: LayertreeServiceProvider.getAdditionalPoiParametersCallback(),
+        });
+        layers.push(poiLayer);
+        LayertreeServiceProvider.setPoiLegendUrl(ConfigServiceProvider.config.poi.legendURL);
+        LayertreeServiceProvider.setPoiLayer(poiLayer);
+        LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
+    }
+    LayersServiceProvider.setLayers(layers);
 }])
 
 .config(['ConfigServiceProvider', 'PrintPageServiceProvider', 'PrintServiceProvider', function(ConfigServiceProvider, PrintPageServiceProvider, PrintServiceProvider) {
