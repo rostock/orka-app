@@ -597,6 +597,12 @@ button.output-format-button {
 
 .navbar-brand {
   padding-left: 140px;
+  float: left;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 50px;
+  padding-right: 0px;
 }
 
 .navbar-brand-subtitle {

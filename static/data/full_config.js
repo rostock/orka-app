@@ -43,8 +43,9 @@ var orkaAppConfig = {
     // Zu verwendende POIs Definition
     poi: {
         legendURL: 'data/poi_legend_data.json',
-        title: 'Themen'
+        title: 'Was suchen Sie?'
     },
+    track: false,
     // Pfad zu GeoJSON mit Polygonen für "Ortliste"
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
     locations: {
