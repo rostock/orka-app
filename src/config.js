@@ -80,7 +80,7 @@ angular.module('orkaApp', [
 
 .config(['ConfigServiceProvider', 'LayersFactoryProvider', 'LayersServiceProvider', 'LayertreeServiceProvider', function(ConfigServiceProvider, LayersFactoryProvider, LayersServiceProvider, LayertreeServiceProvider) {
     var layers = [];
-    if(ConfigServiceProvider.config.track !== undefined) {
+    if(ConfigServiceProvider.config.track) {
         var trackLayer = LayersFactoryProvider.newSingleTileWMS({
             extent: ConfigServiceProvider.config.map.extent,
             url: ConfigServiceProvider.config.track.layerURL,
