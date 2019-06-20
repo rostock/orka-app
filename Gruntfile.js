@@ -149,7 +149,17 @@ module.exports = function(grunt) {
       server: {
         options: {
           hostname: '*',
-          port: 7000
+          port: 7000,
+          middleware: function(connect, options, middlewares) {                       
+            middlewares.unshift(function(req, res, next) {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Credentials', true);
+                res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Custom-Header");
+                res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+                next();
+            });
+            return middlewares;
+          }            
         }
       }
     },
