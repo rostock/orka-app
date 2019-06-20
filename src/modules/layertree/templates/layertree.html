@@ -1,3 +1,20 @@
+<div class="orka-plus-codes-container" ng-if="plusCodes">
+    <span class="bold">Gitternetze</span>
+    <div>
+        <input type="checkbox" 
+            name="locationCode"
+            id="locationCode"
+            ng-model="locationCode"
+            ng-change="toggleLocationCode(locationCode)"
+            class="pointer"/>
+        <label class="no-style pointer" for="locationCode">
+            <span class="pointer glyphicon"></span>
+            Open Location Code (Plus Codes)
+        </label>
+    </div>
+</div>
+<hr ng-show="plusCodes">
+
 <span class="bold">{{ title }}</span>
 <div class="orka-poi-container">
     <div ng-repeat="poi in pois">
@@ -14,6 +31,7 @@
         </div>
     </div>
 </div>
+
 <hr ng-show="tracks">
 <div class="orka-tracks-container">
     <div ng-repeat="track in tracks">

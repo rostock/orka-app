@@ -3,6 +3,8 @@ angular.module('orka.search')
  * @ngdoc directive
  * @name orka.searcg.directive:orkaSearch *
  * 
+ * @requires anolApi/anol.map.LayersFactory
+ * @requires anolApi/anol.map.LayersService
  * @requires anolApi/anol.map.MapService
  * @requires orka.config.ConfigService
  *
@@ -11,17 +13,41 @@ angular.module('orka.search')
  *
  */
 
-.directive('orkaSearch', ['$timeout', 'ConfigService', 'MapService', function($timeout, ConfigService, MapService) {
+.directive('orkaSearch', ['$timeout', 'LayersFactory', 'LayersService', 'ConfigService', 'MapService', 
+  function($timeout, LayersFactory, LayersService, ConfigService, MapService) {
     return {
         scope: {},
         templateUrl: 'src/modules/search/templates/search.html',
         link: {
             pre: function(scope, element, attrs) {
                 scope.searchInput = undefined;
+                scope.hasPlusCodes = ConfigService.config.plusCodes;
                 scope.searchType = 'address';
                 scope.searchCurrentBboxOnly = false;
                 scope.resultData = [];
                 scope.showSearchResults = false;
+                scope.coordSystem = '4326';
+                scope.resultInside = false;
+                scope.showNoResultFound = false;
+                var styles = [
+                    new ol.style.Style({
+                      stroke: new ol.style.Stroke({
+                        color: 'blue',
+                        width: 3
+                      }),
+                      fill: new ol.style.Fill({
+                        color: 'rgba(0, 0, 255, 0.1)'
+                      })
+                    })
+                ];                
+                scope.resultLayer = LayersFactory.newFeatureLayer({
+                    projection: ConfigService.config.map.projection,
+                    style: styles,
+                    displayInLayerswitcher: false,
+                    visible: true
+                });
+                scope.resultSource = scope.resultLayer.getSource();
+                LayersService.addLayer(scope.resultLayer);
 
                 function search(query) {
                     var ajaxData = {
@@ -42,8 +68,8 @@ angular.module('orka.search')
                         ajaxData.bbox = x1 + ',' + y1 + ',' + x2 + ',' + y2;
                         ajaxData.bbox_epsg = '25833';
                     } else if (scope.searchType === 'poi') {
-                        ajaxData.bbox = '206885,5890624,460857,6060841';
-                        ajaxData.bbox_epsg = '25833';
+                        ajaxData.bbox = ConfigService.config.poiSearch.bbox.join(',');
+                        ajaxData.bbox_epsg = ConfigService.config.poiSearch.bbox_epsg;
                     }
                     $.ajax({
                         url: scope.searchType === 'address' ? ConfigService.config.addressSearch.url : ConfigService.config.poiSearch.url,
@@ -53,12 +79,53 @@ angular.module('orka.search')
                             $timeout(function() {
                                 scope.showSearchResults = true;
                                 scope.resultData = data.features;
+                                if (scope.resultData.length == 0) {
+                                    scope.showNoResultFound = true;
+                                }
                             });
                         }
                     });
                 }
 
+                function searchPlusCode(query) {
+                    if (query.indexOf(',') > -1) {
+                        if (scope.coordSystem === '25833') {
+                            var coords = query.split(',');
+                            var coordstransformed = ol.proj.transform([coords[0], coords[1]], 'EPSG:25833', 'EPSG:4326');
+                            query = coordstransformed.join(',');
+                        }
+                    }
+
+                    var ajaxData = {
+                        query: query.replace(/\s/g, "")
+                    };
+
+                    $.ajax({
+                        url: ConfigService.config.plusCodesSearch.url,
+                        data: ajaxData,
+                        dataType: 'json',
+                        success: function(data) {
+                            $timeout(function() {
+                                scope.resultSource.clear();
+                                var coords = [data.properties.center_x, data.properties.center_y];
+                                var transfomedExtent = ol.proj.transformExtent(
+                                    ConfigService.config.plusCodesSearch.bbox, 'EPSG:25833', 'EPSG:4326');
+                                scope.resultInside = ol.extent.containsCoordinate(transfomedExtent, coords);
+                                scope.showSearchResults = true;
+                                scope.resultData = data;
+                            });
+                        },
+                        error: function() {
+                            $timeout(function() {
+                                scope.showNoResultFound = true;
+                            });
+
+                        }
+                    });
+                }
+
                 function querySearch(n) {
+                    scope.showNoResultFound = false;
                     if (n.length >= 3) {
                         var value = n.toLowerCase().trim();
                         search(value);
@@ -67,25 +134,74 @@ angular.module('orka.search')
                     }
                 }
                 
+                function queryPlusCode(query) {
+                    if (query) {
+                        scope.showSearchResults = false;
+                        scope.showNoResultFound = false;
+                        scope.resultData = [];
+                        searchPlusCode(query);
+                    }
+                }
+
                 scope.$watch('searchInput', function(n, o) {
                     if (angular.isDefined(n)) {
-                        querySearch(n);
+                        if (scope.searchType === 'address' || scope.searchType === 'poi') {
+                            querySearch(n);
+                        } else {
+                            queryPlusCode(n);
+                        }
                     }
                 });
 
-                scope.$watch('searchType', function(n) {
+                scope.changeCoordSystem = function(n) {
+                    scope.coordSystem = n;
+                    queryPlusCode(scope.searchInput);
+                };
+
+                scope.$watch('searchType', function(n, o) {
+                    // scope.resultSource.clear();
+                    if (angular.isDefined(o)) {
+                        if (o == 'pluscodes') {
+                            scope.showNoResultFound = false;
+                            scope.searchInput = undefined;
+                            scope.showSearchResults = false;
+                            scope.resultData = [];                        
+                        }
+                    }
                     if (angular.isDefined(n)) {
-                        if (angular.isDefined(scope.searchInput)) {
-                            querySearch(scope.searchInput);
+                        if (n === 'address' || n === 'poi') {
+                            if (angular.isDefined(scope.searchInput)) {
+                                querySearch(scope.searchInput);
+                            }
+                        } else if (n === 'pluscodes') {
+                            scope.showNoResultFound = false;
+                            scope.searchInput = undefined;
+                            scope.showSearchResults = false;
+                            scope.resultData = [];                        
                         }
                     }
                 });
 
                 scope.showList = function() {
-                    scope.showSearchResults = true;
+                    if (scope.searchType === 'address' || scope.searchType === 'poi') {
+                        scope.showSearchResults = true;
+                    }
                 };
             },
             post: function(scope) {
+                scope.loadPlusCodeResult = function(result) {
+                    if (!scope.resultInside) {
+                        return;
+                    }
+                    var feature = new ol.Feature(new ol.geom.Polygon(result.geometry.coordinates));
+                    feature.getGeometry().transform('EPSG:4326', 'EPSG:25833');
+                    scope.resultSource.addFeatures([feature]);
+
+                    var map = MapService.getMap();
+                    var extent = scope.resultSource.getExtent();
+                    map.getView().fit(extent, map.getSize());
+                };
+
                 scope.loadResult = function(result) {
                     var x1, y1, x2, y2;
                     if (result.geometry.type === 'Point') {

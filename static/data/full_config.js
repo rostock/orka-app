@@ -52,6 +52,17 @@ var orkaAppConfig = {
         url: 'data/locations.geojson',
         title: false
     },
+    // Open Location Code (Plus Codes) in der Themenauswahl anzeigen und suchen
+    plusCodes: {
+        title: 'Plus Codes',
+        layerName: 'pc_layer',
+        layerURL: 'codes.geojson?',
+    },
+    // Plus Code Suche
+    plusCodesSearch: {
+        url: 'https://geo.sv.rostock.de/olca/',
+        bbox: [206885,5890624,460857,6060841],
+    },
     // Adressensuche
     addressSearch: {
         url: 'https://geo.sv.rostock.de/geocodr/query',
@@ -68,6 +79,8 @@ var orkaAppConfig = {
         type: 'search',
         class: 'stadtteillotse',
         shape: 'bbox',
-        limit: '10'
+        limit: '10',
+        bbox: [206885,5890624,460857,6060841],
+        bbox_epsg: '25833'
     }
 };

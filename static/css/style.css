@@ -121,13 +121,19 @@ label.no-style {
   margin-left: 8px;
 }
 
-#orka-search-results {
+
+#orka-search-no-results, #orka-search-results {
   margin-top: 3px;
 }
 
 .orka-search-result {
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.orka-search-result.inactive {
+  cursor: default;
+  color: #b4b4b4;
 }
 
 /*
@@ -539,7 +545,13 @@ button.output-format-button {
   max-height: 300px;
 }
 
-.orka-poi-container {
+.orka-tracks-container {
+  max-height: 90px;
+}
+
+.orka-plus-codes-container
+.orka-poi-container,
+.orka-tracks-container {
   margin-right: -20px;
   overflow: auto;
 }

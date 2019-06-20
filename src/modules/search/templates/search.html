@@ -31,9 +31,18 @@
                 ng-model="searchType" />
             Themen
         </label>
+        <label class="search-radio right" ng-show="hasPlusCodes">
+            <input
+                id="search-radio-plus-codes" 
+                name="search-radio" 
+                value="pluscodes" 
+                type="radio" 
+                ng-model="searchType" />
+                Plus codes
+        </label>
     </div>
     <div class="input-group search-checkbox-group">
-        <label>
+        <label ng-if="searchType == 'address' || searchType == 'poi'">
             <input 
                 id="search-checkbox"
                 name="search-checkbox"
@@ -42,27 +51,55 @@
                 ng-change="searchChange()" />
             nur im aktuellen Kartenausschnitt
         </label>
+
+        <select 
+            ng-change="changeCoordSystem(coordSystem)"
+            ng-model="coordSystem" ng-if="searchType == 'pluscodes'">
+            <option value="25833">ETRS89/UTM-33N (EPSG:25833)</option>
+            <option value="4326">WGS84/Geographische Koordinaten (EPSG:4326)</option>
+        </select>
+
+    </div>
+
+    <div id="orka-search-no-results" ng-show="showNoResultFound">
+        <ul class="list-group">
+            <li class="list-group-item feature orka-search-result inactive">
+                Kein Ergebnis für "{{ searchInput }}" gefunden.
+            </li>
+        </ul>
     </div>
     <div id="orka-search-results" ng-if="showSearchResults">
         <ul class="list-group">
-            <li ng-repeat="item in resultData" ng-click=loadResult(item) 
-                 class="list-group-item feature orka-search-result">
-                 <span ng-if="searchType == 'address'">
-                    <i class="fas fa-circle" 
-                        title="{{ item.properties.objektgruppe }}"
-                        ng-if="item.properties.objektgruppe == 'Gemeinde' || item.properties.objektgruppe == 'Gemeindeteil'">
-                    </i>
-                    <i class="fas fa-road" title="Straße" ng-if="item.properties.objektgruppe == 'Straße'"></i>
-                    <i class="fas fa-home" title="Adresse" 
-                        ng-if="item.properties.objektgruppe != 'Gemeinde' && 
-                        item.properties.objektgruppe != 'Gemeindeteil' && 
-                        item.properties.objektgruppe != 'Straße'"></i>
-                    {{ item | title }}
-                </span>                   
-                <span ng-if="searchType == 'poi'">
-                    {{ item.properties._title_ }}
-                </span>
-            </li>
+
+            <span ng-if="searchType == 'pluscodes'">
+                <li ng-click=loadPlusCodeResult(resultData) 
+                    ng-class="{'inactive': resultInside !== true}"
+                    class="list-group-item feature orka-search-result">
+                    {{ resultData.properties.code_level_5 }}
+                    (regional: {{resultData.properties.code_regional }})
+                </li>
+            </span>
+
+            <span ng-if="searchType == 'address' || searchType == 'poi'">
+                <li ng-repeat="item in resultData" ng-click=loadResult(item) 
+                    class="list-group-item feature orka-search-result">
+                    <span ng-if="searchType == 'address'">
+                        <i class="fas fa-circle" 
+                            title="{{ item.properties.objektgruppe }}"
+                            ng-if="item.properties.objektgruppe == 'Gemeinde' || item.properties.objektgruppe == 'Gemeindeteil'">
+                        </i>
+                        <i class="fas fa-road" title="Straße" ng-if="item.properties.objektgruppe == 'Straße'"></i>
+                        <i class="fas fa-home" title="Adresse" 
+                            ng-if="item.properties.objektgruppe != 'Gemeinde' && 
+                            item.properties.objektgruppe != 'Gemeindeteil' && 
+                            item.properties.objektgruppe != 'Straße'"></i>
+                        {{ item | title }}
+                    </span>                   
+                    <span ng-if="searchType == 'poi'">
+                        {{ item.properties._title_ }}
+                    </span>
+                </li>
+            </span>
         </ul>
     </div>
 </div>
