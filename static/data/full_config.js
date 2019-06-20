@@ -53,11 +53,7 @@ var orkaAppConfig = {
         title: false
     },
     // Open Location Code (Plus Codes) in der Themenauswahl anzeigen und suchen
-    plusCodes: {
-        title: 'Plus Codes',
-        layerName: 'pc_layer',
-        layerURL: 'codes.geojson?',
-    },
+    plusCodes: false,
     // Plus Code Suche
     plusCodesSearch: {
         url: 'https://geo.sv.rostock.de/olca/',

@@ -4,7 +4,7 @@ angular.module('orka.layertree')
  * @name orka.layertree.LayertreeServiceProvider
  */
 .provider('LayertreeService', [function() {
-    var _poiLayer, _poiLegendUrl, _iconBaseUrl;
+    var _poiLayer, _poiLegendUrl, _iconBaseUrl, _trackLegendUrl, _trackLayer;    
     var _selectedPoiTypes = [];
     /**
      * @ngdoc method
