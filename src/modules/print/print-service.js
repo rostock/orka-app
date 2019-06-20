@@ -114,17 +114,16 @@ angular.module('orka.print')
             var deferred = $q.defer();
 
             // promise with "success" and "error" methods (specific to $http)
-            var createPromise = $http.post(self.createDownloadUrl, data);
-            createPromise.success(function(data, status, headers, config) {
-                var checkPromise = self.checkDownload(data.status_url);
-                checkPromise.then(function(url) {
-                    deferred.resolve(self.downloadUrl + url);
+            $http.post(self.createDownloadUrl, data)
+                .then(function successCallback(data) {
+                    var checkPromise = self.checkDownload(data.status_url);
+                    checkPromise.then(function(url) {
+                        deferred.resolve(self.downloadUrl + url);
+                    });
+                }, function errorCallback(data) {
+                    self.status = 'error';
+                    deferred.reject(data);
                 });
-            });
-            createPromise.error(function(data, status, headers, config) {
-                self.status = 'error';
-                deferred.reject(data);
-            });
             return deferred.promise;
         };
         /**
