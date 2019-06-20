@@ -44,14 +44,35 @@ var orkaAppConfig = {
     themes: true,
     // Zu verwendende POIs Definition
     poi: {
-        legendURL: 'data/poi_legend_data.json',
-        title: 'Themen'
+        title: 'Themen',
+        layerName: 'poi_layer',
+        layerURL: 'poi.geojson?',
+        markerIcon: 'static/img/highlightMarker.png',
+        legendURL: '/static/data/poi_legend_data.json',
+        symbolAnchor: [10, 26],
+        markerAnchor: [17, 33]
+    },
+    track: {
+        layerURL: '/tracks',
+        layerName: 'tracks',
+        legendURL: 'data/track_legend_data.json'
     },
     // Pfad zu GeoJSON mit Polygonen für "Ortliste"
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
     locations: {
         url: 'data/locations.geojson',
         title: 'verfügbare Bereiche'
+    },
+    // Open Location Code (Plus Codes) in der Themenauswahl anzeigen und suchen
+    plusCodes: {
+        title: 'Plus Codes',
+        layerName: 'pc_layer',
+        layerURL: 'codes.geojson?',
+    },
+    // Plus Code Suche
+    plusCodesSearch: {
+        url: 'https://geo.sv.rostock.de/olca/',
+        bbox: [206885,5890624,460857,6060841],
     },
     // Adressensuche
     addressSearch: {
@@ -69,6 +90,8 @@ var orkaAppConfig = {
         type: 'search',
         class: 'orka-app',
         shape: 'bbox',
-        limit: '10'
+        limit: '10',
+        bbox: [206885,5890624,460857,6060841],
+        bbox_epsg: '25833'
     }
 };

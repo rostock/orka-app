@@ -53,6 +53,7 @@
     "ol.proj.Projection#getExtent",
     "ol.proj.Projection#getMetersPerUnit",
     "ol.proj.transform",
+    "ol.proj.transformExtent",
     "ol.source.ImageWMS",
     "ol.source.ImageWMS#*",
     "ol.source.TileImage",

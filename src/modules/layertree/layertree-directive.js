@@ -19,6 +19,8 @@ angular.module('orka.layertree')
         link: {
             pre: function(scope, element, attrs) {
                 scope.title = ConfigService.config.poi.title;
+                scope.plusCodes = ConfigService.config.plusCodes;
+                scope.locationCode = false;
                 LayertreeService.poisLoaded.then(function(pois) {
                     scope.pois = pois;
                 });
@@ -28,7 +30,6 @@ angular.module('orka.layertree')
                         scope.tracks = tracks;
                     });
                 }
-
                 scope.collectSelectedTypes = function(topics) {
                     var selectedTypes = [];
                     angular.forEach(topics, function(topic) {
@@ -71,6 +72,10 @@ angular.module('orka.layertree')
                 scope.toggleTrackTopic = function(topic) {
                     scope.toggleTopic(topic);
                     scope.updateTracks(scope.tracks);
+                };
+
+                scope.toggleLocationCode = function(visible) {
+                    LayertreeService.updatePlusCodeVisibility(visible)
                 };
             }
         }

@@ -13,7 +13,8 @@ angular.module('orka.featurelist')
  * @description
  * Add a list of currently visible POIs. When clicking on list entry, corresponding POI in map will be highlighted.
  */
-.directive('orkaFeatureList', ['$filter', '$timeout', 'MapService', 'LayersService', 'LayertreeService', 'ConfigService', function($filter, $timeout, MapService, LayersService, LayertreeService, ConfigService) {
+.directive('orkaFeatureList', ['$timeout', 'MapService', 'LayersService', 'LayertreeService', 'ConfigService', 
+    function($timeout, MapService, LayersService, LayertreeService, ConfigService) {
     return {
         restrict: 'A',
         replace: true,

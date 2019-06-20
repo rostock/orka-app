@@ -99,6 +99,19 @@ angular.module('orkaApp', [
         layers.push(trackLayer);
     }
 
+    if (ConfigServiceProvider.config.plusCodes !== undefined) {
+        var plusCodesLayer = LayersFactoryProvider.newDynamicGeoJSON({
+            projection: ConfigServiceProvider.config.map.projection,
+            url: ConfigServiceProvider.config.plusCodes.layerURL,
+            title: ConfigServiceProvider.config.plusCodes.title,
+            layer: ConfigServiceProvider.config.plusCodes.layerName,
+            visible: false,
+            displayInLayerswitcher: false
+        });
+        layers.push(plusCodesLayer);
+        LayertreeServiceProvider.setPlusCodesLayer(plusCodesLayer);
+    }
+
     if (ConfigServiceProvider.config.poi !== undefined) {
         var poiLayer = LayersFactoryProvider.newDynamicGeoJSON({
             projection: ConfigServiceProvider.config.map.projection,
@@ -114,6 +127,7 @@ angular.module('orkaApp', [
         LayertreeServiceProvider.setPoiLayer(poiLayer);
         LayertreeServiceProvider.setIconBaseUrl(ConfigServiceProvider.config.poi.iconBaseURL);
     }
+
     LayersServiceProvider.setLayers(layers);
 }])
 

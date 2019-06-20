@@ -126,6 +126,11 @@ angular.module('orka.config')
                 printLayer: 'orkamv-printqueue-graustufen'
             }
         },
+        plusCodes: {
+            title: 'Plus Codes',
+            layerName: 'pc_layer',
+            layerURL: 'citymap/pluscodes.geojson?'
+        },        
         poi: {
             layerName: 'poi_layer',
             layerURL: '/citymap/poi.geojson?',
@@ -265,14 +270,35 @@ angular.module('orka.config')
             if(config.poiSearch !== undefined) {
                 self.config.poiSearch = config.poiSearch;
             }
+            if(config.plusCodesSearch !== undefined) {
+                self.config.plusCodesSearch = config.plusCodesSearch;
+            }
             if(config.themes === true) {
                 self.config.poi = $.extend({}, defaults.poi);
                 if(config.poi !== undefined) {
                     if (config.poi.title !== undefined) {
                         self.config.poi.title = config.poi.title;
                     }
+                    if (config.poi.layerName !== undefined) {
+                        self.config.poi.layerName = config.poi.layerName;
+                    }
+                    if (config.poi.layerURL !== undefined) {
+                        self.config.poi.layerURL = config.poi.layerURL;
+                    }
+                    if (config.poi.iconBaseURL !== undefined) {
+                        self.config.poi.iconBaseURL = config.poi.iconBaseURL;
+                    }
+                    if (config.poi.markerIcon !== undefined) {
+                        self.config.poi.markerIcon = config.poi.markerIcon;
+                    }
                     if (config.poi.legendURL !== undefined) {
                         self.config.poi.legendURL = config.poi.legendURL;
+                    }
+                    if (config.poi.symbolAnchor !== undefined) {
+                        self.config.poi.symbolAnchor = config.poi.symbolAnchor;
+                    }
+                    if (config.poi.markerAnchor !== undefined) {
+                        self.config.poi.markerAnchor = config.poi.markerAnchor;
                     }
                 }
                 self.config.track = $.extend({}, defaults.track);
@@ -291,7 +317,13 @@ angular.module('orka.config')
                     self.config.track = false;
                 }
             }
-
+            self.config.plusCodes = false;
+            if(config.plusCodes !== undefined) {
+                if(config.plusCodes === false) {
+                    self.config.plusCodes = false;
+                }
+                self.config.plusCodes = config.plusCodes;
+            }
             if(config.trackLayer !== undefined) {
                 self.config.trackLayer = config.trackLayer;
             } else {
@@ -299,7 +331,11 @@ angular.module('orka.config')
             }
 
             if(config.print === true) {
-                self.config.print = $.extend({}, defaults.print);
+                if(config.printConfig !== undefined) {
+                    self.config.print = config.printConfig;
+                } else {
+                    self.config.print = $.extend({}, defaults.print);
+                }
             }
         }
     };

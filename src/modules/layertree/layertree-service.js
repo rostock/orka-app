@@ -14,10 +14,23 @@ angular.module('orka.layertree')
      * @param {Object} poiLayer Layer containing POIs
      *
      * @description
-     * Register layer to display POIs in
+     * Register layer to display POIs
      */
     this.setPoiLayer = function(poiLayer) {
         _poiLayer = poiLayer;
+    };
+    /**
+     * @ngdoc method
+     * @name setPlusCodesLayer
+     * @methodOf orka.layertree.LayertreeServiceProvider
+     *
+     * @param {Object} setPlusCodesLayer Layer containing Plus Codes
+     *
+     * @description
+     * Register layer to display Plus Codes
+     */
+    this.setPlusCodesLayer = function(plusCodesLayer) {
+        _plusCodesLayer = plusCodesLayer;
     };
     /**
      * @ngdoc method
@@ -27,7 +40,7 @@ angular.module('orka.layertree')
      * @param {Object} trackLayer Layer containing Tracks
      *
      * @description
-     * Register layer to display Tracks in
+     * Register layer to display tracks
      */
     this.setTrackLayer = function(trackLayer) {
         _trackLayer = trackLayer;
@@ -86,11 +99,12 @@ angular.module('orka.layertree')
          * @description
          * Updates given poi- / trackLayer and prepare structure for {@link orka.layertree.directive:orkaLayertree `orkaLayertree directive`} as well as {@link orka.layertree.directive:orkaLayertreeLegend `orkaLayertreeLegend directive`}
          */
-        var LayerTree = function(poiLayer, trackLayer, poiLegendUrl, trackLegendUrl, iconBaseUrl) {
+        var LayerTree = function(poiLayer, trackLayer, poiLegendUrl, trackLegendUrl, iconBaseUrl, plusCodeLayer) {
             var self = this;
             this.iconBaseUrl = iconBaseUrl;
             this.poiLayer = poiLayer;
             this.trackLayer = trackLayer;
+            this.plusCodeLayer = plusCodeLayer;
             this.typeMap = {};
             this.selectedPoiTypes = [];
             this.selectedTrackTypes = [];
@@ -115,7 +129,6 @@ angular.module('orka.layertree')
                             anchorYUnits: 'pixels'
                         })
                     }));
-
                     return styles;
                 });
 
@@ -124,8 +137,19 @@ angular.module('orka.layertree')
             this.tracksLoaded = undefined;
             if(this.trackLayer !== undefined) {
                 this.tracksLoaded = this._loadTracks(trackLegendUrl);
-            } 
+            }
+                
         };
+        /**
+         * @ngdoc method
+         * @name updatePlusCodeVisibility
+         * @methodOf orka.layertree.LayerTreeService
+         *
+         * @param {Booelan} visible Visibilty of the Plus coede layer
+         */
+        LayerTree.prototype.updatePlusCodeVisibility = function(visible) {
+            this.plusCodeLayer.setVisible(visible);
+        };        
         /**
          * @ngdoc method
          * @name updateSelectedPoiTypes
@@ -229,6 +253,6 @@ angular.module('orka.layertree')
             });
             return deferred.promise;
         };
-        return new LayerTree(_poiLayer, _trackLayer, _poiLegendUrl, _trackLegendUrl, _iconBaseUrl);
+        return new LayerTree(_poiLayer, _trackLayer, _poiLegendUrl, _trackLegendUrl, _iconBaseUrl, _plusCodesLayer);
     }];
 }]);
