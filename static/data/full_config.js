@@ -44,7 +44,7 @@ var orkaAppConfig = {
     poi: {
         legendURL: 'data/poi_legend_data.json',
         title: 'Was suchen Sie?'
-    },
+    },   
     track: false,
     // Pfad zu GeoJSON mit Polygonen für "Ortliste"
     // Wenn nicht vorhanden ist das Ortemodul deaktiviert
