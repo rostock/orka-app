@@ -80,6 +80,10 @@ angular.module('orka.print')
                     if (LayertreeService.plusCodeLayer) {
                         olcLayer = LayertreeService.plusCodeLayer.getVisible();
                     }
+                    var trackType = false;
+                    if (LayertreeService.selectedTrackTypes) {
+                        trackType = LayertreeService.selectedTrackTypes;
+                    }
                     var downloadPromise = PrintService.createDownload(
                         PrintPageService.getBounds(),
                         scope.outputFormat.value,
@@ -87,7 +91,7 @@ angular.module('orka.print')
                         layerName,
                         scope.streetIndex,
                         LayertreeService.selectedPoiTypes,
-                        LayertreeService.selectedTrackTypes,
+                        trackType,
                         olcLayer
                     );
 
