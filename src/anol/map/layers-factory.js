@@ -217,6 +217,7 @@ angular.module('anol.map')
         var loader = function(extent, resolution, projection) {
             var params = [
                 'srs=' + projection.getCode(),
+                'resolution=' + resolution,
                 'bbox=' + extent.join(',')
             ];
             if(angular.isFunction(options.additionalParameters)) {
@@ -229,10 +230,6 @@ angular.module('anol.map')
                 dataType: 'json'
             })
             .done(function(response) {
-                var sourceFeatures = source.getFeatures();
-                for(var i = 0; i < sourceFeatures.length; i++) {
-                    source.removeFeature(sourceFeatures[i]);
-                }
                 var format = new ol.format.GeoJSON();
                 var features = format.readFeatures(response, {
                     featureProjection: 'EPSG:25833'
@@ -243,7 +240,13 @@ angular.module('anol.map')
 
         var sourceOptions = createBasicSourceOptions(options);
         sourceOptions.format = new ol.format.GeoJSON();
-        sourceOptions.strategy = ol.loadingstrategy.bbox;
+        sourceOptions.strategy = function(extent, resolution) {
+            if(this.resolution && this.resolution != resolution){
+                this.clear();  
+            }
+            this.resolution = resolution;
+            return [extent];
+        }
         sourceOptions.loader = loader;
 
         source = new ol.source.Vector(sourceOptions);

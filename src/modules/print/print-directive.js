@@ -75,6 +75,11 @@ angular.module('orka.print')
                     var layerName = LayersService.backgroundLayer().get('printLayer');
                     if (!scope.streetIndex && LayertreeService.selectedPoiTypes.length < 1 && LayertreeService.selectedTrackTypes.length < 1)
                         layerName = layerName + '_nogrid';
+
+                    var olcLayer = false;
+                    if (LayertreeService.plusCodeLayer) {
+                        olcLayer = LayertreeService.plusCodeLayer.getVisible();
+                    }
                     var downloadPromise = PrintService.createDownload(
                         PrintPageService.getBounds(),
                         scope.outputFormat.value,
@@ -82,7 +87,8 @@ angular.module('orka.print')
                         layerName,
                         scope.streetIndex,
                         LayertreeService.selectedPoiTypes,
-                        LayertreeService.selectedTrackTypes
+                        LayertreeService.selectedTrackTypes,
+                        olcLayer
                     );
 
                     downloadPromise.then(function(url) {

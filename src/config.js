@@ -106,7 +106,34 @@ angular.module('orkaApp', [
             title: ConfigServiceProvider.config.plusCodes.title,
             layer: ConfigServiceProvider.config.plusCodes.layerName,
             visible: false,
-            displayInLayerswitcher: false
+            displayInLayerswitcher: false,
+            style: function(feature) {
+                var styles = [];
+                if (feature.getGeometry().getType() == 'Point') {
+                    styles.push(new ol.style.Style({
+                        text: new ol.style.Text({
+                            font: '11px Calibri, sans-serif',
+                            fill: new ol.style.Fill({ color: '#000' }),
+                            stroke: new ol.style.Stroke({
+                              color: '#fff', 
+                              width: 1
+                            }),
+                            text: feature.get('name')
+                          })
+                      }))
+                } else {
+                    styles.push(new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                          color: 'grey',
+                          width: 1
+                        }),
+                        fill: new ol.style.Fill({
+                          color: 'rgba(0, 0, 255, 0.1)'
+                        })
+                      }))
+                }
+                return styles;
+            },            
         });
         layers.push(plusCodesLayer);
         LayertreeServiceProvider.setPlusCodesLayer(plusCodesLayer);

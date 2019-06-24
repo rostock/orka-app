@@ -96,7 +96,7 @@ angular.module('orka.print')
          * @description
          * Requests the printqueue to create a download with given parameters
          */
-        Print.prototype.createDownload = function(bounds, format, scale, layer, streetIndex, poiTypes, trackTypes) {
+        Print.prototype.createDownload = function(bounds, format, scale, layer, streetIndex, poiTypes, trackTypes, olc) {
             var self = this;
             self.abort = false;
             self.status = 'waiting';
@@ -106,11 +106,13 @@ angular.module('orka.print')
                 format: format,
                 layer: layer,
                 params: {
+                    'olc': olc,
                     'street_index': streetIndex,
                     'poi_types':  poiTypes.join(','),
                     'track_types': trackTypes.join(','),
                 }
             };
+            console.log(data)
             var deferred = $q.defer();
             $http.post(self.createDownloadUrl, data).then(
                 function successCallback(response) {
@@ -142,7 +144,8 @@ angular.module('orka.print')
             var deferred = $q.defer();
             var wrapper = function() {
                 $http.get(self.checkDownloadUrl + statusUrl)
-                    .then(function successCallback(data) {
+                    .then(function successCallback(response) {
+                        var data = response.data;
                         if(data.status === 'done') {
                             deferred.resolve(data.url);
                         } else if(self.abort === true || data.status === 'error') {

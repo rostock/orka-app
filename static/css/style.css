@@ -82,14 +82,25 @@ label.no-style {
   max-width: none;
 }
 
+.navbar-brand {
+  padding: 15px 0;
+}
 /*
  * Search
  */
+
+.orka-search {
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  width: 240px;
+}
+
 #search-container {
   position: absolute;
   top: 10px;
+  width: inherit;
   z-index: 1;
-  width: 100%;
 }
 
 .form-control-feedback, .input-group-addon {
@@ -551,7 +562,7 @@ button.output-format-button {
   max-height: 90px;
 }
 
-.orka-plus-codes-container
+.orka-plus-codes-container,
 .orka-poi-container,
 .orka-tracks-container {
   margin-right: -20px;

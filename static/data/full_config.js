@@ -52,6 +52,51 @@ var orkaAppConfig = {
         symbolAnchor: [10, 26],
         markerAnchor: [17, 33]
     },
+    printConfig: {
+        maxPageSize: 200000,
+        defaultScale: 250000,
+        maxScale: 250000,
+        minScale: 500,
+        createURL: 'http://localhost:8888/proxy/http://localhost:5000/print',
+        checkURL: 'http://localhost:8888/proxy/http://localhost:5000',
+        downloadURL: 'http://localhost:8888/proxy/http://localhost:5000',
+        checkDelay: 2000,
+        pageSizes: [{
+            'label': 'A4',
+            'icon': 'glyphicon-resize-vertical',
+            'value': [210, 297]
+        }, {
+            'label': 'A4',
+            'icon': 'glyphicon-resize-horizontal',
+            'value': [297, 210]
+        }, {
+            'label': 'A3',
+            'icon': 'glyphicon-resize-vertical',
+            'value': [297, 420]
+        }, {
+            'label': 'A3',
+            'icon': 'glyphicon-resize-horizontal',
+            'value': [420, 297]
+        }],
+        outputFormats: [{
+            'label': 'PDF',
+            'value': 'pdf'
+        },
+        {
+            'label': 'PNG',
+            'value': 'png'
+        }],
+        style: {
+            fillColor: 'rgba(255, 255, 255, 0.4)',
+            strokeColor: 'rgba(0, 0, 0, 1)',
+            strokeWidth: 1,
+            pointRadius: 5,
+            pointCursor: 'pointer',
+            pointFillColor: 'rgba(255, 255, 255, 1)',
+            pointStrokeColor: 'rgba(0, 0, 0, 1)',
+            pointStrokeWidth: 1
+        }
+    },    
     track: {
         layerURL: '/tracks',
         layerName: 'tracks',
@@ -67,7 +112,8 @@ var orkaAppConfig = {
     plusCodes: {
         title: 'Plus Codes',
         layerName: 'pc_layer',
-        layerURL: 'codes.geojson?',
+        // layerURL: 'citymap/olc.geojson?',
+        layerURL: 'http://localhost:8888/proxy/http://localhost:4000/olc.geojson?',
     },
     // Plus Code Suche
     plusCodesSearch: {
