@@ -93,7 +93,7 @@ label.no-style {
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
-  width: 240px;
+  width: 250px;
 }
 
 #search-container {
@@ -348,9 +348,9 @@ div.print-headline-container-last {
   margin-top: 5px;
 }
 
-div.btn-group {
+/* div.btn-group {
   width: 100%;
-}
+} */
 
 button.output-format-button {
   width: 25.25%;

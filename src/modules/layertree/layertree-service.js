@@ -86,8 +86,7 @@ angular.module('orka.layertree')
             var param = 'poi_types=' + _selectedPoiTypes.join(',');
             return param;
         };
-    };
-
+    };    
     this.$get = ['$q', 'ConfigService', function($q, ConfigService) {
         /**
          * @ngdoc service
