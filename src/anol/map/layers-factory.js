@@ -239,6 +239,7 @@ angular.module('anol.map')
                     featureProjection: 'EPSG:25833'
                 });
                 source.addFeatures(features);
+                source.dispatchEvent('anolSourceUpdated');
             });
         };
 

@@ -145,6 +145,9 @@ angular.module('orka.search')
 
                 scope.$watch('searchInput', function(n, o) {
                     if (angular.isDefined(n)) {
+                        if (n === '') {
+                            scope.resultSource.clear();
+                        }
                         if (scope.searchType === 'address' || scope.searchType === 'poi') {
                             querySearch(n);
                         } else {
@@ -153,13 +156,30 @@ angular.module('orka.search')
                     }
                 });
 
+                scope.searchInBBOX = function(n) {
+                    scope.searchCurrentBboxOnly = n;
+                    if (angular.isDefined(scope.searchInput)) {
+                        querySearch(scope.searchInput);
+                    }
+                };
+
                 scope.changeCoordSystem = function(n) {
                     scope.coordSystem = n;
                     queryPlusCode(scope.searchInput);
                 };
 
+                scope.clearSearchInput = function() {
+                    if (angular.isDefined(scope.searchInput)) {
+                        scope.searchInput = undefined;
+                        scope.showNoResultFound = false;
+                        scope.searchInput = undefined;
+                        scope.showSearchResults = false;
+                        scope.resultData = [];     
+                        scope.resultSource.clear();
+                     }
+                };
+
                 scope.$watch('searchType', function(n, o) {
-                    // scope.resultSource.clear();
                     if (angular.isDefined(o)) {
                         if (o == 'pluscodes') {
                             scope.showNoResultFound = false;
@@ -170,6 +190,7 @@ angular.module('orka.search')
                     }
                     if (angular.isDefined(n)) {
                         if (n === 'address' || n === 'poi') {
+                            scope.resultSource.clear();
                             if (angular.isDefined(scope.searchInput)) {
                                 querySearch(scope.searchInput);
                             }

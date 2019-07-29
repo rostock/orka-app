@@ -3,6 +3,7 @@
         <span class="glyphicon glyphicon-search input-group-addon" aria-hidden="true"></span>
         <input 
             type="text"
+            autocomplete="off"
             id="search-input"
             class="form-control"
             placeholder="Suche…"
@@ -10,8 +11,10 @@
             ng-model-options='{ debounce: 250 }'
             ng-focus="showList()" />
     </div>
-    <!-- <span class="glyphicon glyphicon-remove-circle form-control-feedback form-control-clear" 
-        ng-click="clearSearchInput()"></span> -->
+    
+    <span class="glyphicon glyphicon-remove-circle form-control-feedback" 
+        aria-hidden="true" ng-click="clearSearchInput()"></span>
+
     <div class="input-group search-radio-group">
         <label>
             <input 
@@ -41,6 +44,7 @@
                 Plus codes
         </label>
     </div>
+
     <div class="input-group search-checkbox-group">
         <label ng-if="searchType == 'address' || searchType == 'poi'">
             <input 
@@ -48,17 +52,15 @@
                 name="search-checkbox"
                 type="checkbox"
                 ng-model="searchCurrentBboxOnly"
-                ng-change="searchChange()" />
+                ng-change="searchInBBOX(searchCurrentBboxOnly)"/>
             nur im aktuellen Kartenausschnitt
         </label>
-
         <select 
             ng-change="changeCoordSystem(coordSystem)"
             ng-model="coordSystem" ng-if="searchType == 'pluscodes'">
             <option value="25833">ETRS89/UTM-33N (EPSG:25833)</option>
             <option value="4326">WGS84/Geographische Koordinaten (EPSG:4326)</option>
         </select>
-
     </div>
 
     <div id="orka-search-no-results" ng-show="showNoResultFound">
@@ -68,18 +70,33 @@
             </li>
         </ul>
     </div>
+
     <div id="orka-search-results" ng-if="showSearchResults">
         <ul class="list-group">
-
             <span ng-if="searchType == 'pluscodes'">
                 <li ng-click=loadPlusCodeResult(resultData) 
                     ng-class="{'inactive': resultInside !== true}"
                     class="list-group-item feature orka-search-result">
-                    {{ resultData.properties.code_level_5 }}
-                    (regional: {{resultData.properties.code_regional }})
+                    <span ng-if="resultData.properties.level === 1">
+                        {{ resultData.properties.code_level_1 }}
+                    </span>
+                    <span ng-if="resultData.properties.level === 2">
+                        {{ resultData.properties.code_level_2 }}
+                    </span>
+                    <span ng-if="resultData.properties.level === 3">
+                        {{ resultData.properties.code_level_3 }}
+                    </span>
+                    <span ng-if="resultData.properties.level === 4">
+                        {{ resultData.properties.code_level_4 }}
+                    </span>
+                    <span ng-if="resultData.properties.level === 5">
+                        {{ resultData.properties.code_level_5}}
+                    </span>                  
+                    <span ng-if="resultData.properties.code_regional && resultData.properties.code_regional !== 'not definable'">
+                        (regional: {{resultData.properties.code_regional }})
+                    </span>
                 </li>
             </span>
-
             <span ng-if="searchType == 'address' || searchType == 'poi'">
                 <li ng-repeat="item in resultData" ng-click=loadResult(item) 
                     class="list-group-item feature orka-search-result">

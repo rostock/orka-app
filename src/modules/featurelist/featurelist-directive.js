@@ -26,7 +26,6 @@ angular.module('orka.featurelist')
                 scope.map = MapService.getMap();
                 scope.featureGroups = false;
                 scope.featureLayer = LayersService.layersByProperty('layer', ConfigService.config.poi.layerName)[0];
-
                 scope.typeMap = {};
 
                 LayertreeService.poisLoaded.then(function() {
