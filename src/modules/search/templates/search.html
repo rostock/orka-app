@@ -104,13 +104,12 @@
                     <span ng-if="searchType == 'address'">
                         <i class="fas fa-circle" 
                             title="{{ item.properties.objektgruppe }}"
-                            ng-if="item.properties.objektgruppe == 'Gemeinde' || item.properties.objektgruppe == 'Gemeindeteil'">
+                            ng-if="item.properties.objektgruppe == 'Gemeindeteil HRO'">
                         </i>
-                        <i class="fas fa-road" title="Straße" ng-if="item.properties.objektgruppe == 'Straße'"></i>
+                        <i class="fas fa-road" title="Straße" ng-if="item.properties.objektgruppe == 'Straße HRO'"></i>
                         <i class="fas fa-home" title="Adresse" 
-                            ng-if="item.properties.objektgruppe != 'Gemeinde' && 
-                            item.properties.objektgruppe != 'Gemeindeteil' && 
-                            item.properties.objektgruppe != 'Straße'"></i>
+                            ng-if="item.properties.objektgruppe != 'Gemeindeteil HRO' && 
+                            item.properties.objektgruppe != 'Straße HRO'"></i>
                         {{ item | title }}
                     </span>                   
                     <span ng-if="searchType == 'poi'">

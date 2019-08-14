@@ -254,20 +254,11 @@ angular.module('orka.search')
 .filter('title', function() {
     return function (item) {
         var results = '';
-        var gemeinde = item.properties.gemeinde_name.indexOf(',') !== -1 ? item.properties.gemeinde_name.substring(0, item.properties._title_.indexOf(',')) : item.properties.gemeinde_name;
-        if (item.properties.objektgruppe === 'Gemeinde') {
-            results += gemeinde;
-        } else if (item.properties.objektgruppe === 'Gemeindeteil') {
-            results += gemeinde;
-            results += ', ';
+        if (item.properties.objektgruppe === 'Gemeindeteil HRO') {
             results += item.properties.gemeindeteil_name;
         } else {
-            results += gemeinde;
+            results += item.properties.gemeindeteil_name;
             results += ', ';
-            if (item.properties.gemeindeteil_name) {
-                results += item.properties.gemeindeteil_name;
-                results += ', ';
-            }
             results += item.properties._title_.substring(item.properties._title_.lastIndexOf(',') + 2);
         }
         return results;
