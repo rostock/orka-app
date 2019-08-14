@@ -263,7 +263,7 @@ angular.module('anol.map')
             }
             this.resolution = resolution;
             return [extent];
-        }
+        };
         sourceOptions.loader = loader;
 
         source = new ol.source.Vector(sourceOptions);

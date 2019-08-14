@@ -75,7 +75,7 @@ angular.module('orka.layertree')
                 };
 
                 scope.toggleLocationCode = function(visible) {
-                    LayertreeService.updatePlusCodeVisibility(visible)
+                    LayertreeService.updatePlusCodeVisibility(visible);
                 };
             }
         }
