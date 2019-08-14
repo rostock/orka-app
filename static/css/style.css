@@ -125,6 +125,11 @@ label.no-style {
   margin-top: 3px;
   padding: 3px 5px 0 5px;
   border-radius: 4px;
+  width: 100%;
+}
+
+.change-coord-system {
+  margin-bottom: 3px;
 }
 
 .search-radio.right {
@@ -253,6 +258,10 @@ label.no-style {
   margin-top: 10px;
 }
 
+.list-group {
+  margin-bottom: 0;
+}
+
 .list-group-item.feature:nth-child(2n):not(.highlight) {
     background-color: #f6f6f6;
 }
@@ -266,19 +275,15 @@ label.no-style {
 }
 
 .list-group-item .list-group .list-group-item {
-    border: medium none;
-    margin-left: -15px;
-    margin-right: -15px;
-    padding: 0 20px 5px;
+  border: medium none;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0 20px 5px;
 }
 
 .list-group-item .list-group .list-group-item:first-child,
 .list-group-item .list-group .list-group-item:last-child {
   border-radius: 0px;
-}
-
-.list-group-item .list-group .list-group-item:last-child {
-  margin-bottom: 10px;
 }
 
 .list-group-item .list-group .list-group-item .list-group-item-heading {
@@ -587,7 +592,7 @@ button.output-format-button {
   padding: 0px 25px 5px 5px;
   border-radius: 5px 0px 0px 5px;
   font-size: 14px;
-  bottom: 105px;
+  bottom: 118px;
   right: 0px;
   position: absolute;
   z-index: 1000;
@@ -605,7 +610,7 @@ button.output-format-button {
 }
 
 .ol-unselectable .orka-legend-toggle.legend-hidden {
-  bottom: 100px;
+  bottom: 125px;
   right: 0px;
   position: absolute;
 }
