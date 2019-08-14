@@ -47,9 +47,9 @@ var orkaAppConfig = {
     poi: {
         title: 'Themen',
         layerName: 'poi_layer',
-        layerURL: 'poi.geojson?',
-        markerIcon: 'static/img/highlightMarker.png',
-        legendURL: '/static/data/poi_legend_data.json',
+        layerURL: '../citymap/poi.geojson?',
+        markerIcon: '/app/img/highlightMarker.png',
+        legendURL: 'data/poi_legend_data.json',
         symbolAnchor: [10, 26],
         markerAnchor: [17, 33]
     },
@@ -58,9 +58,9 @@ var orkaAppConfig = {
         defaultScale: 250000,
         maxScale: 250000,
         minScale: 500,
-        createURL: 'http://localhost:8888/proxy/http://localhost:5000/print',
-        checkURL: 'http://localhost:8888/proxy/http://localhost:5000',
-        downloadURL: 'http://localhost:8888/proxy/http://localhost:5000',
+        createURL: '/printqueue/print',
+        checkURL: '',
+        downloadURL: '',
         checkDelay: 2000,
         pageSizes: [{
             'label': 'A4',
@@ -99,7 +99,7 @@ var orkaAppConfig = {
         }
     },    
     track: {
-        layerURL: '/tracks',
+        layerURL: '../citymap/tracks',
         layerName: 'tracks',
         legendURL: 'data/track_legend_data.json'
     },
@@ -113,8 +113,7 @@ var orkaAppConfig = {
     plusCodes: {
         title: 'Plus Codes',
         layerName: 'pc_layer',
-        // layerURL: 'citymap/olc.geojson?',
-        layerURL: 'http://localhost:8888/proxy/http://localhost:4000/olc.geojson?',
+        layerURL: '../citymap/olc.geojson?'
     },
     // Plus Code Suche
     plusCodesSearch: {
