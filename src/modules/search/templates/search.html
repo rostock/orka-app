@@ -55,11 +55,12 @@
                 ng-change="searchInBBOX(searchCurrentBboxOnly)"/>
             nur im aktuellen Kartenausschnitt
         </label>
-        <select 
+        <select
+            class="change-coord-system"
             ng-change="changeCoordSystem(coordSystem)"
             ng-model="coordSystem" ng-if="searchType == 'pluscodes'">
             <option value="25833">ETRS89/UTM-33N (EPSG:25833)</option>
-            <option value="4326">WGS84/Geographische Koordinaten (EPSG:4326)</option>
+            <option value="4326">WGS84/Geografische Koordinaten (EPSG:4326)</option>
         </select>
     </div>
 
