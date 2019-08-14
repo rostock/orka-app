@@ -106,6 +106,7 @@ angular.module('orkaApp', [
             title: ConfigServiceProvider.config.plusCodes.title,
             layer: ConfigServiceProvider.config.plusCodes.layerName,
             visible: false,
+            clearResolutions: [0.3, 2],
             displayInLayerswitcher: false,
             style: function(feature) {
                 var styles = [];

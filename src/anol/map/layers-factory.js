@@ -230,23 +230,40 @@ angular.module('anol.map')
                 dataType: 'json'
             })
             .done(function(response) {
+                var sourceFeatures = source.getFeatures();
+                for(var i = 0; i < sourceFeatures.length; i++) {
+                    source.removeFeature(sourceFeatures[i]);
+                }
                 var format = new ol.format.GeoJSON();
                 var features = format.readFeatures(response, {
                     featureProjection: 'EPSG:25833'
                 });
                 source.addFeatures(features);
+                source.dispatchEvent('anolSourceUpdated');
             });
         };
 
         var sourceOptions = createBasicSourceOptions(options);
+        sourceOptions.clearResolutions = false;
+        if (options.clearResolutions) {
+            sourceOptions.clearResolutions = options.clearResolutions;
+        }
         sourceOptions.format = new ol.format.GeoJSON();
         sourceOptions.strategy = function(extent, resolution) {
             if(this.resolution && this.resolution != resolution){
-                this.clear();  
+                this.clear();
+                // var sourceFeatures = source.getFeatures();
+                // for(var i = 0; i < sourceFeatures.length; i++) {
+                //     source.removeFeature(sourceFeatures[i]);
+                // }
+                // var sourceFeatures = self.olSource.getFeatures();
+                // for(var i = 0; i < sourceFeatures.length; i++) {
+                //     self.olSource.removeFeature(sourceFeatures[i]);
+                // }                
             }
             this.resolution = resolution;
             return [extent];
-        }
+        };
         sourceOptions.loader = loader;
 
         source = new ol.source.Vector(sourceOptions);

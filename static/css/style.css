@@ -107,18 +107,31 @@ label.no-style {
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
-  width: 240px;
+  width: 16.66666667%;
+  min-width: 250px;
 }
 
 #search-container {
   position: absolute;
-  top: 10px;
+  top: 5px;
   width: inherit;
+  min-width: inherit;
   z-index: 1;
+}
+
+#search-input {
+  padding-right: 42.5px;
+  z-index: 1;
+}
+
+.form-control-feedback {
+  pointer-events: all;
+  z-index: 2;
 }
 
 .form-control-feedback, .input-group-addon {
   top: 0;
+  cursor: pointer;
 }
 
 .search-radio-group, .search-checkbox-group {
@@ -362,9 +375,9 @@ div.print-headline-container-last {
   margin-top: 5px;
 }
 
-div.btn-group {
+/* div.btn-group {
   width: 100%;
-}
+} */
 
 button.output-format-button {
   width: 25.25%;

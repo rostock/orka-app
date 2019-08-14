@@ -112,7 +112,6 @@ angular.module('orka.print')
                     'track_types': '',
                 }
             };
-            console.log(data)
             var deferred = $q.defer();
             $http.post(self.createDownloadUrl, data).then(
                 function successCallback(response) {
