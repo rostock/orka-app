@@ -113,8 +113,8 @@ angular.module('orkaApp', [
                 if (feature.getGeometry().getType() == 'Point') {
                     styles.push(new ol.style.Style({
                         text: new ol.style.Text({
-                            font: '11px Calibri, sans-serif',
-                            fill: new ol.style.Fill({ color: '#000' }),
+                            font: 'bold 12px PT Sans, Verdana, sans-serif',
+                            fill: new ol.style.Fill({ color: '#32285a' }),
                             stroke: new ol.style.Stroke({
                               color: '#fff', 
                               width: 1
@@ -125,8 +125,8 @@ angular.module('orkaApp', [
                 } else {
                     styles.push(new ol.style.Style({
                         stroke: new ol.style.Stroke({
-                          color: 'grey',
-                          width: 1
+                          color: '#645a8c',
+                          width: 1.5
                         }),
                         fill: new ol.style.Fill({
                           color: 'rgba(0, 0, 255, 0.1)'
