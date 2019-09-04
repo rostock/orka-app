@@ -84,8 +84,20 @@ var orkaAppConfig = {
             'value': 'pdf'
         },
         {
+            'label': 'GeoTIFF',
+            'value': 'tiff'
+        },
+        {
+            'label': 'JPEG',
+            'value': 'jpeg'
+        },
+        {
             'label': 'PNG',
             'value': 'png'
+        },
+        {
+            'label': 'SVG',
+            'value': 'svg'
         }],
         style: {
             fillColor: 'rgba(255, 255, 255, 0.4)',
