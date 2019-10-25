@@ -77,6 +77,7 @@
             <span ng-if="searchType == 'pluscodes'">
                 <li ng-click=loadPlusCodeResult(resultData) 
                     ng-class="{'inactive': resultInside !== true}"
+                    data-ng-attr-title="{{resultInside !== true ? 'Objekt außerhalb des gültigen Kartenbereichs': ''}}"
                     class="list-group-item feature orka-search-result">
                     <span ng-if="resultData.properties.level === 1">
                         {{ resultData.properties.code_level_1 }}

@@ -163,6 +163,7 @@ label.no-style {
 .orka-search-result.inactive {
   cursor: default;
   color: #b4b4b4;
+  font-style: italic;
 }
 
 /*
