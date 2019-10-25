@@ -87,17 +87,17 @@ angular.module('orka.search')
                     });
                 }
 
-                function searchPlusCode(query) {
-                    if (query.indexOf(',') > -1) {
-                        if (scope.coordSystem === '25833') {
-                            var coords = query.split(',');
-                            var coordstransformed = ol.proj.transform([coords[0], coords[1]], 'EPSG:25833', 'EPSG:4326');
-                            query = coordstransformed.join(',');
-                        }
+                function searchPlusCode(query) {        
+                    // manipulate query in order to fetch results even for incomplete Plus codes
+                    if (query.length < 9 && query.indexOf(',') == -1 && query.indexOf(' ') == -1) {
+                        if (query.length < 8)
+                            query = query.padEnd(8, '0');
+                        query += '+';
                     }
 
                     var ajaxData = {
-                        query: query.replace(/\s/g, "")
+                        query: query.replace(/%2B/g, '+'),
+                        epsg_in: scope.coordSystem
                     };
 
                     $.ajax({
