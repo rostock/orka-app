@@ -166,6 +166,11 @@
           "type": "denkmal"
         },
         {
+          "icon": "kultur/denkstein.png",
+          "title": "Denksteine",
+          "type": "denkstein"
+        },
+        {
           "icon": "kultur/galerie.png",
           "title": "Galerien",
           "type": "galerie"
