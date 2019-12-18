@@ -225,6 +225,15 @@
       }, {
         "tag": "entstehungsjahr",
         "title": "Entstehungsjahr"
+      }, {
+        "tag": "lebensdaten",
+        "title": "Lebensdaten"
+      }, {
+        "tag": "text_auf_dem_stein",
+        "title": "Text auf dem Stein"
+      }, {
+        "tag": "ehemalige_adresse",
+        "title": "ehemalige Adresse"
       }],
       "popupTags": []
     },
