@@ -584,6 +584,11 @@
           "type": "haltestelle"
         },
         {
+          "icon": "verkehr/ladestation.png", 
+          "title": "Ladestationen f\u00fcr Elektrofahrzeuge", 
+          "type": "ladestation"
+        },
+        {
           "icon": "verkehr/paketautomat.png", 
           "title": "Paketautomaten", 
           "type": "paketautomat"
@@ -728,6 +733,12 @@
       }, {
         "tag": "tarifzone",
         "title": "Tarifzone"
+      }, {
+        "tag": "verbund",
+        "title": "Verbund"
+      }, {
+        "tag": "anzahl_ladepunkte",
+        "title": "Anzahl an Ladepunkten"
       }],
       "popupTags": []
     },
