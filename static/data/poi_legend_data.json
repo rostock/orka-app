@@ -456,6 +456,11 @@
           "type": "hro_cafe"
         },
         {
+          "icon": "essen_trinken/lieferservice.png",
+          "title": "Liefer- und Abholservices",
+          "type": "lieferservice"
+        },
+        {
           "icon": "essen_trinken/restaurant.png",
           "title": "Restaurants",
           "type": "hro_restaurant"
@@ -483,6 +488,12 @@
       }, {
         "tag": "barrierefrei",
         "title": "barrierefrei"
+      }, {
+        "tag": "lieferung",
+        "title": "Lieferung"
+      }, {
+        "tag": "abholung",
+        "title": "Abholung"
       }],
       "popupTags": []
     },
@@ -587,6 +598,11 @@
           "icon": "verkehr/ladestation.png", 
           "title": "Ladestationen f\u00fcr Elektrofahrzeuge", 
           "type": "ladestation"
+        },
+        {
+          "icon": "verkehr/mobilpunkt.png", 
+          "title": "Mobilpunkte", 
+          "type": "mobilpunkt"
         },
         {
           "icon": "verkehr/paketautomat.png", 
@@ -739,6 +755,9 @@
       }, {
         "tag": "anzahl_ladepunkte",
         "title": "Anzahl an Ladepunkten"
+      }, {
+        "tag": "angebote",
+        "title": "Angebote"
       }],
       "popupTags": []
     },
