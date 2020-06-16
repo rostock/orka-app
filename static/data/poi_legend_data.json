@@ -300,6 +300,9 @@
         "tag": "opening_hours",
         "title": "Öffnungszeiten"
       }, {
+        "tag": "betreuungszeiten",
+        "title": "Betreuungszeiten"
+      }, {
         "tag": "telefon",
         "title": "Telefon"
       }, {
