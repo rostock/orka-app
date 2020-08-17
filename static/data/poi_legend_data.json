@@ -15,10 +15,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -74,10 +74,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -131,10 +131,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -203,10 +203,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -304,10 +304,10 @@
         "title": "Betreuungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -326,9 +326,6 @@
       }, {
         "tag": "operator",
         "title": "Betreiber"
-      }, {
-        "tag": "leitung",
-        "title": "Leitung"
       }],
       "popupTags": []
     },
@@ -390,10 +387,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -481,10 +478,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -554,10 +551,10 @@
         "title": "Öffnungszeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -706,10 +703,10 @@
         "title": "Wasserstoff"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
@@ -789,10 +786,10 @@
         "title": "Sprechzeiten"
       }, {
         "tag": "telefon",
-        "title": "Telefon"
+        "title": "Telefon (Festnetz)"
       }, {
-        "tag": "fax",
-        "title": "Telefax"
+        "tag": "mobil",
+        "title": "Telefon (mobil)"
       }, {
         "tag": "email",
         "title": "E-Mail"
