@@ -530,6 +530,11 @@
           "type": "poststelle"
         },
         {
+          "icon": "einkauf/sozialkaufhaus_umsonstladen.png", 
+          "title": "Sozialkaufh\u00e4user \u0026 Umsonstl\u00e4den", 
+          "type": "sozialkaufhaus_umsonstladen"
+        },
+        {
           "icon": "einkauf/supermarkt.png", 
           "title": "Superm\u00e4rkte \u0026 Discounter", 
           "type": "supermarkt"
